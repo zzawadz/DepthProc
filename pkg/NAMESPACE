@@ -1,0 +1,2 @@
+useDynLib(depthproc)
+export(asymmetrycurve, ddmvnorm,ddPlot,depth,depthPersp,depthContour, med, scalecurve,deepreg2d, trimprojreg2d, mregdepth, tmp_deepreg2d)
