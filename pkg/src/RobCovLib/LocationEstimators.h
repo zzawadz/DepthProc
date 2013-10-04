@@ -1,6 +1,7 @@
 #ifndef LOCATION_INCLUDES
 #define LOCATION_INCLUDES
 
+#include "RobCovLibConfig.h"
 #include "armadillo"
 #include "Depth.h"
 

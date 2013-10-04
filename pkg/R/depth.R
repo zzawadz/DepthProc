@@ -66,47 +66,32 @@ if(is.data.frame(X)) X = as.matrix(X)
 if(is.vector(X)) X = matrix(X,ncol = 1)
 if(is.vector(u)) u = matrix(u,ncol = dim(X)[2])
 
-#######################################################################
+###################################
 if (method=="Mahalanobis")
 {	
-  return(depthMah(u, X))
-  
-	cov = cov(X)
-	center = colMeans(X)
-	
-	icov = solve(cov)
-	
-	d <- function(u,center = center, icov = icov)
- 	{
-		depth<-1/(1+t(u-center)%*%icov%*%(u-center))
-		depth	
-	}
-										
-	depth = apply(u,1,d,center,icov)         
+  return(depthMah(u, X))      
 }
 
-######################################################################
+####################################
 if (method=="Euclidean")
 {
 		return(depthEuclid(u, X))
 }
 
 ####################################
-  
+tmpSeed <- .Random.seed
+set.seed(1)
+
 if(method == "Projection")
 {
-    tmpSeed <- .Random.seed
-    set.seed(1)
+    
     proj = runifsphere(ndir, ncol(X))
     depth = .Call("projection",PACKAGE = "depthproc",u,X,proj,ncol(X),nrow(X),nrow(u),nrow(proj))
-    assign(".Random.seed",tmpSeed,.GlobalEnv)
 }
 
 #######################################################################
 if (method=="Tukey")
 {
-  tmpSeed <- .Random.seed
-  set.seed(1) 
   	tukey1d = function(u,X)
 		{
 		  Xecdf = ecdf(X)
@@ -126,28 +111,24 @@ if (method=="Tukey")
 #### 
   else  # czyli jesli wymiar d>2
   {
-  
-  
-  proj = t(runifsphere(ndir, ncol(X)))
-  xut = X%*%proj
-  uut = u%*%proj
-  
-  OD<-matrix(nrow=nrow(uut),ncol=ncol(uut))
-  
-	for (i in 1:ndir)
-	{
-	
-    OD[,i]=tukey1d(uut[,i],xut[,i])  
-	}
- 
-	depth<-apply(OD,1,min)
-  
-  rm(.Random.seed, pos = 1)
-  assign(".Random.seed",tmpSeed,.GlobalEnv)
+    proj = t(runifsphere(ndir, ncol(X)))
+    xut = X%*%proj
+    uut = u%*%proj
+    
+    OD<-matrix(nrow=nrow(uut),ncol=ncol(uut))
+    
+  	for (i in 1:ndir)
+  	{
+  	
+      OD[,i]=tukey1d(uut[,i],xut[,i])  
+  	}
+   
+  	depth<-apply(OD,1,min)
   }
 }
 ########################################################
-depth
+assign(".Random.seed",tmpSeed,.GlobalEnv)
+return(depth)
 }
 
 
@@ -164,16 +145,6 @@ depthEuclid = function(u, X)
 
 depthMah = function(u, X)
 {
-  cov = cov(X)
-  center = colMeans(X)
-  
-  icov = solve(cov)
-  
-  d <- function(u,center = center, icov = icov)
-  {
-    depth<-1/(1+t(u-center)%*%icov%*%(u-center))
-    depth  
-  }
-  depth = apply(u,1,d,center,icov)   
+  depth = depthMahCPP(u,X)
 }
   

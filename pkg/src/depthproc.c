@@ -172,7 +172,7 @@ return(r);
 	double depthtmp;
 	
 	double *pu = REAL(u);
-	double *pX = REAL(X);
+//	double *pX = REAL(X);
 	double *ptX = REAL(X);
 	double *pproj = REAL(proj);
 	

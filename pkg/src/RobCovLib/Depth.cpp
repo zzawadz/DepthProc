@@ -1,8 +1,10 @@
 #include "Depth.h"
 #include <stdio.h>
-
+#include <iostream>
 
 namespace Depth{
+
+	// LPDEPTH
 
 	arma::vec LPDepth(const arma::mat& X, const double &p, const double& a, const double& b)
 	{
@@ -40,4 +42,32 @@ namespace Depth{
 		}
 		return depth;
 	}
+
+	// Mahalanobis Depth
+	arma::vec MahalanobisDepth(const arma::mat& X)
+	{
+		return(MahalanobisDepth(X,X));
+	}
+	arma::vec MahalanobisDepth(const arma::mat& X, const arma::mat& Y)
+	{
+		size_t n = X.n_rows;
+		arma::mat covY = arma::cov(Y);
+		covY = covY.i();
+		arma::rowvec mean = arma::mean(Y);
+		
+		arma::vec depth(n);
+
+		arma::rowvec tmpX;
+		double dist;
+
+		for(size_t i = 0; i < n; i++)
+		{
+			tmpX = X.row(i) - mean;
+			tmpX = tmpX * covY *tmpX.t();
+			dist = 1.0/(1.0 + tmpX(0));
+			depth(i) = dist;
+		}
+		return(depth);
+	}
+
  }

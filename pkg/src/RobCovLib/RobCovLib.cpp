@@ -14,9 +14,9 @@ namespace RobCovLib
 		arma::mat tmpXW = tmpX;
 		tmpXW.each_col() %= w;
 
-		arma::mat covMat = tmpXW * tmpX;
+		arma::mat covMat = tmpXW.t() * tmpX;
 
-		return covMat;
+		return covMat/sumW;
 	}
 
 	arma::mat LPDepthCovarianceEstimator(const arma::mat& X, const double &p, const double& a, const double& b)
