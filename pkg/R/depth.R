@@ -56,59 +56,79 @@
 #'
 
 
-depth = function(u, X, method="Projection", ndir=1000, digits=2)
+depth = function(u, X, method="Projection", ndir=1000, seed = 1, name = "X")
+{  
+  if(is.data.frame(u)) u = as.matrix(u)
+  if(is.data.frame(X)) X = as.matrix(X)
+  if(is.vector(X)) X = matrix(X,ncol = 1)
+  if(is.vector(u)) u = matrix(u,ncol = dim(X)[2])
+
+  ###################################
+  if (method=="Mahalanobis")
+  {	
+    return(depthMah(u, X, name = name))      
+  }
+  ####################################
+  if (method=="Euclidean")
+  {
+  		return(depthEuclid(u, X, name = name))
+  }
+  ####################################
+  if(method == "Projection")
+  {
+    return(depthProjection(u, X, ndir,name = name))
+  }
+  #######################################################################
+  if (method=="Tukey")
+  {
+    return(depthTukey(u, X, ndir, name = name))
+  }
+  ########################################################
+}
+
+
+#########################################################
+depthEuclid = function(u, X, name)
 {
-    
-if(is.data.frame(u)) u = as.matrix(u)
-if(is.data.frame(X)) X = as.matrix(X)
+  n = dim(u)[1]
+  center = colMeans(X)
+  center = matrix(rep(center,n),nrow=n,byrow=TRUE)
+  depth=1/(1+(rowSums((u-center)^2)))  
   
-
-if(is.vector(X)) X = matrix(X,ncol = 1)
-if(is.vector(u)) u = matrix(u,ncol = dim(X)[2])
-
-###################################
-if (method=="Mahalanobis")
-{	
-  return(depthMah(u, X))      
+  new("DepthEuclid", depth, u = u, X = X, method = "Euclidean", name = name)
 }
-
-####################################
-if (method=="Euclidean")
+#########################################################
+depthMah = function(u, X, name)
 {
-		return(depthEuclid(u, X))
+  depth = depthMahCPP(u,X)
+  new("DepthMahalanobis", depth, u = u, X = X, method = "Mahalanobis", name = name)
 }
-
-####################################
-tmpSeed <- .Random.seed
-set.seed(1)
-
-if(method == "Projection")
+#########################################################
+depthProjection = function(u, X, ndir, seed = 1, name)
 {
-    
-    proj = runifsphere(ndir, ncol(X))
-    depth = .Call("projection",PACKAGE = "depthproc",u,X,proj,ncol(X),nrow(X),nrow(u),nrow(proj))
+  depth = depthProjCPP(u, X, ndir, seed)
+  new("DepthProjection", depth, u = u, X = X, method = "Projection", name = name)
 }
-
-#######################################################################
-if (method=="Tukey")
+#########################################################
+depthTukey = function(u, X, ndir, seed = 1, name)
 {
-  	tukey1d = function(u,X)
-		{
-		  Xecdf = ecdf(X)
-			uecdf = Xecdf(u) 
-			uecdf2 = 1-uecdf
-			min.ecdf = uecdf>uecdf2
-			depth = uecdf 
-			depth[min.ecdf]=uecdf2[min.ecdf] 
-			depth
-		}
+  tukey1d = function(u,X)
+  {
+    Xecdf = ecdf(X)
+    uecdf = Xecdf(u) 
+    uecdf2 = 1-uecdf
+    min.ecdf = uecdf>uecdf2
+    depth = uecdf 
+    depth[min.ecdf]=uecdf2[min.ecdf] 
+    depth
+  }
   
   if (ncol(X)==1)
   {
-  depth= tukey1d(u,X)
+    depth= tukey1d(u,X)
   }
   
-#### 
+  #### 
   else  # czyli jesli wymiar d>2
   {
     proj = t(runifsphere(ndir, ncol(X)))
@@ -117,34 +137,14 @@ if (method=="Tukey")
     
     OD<-matrix(nrow=nrow(uut),ncol=ncol(uut))
     
-  	for (i in 1:ndir)
-  	{
-  	
+    for (i in 1:ndir)
+    {
+      
       OD[,i]=tukey1d(uut[,i],xut[,i])  
-  	}
-   
-  	depth<-apply(OD,1,min)
+    }
+    
+    depth<-apply(OD,1,min)
   }
-}
-########################################################
-assign(".Random.seed",tmpSeed,.GlobalEnv)
-return(depth)
-}
-
-
-#########################################################
-depthEuclid = function(u, X)
-{
-  n = dim(u)[1]
-  center = colMeans(X)
-  center = matrix(rep(center,n),nrow=n,byrow=TRUE)
-  depth=1/(1+(rowSums((u-center)^2)))  
-  
-  new("DepthEuclid", depth, u = u, X = X)
-}
-
-depthMah = function(u, X)
-{
-  depth = depthMahCPP(u,X)
+  new("DepthTukey", depth, u = u, X = X, method = "Tukey", name = name)
 }
   

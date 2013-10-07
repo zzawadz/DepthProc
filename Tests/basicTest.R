@@ -9,3 +9,7 @@ max(depthproc:::depthMahCPP(X,X) - depthproc:::depthMah(X,X))
 
 
 max(depth(X,X, method="Mahalanobis") - depthproc:::depthMahCPP(X,X))
+
+
+system.time(runifsphere(1e6,20))
+system.time(depthproc:::runifsphereCPP(1e6,20))

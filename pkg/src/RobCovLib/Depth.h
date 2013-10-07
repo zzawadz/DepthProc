@@ -13,6 +13,10 @@ namespace Depth
 	// Mahalanobis Depth
 	__declspec(dllexport) arma::vec MahalanobisDepth(const arma::mat& X);
 	__declspec(dllexport) arma::vec MahalanobisDepth(const arma::mat& X, const arma::mat& Y);
+
+	// Projection Depth
+	arma::vec ProjectionDepth(const arma::mat& X, size_t nproj, double seed);
+	arma::vec ProjectionDepth(const arma::mat& X, const arma::mat& Y, size_t nproj, double seed);
 }
 
 #endif

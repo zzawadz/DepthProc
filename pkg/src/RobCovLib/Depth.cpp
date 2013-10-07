@@ -1,4 +1,5 @@
 #include "Depth.h"
+#include "Utils.h"
 #include <stdio.h>
 #include <iostream>
 
@@ -70,4 +71,48 @@ namespace Depth{
 		return(depth);
 	}
 
+
+	// Projection Depth
+	arma::vec ProjectionDepth(const arma::mat& X, size_t nproj, double seed)
+	{
+		return ProjectionDepth(X, X, nproj, seed);
+	}
+
+	arma::vec ProjectionDepth(const arma::mat& X, const arma::mat& Y, size_t nproj, double seed)
+	{
+		size_t nx = X.n_rows;
+		size_t ny = Y.n_rows;
+		size_t d  = Y.n_cols;
+
+		arma::mat directions = Utils::runifsphere(nproj, d, seed);
+		directions = directions.t();
+
+		arma::vec depth(nx);
+
+		arma::vec tmpProj(ny);
+		arma::rowvec medians(nproj);
+		arma::rowvec mads(nproj);
+
+		for(size_t i = 0; i < nproj; i++)
+		{
+			tmpProj = Y * directions.col(i);
+			medians(i) = arma::median(tmpProj);
+			mads(i) = arma::median(arma::abs(tmpProj - medians(i)));
+		}
+
+		arma::rowvec tmpX(nproj);
+
+		for(size_t i = 0; i < nx; i++)
+		{
+			tmpX = X.row(i) * directions;
+			tmpX -= medians;
+			tmpX /= mads;
+			tmpX = arma::abs(tmpX);
+			depth(i) = arma::max(tmpX);
+		}
+
+		depth = 1/(1+depth);
+		
+		return depth;
+	}
  }

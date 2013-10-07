@@ -7,17 +7,17 @@
 using namespace Rcpp;
 
 // CovLPCPP
-SEXP CovLPCPP(SEXP rX, double p, double a, double b);
-RcppExport SEXP depthproc_CovLPCPP(SEXP rXSEXP, SEXP pSEXP, SEXP aSEXP, SEXP bSEXP) {
+SEXP CovLPCPP(SEXP X, double p, double a, double b);
+RcppExport SEXP depthproc_CovLPCPP(SEXP XSEXP, SEXP pSEXP, SEXP aSEXP, SEXP bSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        SEXP rX = Rcpp::as<SEXP >(rXSEXP);
+        SEXP X = Rcpp::as<SEXP >(XSEXP);
         double p = Rcpp::as<double >(pSEXP);
         double a = Rcpp::as<double >(aSEXP);
         double b = Rcpp::as<double >(bSEXP);
-        SEXP __result = CovLPCPP(rX, p, a, b);
+        SEXP __result = CovLPCPP(X, p, a, b);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
@@ -56,16 +56,35 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// depthProjCPP
+SEXP depthProjCPP(SEXP ru, SEXP rX, double nproj, double seed);
+RcppExport SEXP depthproc_depthProjCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP nprojSEXP, SEXP seedSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        SEXP ru = Rcpp::as<SEXP >(ruSEXP);
+        SEXP rX = Rcpp::as<SEXP >(rXSEXP);
+        double nproj = Rcpp::as<double >(nprojSEXP);
+        double seed = Rcpp::as<double >(seedSEXP);
+        SEXP __result = depthProjCPP(ru, rX, nproj, seed);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // runifsphereCPP
-SEXP runifsphereCPP(double n, double p);
-RcppExport SEXP depthproc_runifsphereCPP(SEXP nSEXP, SEXP pSEXP) {
+SEXP runifsphereCPP(double n, double p, int seed);
+RcppExport SEXP depthproc_runifsphereCPP(SEXP nSEXP, SEXP pSEXP, SEXP seedSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         double n = Rcpp::as<double >(nSEXP);
         double p = Rcpp::as<double >(pSEXP);
-        SEXP __result = runifsphereCPP(n, p);
+        int seed = Rcpp::as<int >(seedSEXP);
+        SEXP __result = runifsphereCPP(n, p, seed);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

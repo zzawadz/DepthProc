@@ -30,3 +30,6 @@ LocationEstimators.o: RobCovLib/LocationEstimators.cpp
 
 	
 $(SHLIB): Utils.o Depth.o LocationEstimators.o RobCovLib.o
+
+clean:
+	rm -rf *.o
