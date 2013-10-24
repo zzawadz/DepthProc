@@ -1,0 +1,35 @@
+
+## Use the R_HOME indirection to support installations of multiple R version
+PKG_LIBS = $(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" -e "Rcpp:::LdFlags()")
+PKG_LIBS += Utils.o
+PKG_LIBS += Depth.o
+PKG_LIBS += LocationEstimators.o
+PKG_LIBS += RobCovLib.o
+PKG_LIBS += $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+
+PKG_CPPFLAGS=-I.
+
+ARMA = $(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" -e "RcppArmadillo:::CxxFlags()")
+
+LIB_COMP_OPTS = -DNDEBUG -O2 -Wall  -mtune=core2 $(LAPACK_LIBS) $(BLAS_LIBS)  $(FLIBS) $(ARMA)
+
+all: Utils.o Depth.o RobCovLib.o LocationEstimators.o $(SHLIB) 
+
+Utils.o: RobCovLib/Utils.cpp
+	$(CXX) $(LIB_COMP_OPTS) -c RobCovLib/Utils.cpp 
+	
+Depth.o: RobCovLib/Depth.cpp
+	$(CXX) $(LIB_COMP_OPTS) -c RobCovLib/Depth.cpp 
+	
+RobCovLib.o: RobCovLib/RobCovLib.cpp
+	$(CXX) -DNDEBUG -O2 -Wall  -mtune=core2 $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) $(ARMA) -c RobCovLib/RobCovLib.cpp 
+	
+LocationEstimators.o: RobCovLib/LocationEstimators.cpp
+	$(CXX) -DNDEBUG -O2 -Wall  -mtune=core2 $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) $(ARMA) -c RobCovLib/LocationEstimators.cpp 
+	
+
+	
+$(SHLIB): Utils.o Depth.o LocationEstimators.o RobCovLib.o
+
+clean:
+	rm -rf *.o
