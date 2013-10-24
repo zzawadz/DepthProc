@@ -43,10 +43,11 @@ ddPlot <- function (x, y = NULL, distribution = "mvnorm", method = "Projection",
     }
     if (location == TRUE) 
     {
-      medx <- med(x_new)
-      medy <- med(y_new)
-      x_new <- x_new - medx
-      y_new <- y_new - medy
+        medx <- med(x_new, method = method)
+        medy <- med(y_new, method = method)
+        x_new <- sweep(x_new, 2, medx, "-")
+         y_new <- sweep(y_new, 2, medy, "-")
+      
     }
     data <- rbind(x_new, y_new)
     depth_x <- depth(data, x_new, method, name = name_x)
