@@ -23,7 +23,7 @@
   plot; otherwise, returns a data frame containing the
   central areas and their volume.}
 
-  \item{name}{Name of matrix X used in legend.}
+  \item{name_x}{Name of matrix X used in legend.}
 
   \item{name_y}{Name of matrix Y used in legend.}
 
