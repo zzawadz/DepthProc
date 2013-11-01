@@ -1,6 +1,6 @@
 #include <RcppArmadillo.h>
 using namespace Rcpp;
-#include "RobCovLib/Utils.h"
+#include "Utils.h"
 
 // [[Rcpp::export]]
 SEXP runifsphereCPP(double n, double p, int seed) 

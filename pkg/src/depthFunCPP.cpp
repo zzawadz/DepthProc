@@ -1,6 +1,6 @@
 #include <RcppArmadillo.h>
 using namespace Rcpp;
-#include "RobCovLib/Depth.h"
+#include "Depth.h"
 
 // [[Rcpp::export]]
 SEXP depthMahCPP(SEXP ru, SEXP rX) 

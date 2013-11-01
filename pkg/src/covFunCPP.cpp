@@ -1,6 +1,6 @@
 #include <RcppArmadillo.h>
 using namespace Rcpp;
-#include "RobCovLib/RobCovLib.h"
+#include "RobCovLib.h"
 
 // [[Rcpp::export]]
 SEXP CovLPCPP(SEXP X, double p, double a, double b) 

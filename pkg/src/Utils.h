@@ -6,7 +6,7 @@
 
 namespace Utils
 {
-	__declspec(dllexport) arma::mat runifsphere(size_t n, size_t p, int seed);
+ arma::mat runifsphere(size_t n, size_t p, int seed);
 
 }
 

@@ -13,10 +13,10 @@ BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        SEXP X = Rcpp::as<SEXP >(XSEXP);
-        double p = Rcpp::as<double >(pSEXP);
-        double a = Rcpp::as<double >(aSEXP);
-        double b = Rcpp::as<double >(bSEXP);
+        Rcpp::traits::input_parameter< SEXP >::type X(XSEXP );
+        Rcpp::traits::input_parameter< double >::type p(pSEXP );
+        Rcpp::traits::input_parameter< double >::type a(aSEXP );
+        Rcpp::traits::input_parameter< double >::type b(bSEXP );
         SEXP __result = CovLPCPP(X, p, a, b);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
@@ -31,8 +31,8 @@ BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        SEXP R_x = Rcpp::as<SEXP >(R_xSEXP);
-        SEXP R_y = Rcpp::as<SEXP >(R_ySEXP);
+        Rcpp::traits::input_parameter< SEXP >::type R_x(R_xSEXP );
+        Rcpp::traits::input_parameter< SEXP >::type R_y(R_ySEXP );
         NumericVector __result = depth2dcpp(R_x, R_y);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
@@ -47,8 +47,8 @@ BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        SEXP ru = Rcpp::as<SEXP >(ruSEXP);
-        SEXP rX = Rcpp::as<SEXP >(rXSEXP);
+        Rcpp::traits::input_parameter< SEXP >::type ru(ruSEXP );
+        Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP );
         SEXP __result = depthMahCPP(ru, rX);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
@@ -63,10 +63,10 @@ BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        SEXP ru = Rcpp::as<SEXP >(ruSEXP);
-        SEXP rX = Rcpp::as<SEXP >(rXSEXP);
-        double nproj = Rcpp::as<double >(nprojSEXP);
-        double seed = Rcpp::as<double >(seedSEXP);
+        Rcpp::traits::input_parameter< SEXP >::type ru(ruSEXP );
+        Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP );
+        Rcpp::traits::input_parameter< double >::type nproj(nprojSEXP );
+        Rcpp::traits::input_parameter< double >::type seed(seedSEXP );
         SEXP __result = depthProjCPP(ru, rX, nproj, seed);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
@@ -81,9 +81,9 @@ BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        double n = Rcpp::as<double >(nSEXP);
-        double p = Rcpp::as<double >(pSEXP);
-        int seed = Rcpp::as<int >(seedSEXP);
+        Rcpp::traits::input_parameter< double >::type n(nSEXP );
+        Rcpp::traits::input_parameter< double >::type p(pSEXP );
+        Rcpp::traits::input_parameter< int >::type seed(seedSEXP );
         SEXP __result = runifsphereCPP(n, p, seed);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
