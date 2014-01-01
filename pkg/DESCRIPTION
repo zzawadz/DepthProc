@@ -6,6 +6,6 @@ Maintainer: Core Tean <z@gmail.com>
 Description: Package for depths
 License: GPL-2
 Depends: R (>= 2.13.1), geometry, ggplot2, lattice, MNM, sn, MASS,
-        robustbase, Rcpp (>= 0.10.1), RcppArmadillo, rrcov
+        robustbase, Rcpp (>= 0.10.1), RcppArmadillo, rrcov, sm
 LinkingTo: Rcpp, RcppArmadillo
 Packaged: 2012-11-10 23:48:39 UTC; Dom
