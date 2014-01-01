@@ -65,7 +65,7 @@ else
 
 filled.contour(x_axis, y_axis, depth_surface, 
   color.palette = colorRampPalette(colors,space = "Lab"),levels = levels,
-	main = plot.title,
+	main = plot_title,
 									
 
 	plot.axes = { contour(x_axis, y_axis, depth_surface, add = TRUE,drawlabels=FALSE,lwd=1.3);
