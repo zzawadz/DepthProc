@@ -1,4 +1,3 @@
-
 depthMedian = function(X, method="Projection",...)
 {
   depths = depth(X, X, method = method,...)

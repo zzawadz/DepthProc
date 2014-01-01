@@ -86,7 +86,7 @@ depth = function(u, X, method="Projection", ndir=1000, seed = 1, name = "X", a =
   ########################################################
   if (method=="LP")
   {
-    return(depthTukey(u, X, ndir, name = name))
+    return(depthLP(u, X, ndir, name = name, a=a, b=b, p=p))
   }
 }
 
@@ -156,7 +156,7 @@ depthTukey = function(u, X, ndir, seed = 1, name)
 
 depthLP = function(u, X, p, a, b, name, func = NULL)
 {
-  depth = depthProjCPP(u, X, p, a, b)
+  depth = depthLPCPP(u, X, p, a, b)
   new("DepthLP", depth, u = u, X = X, method = "LP", name = name)
 }
 
