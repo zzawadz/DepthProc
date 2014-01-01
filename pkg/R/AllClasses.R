@@ -20,7 +20,7 @@ setClass("AsymmetryCurve", representation(alpha = "numeric")
 setClass("AsymmetryCurveList", contains=c("DepthCurveList", "list"))
 
 
-setClass("BinnDepth2d", contains="matrix", representation=c(mid_x = "numeric", mid_y = "numeric", breaks_x = "numeric", breaks_y = "numeric", input_data = "matrix"))
+setClass("BinnDepth2d", representation=list(freq = "matrix", mid_x = "numeric", mid_y = "numeric", breaks_x = "numeric", breaks_y = "numeric", input_data = "matrix"))
 
 #Generics
 setGeneric("getPlot", function(object) standardGeneric("getPlot"))

@@ -61,9 +61,9 @@ binningDepth2D = function(x, nbins = 8, remove_borders = FALSE)
     tmp2[[2]] = tmp2[[2]][-c(1,length(tmp2[[2]]))]
   }
   
- # result = list(freq = tmp, mid_x = tmp1[[2]], mid_y = tmp2[[2]], breaks_x = tmp1[[1]], breaks_y = tmp2[[1]])
-  
-  new("BinnDepth2d", tmp, mid_x =  tmp1[[2]], mid_y = tmp2[[2]], breaks_x = tmp1[[1]], breaks_y = tmp2[[1]], input_data = x)
+
+ tmp = matrix(as.vector(tmp), ncol = ncol(tmp))
+  new("BinnDepth2d", freq = tmp, mid_x =  tmp1[[2]], mid_y = tmp2[[2]], breaks_x = tmp1[[1]], breaks_y = tmp2[[1]], input_data = x)
   #return(result)
 }
 
@@ -89,6 +89,4 @@ setMethod("plot", signature = c(x = "BinnDepth2d", y = "missing"), function(x, y
   #abline(v = breaks_x, lty = 2)
   #abline(h = breaks_y, lty = 2)
 })
-
-
 
