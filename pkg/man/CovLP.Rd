@@ -2,7 +2,7 @@
 \alias{CovLP}
 \title{CovLp}
 \usage{
-CovLP(x, p, a, b)
+CovLP(x, p = 1, a = 1, b = 1)
 }
 \arguments{
   \item{x}{x}

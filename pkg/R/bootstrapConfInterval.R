@@ -1,5 +1,5 @@
 medianDepthConfInterval = function(X, method="Projection", R = 1000, ...)
 { 
-  depthTMP = function(x, indices, ...) depthMedian(X=x[indices,],...)  
-  boot(x,depthTMP, R = R, method = method,...)
+  depthTMP = function(X, indices, ...) depthMedian(X=X[indices,],...)  
+  boot(X,depthTMP, R = R, method = method,...)
 }

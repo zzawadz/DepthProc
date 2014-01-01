@@ -2,7 +2,8 @@
 \alias{depth}
 \title{Depth calculation}
 \usage{
-depth(u, X, method = "Projection", ndir = 1000, seed = 1, name = "X")
+depth(u, X, method = "Projection", ndir = 1000, seed = 1, name = "X",
+  a = 1, b = 1, p = 1)
 }
 \arguments{
   \item{u}{Numerical vector or matrix whose depth is to be
