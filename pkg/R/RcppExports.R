@@ -17,6 +17,10 @@ depthProjCPP <- function(ru, rX, nproj, seed) {
     .Call('depthproc_depthProjCPP', PACKAGE = 'depthproc', ru, rX, nproj, seed)
 }
 
+depthLPCPP <- function(ru, rX, p, a, b) {
+    .Call('depthproc_depthLPCPP', PACKAGE = 'depthproc', ru, rX, p, a, b)
+}
+
 runifsphereCPP <- function(n, p, seed) {
     .Call('depthproc_runifsphereCPP', PACKAGE = 'depthproc', n, p, seed)
 }

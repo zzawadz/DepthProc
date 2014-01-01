@@ -2,9 +2,8 @@
 \alias{scaleCurve}
 \title{Scale curve}
 \usage{
-  scaleCurve(x, y = NULL, alpha = seq(0, 1, 0.01),
-    method = "Projection", plot = TRUE, name = "X",
-    name_y = "Y", ...)
+scaleCurve(x, y = NULL, alpha = seq(0, 1, 0.01), method = "Projection",
+  plot = TRUE, name = "X", name_y = "Y", ...)
 }
 \arguments{
   \item{x}{Multivariate data as a matrix.}
@@ -23,7 +22,7 @@
   plot; otherwise, returns a data frame containing the
   central areas and their volume.}
 
-  \item{name_x}{Name of matrix X used in legend.}
+  \item{name}{Name of matrix X used in legend.}
 
   \item{name_y}{Name of matrix Y used in legend.}
 
@@ -31,25 +30,25 @@
   \code{depth}.}
 }
 \value{
-  Returns the volume of the convex hull containing
-  subsequent central points of \code{X}.
+Returns the volume of the convex hull containing subsequent
+central points of \code{X}.
 }
 \description{
-  Draws a scale curve: measure of dispersion.
+Draws a scale curve: measure of dispersion.
 }
 \details{
-  The scale curve is a two-dimensional method to describe
-  the dispersion of random vector around the median induced
-  by considered depth function.
+The scale curve is a two-dimensional method to describe the
+dispersion of random vector around the median induced by
+considered depth function.
 
-  Function \code{scalecurve}, when determining the volumes
-  of the convex hull containing subsequent points from
-  alpha central region, uses function \code{convhulln} from
-  \code{geometry} package.
+Function \code{scalecurve}, when determining the volumes of
+the convex hull containing subsequent points from alpha
+central region, uses function \code{convhulln} from
+\code{geometry} package.
 
-  The minimal dimension of data in X or Y is 2.
+The minimal dimension of data in X or Y is 2.
 
-  \code{ggplot2} package is used to draw a plot.
+\code{ggplot2} package is used to draw a plot.
 }
 \examples{
 require(MASS)
@@ -65,26 +64,26 @@ require(MASS)
  scalecurve(x, rbind(y,z), method = "Projection", draw = TRUE, nameX = "N", nameY = "Mixture of N")
 }
 \author{
-  Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz
-  and Zygmunt Zawadzki from Cracow University of Economics.
+Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and
+Zygmunt Zawadzki from Cracow University of Economics.
 }
 \references{
-  Liu, R.Y., Parelius, J.M. and Singh, K. (1999),
-  Multivariate analysis by data depth: Descriptive
-  statistics, graphics and inference (with discussion),
-  \emph{Ann. Statist.}, \bold{27}, 783--858.
+Liu, R.Y., Parelius, J.M. and Singh, K. (1999),
+Multivariate analysis by data depth: Descriptive
+statistics, graphics and inference (with discussion),
+\emph{Ann. Statist.}, \bold{27}, 783--858.
 
-  Chaudhuri, P. (1996), On a Geometric Notion of Quantiles
-  for Multivariate Data, \emph{Journal of the American
-  Statistical Association}, 862--872.
+Chaudhuri, P. (1996), On a Geometric Notion of Quantiles
+for Multivariate Data, \emph{Journal of the American
+Statistical Association}, 862--872.
 
-  Dyckerhoff, R. (2004), Data Depths Satisfying the
-  Projection Property, \emph{Allgemeines Statistisches
-  Archiv.}, \bold{88}, 163--190.
+Dyckerhoff, R. (2004), Data Depths Satisfying the
+Projection Property, \emph{Allgemeines Statistisches
+Archiv.}, \bold{88}, 163--190.
 }
 \seealso{
-  \code{\link{depthContour}} and \code{\link{depthPersp}}
-  for depth graphics.
+\code{\link{depthContour}} and \code{\link{depthPersp}} for
+depth graphics.
 }
 \keyword{curve}
 \keyword{depth}

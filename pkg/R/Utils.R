@@ -1,5 +1,3 @@
-### Theme for ggplot2
-
 .depTheme= function()
 {
   return(theme(axis.title.x = element_text(face = "bold", vjust = 0, size = 16),

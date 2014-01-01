@@ -29,3 +29,18 @@ SEXP depthProjCPP(SEXP ru, SEXP rX, double nproj, double seed)
   arma::vec depth = Depth::ProjectionDepth(u, X, nproj, seed);
   return wrap(depth);
 }
+
+// [[Rcpp::export]]
+SEXP depthLPCPP(SEXP ru, SEXP rX, double p, double a, double b) 
+{
+  Rcpp::NumericMatrix cu(ru);
+  arma::mat u(cu.begin(), cu.nrow(), cu.ncol(), false);
+  
+  Rcpp::NumericMatrix cX(rX);
+  arma::mat X(cX.begin(), cX.nrow(), cX.ncol(), false);
+  
+  
+  arma::vec depth = Depth::LPDepth(u, X, p, a, b);
+  return wrap(depth);
+}
+

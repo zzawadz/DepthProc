@@ -56,7 +56,7 @@
 #'
 
 
-depth = function(u, X, method="Projection", ndir=1000, seed = 1, name = "X")
+depth = function(u, X, method="Projection", ndir=1000, seed = 1, name = "X", a = 1, b = 1, p = 1)
 {  
   if(is.data.frame(u)) u = as.matrix(u)
   if(is.data.frame(X)) X = as.matrix(X)
@@ -84,6 +84,10 @@ depth = function(u, X, method="Projection", ndir=1000, seed = 1, name = "X")
     return(depthTukey(u, X, ndir, name = name))
   }
   ########################################################
+  if (method=="LP")
+  {
+    return(depthTukey(u, X, ndir, name = name))
+  }
 }
 
 
@@ -147,4 +151,12 @@ depthTukey = function(u, X, ndir, seed = 1, name)
   }
   new("DepthTukey", depth, u = u, X = X, method = "Tukey", name = name)
 }
-  
+
+######################################################################
+
+depthLP = function(u, X, p, a, b, name, func = NULL)
+{
+  depth = depthProjCPP(u, X, p, a, b)
+  new("DepthLP", depth, u = u, X = X, method = "LP", name = name)
+}
+

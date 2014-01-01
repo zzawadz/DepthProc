@@ -1,3 +1,61 @@
+#'@title Asymmetry curve based on depths
+#'
+#'@description Draws a asymmetry curve estimated from given data.
+#'
+#'  @param x Multivariate data as a matrix.
+#'  @param y Additional matrix with multivariate data.
+#'  @param alpha Vector with values of central area to be used in computing assymetry norm.
+#'  @param method Character string which determines the depth function. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}
+#' @param movingmedian Logical. For default FALSE only one depth median is used to compute asymmetry norm. If TRUE - for every central area new depth median will be used - this approach needs much more time.
+#' @param plot Logical. Default TRUE produces aassymetry curve plot; otherwise, returns a data frame containing the central areas and asymmetry norm values over these points.
+#' @param name Name of set X - used in plot legend
+#' @param name_y Name of set Y - used in plot legend
+#' @param ... Any additional parameters for function depth
+#'
+#'@details 
+#'  
+#'  Asymmetrycurve takes advantage of function \code{convhulln} to compute volume of central area's convex hull.
+#'  
+#'  
+#'  @references 
+#'  
+#' Serfling  R. J.  Multivariate Symmetry and Asymmetry, \emph{Encyclopedia of Statistical Science}, S Kotz, C.B. Read, N. Balakrishnan, B. Vidakovic (eds), 2nd, ed., John Wiley.
+#'
+#'Liu, R.Y., Parelius, J.M. and Singh, K. (1999), Multivariate analysis by data depth: Descriptive statistics, graphics and inference (with discussion), \emph{Ann. Statist.}, \bold{27}, 783--858.
+#'
+#'Chaudhuri, P. (1996), On a Geometric Notion of Quantiles for Multivariate Data, \emph{Journal of the American Statistical Association}, 862--872.
+#'
+#'Dyckerhoff, R. (2004), Data Depths Satisfying the Projection Property, \emph{Allgemeines Statistisches Archiv.},  \bold{88}, 163--190.}
+#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#'  
+#'  @seealso \code{\link{scalecurve}}, \code{\link{depth}}
+#'  
+#'  @examples
+#'  
+#'  require(sn)
+#' require(MASS)
+#'
+#' xi = c(0,0)
+#' alpha <- c(2,-5)
+#' Omega <- diag(2)*5
+#' 
+#' n = 500
+#' X = mvrnorm(n, xi, Omega)  # normal distribution
+#' Y = rmst(n, xi, Omega, alpha, df=1)
+#' asymmetryCurve(X,Y1,name = "NORM",name_y = "S_T(2,-5,10)")
+#'  
+#'  
+#'  @keywords
+#'  multivariate
+#'  nonparametric
+#'  robust
+#'  depth function
+#'  asymmetry
+#'
+
+
+
+
 asymmetryCurve<-function(x, y = NULL, alpha = seq(0,1,0.01), method = "Projection",
 	movingmedian = FALSE,plot = TRUE, name = "X", name_y = "Y",...)
 {

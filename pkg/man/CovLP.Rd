@@ -1,0 +1,42 @@
+\name{CovLP}
+\alias{CovLP}
+\title{CovLp}
+\usage{
+CovLP(x, p, a, b)
+}
+\arguments{
+  \item{x}{x}
+
+  \item{p}{p}
+
+  \item{a}{a}
+
+  \item{b}{b}
+}
+\value{
+Returns depth weighted covariance matrix.
+}
+\description{
+Claculate covariance matrix
+}
+\details{
+Under construction.
+}
+\examples{
+x = mvrnorm(n = 100, mu = c(0,0), Sigma = 3*diag(2))
+ cov_x = CovLP(x,1,1,1)
+}
+\author{
+Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and
+Zygmunt Zawadzki from Cracow University of Economics.
+}
+\seealso{
+\code{\link{depthContour}} and \code{\link{depthPersp}} for
+depth graphics.
+}
+\keyword{depth}
+\keyword{function}
+\keyword{multivariate}
+\keyword{nonparametric}
+\keyword{robust}
+

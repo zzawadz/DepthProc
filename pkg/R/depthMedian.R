@@ -1,5 +1,5 @@
 
-med = function(X, method="Projection",...)
+depthMedian = function(X, method="Projection",...)
 {
   depths = depth(X, X, method = method,...)
   med = X[depths == max(depths),]

@@ -1,5 +1,42 @@
-depthContour<-function(X,method = "Projection",plot.title = paste(method,"depth"),
-	xlim = extendrange(X[,1],f=0.1),ylim = extendrange(X[,2],f=0.1),n=50,pmean = TRUE,mcol = "blue",
+#'@title Approximate depth contours
+#'
+#'@description Draws an approximate contours of depth for bivariate data.
+#'
+#'  
+#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#'  
+#'  @seealso \code{\link{depthPersp}}
+#'  
+#'  @examples
+#'
+#' x = mvrnorm(1000,c(0,0),diag(2))
+#' depthContour(x)
+#' #with points
+#' depthContour(x, points = TRUE)
+#'  
+#'  
+#'  
+#'  @keywords
+#'  contour
+#'  depth
+
+
+#' @param x Bivariate data
+#' @param method Character string which determines the depth function. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}
+#' @param plot_title Title of the plot
+#' @param xlim Determines the width of x-axis.
+#' @param ylim Determines the width of y-axis.
+#' @param n Number of points in each coordinate direction to be used in contour plot.
+#' @param pmean Logical. If TRUE mean will be marked.
+#' @param mcol Determines the color of lines describing the mean.
+#' @param pdmedian Logical. If TRUE depth median will be marked.
+#' @param mecol Determines the color of lines describing the depth median. 
+#' @param legend Logical. If TRUE legend for mean and depth median will be drawn.
+#' @param points Logical. If TRUE points from matrix x will be drawn.
+#' @param \dots Any additional parameters for function depth
+
+depthContour<-function(x,method = "Projection",plot_title = paste(method,"depth"),
+	xlim = extendrange(x[,1],f=0.1),ylim = extendrange(x[,2],f=0.1),n=50,pmean = TRUE,mcol = "blue",
 	pdmedian = TRUE, mecol = "brown",legend = TRUE,points = FALSE,...)
 {
 			x_axis = seq(xlim[1],xlim[2],length.out = n)
@@ -8,7 +45,7 @@ depthContour<-function(X,method = "Projection",plot.title = paste(method,"depth"
 			xy_surface = expand.grid(x_axis,y_axis)
 			
 			xy_surface=cbind(xy_surface[,1],xy_surface[,2])
-			depth_surface = depth(xy_surface,X,method = method,...)
+			depth_surface = depth(xy_surface, x,method = method,...)
 
 			
 depth_surface = matrix(depth_surface,ncol = n)
@@ -37,17 +74,17 @@ filled.contour(x_axis, y_axis, depth_surface,
 				
 				if(points)
  					{
-						points(X[,1],X[,2],col = "white",pch = 19,cex = 1.2);
-						points(X[,1],X[,2],cex = 1.3,col = "grey");
+						points(x[,1],x[,2],col = "white",pch = 19,cex = 1.2);
+						points(x[,1],x[,2],cex = 1.3,col = "grey");
 					}
 				if(pmean)
 					{
-						points(mean(X[,1]),mean(X[,2]),pch = 4 ,col = mcol,cex = 1.5,lwd = 2.5)
+						points(mean(x[,1]),mean(x[,2]),pch = 4 ,col = mcol,cex = 1.5,lwd = 2.5)
 						#abline(, col = mcol,lwd = 1.8)
 					}
 				if(pdmedian)
 					{
-						dmedian = med(X,method = method)
+						dmedian = depthMedian(x,method = method)
 						points(dmedian[1],dmedian[2] ,pch = 4,col = mecol, cex = 1.5,lwd = 2.5)
 						#abline(h = dmedian[2], col = mecol, lwd = 1.8)
 					}

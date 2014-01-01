@@ -74,6 +74,25 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// depthLPCPP
+SEXP depthLPCPP(SEXP ru, SEXP rX, double p, double a, double b);
+RcppExport SEXP depthproc_depthLPCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP pSEXP, SEXP aSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< SEXP >::type ru(ruSEXP );
+        Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP );
+        Rcpp::traits::input_parameter< double >::type p(pSEXP );
+        Rcpp::traits::input_parameter< double >::type a(aSEXP );
+        Rcpp::traits::input_parameter< double >::type b(bSEXP );
+        SEXP __result = depthLPCPP(ru, rX, p, a, b);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // runifsphereCPP
 SEXP runifsphereCPP(double n, double p, int seed);
 RcppExport SEXP depthproc_runifsphereCPP(SEXP nSEXP, SEXP pSEXP, SEXP seedSEXP) {
