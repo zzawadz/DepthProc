@@ -38,7 +38,7 @@ binningDepth2D = function(x, nbins = 8, remove_borders = FALSE)
       if(is.na(midpoints[length(midpoints)])) midpoints[(length(midpoints))] = midpoints[(length(midpoints)-1)]+2*sigma
     }
     
-    res = list(breaks, midpoints)
+    res = list(breaks, midpoints, dep_stat)
     return(res)
   }
   
@@ -63,7 +63,8 @@ binningDepth2D = function(x, nbins = 8, remove_borders = FALSE)
   
 
  tmp = matrix(as.vector(tmp), ncol = ncol(tmp))
-  new("BinnDepth2d", freq = tmp, mid_x =  tmp1[[2]], mid_y = tmp2[[2]], breaks_x = tmp1[[1]], breaks_y = tmp2[[1]], input_data = x)
+  new("BinnDepth2d", freq = tmp, mid_x =  tmp1[[2]], mid_y = tmp2[[2]], breaks_x = tmp1[[1]], breaks_y = tmp2[[1]], input_data = x,
+      max_depth_x = tmp1[[3]], max_depth_y = tmp2[[3]])
   #return(result)
 }
 
