@@ -27,11 +27,14 @@ sample.max.depth <-
       #  cat( "    n.up: ", n.up, "n.low: ", n.low, "i.mu: ", res["i"], "difb: ", difb, "\n")
       dec<-1
       while(i<iter & (n.up-n.low>1 & dec>0)){
+       # cat(sprintf("Nup i low %i %i %i ",d,n.up,n.low))
         i<-i+1
         n.mid.low<-ceiling((n.mid+n.low)/2)
         n.mid.up<-floor((n.mid+n.up)/2)
         #    cat("i: ", i, " n.low:", n.low, " n.mid.low", n.mid.low, " n.mid:", n.mid,
         #           " n.mid.up:" , n.mid.up, " n.up:", n.up, "\n")
+     ##   cat(sprintf("|| %f %i ||", n.mid.low, n.mid.up))
+    #    cat(sprintf("|| %f %i ||", y[n.mid.low], d.min))
         res.low<-sample.max.depth.for.mu(mu=y[n.mid.low],y=y,d.min=d.min,
                                          iter=iter,eps=eps)
         res.up<-sample.max.depth.for.mu(mu=y[n.mid.up],y=y,d.min=d.min,
@@ -41,6 +44,9 @@ sample.max.depth <-
         d.low<-res.low["d"]
         d.up<-res.up["d"]
         if(d.low> d ){
+          
+       
+          
           d<-d.low
           s<-res.low["sigma"]
           difb<-res.low["difbound"]
@@ -51,6 +57,7 @@ sample.max.depth <-
         } # d.low>d
         else{
           if(d.up >d){
+     
             d<-d.up
             s<-res.up["sigma"]
             difb<-res.up["difbound"]
@@ -61,12 +68,15 @@ sample.max.depth <-
           } # d.up
           else{
             if(d.low< d | d.up < d){
+           
               if(d.low < d){
+
                 n.low<-n.mid.low
                 #               cat("3. Fall (d.low<d): ", "depth: ", d, "s: ", s,  
                 #                   "n.low: ", n.low,"n.mid: ", n.mid, " n.up: ", n.up, "\n")
               } # d.low< d 
               if(d.up < d){
+         
                 n.up<-n.mid.up
                 #               cat("4. Fall (d.up<d): ", "depth: ", d,"s: ", s, "n.low: ", 
                 #                      n.low,  "n.mid: ", n.mid," n.up: ", n.up,  "\n")
@@ -79,6 +89,7 @@ sample.max.depth <-
             } # d.low< d | d.up < d else
           } # d.up else
         }# d.low else
+    #    cat(" KONIEC \n")
       } # while
     } # d< N/2
     # Precision step
@@ -134,12 +145,14 @@ sample.max.depth.for.mu <-
     y<-sort(y)
     M<-0
     N<-length(y)
+    
     for(i in 1:N){
       if(y[i]<mu){
         M<-M+1
       }
-      i<-i+1
+      
     }
+    i = 0
     if(y[M+1]>mu){ 
       d<-min(M,N-M)
     }
@@ -149,9 +162,12 @@ sample.max.depth.for.mu <-
     cont<-sample.depth.cont.for.mu(d,mu,y=y)
     difbound<-cont["ubound"]-cont["lbound"]
     if(abs(difbound)>eps){
+      
       i<-1
       d.up<-d
       d.low<-d.min
+    # cat(paste(d.up, d.low, i<iter , abs(difbound)>eps , d.up-d.low>1))
+    #  cat("\n")
       while(i<iter & (abs(difbound)>eps & d.up-d.low>1)){
         i<-i+1
         if(difbound < -eps){
@@ -196,10 +212,13 @@ sample.depth.cont.for.mu <-
       }
       i<-i+1
     }
+   # cat(sprintf("M value %i \n", M))
+    
     if(y[M+1]>mu){       
       if((d<=M & d<=N-M) & d>0){
         k<-seq(M-d+1,M,1)
         lk<-(mu-y[k])*(y[d+k]-mu)
+        #print(k)
         lbound<-max(sqrt(abs(lk)))
         k<-seq(1,d,1)
         uk<-(mu-y[k])*(y[N-d+k]-mu) 

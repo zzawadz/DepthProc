@@ -1,9 +1,20 @@
-binningDepth2D = function(x, nbins = 8, remove_borders = FALSE)
+binningDepth2D = function(x, nbins = 8, remove_borders = FALSE, devel = FALSE)
 {
   require(sm)
   createBin = function(x, nbins)
   {
-    dep_stat = sample.max.depth(x)
+    if(!devel) dep_stat = sample.max.depth(x) 
+    else 
+    {
+       # dep_stat_tmp = sample.max.depth(as.numeric(x)) 
+        dep_stat = maxSampleLocScaleDepth(x)
+       # if(any(dep_stat_tmp - dep_stat > 1e-10)) 
+       # {
+       #   print(dep_stat_tmp)
+       #   print(dep_stat)
+       #   stop("Error in maxSampleLocScale")
+       # }
+    }
     mean = dep_stat["mu"]
     sigma = dep_stat["sigma"]
     

@@ -21,6 +21,18 @@ depthLPCPP <- function(ru, rX, p, a, b) {
     .Call('depthproc_depthLPCPP', PACKAGE = 'depthproc', ru, rX, p, a, b)
 }
 
+sampleDepthContForMuCPP <- function(d, mu, rY) {
+    .Call('depthproc_sampleDepthContForMuCPP', PACKAGE = 'depthproc', d, mu, rY)
+}
+
+sampleMaxDepthForMuCPP <- function(mu, rY, d_min, max_iter, eps) {
+    .Call('depthproc_sampleMaxDepthForMuCPP', PACKAGE = 'depthproc', mu, rY, d_min, max_iter, eps)
+}
+
+sampleMaxLocScaleDepthCPP <- function(ry, iter, eps, p_length) {
+    .Call('depthproc_sampleMaxLocScaleDepthCPP', PACKAGE = 'depthproc', ry, iter, eps, p_length)
+}
+
 runifsphereCPP <- function(n, p, seed) {
     .Call('depthproc_runifsphereCPP', PACKAGE = 'depthproc', n, p, seed)
 }

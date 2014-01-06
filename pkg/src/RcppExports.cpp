@@ -93,6 +93,60 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// sampleDepthContForMuCPP
+SEXP sampleDepthContForMuCPP(double d, double mu, SEXP rY);
+RcppExport SEXP depthproc_sampleDepthContForMuCPP(SEXP dSEXP, SEXP muSEXP, SEXP rYSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< double >::type d(dSEXP );
+        Rcpp::traits::input_parameter< double >::type mu(muSEXP );
+        Rcpp::traits::input_parameter< SEXP >::type rY(rYSEXP );
+        SEXP __result = sampleDepthContForMuCPP(d, mu, rY);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// sampleMaxDepthForMuCPP
+SEXP sampleMaxDepthForMuCPP(double mu, const SEXP rY, int d_min, int max_iter, double eps);
+RcppExport SEXP depthproc_sampleMaxDepthForMuCPP(SEXP muSEXP, SEXP rYSEXP, SEXP d_minSEXP, SEXP max_iterSEXP, SEXP epsSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< double >::type mu(muSEXP );
+        Rcpp::traits::input_parameter< const SEXP >::type rY(rYSEXP );
+        Rcpp::traits::input_parameter< int >::type d_min(d_minSEXP );
+        Rcpp::traits::input_parameter< int >::type max_iter(max_iterSEXP );
+        Rcpp::traits::input_parameter< double >::type eps(epsSEXP );
+        SEXP __result = sampleMaxDepthForMuCPP(mu, rY, d_min, max_iter, eps);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// sampleMaxLocScaleDepthCPP
+SEXP sampleMaxLocScaleDepthCPP(SEXP ry, double iter, double eps, double p_length);
+RcppExport SEXP depthproc_sampleMaxLocScaleDepthCPP(SEXP rySEXP, SEXP iterSEXP, SEXP epsSEXP, SEXP p_lengthSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< SEXP >::type ry(rySEXP );
+        Rcpp::traits::input_parameter< double >::type iter(iterSEXP );
+        Rcpp::traits::input_parameter< double >::type eps(epsSEXP );
+        Rcpp::traits::input_parameter< double >::type p_length(p_lengthSEXP );
+        SEXP __result = sampleMaxLocScaleDepthCPP(ry, iter, eps, p_length);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // runifsphereCPP
 SEXP runifsphereCPP(double n, double p, int seed);
 RcppExport SEXP depthproc_runifsphereCPP(SEXP nSEXP, SEXP pSEXP, SEXP seedSEXP) {
