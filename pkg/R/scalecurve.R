@@ -66,9 +66,13 @@
 scaleCurve<-function(x,y=NULL,alpha = seq(0,1,0.01),method = "Projection",plot = TRUE,
 	name = "X", name_y = "Y",...)
 {
-  if(!is.matrix(x)) stop("x must be a matrix!")
-  if(!is.null(y)) if(!is.matrix(y)) stop("y must be a matrix!")
-  
+  if(is.data.frame(x)) x = as.matrix(x)
+  if(!is.matrix(x)) stop("x must be a matrix or data frame!")
+  if(!is.null(y)) 
+    {
+      if(is.data.frame(y)) y = as.matrix(y)
+      if(!is.matrix(y)) stop("y must be a matrix or data frame!")
+    }
   dim_x <- dim(x)[2] 
 
 	depth_est <- depth(x,x,method, name = name) 
