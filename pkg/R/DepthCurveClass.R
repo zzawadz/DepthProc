@@ -87,5 +87,7 @@ setMethod("as.matrix", signature(x = "DepthCurveList"), function(x)
   tmp
 })
 
-
-
+setMethod("show", "DepthCurve", function(object)
+{
+  cat("Object of class:", class(object))
+})

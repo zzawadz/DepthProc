@@ -2,9 +2,8 @@
 \alias{depthContour}
 \title{Approximate depth contours}
 \usage{
-depthContour(x, method = "Projection", plot_title = paste(method, "depth"),
-  xlim = extendrange(x[, 1], f = 0.1), ylim = extendrange(x[, 2], f = 0.1),
-  n = 50, pmean = TRUE, mcol = "blue", pdmedian = TRUE,
+depthContour(x, xlim = extendrange(x[, 1], f = 0.1), ylim = extendrange(x[,
+  2], f = 0.1), n = 50, pmean = TRUE, mcol = "blue", pdmedian = TRUE,
   mecol = "brown", legend = TRUE, points = FALSE, ...)
 }
 \arguments{

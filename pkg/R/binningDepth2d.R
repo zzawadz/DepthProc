@@ -1,3 +1,20 @@
+#'@title 2d Binning
+#'
+#'@description Binning 2d
+#'
+#'  @seealso \code{\link{depth}}
+#'  
+#'  @examples
+#'  
+#'  binningDepth2D(x = mvrnorm(100,rep(0,2),diag(2)))
+#'  
+#'  @keywords
+#'  multivariate
+#'  nonparametric
+#'  robust
+#'  depth function
+
+
 binningDepth2D = function(x, nbins = 8, remove_borders = FALSE, devel = FALSE)
 {
   require(sm)
@@ -79,6 +96,22 @@ binningDepth2D = function(x, nbins = 8, remove_borders = FALSE, devel = FALSE)
   #return(result)
 }
 
+#'@docType methods
+#'@title 2d Binning plot
+#'
+#'@description Binning 2d
+#'
+#'  @seealso \code{\link{depth}}
+#'  
+#'  @examples
+#'  
+#'  tmp = binningDepth2D(x = mvrnorm(100,rep(0,2),diag(2)))
+#'  plot(tmp)
+#'  @keywords
+#'  multivariate
+#'  nonparametric
+#'  robust
+#'  depth function
 
 setMethod("plot", signature = c(x = "BinnDepth2d", y = "missing"), function(x, y = "missing", alpha = 0.1, bg_col = "red", add_mid = TRUE,...){
   
