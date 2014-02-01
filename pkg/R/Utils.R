@@ -7,3 +7,35 @@
                title = element_text(face = "bold", vjust = 1, size = 18)
   ))
 }
+
+.extractDepthParams = function(u, X,...)
+{
+  tmp = list(...)
+  params = c("method", "ndir", "seed", "name", "a", "b", "p")
+  def_param = list(method="Projection", ndir=1000, seed = 1, name = "X", a = 1, b = 1, p = 1)
+  fastIfElse = function(name, tmp, def){
+    ifelse(is.null(tmp[[name]]),def[[name]],tmp[[name]])
+  }
+  tmp = sapply(params, fastIfElse, tmp, def_param, simplify=FALSE)
+  #tmp = list(method = "Tukey")
+  tmp = c(list(u = u,X = X),tmp)
+  return(tmp)
+}
+
+.removeDepthParams = function(...)
+{
+  tmp = list(...)
+  params = c("method", "ndir", "seed", "name", "a", "b", "p")
+  names = names(tmp)
+  tmp = sapply(names, function(x) {
+    ifelse(x %in% params, NA, tmp[x])
+  })
+  tmp[!sapply(tmp, is.na)]
+}
+  
+
+.testNorm = function(d = 2)
+{
+  mvrnorm(100,rep(1,d),diag(d))
+}
+

@@ -35,17 +35,20 @@
 #' @param points Logical. If TRUE points from matrix x will be drawn.
 #' @param \dots Any additional parameters for function depth
 
-depthContour<-function(x,method = "Projection",plot_title = paste(method,"depth"),
-	xlim = extendrange(x[,1],f=0.1),ylim = extendrange(x[,2],f=0.1),n=50,pmean = TRUE,mcol = "blue",
-	pdmedian = TRUE, mecol = "brown",legend = TRUE,points = FALSE,...)
-{
+depthContour<-function(x, xlim = extendrange(x[,1],f=0.1), ylim = extendrange(x[,2],f=0.1),n=50,pmean = TRUE,mcol = "blue", pdmedian = TRUE, mecol = "brown",legend = TRUE,points = FALSE, ...)
+{ 
 			x_axis = seq(xlim[1],xlim[2],length.out = n)
  			y_axis = seq(ylim[1],ylim[2],length.out = n)
 				
 			xy_surface = expand.grid(x_axis,y_axis)
 			
 			xy_surface=cbind(xy_surface[,1],xy_surface[,2])
-			depth_surface = depth(xy_surface, x,method = method,...)
+      
+      
+			depth_params = .extractDepthParams(xy_surface,x,...)
+			depth_surface = do.call(depth,depth_params)
+      method = depth_params$method
+			#depth_surface = depth(xy_surface, x,method = method,...)
 
 			
 depth_surface = matrix(depth_surface,ncol = n)
@@ -62,15 +65,14 @@ else
 	levels = seq(0,0.5,0.05)
 	}
 
+graph_params = .removeDepthParams(...)
 
-filled.contour(x_axis, y_axis, depth_surface, 
-  color.palette = colorRampPalette(colors,space = "Lab"),levels = levels,
-	main = plot_title,
-									
-
-	plot.axes = { contour(x_axis, y_axis, depth_surface, add = TRUE,drawlabels=FALSE,lwd=1.3);
-
-				
+do.call(filled.contour, c(list(x = x_axis, y = y_axis, z = depth_surface, 
+  color.palette = colorRampPalette(colors,space = "Lab"),levels = levels,									
+	plot.axes = quote({ 
+    
+        do.call(contour,c(list(x = x_axis,y = y_axis,z= depth_surface, add = TRUE,drawlabels=FALSE), graph_params))
+        #contour(x_axis, y_axis, depth_surface, add = TRUE,drawlabels=FALSE);
 				
 				if(points)
  					{
@@ -108,8 +110,7 @@ filled.contour(x_axis, y_axis, depth_surface,
 					axis(1);
 					axis(2);
 
-                     }	
-	
-	)
+                     })), graph_params
+  ))
 
 }
