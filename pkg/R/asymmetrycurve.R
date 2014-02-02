@@ -59,6 +59,7 @@
 asymmetryCurve<-function(x, y = NULL, alpha = seq(0,1,0.01), method = "Projection",
 	movingmedian = FALSE,plot = TRUE, name = "X", name_y = "Y",...)
 {
+  if(nrow(x)<200) stop("Too small sample!")
 	if(!is.matrix(x)) stop("X must be a matrix!")
 	if(!is.null(y)) if(!is.matrix(y)) stop("Y must be a matrix!")
 	
@@ -67,8 +68,12 @@ asymmetryCurve<-function(x, y = NULL, alpha = seq(0,1,0.01), method = "Projectio
   if(!movingmedian) x_est = .asCurve(x, depth_est, alpha, method, ...) #function in as_curve.R
 	else x_est = .asCurveMM(x,alpha,method,...)  #function in as_curve_mm.R
 	
-  print(x_est)
 	asc = new("AsymmetryCurve", x_est[,2], depth = depth_est, alpha = x_est[,1])
+  
+  if(!is.null(y)){
+    asc = asc + asymmetryCurve(y, y =NULL, alpha, method,
+                                         movingmedian, plot = FALSE, name = name_y, name_y = "Y",...)
+  }
 	return(asc)
 }
 
@@ -112,9 +117,9 @@ asymmetryCurve<-function(x, y = NULL, alpha = seq(0,1,0.01), method = "Projectio
   }
   
   
-  vol <- vol[!is.na(vol)]
-  alpha_est <- alpha_est[!is.na(alpha_est)]
-  means <- matrix(means[!is.na(means)],ncol=dim_X)
+  #vol <- vol[!is.na(vol)]
+  #alpha_est <- alpha_est[!is.na(alpha_est)]
+  #means <- matrix(means[!is.na(means)],ncol=dim_X)
   
   k = length(vol)
   kmedian = matrix(rep(median,k),byrow=TRUE,ncol=dim_X) # taka ma?a optymalizacja

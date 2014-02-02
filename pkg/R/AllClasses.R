@@ -58,3 +58,9 @@ setClass("BinnDepth2d", representation=list(freq = "matrix", mid_x = "numeric", 
 setGeneric("getPlot", function(object) standardGeneric("getPlot"))
 setGeneric(".getPlot", function(object) standardGeneric(".getPlot"))
 setGeneric("as.matrix", function(x,...) standardGeneric("as.matrix"))
+
+
+setClass("Reg", representation(coef = "numeric", "VIRTUAL"))
+setClass("DeepReg2d", representation=list(depth = "numeric"), contains="Reg")
+setClass("TrimReg2d", contains="Reg")
+setMethod("abline", "Reg",function(a, ...) { abline(a@coef, ...)})

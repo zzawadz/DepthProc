@@ -72,8 +72,8 @@ setMethod(".getPlot", "DepthCurveList", function(object)
   p = ggplot()
   p = p + geom_line(data = data, aes(x = alpha,y = value, col = names), size = 1.5)
   p = p + theme_bw() + .depTheme()
-  p = p + ylim(c(0, max(data$value)))
-  p = p + xlim(c(0, max(data$alpha)))
+  p = p + ylim(c(0, max(data$value, na.rm=TRUE)))
+  p = p + xlim(c(0, max(data$alpha, na.rm=TRUE)))
   return(p)
 })
 
@@ -90,4 +90,11 @@ setMethod("as.matrix", signature(x = "DepthCurveList"), function(x)
 setMethod("show", "DepthCurve", function(object)
 {
   cat("Object of class:", class(object))
+  plot(object)
+})
+
+setMethod("show", "DepthCurveList", function(object)
+{
+  cat("Object of class:", class(object))
+  print(getPlot(object))
 })

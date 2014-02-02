@@ -1,0 +1,145 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+
+\begin{document}
+
+\tableofcontents
+
+\section{Bazowe funckje liczące głębie}
+\subsection{Ładowanie}
+<<echo=FALSE,message=FALSE>>=
+require(depthproc)
+@
+
+\section{Dostępne głębie}
+Lista dostępnych głębi:
+<<>>=
+x = depthproc:::.testNorm() # Dane testowe
+d = depth(x,x,method="Mahalanobis")
+d = depth(x,x,method="Euclidean")
+d = depth(x,x,method="Projection")
+d = depth(x,x,method="Tukey")
+d = depth(x,x,method="LP")
+@
+
+\section{Rysowanie}
+
+\subsection{DepthContour}
+
+<<fig.width=6,fig.height=4>>=
+depthContour(x,method="Mahalanobis")
+@
+
+Modyfikacja wykresu w oparciu o bazowe parametry graficzne, typu lwd, xlab:
+<<fig.width=6,fig.height=4>>=
+depthContour(x,method="Projection", main = "Wykres", lwd = 2, xlab = "X", ylab = "Y")
+@
+
+\subsection{depthPers}
+
+Wykres 3d - domyślnie ustawiony jest lattice - czyli to co poniżej. Dostępna jest też opcja "rgl", która wcześniej była domyślna (rgl - wykres możliwy do obracania), jednak są systemy na których pakiet rgl nie jest możliwy do zainstalowania (np. nie ma karty graficznej), dlatego wyrzuciłem go z pakietów od których R zależy. W przypadku, gdy jest dostępny w systemie to zadziała.
+
+<<>>=
+depthPersp(x, plot_method="lattice")
+@
+
+
+\subsection{ddPlot}
+
+<<fig.width=6,fig.height=4>>=
+ddPlot(x,x+5,method="Projection")
+@
+
+Modyfikacja wykresu odbywa się w oparciu o funckje ggplot2:
+<<fig.width=6,fig.height=4>>=
+# Obliczenie wykresu bez rysowania:
+p = ddPlot(x,x+5,method="Projection", plot=FALSE)
+# Pobranie wykresu z obiektu DDPlot:
+w = getPlot(p)
+w+xlab("Tekst")+ggtitle("Wykres")
+@
+
+Do tego jeszcze porównanie z wielowymiarowym rozkładem normalnym:
+<<fig.width=6,fig.height=4>>=
+ddmvnorm(x)
+@
+
+\subsection{Krzywa skali:}
+Krzywe skali działają w ten sposób, że można je "dodawać". Znaczy to, że jeżeli obliczymy sobie jedną krzywą i zapiszemy ją w zmiennej s1, następnie obliczmy dwie kolejne krzywe i zostaną zapisane w s2 to wywołanie s1 + s2 spowoduje narysowanie wykresu z tymi trzema krzywymi.
+
+<<fig.width=6,fig.height=4>>=
+# Razem z rysowaniem:
+s1 = scaleCurve(x,name = "Krzywa 1")
+s2 = scaleCurve(x*2,x*3,name = "Krzywa 2", name_y = "Krzywa 3", plot = FALSE)
+w = getPlot(s1+s2)+ggtitle("Wykres")
+w + theme(text = element_text(size = 25))
+@
+
+Rysować można też w ten sposób (tutaj nie dodaję wykresów):
+<<fig.keep='none'>>=
+s1 = scaleCurve(x,name = "Krzywa 1", plot = FALSE)
+# Funckja plot:
+plot(s1)
+#Wywolanie obiektu bez niczego
+s1
+@
+
+
+\subsection{Krzywa asymetrii}
+
+Tej funkcji trzeba się przyjrzeć - jak ona to liczy. W każdym razie dla małych prób się sypie totalnie, dlatego na razie ustawiłem limit min. 200 obserwacji. Tej funckji przyda się jeszcze trochę troski. Cała reszta zachowania - między innymi "dodawanie" krzywych - tak jak w scaleCurve (dziedziczą te same funckje). 
+
+<<fig.width=6,fig.height=4>>=
+xx = mvrnorm(1000, c(0,0),diag(2))
+yy = mvrnorm(1000, c(0,0),diag(2))
+p = asymmetryCurve(xx,yy, plot = FALSE)
+getPlot(p)+ggtitle("Wykres")
+@
+
+\section{Regresje}
+
+Poniższe regresje zawierają w zasadzie jedynie współczynniki modelu. 
+
+<<fig.width=6,fig.height=4>>=
+plot(starsCYG)
+deepreg = deepReg2d(starsCYG$log.Te, starsCYG$log.light)
+trimreg = trimProjReg2d(starsCYG$log.Te, starsCYG$log.light)
+abline(deepreg, lwd = 3, col = "red")
+abline(trimreg, lwd = 3, col = "green")
+# Odwolanie do współczynników:
+deepreg@coef
+@
+
+\section{Binnowanie}
+
+Binnowanie wraz z wykresem kontrolnym:
+
+<<fig.width=6,fig.height=4>>=
+binn = binningDepth2D(x,remove_borders=TRUE)
+plot(binn)
+@
+
+
+\section{Macierz kowariancji}
+Funckja licząca "macierz kowraiacji" na podstawie głębi LP. Dziedziczy funckje z pakietu rrcov:
+<<fig.width=4,fig.height=4>>=
+c = CovLP(x)
+# Możliwe jest wywolanie dzieki dziedziczeniu:
+plot(c)
+@
+
+\section{Inne}
+
+Wielowymiarowa mediana:
+<<>>=
+depthMedian(x)
+@
+
+Losowanie ze sfery jednostkowej. Z tego kodu korzystam w C++, przy obliczaniu głębi (dlatego jest w miarę szybko), więc dopisałem jeszcze interface który pozwala ją wywołać z poziomu R.
+<<fig.width=4,fig.height=4>>=
+plot(runifsphere(200,p=2))
+@
+
+\end{document}

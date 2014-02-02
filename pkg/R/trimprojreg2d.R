@@ -1,4 +1,4 @@
-trimprojreg2d<-function(x, y, alpha = 0.1)
+trimProjReg2d<-function(x, y, alpha = 0.1)
 {
 
 	yX= cbind(y,x)
@@ -9,6 +9,6 @@ trimprojreg2d<-function(x, y, alpha = 0.1)
 	xcut = x[ depth > cut ]
 	
 	fitcut = lm(ycut~xcut)$coeff 
-  fitcut
+  new("TrimReg2d",coef = fitcut)
   
 }

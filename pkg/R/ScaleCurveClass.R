@@ -8,9 +8,3 @@ setMethod("getPlot", "ScaleCurveList", function(object)
 })
 
 
-setMethod("show", "ScaleCurveList", function(object){
-})
-
-setMethod("show", "ScaleCurve", function(object){
-})
-

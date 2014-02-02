@@ -16,7 +16,8 @@ This function generates random numbers from p-dimensional
 unit sphere.
 }
 \details{
-seed is passed to function std::srand(seed);
+seed is passed to function std::srand(seed); Value -1 means
+that seed is not set in c++ code.
 
 This function uses function randn() from Armadillo C++
 Library.
