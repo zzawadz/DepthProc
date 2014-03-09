@@ -1,39 +1,34 @@
-\name{deepreg2d}
-\alias{deepreg2d}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Under construction
+\name{deepReg2d}
+\alias{deepReg2d}
+\title{Simple deepest regression method.}
+\usage{
+deepReg2d(x, y)
+}
+\arguments{
+  \item{x}{Independent variable.}
+
+  \item{y}{Dependent variable.}
 }
 \description{
-Computes 2d regression model based on regression depth.
+This function calculate estimator of simple regression
+model y=ax+b
 }
-\usage{
-deepreg2d(x, y)
-}
-
-\arguments{
-  \item{x}{Independent variable}
-  \item{y}{Dependent variable}
-}
-
 \details{
+Function returns object of class DeepReg2d.
 }
-\value{
-Function returns list of two objects:
-\item{depth}{Value of regression depth}
-\item{coef}{Vector of coefficients}
-}
-\references{
-Rousseeuw J.P., Hubert M. (1998), Regression Depth, \emph{Journal of The American Statistical Association},  vol.94.
+\examples{
+data(pension)
+plot(pension)
+abline(lm(Reserves~Income,data = pension), lty = 3, lwd = 2) #lm
+abline(deepReg2d(pension[,1],pension[,2]), lwd = 2) #deepreg2d
 }
 \author{
-Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and
+Zygmunt Zawadzki from Cracow University of Economics.
+}
+\references{
+Rousseeuw J.P., Hubert M. (1998), Regression Depth,
+\emph{Journal of The American Statistical Association},
+vol.94.
 }
 
-
-\examples{
- data(pension)
- plot(pension)
- abline(lm(Reserves~Income,data = pension), lty = 3, lwd = 2) #lm
- abline(deepreg2d(pension[,1],pension[,2])$coef, lwd = 2) #deepreg2d
-}

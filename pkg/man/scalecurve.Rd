@@ -51,13 +51,11 @@ The minimal dimension of data in X or Y is 2.
 \code{ggplot2} package is used to draw a plot.
 }
 \examples{
-require(MASS)
- require(mvtnorm)
+require(mvtnorm)
  x = mvrnorm(n = 100, mu = c(0,0), Sigma = 3*diag(2))
  y = rmvt(n = 100, sigma = diag(2), df = 2)
  scalecurve(x, y, method = "Projection", draw = TRUE)
  ## comparing of two scale curves - normal distribution and mixture of normal distributions
- require(MASS)
  x = mvrnorm(100, c(0,0), diag(2))
  y = mvrnorm(80, c(0,0), diag(2))
  z = mvrnorm(20, c(5,5), diag(2))

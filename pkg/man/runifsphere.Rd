@@ -26,4 +26,8 @@ Library.
 x = runifsphere(n=100)
  plot(x)
 }
+\author{
+Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and
+Zygmunt Zawadzki from Cracow University of Economics.
+}
 

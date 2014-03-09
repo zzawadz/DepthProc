@@ -1,23 +1,30 @@
-deepReg2d_old<-function(x,y){
+#'@title Simple deepest regression method.
+#'
+#'  @description This function calculate estimator of simple regression model y=ax+b
+#'
+#'  @param x Independent variable.
+#'  @param y Dependent variable.
+#'
+#'  @details 
+#'  Function returns object of class DeepReg2d.
+#'
+#'  @references
+#'  Rousseeuw J.P., Hubert M. (1998), Regression Depth, \emph{Journal of The American Statistical Association},  vol.94.
+#'  
+#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#'  
+#'  @examples
+#'  
+#' data(pension)
+#' plot(pension)
+#' abline(lm(Reserves~Income,data = pension), lty = 3, lwd = 2) #lm
+#' abline(deepReg2d(pension[,1],pension[,2]), lwd = 2) #deepreg2d
 
-W<-ros(x,y)
-M = 1:nrow(W)
 
-x<-as.vector(x)
-y<-as.vector(y)
-xy<-cbind(x,y)
-xy<-xy[order(xy[,1]),,drop=F]
-
-for (i in 1: nrow(W))
-M[i]<-rdepth(W[i,],xy)
-return(list(depth = max(M)/length(x),coef = c(W[which.max(M),1],W[which.max(M),2])))
-}
-
-
-deepReg2d<-function(x,y){
+deepReg2d<-function(x,y)
+{
   y <- y[order(x)]
   x <- sort(x)
-  
   tmp = depth2dcpp(x,y)
   new("DeepReg2d", coef = tmp[2:1], depth = tmp[3])
 }

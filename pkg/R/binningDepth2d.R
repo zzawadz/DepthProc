@@ -17,7 +17,6 @@
 
 binningDepth2D = function(x, nbins = 8, remove_borders = FALSE, devel = FALSE)
 {
-  require(sm)
   createBin = function(x, nbins)
   {
     if(!devel) dep_stat = sample.max.depth(as.numeric(x)) 

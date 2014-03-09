@@ -2,8 +2,7 @@
 \alias{depth}
 \title{Depth calculation}
 \usage{
-depth(u, X, method = "Projection", ndir = 1000, seed = 1, name = "X",
-  a = 1, b = 1, p = 1)
+depth(u, X, method = "Projection", name = "X", ...)
 }
 \arguments{
   \item{u}{Numerical vector or matrix whose depth is to be
@@ -21,8 +20,11 @@ depth(u, X, method = "Projection", ndir = 1000, seed = 1, name = "X",
   default), "Mahalanobis", "Euclidean" or "Tukey". For
   details see \code{\link{depth}.}}
 
-  \item{ndir}{Number of random directions used when
-  Projection and Tukey depth is approximated.}
+  \item{name}{name for this data set - it will be used on
+  plots from depthproc.}
+
+  \item{...}{parameters specific to method - see
+  \code{\link{depthEuclid}}}
 }
 \description{
 Computes the depth of a point or vectors of points with

@@ -25,15 +25,12 @@
 #'
 #'Chaudhuri, P. (1996), On a Geometric Notion of Quantiles for Multivariate Data, \emph{Journal of the American Statistical Association}, 862--872.
 #'
-#'Dyckerhoff, R. (2004), Data Depths Satisfying the Projection Property, \emph{Allgemeines Statistisches Archiv.},  \bold{88}, 163--190.}
+#'Dyckerhoff, R. (2004), Data Depths Satisfying the Projection Property, \emph{Allgemeines Statistisches Archiv.},  \bold{88}, 163--190.
 #'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #'  
-#'  @seealso \code{\link{scalecurve}}, \code{\link{depth}}
+#'  @seealso \code{\link{scaleCurve}}, \code{\link{depth}}
 #'  
 #'  @examples
-#'  
-#'  require(sn)
-#' require(MASS)
 #'
 #' xi = c(0,0)
 #' alpha <- c(2,-5)
@@ -41,8 +38,8 @@
 #' 
 #' n = 500
 #' X = mvrnorm(n, xi, Omega)  # normal distribution
-#' Y = rmst(n, xi, Omega, alpha, df=1)
-#' asymmetryCurve(X,Y1,name = "NORM",name_y = "S_T(2,-5,10)")
+#' Y = rmst(n, xi, Omega, alpha, nu=1)
+#' asymmetryCurve(X,Y,name = "NORM",name_y = "S_T(2,-5,10)")
 #'  
 #'  
 #'  @keywords

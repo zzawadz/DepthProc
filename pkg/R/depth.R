@@ -5,7 +5,8 @@
 #'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
 #'  @param method Character string which determines the depth function. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}
-#'  @param ndir Number of random directions used when Projection and Tukey depth is approximated.
+#'  @param name name for this data set - it will be used on plots from depthproc.
+#'  @param ... parameters specific to method - see \code{\link{depthEuclid}}
 #'
 #'
 #'@details 
@@ -13,8 +14,6 @@
 #'  Irrespective of dimension, Projection and Tukey's depth is obtained by approximate calculation. 
 #'  
 #'  Calculation of Mahalanobis and Euclidean depth is exact.
-#'  
-#'
 #'  
 #'  Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
 #'  
@@ -55,8 +54,7 @@
 #'  
 #'
 
-
-depth = function(u, X, method="Projection", ndir=1000, seed = 1, name = "X", a = 1, b = 1, p = 1)
+depth = function(u, X, method="Projection", name = "X", ...)
 {  
   if(is.data.frame(u)) u = as.matrix(u)
   if(is.data.frame(X)) X = as.matrix(X)
@@ -76,23 +74,58 @@ depth = function(u, X, method="Projection", ndir=1000, seed = 1, name = "X", a =
   ####################################
   if(method == "Projection")
   {
-    return(depthProjection(u, X, ndir,name = name))
+    return(depthProjection(u, X, name = name, ...))
   }
   #######################################################################
   if (method=="Tukey")
   {
-    return(depthTukey(u, X, ndir, name = name))
+    return(depthTukey(u, X, name = name, ...))
   }
   ########################################################
   if (method=="LP")
   {
-    return(depthLP(u, X, ndir, name = name, a=a, b=b, p=p))
+    return(depthLP(u, X, name = name, ...))
+  }
+  if(method=="Local")
+  {
+    return(depthLocal(u, X, name = name, ...))
   }
 }
 
+############################################
+############################################
+############################################
 
-#########################################################
-depthEuclid = function(u, X, name)
+#'@title Euclidean Depth
+#'
+#'@description Computes the euclidean depth of a point or vectors of points with respect to a multivariate data set.
+#'
+#'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
+#'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
+#'  @param name name for this data set - it will be used on plots from depthproc.
+#'
+#'
+#'@details 
+#'
+#'  Calculation of Euclidean depth is exact.
+#'  
+#'  Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
+#'  
+#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#'  
+#'  
+#'  @examples
+#'  x <- matrix(rnorm(9999), nc = 3)
+#'  depthEuclid(x, x)
+#'  
+#'  
+#'  
+#'  @keywords
+#'  multivariate
+#'  nonparametric
+#'  depth function
+
+depthEuclid = function(u, X, name = "X", ...)
 {
   n = dim(u)[1]
   center = colMeans(X)
@@ -101,20 +134,131 @@ depthEuclid = function(u, X, name)
   
   new("DepthEuclid", depth, u = u, X = X, method = "Euclidean", name = name)
 }
-#########################################################
-depthMah = function(u, X, name)
+
+
+############################################
+############################################
+############################################
+
+#'@title Mahalanobis Depth
+#'
+#'@description Computes the mahalanobis depth of a point or vectors of points with respect to a multivariate data set.
+#'
+#'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
+#'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
+#'  @param name name for this data set - it will be used on plots from depthproc.
+#'
+#'
+#'@details 
+#'
+#'  Calculation of Mahalanobis depth is exact.
+#'  
+#'  Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
+#'  
+#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#'  
+#'  
+#'  @examples
+#'  x <- matrix(rnorm(9999), nc = 3)
+#'  depthMah(x, x)
+#'  
+#'  
+#'  
+#'  @keywords
+#'  multivariate
+#'  nonparametric
+#'  depth function
+depthMah = function(u, X, name = "X", ...)
 {
   depth = depthMahCPP(u,X)
   new("DepthMahalanobis", depth, u = u, X = X, method = "Mahalanobis", name = name)
 }
-#########################################################
-depthProjection = function(u, X, ndir, seed = 1, name)
+
+
+############################################
+############################################
+############################################
+
+#'@title Projection Depth
+#'
+#'@description Computes the Projection depth of a point or vectors of points with respect to a multivariate data set.
+#'
+#'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
+#'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
+#'  @param ndir number of directions used in computations
+#'  @param seed this seed is used in random number generator in C++ code. Value -1 means that seed is not set.
+#'  @param name name for this data set - it will be used on plots from depthproc.
+#'
+#'
+#'@details 
+#'
+#'  Irrespective of dimension, Projection and Tukey's depth is obtained by approximate calculation.
+#'  
+#'  Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
+#'  
+#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#'  
+#'  
+#'  @examples
+#'  x <- matrix(rnorm(3000), nc = 3)
+#'  
+#'  #Same results
+#'  depthProjection(x, x, ndir = 2000, seed = 1) == depthProjection(x, x, ndir = 2000, seed = 1)
+#'  #Different
+#'  depthProjection(x, x, ndir = 2000, seed = -1) == depthProjection(x, x, ndir = 2000, seed = -1)
+#'  
+#'  
+#'  @keywords
+#'  multivariate
+#'  nonparametric
+#'  depth function
+
+depthProjection = function(u, X, ndir = 1000, seed = 1, name = "X",...)
 {
   depth = depthProjCPP(u, X, ndir, seed)
   new("DepthProjection", depth, u = u, X = X, method = "Projection", name = name)
 }
-#########################################################
-depthTukey = function(u, X, ndir, seed = 1, name)
+
+############################################
+############################################
+############################################
+
+#'@title Tukey Depth
+#'
+#'@description Computes the Tukey depth of a point or vectors of points with respect to a multivariate data set.
+#'
+#'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
+#'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
+#'  @param ndir number of directions used in computations
+#'  @param seed this seed is used in random number generator in C++ code. Value -1 means that seed is not set.
+#'  @param name name for this data set - it will be used on plots from depthproc.
+#'
+#'
+#'@details 
+#'
+#'  Irrespective of dimension, Projection and Tukey's depth is obtained by approximate calculation.
+#'  
+#'  Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
+#'  
+#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#'  
+#'  
+#'  @examples
+#'  x <- matrix(rnorm(3000), nc = 3)
+#'  
+#'  #Same results
+#'  depthTukey(x, x, ndir = 2000, seed = 1) == depthTukey(x, x, ndir = 2000, seed = 1)
+#'  #Different
+#'  depthTukey(x, x, ndir = 2000, seed = -1) == depthTukey(x, x, ndir = 2000, seed = -1)
+#'  
+#'  
+#'  @keywords
+#'  multivariate
+#'  nonparametric
+#'  depth function
+
+
+depthTukey = function(u, X, ndir, seed = 1, name = "X",...)
 {
   tukey1d = function(u,X)
   {
@@ -152,11 +296,41 @@ depthTukey = function(u, X, ndir, seed = 1, name)
   new("DepthTukey", depth, u = u, X = X, method = "Tukey", name = name)
 }
 
-######################################################################
+#'@title LP Depth
+#'
+#'@description Computes the LP depth of a point or vectors of points with respect to a multivariate data set.
+#'
+#'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
+#'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
+#'  @param p 1
+#'  @param a 1
+#'  @param b 1
+#'  @param name name for this data set - it will be used on plots from depthproc.
+#'
+#'
+#'@details 
+#'  
+#'  Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
+#'  
+#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#'  
+#'  
+#'  @examples
+#'  x <- matrix(rnorm(3000), nc = 3)
+#'  
+#'  #Same results
+#'  depthLP(x, x, ndir = 2000, p = 2) 
+#'  
+#'  @keywords
+#'  multivariate
+#'  nonparametric
+#'  depth function
 
-depthLP = function(u, X, p, a, b, name, func = NULL)
+depthLP = function(u, X, p = 1, a = 1, b = 1, name, func = NULL,...)
 {
   depth = depthLPCPP(u, X, p, a, b)
   new("DepthLP", depth, u = u, X = X, method = "LP", name = name)
 }
+
+
 

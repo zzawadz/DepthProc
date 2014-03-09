@@ -8,7 +8,11 @@ setMethod("plot", signature = c(x = "DDPlot", y = "missing"), function(x, y = "m
 setMethod("getPlot", "DDPlot", function(object){
   a_est = data.frame(x = object@X, y = object@Y)
   p = ggplot()
-  p = p + geom_point(data = a_est, aes(x,y), color = "blue", 
+  # eval(as.name("x")) - small hack to fix:
+  # getPlot,DDPlot: no visible binding for global variable 'x'
+  # getPlot,DDPlot: no visible binding for global variable 'y'
+  # i cannot use aes(x,y)
+  p = p + geom_point(data = a_est, aes(eval(as.name("x")),eval(as.name("y"))), color = "blue", 
                      shape = 1, size = 3)
   p = p + theme_bw() + .depTheme()
   p = p + ggtitle("Depth vs. depth plot")

@@ -1,68 +1,47 @@
 \name{depthPersp}
 \alias{depthPersp}
-\title{
-Perspective plot for depth functions
+\title{Perspective plot for depth functions}
+\usage{
+depthPersp(x, plot_method = "lattice", xlim = extendrange(x[, 1], f = 0.1),
+  ylim = extendrange(x[, 2], f = 0.1), n = 50, xlab = "x", ylab = "y",
+  plot_title = NULL, ...)
+}
+\arguments{
+  \item{x}{bivariate data}
+
+  \item{plot_method}{there are two options "lattice", and
+  "rgl" - see details}
+
+  \item{xlim}{limits for x-axis}
+
+  \item{ylim}{limits for y-axis}
+
+  \item{n}{number of points that will be used to create
+  plot (n^2)}
+
+  \item{xlab}{description of x-axis}
+
+  \item{ylab}{description of y-axis}
+
+  \item{plot_title}{plot title (default NULL means
+  paste(method, "depth"))}
+
+  \item{...}{arguments passed to depth function}
 }
 \description{
 Draws a perspective plot of depth function over x-y plane.
 }
-\usage{
-depthPersp(X,method = "Projection",plot.method = "rgl",xlim = extendrange(X[,1],f=0.1),ylim = extendrange(X[,2],f=0.1),
-n=50,xlab = "x", ylab = "y",plot.title=paste(method,"depth"),...)
-}
-
-\arguments{
-  \item{X}{
-Bivariate data as a matrix
-}
- \item{method}{Character string which determines the depth function. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}}
-  \item{plot.method}{
-Method used to draw the plot. Default - "rgl" draws rotatable plot using package rgl. Another possible method "lattice" uses lattice package for 3d surface plot. 
-}
-  \item{xlim}{
-Determines the width of x-axis.
-}
-  \item{ylim}{
-Determines the width of x-axis.
-}
-  \item{n}{
-Number of points in each coordinate direction to be used in perspective plot.
-}
-  \item{xlab}{
-Title of x-axis.
-}
-  \item{ylab}{
-Title of ylab.
-}
-  \item{plot.title}{
-Title of plot.
-}
-  \item{\dots}{
-Any additional parameters for function depth
-}
-}
 \details{
-}
-
-\references{}
-
-\author{Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.}
-
-\seealso{
-\code{\link{depthContour}}
+plot_method - rgl package is not in depends list beacuse it
+may cause problems when OpenGL is not supported.  To use
+plot_method = "rgl" you must load this package on your own.
 }
 \examples{
-\dontrun{
-#Example 1
-require(MASS)
-
 x = mvrnorm(100,c(0,0),diag(2))
-depthPersp(x)
-
-#Example 2
-
-depthPersp(x,plot.method = "lattice")
+ depthPersp(x, method = "Euclidean")
 }
+\author{
+Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and
+Zygmunt Zawadzki from Cracow University of Economics.
 }
-\keyword{plot}
-\keyword{depth}
+

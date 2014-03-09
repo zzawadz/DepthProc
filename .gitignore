@@ -1,3 +1,5 @@
+*.zip
+*.png
 .RData
 .Rhistory
 *.o
