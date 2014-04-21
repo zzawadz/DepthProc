@@ -43,12 +43,12 @@
 #'  require(mvtnorm)
 #'  x = mvrnorm(n = 100, mu = c(0,0), Sigma = 3*diag(2))
 #'  y = rmvt(n = 100, sigma = diag(2), df = 2)
-#'  scalecurve(x, y, method = "Projection", draw = TRUE)
+#'  scalecurve(x, y, method = "Projection", plot = TRUE)
 #'  ## comparing of two scale curves - normal distribution and mixture of normal distributions
 #'  x = mvrnorm(100, c(0,0), diag(2))
 #'  y = mvrnorm(80, c(0,0), diag(2))
 #'  z = mvrnorm(20, c(5,5), diag(2))
-#'  scalecurve(x, rbind(y,z), method = "Projection", draw = TRUE, nameX = "N", nameY = "Mixture of N")
+#'  scalecurve(x, rbind(y,z), method = "Projection", plot = TRUE, nameX = "N", nameY = "Mixture of N")
 #'  
 #'  
 #'  

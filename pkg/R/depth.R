@@ -302,7 +302,7 @@ depthTukey = function(u, X, ndir, seed = 1, name = "X",...)
 #'
 #'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#'  @param p 1
+#'  @param pdim 1
 #'  @param a 1
 #'  @param b 1
 #'  @param name name for this data set - it will be used on plots from depthproc.
@@ -326,11 +326,12 @@ depthTukey = function(u, X, ndir, seed = 1, name = "X",...)
 #'  nonparametric
 #'  depth function
 
-depthLP = function(u, X, p = 1, a = 1, b = 1, name, func = NULL,...)
+depthLP = function(u, X, pdim = 1, a = 1, b = 1, name, func = NULL,...)
 {
-  depth = depthLPCPP(u, X, p, a, b)
+  if(is.null(func)) depth = depthLPCPP(u, X, pdim, a, b)
+  norm = function(xi, z, p = 1) sum(abs(z-xi)^p)^(1/p)
+  
   new("DepthLP", depth, u = u, X = X, method = "LP", name = name)
 }
-
 
 

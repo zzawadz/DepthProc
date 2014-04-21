@@ -2,6 +2,15 @@
 #'
 #'@description Binning 2d
 #'
+#'  @param x bivariate matrix
+#'  @param binmethod method for calculation center and dispersion measures. "LocDepth" uses location-scale depth, MAD uses median and MAD in each dimension
+#'  @param nbins number of bins in each dimension
+#'  @param k scale parameter for dispersion measure
+#'  @param remove_borders logical. Include or not marginal bins
+#'  @param devel this is only for devel purposes and soon will be removed
+#'  @param ... other arguments passed to depthMedian
+#'  
+#'  
 #'  @seealso \code{\link{depth}}
 #'  
 #'  @examples
@@ -15,24 +24,25 @@
 #'  depth function
 
 
-binningDepth2D = function(x, nbins = 8, remove_borders = FALSE, devel = FALSE)
+binningDepth2D = function(x, binmethod = "LocDepth", nbins = 8, k = 1, remove_borders = FALSE, devel = FALSE, ...)
 {
-  createBin = function(x, nbins)
+  createBin = function(x, nbins, mean = NULL)
   {
-    if(!devel) dep_stat = sample.max.depth(as.numeric(x)) 
-    else 
+    if(binmethod == "LocDepth")
     {
-       # dep_stat_tmp = sample.max.depth(as.numeric(x)) 
+      if(!devel) dep_stat = sample.max.depth(as.numeric(x)) 
+      else 
+      {
         dep_stat = maxSampleLocScaleDepth(x)
-       # if(any(dep_stat_tmp - dep_stat > 1e-10)) 
-       # {
-       #   print(dep_stat_tmp)
-       #   print(dep_stat)
-       #   stop("Error in maxSampleLocScale")
-       # }
+      }
+      mean = dep_stat["mu"]
+      sigma = k*dep_stat["sigma"]
     }
-    mean = dep_stat["mu"]
-    sigma = dep_stat["sigma"]
+    if(binmethod == "LP")
+    {
+      sigma  = mad(x)
+      dep_stat = c(mu = mean, sigma = sigma)
+    }
     
     range = range(x)
     
@@ -69,8 +79,11 @@ binningDepth2D = function(x, nbins = 8, remove_borders = FALSE, devel = FALSE)
     return(res)
   }
   
-  tmp1 = createBin(x[,1], nbins)
-  tmp2 = createBin(x[,2], nbins)
+  means = c(0,0)
+  if(binmethod == "LP") means = depthMedian(x,method = "LP",...)
+  
+  tmp1 = createBin(x[,1], nbins, means[1])
+  tmp2 = createBin(x[,2], nbins, means[2])
   
   
   b = cbind(tmp1[[1]],tmp2[[1]])

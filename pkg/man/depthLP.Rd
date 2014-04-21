@@ -2,7 +2,7 @@
 \alias{depthLP}
 \title{LP Depth}
 \usage{
-depthLP(u, X, p = 1, a = 1, b = 1, name, func = NULL, ...)
+depthLP(u, X, pdim = 1, a = 1, b = 1, name, func = NULL, ...)
 }
 \arguments{
   \item{u}{Numerical vector or matrix whose depth is to be
@@ -15,7 +15,7 @@ depthLP(u, X, p = 1, a = 1, b = 1, name, func = NULL, ...)
   must be numerical vectors of equal length (coordinates of
   observations).}
 
-  \item{p}{1}
+  \item{pdim}{1}
 
   \item{a}{1}
 

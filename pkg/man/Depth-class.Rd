@@ -1,0 +1,21 @@
+\docType{class}
+\name{Depth}
+\alias{Depth}
+\alias{DepthEuclid}
+\alias{DepthLP}
+\alias{DepthLocal}
+\alias{DepthMahalanobis}
+\alias{DepthProjection}
+\alias{DepthTukey}
+\title{Depth}
+\description{
+Virtual class with structure for every depth class from
+depthproc package.
+}
+\section{Slots}{
+  \describe{ \item{u}{Matrix with number of elements in
+  certain bin.} \item{X}{Middle values on x-axis.}
+  \item{method}{Middle values on y-axis.}
+  \item{name}{Boundaries of bins.} }
+}
+

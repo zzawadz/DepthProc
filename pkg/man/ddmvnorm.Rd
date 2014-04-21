@@ -2,14 +2,13 @@
 \alias{ddmvnorm}
 \title{Normal depth versus depth plot}
 \usage{
-ddmvnorm(x, method = "Projection", size = nrow(x), robust = FALSE,
-  alpha = 0.05, plot = TRUE, ...)
+ddmvnorm(x, size = nrow(x), robust = FALSE, alpha = 0.05, plot = TRUE,
+  ...)
 }
 \arguments{
   \item{x}{The data sample for DD plot.}
 
-  \item{method}{Character string which determines the depth
-  function used.}
+  \item{size}{size of theoretical set}
 
   \item{robust}{Logical. Dafault \code{FALSE}. If
   \code{TRUE}, robust measures are used to specify the

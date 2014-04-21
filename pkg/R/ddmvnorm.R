@@ -2,7 +2,7 @@
 #' @title Normal depth versus depth plot
 #' 
 #' @param x The data sample for DD plot.
-#' @param method Character string which determines the depth function used. 
+#' @param size size of theoretical set
 #' @param robust Logical. Dafault \code{FALSE}. If \code{TRUE}, robust measures are used to specify the parameters of theoretical distribution.
 #' @param alpha cutoff point for robust measure of covariance
 #' @param ... Parameters passed to \code{depth}
@@ -32,9 +32,9 @@
 
 
 
-ddmvnorm <-function(x, method = "Projection", size = nrow(x), robust=FALSE, alpha=0.05, plot = TRUE, ...)     
+ddmvnorm <-function(x, size = nrow(x), robust=FALSE, alpha=0.05, plot = TRUE, ...)     
 {
-  depth_sample <- depth(x, x, method, ...)  
+  depth_sample <- depth(x, x,  ...)  
   
   if(robust == TRUE) 
   {
@@ -47,7 +47,7 @@ ddmvnorm <-function(x, method = "Projection", size = nrow(x), robust=FALSE, alph
   	varcov  <- cov(x) 
   }
   theoretical <- mvrnorm(size, location, varcov)  
-  depth_theoretical <- depth(x, theoretical, method, ...)
+  depth_theoretical <- depth(x, theoretical, ...)
   ddplot = new("DDPlot",X = depth_sample, Y = depth_theoretical)
   
   if(plot) plot(ddplot)

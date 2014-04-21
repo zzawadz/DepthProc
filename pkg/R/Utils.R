@@ -11,11 +11,12 @@
 .extractDepthParams = function(u, X,...)
 {
   tmp = list(...)
-  params = c("method", "ndir", "seed", "name", "a", "b", "p", "depth1", "depth2", "beta")
-  def_param = list(method="Projection", ndir=1000, seed = 1, name = "X", a = 1, b = 1, p = 1, depth1 = "Projection", depth2 = "Projection", beta = 0.5)
+  params = c("method", "ndir", "seed", "name", "a", "b", "pdim", "depth1", "depth2", "beta")
+  def_param = list(method="Projection", ndir=1000, seed = 1, name = "X", a = 1, b = 1, pdim = 1, depth1 = "Projection", depth2 = "Projection", beta = 0.5)
   fastIfElse = function(name, tmp, def){
     ifelse(is.null(tmp[[name]]),def[[name]],tmp[[name]])
   }
+  
   tmp = sapply(params, fastIfElse, tmp, def_param, simplify=FALSE)
   #tmp = list(method = "Tukey")
   tmp = c(list(u = u,X = X),tmp)
@@ -25,7 +26,7 @@
 .removeDepthParams = function(...)
 {
   tmp = list(...)
-  params = c("method", "ndir", "seed", "name", "a", "b", "p", "depth1", "depth2","beta")
+  params = c("method", "ndir", "seed", "name", "a", "b", "pdim", "depth1", "depth2","beta")
   names = names(tmp)
   tmp = sapply(names, function(x) {
     ifelse(x %in% params, NA, tmp[x])

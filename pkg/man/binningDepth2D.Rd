@@ -2,7 +2,27 @@
 \alias{binningDepth2D}
 \title{2d Binning}
 \usage{
-binningDepth2D(x, nbins = 8, remove_borders = FALSE, devel = FALSE)
+binningDepth2D(x, binmethod = "LocDepth", nbins = 8, k = 1,
+  remove_borders = FALSE, devel = FALSE, ...)
+}
+\arguments{
+  \item{x}{bivariate matrix}
+
+  \item{binmethod}{method for calculation center and
+  dispersion measures. "LocDepth" uses location-scale
+  depth, MAD uses median and MAD in each dimension}
+
+  \item{nbins}{number of bins in each dimension}
+
+  \item{k}{scale parameter for dispersion measure}
+
+  \item{remove_borders}{logical. Include or not marginal
+  bins}
+
+  \item{devel}{this is only for devel purposes and soon
+  will be removed}
+
+  \item{...}{other arguments passed to depthMedian}
 }
 \description{
 Binning 2d
