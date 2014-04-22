@@ -1,6 +1,6 @@
 \docType{methods}
-\name{abline,RobReg-method}
-\alias{abline,RobReg-method}
+\name{abline_depthproc}
+\alias{abline_depthproc}
 \title{Add line to plot}
 \usage{
 \S4method{abline}{RobReg}(a, ...)

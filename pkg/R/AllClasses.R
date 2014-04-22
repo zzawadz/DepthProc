@@ -29,7 +29,7 @@ setClass("DepthLP", representation(), contains = c("Depth","numeric"))
 setClass("DepthLocal", representation(), contains = c("Depth","numeric"))
 
 #####################################
-######### DDPlot #########
+######### DDPlot ####################
 #####################################
 
 #' DDPlot
@@ -49,14 +49,103 @@ setClass("DepthLocal", representation(), contains = c("Depth","numeric"))
 #' @exportClass 
 setClass("DDPlot", representation(X = c("Depth"), Y = "Depth"))
 
+#####################################
+######### DepthCurve ################
+#####################################
 
+#' DepthCurve and DepthCurveList
+#' 
+#' This page describes mechanism behavior of ScaleCurve and AsymmetryCurve
+#'
+#' @section DepthCurve and DepthCurveList:
+#' 
+#' DepthCurve is a virtual class that contains methods (getPlot(...) and plot(...)) for rendering single curve such as ScaleCurve or AsymmetryCurve. Such object can be added by overloaded operator '+'. This 'addition' create DepthCurveList that can be used for rendering plot with multiple curves. Sample session (using ScaleCurve) is shown in Examples section.
+#' 
+#' @examples
+#' require(mvtnorm)
+#' x = mvrnorm(n = 100, mu = c(0,0), Sigma = 2*diag(2))
+#' y = rmvt(n = 100, sigma = diag(2), df = 4)
+#' s1 = scaleCurve(x, method = "Projection", plot = FALSE)
+#' s2 = scaleCurve(y, method = "Projection", plot = FALSE, name = "Set2")
+#' 
+#' 
+#' sc_list = s1 + s2 # Add one curve to another
+#' 
+#' plot(sc_list) # Draw plot with two curves
+#' 
+#' z = mvrnorm(n = 100, mu = c(0,0), Sigma = 1*diag(2))
+#' s3 = scaleCurve(z, method = "Projection", plot = FALSE)
+#' plot(sc_list+s3) # Add third curve and draw a plot
+#' 
+#'
+#' @name DepthCurve
+#' @aliases DepthCurve DepthCurveList
+#' @rdname DepthCurve-class 
+#' @exportClass  
 setClass("DepthCurve", representation(depth = "Depth","VIRTUAL"))
 setClass("DepthCurveList", representation("VIRTUAL"))
 
-setClass("ScaleCurve", representation(alpha = "numeric")
-                                          , contains=c("numeric","DepthCurve"))
+
+
+#' ScaleCurve and ScaleCurveList
+#' 
+#' ScaleCurve is a class that stores results of \link{scaleCurve} function.
+#' 
+#' @section Slots:
+#' \describe{
+#' 
+#'    ScaleCurve intherits behviour from numeric vector, so raw values of ScaleCurve can be accessed via as.numeric(...).
+#'    
+#'    \item{alpha}{central regions}.}
+#'  
+#' 
+#' The mechanism of creating plots with multiple curves is shown in \link{DepthCurve} (same mechanism is applied for AsymmetryCurve).
+#' 
+#' @examples
+#' require(mvtnorm)
+#' x = mvrnorm(n = 100, mu = c(0,0), Sigma = 2*diag(2))
+#' y = rmvt(n = 100, sigma = diag(2), df = 4)
+#' s1 = scaleCurve(x, method = "Projection", plot = FALSE)
+#' s2 = scaleCurve(y, method = "Projection", plot = FALSE, name = "Set2")
+#' 
+#' 
+#' sc_list = s1 + s2 # Add one curve to another
+#' 
+#' plot(sc_list) # Draw plot with two curves
+#' 
+#' z = mvrnorm(n = 100, mu = c(0,0), Sigma = 1*diag(2))
+#' s3 = scaleCurve(z, method = "Projection", plot = FALSE)
+#' plot(sc_list+s3) # Add third curve and draw a plot
+#' 
+#'
+#' @name ScaleCurve
+#' @aliases ScaleCurve ScaleCurveList
+#' @rdname ScaleCurve-class 
+#' @exportClass  
+setClass("ScaleCurve", representation(alpha = "numeric")                                          , contains=c("numeric","DepthCurve"))
 setClass("ScaleCurveList", contains=c("DepthCurveList", "list"))
 
+
+
+#' AsymmetryCurve and AsymmetryCurveList
+#' 
+#' AsymmetryCurve is a class that stores results of \link{asymmetryCurve} function.
+#' 
+#' @section Slots:
+#' \describe{
+#' 
+#'    AsymmetryCurve intherits behviour from numeric vector, so raw values of AsymmetryCurve can be accessed via as.numeric(...).
+#'    
+#'    \item{alpha}{central regions}.}
+#'  
+#' 
+#' The mechanism of creating plots with multiple curves is shown in \link{DepthCurve} (same mechanism is applied for ScaleCurve).
+#' 
+#'
+#' @name AsymmetryCurve
+#' @aliases AsymmetryCurve AsymmetryCurveList
+#' @rdname AsymmetryCurve-class 
+#' @exportClass 
 setClass("AsymmetryCurve", representation(alpha = "numeric")
          , contains=c("numeric","DepthCurve"))
 setClass("AsymmetryCurveList", contains=c("DepthCurveList", "list"))
@@ -85,9 +174,19 @@ setClass("AsymmetryCurveList", contains=c("DepthCurveList", "list"))
 #' @exportClass 
 setClass("BinnDepth2d", representation=list(freq = "matrix", mid_x = "numeric", mid_y = "numeric", breaks_x = "numeric", breaks_y = "numeric", input_data = "matrix", max_depth_x = "numeric", max_depth_y = "numeric"))
 
-#Generics
+#' @genericMethods
+#' @title Create plot from DepthCurve and DepthCurveList.
+#'
+#'  @description Create an object of class ggplot from DepthCurve and DepthCurveList.
+#' @name getPlot
 setGeneric("getPlot", function(object) standardGeneric("getPlot"))
 setGeneric(".getPlot", function(object) standardGeneric(".getPlot"))
+
+#' @genericMethods
+#' @title As matrix method for DepthCurve and DepthCurveList.
+#'
+#'  @description Create a matrix from DepthCurve and DepthCurveList.
+#' @name as.matrix_depthproc
 setGeneric("as.matrix", function(x,...) standardGeneric("as.matrix"))
 
 #####################################################
@@ -140,8 +239,11 @@ setClass("DeepReg2d", representation=list(depth = "numeric"), contains="RobReg")
 #' @exportClass 
 setClass("TrimReg2d", contains="RobReg")
 
+
+
+
 #' @title Add line to plot
 #'
 #'  @description Add fitted line to a plot. This is overloaded function for robust regression methods from package depthproc.
-#'  
+#' @name abline_depthproc
 setMethod("abline", "RobReg",function(a, ...) { abline(a@coef, ...)})

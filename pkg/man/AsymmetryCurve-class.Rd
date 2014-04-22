@@ -1,0 +1,23 @@
+\docType{class}
+\name{AsymmetryCurve}
+\alias{AsymmetryCurve}
+\alias{AsymmetryCurveList}
+\title{AsymmetryCurve and AsymmetryCurveList}
+\description{
+AsymmetryCurve is a class that stores results of
+\link{asymmetryCurve} function.
+}
+\section{Slots}{
+  \describe{
+
+  AsymmetryCurve intherits behviour from numeric vector, so
+  raw values of AsymmetryCurve can be accessed via
+  as.numeric(...).
+
+  \item{alpha}{central regions}.}
+
+  The mechanism of creating plots with multiple curves is
+  shown in \link{DepthCurve} (same mechanism is applied for
+  ScaleCurve).
+}
+

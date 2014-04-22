@@ -1,0 +1,35 @@
+\docType{class}
+\name{DepthCurve}
+\alias{DepthCurve}
+\alias{DepthCurveList}
+\title{DepthCurve and DepthCurveList}
+\description{
+This page describes mechanism behavior of ScaleCurve and
+AsymmetryCurve
+}
+\section{DepthCurve and DepthCurveList}{
+  DepthCurve is a virtual class that contains methods
+  (getPlot(...) and plot(...)) for rendering single curve
+  such as ScaleCurve or AsymmetryCurve. Such object can be
+  added by overloaded operator '+'. This 'addition' create
+  DepthCurveList that can be used for rendering plot with
+  multiple curves. Sample session (using ScaleCurve) is
+  shown in Examples section.
+}
+\examples{
+require(mvtnorm)
+x = mvrnorm(n = 100, mu = c(0,0), Sigma = 2*diag(2))
+y = rmvt(n = 100, sigma = diag(2), df = 4)
+s1 = scaleCurve(x, method = "Projection", plot = FALSE)
+s2 = scaleCurve(y, method = "Projection", plot = FALSE, name = "Set2")
+
+
+sc_list = s1 + s2 # Add one curve to another
+
+plot(sc_list) # Draw plot with two curves
+
+z = mvrnorm(n = 100, mu = c(0,0), Sigma = 1*diag(2))
+s3 = scaleCurve(z, method = "Projection", plot = FALSE)
+plot(sc_list+s3) # Add third curve and draw a plot
+}
+
