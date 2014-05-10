@@ -4,7 +4,12 @@
 {
   ncol = ncol(X)
   nrow = nrow(X)
-  symDATA = rbind(X, t(apply(X, 1, function(k) 2*u-k)))
+  
+  ### Fix for dim 1
+  tmp = t(apply(X, 1, function(k) 2*u-k))
+  if(ncol(tmp) != ncol(X)) tmp = t(tmp)
+  
+  symDATA = rbind(X, tmp)
   depths = as.numeric(depth(X, symDATA, method=depth1))
   quan = quantile(depths, probs=1-beta)
   Rset = as.matrix(X[ signif(depths,digits=6) >= signif(quan,digits=6), ])
