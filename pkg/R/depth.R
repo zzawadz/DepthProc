@@ -54,7 +54,7 @@
 #'  
 #'
 
-depth = function(u, X, method="Projection", name = "X", ...)
+depth = function(u, X, method="Projection", name = "X", threads = -1,...)
 {  
   if(is.data.frame(u)) u = as.matrix(u)
   if(is.data.frame(X)) X = as.matrix(X)
@@ -84,7 +84,7 @@ depth = function(u, X, method="Projection", name = "X", ...)
   ########################################################
   if (method=="LP")
   {
-    return(depthLP(u, X, name = name, ...))
+    return(depthLP(u, X, name = name, threads = threads,...))
   }
   if(method=="Local")
   {
@@ -326,10 +326,10 @@ depthTukey = function(u, X, ndir, seed = 1, name = "X",...)
 #'  nonparametric
 #'  depth function
 
-depthLP = function(u, X, pdim = 1, a = 1, b = 1, name, func = NULL,...)
+depthLP = function(u, X, pdim = 1, a = 1, b = 1, name = "X", threads = -1, func = NULL,...)
 {
-  if(is.null(func)) depth = depthLPCPP(u, X, pdim, a, b)
-  norm = function(xi, z, p = 1) sum(abs(z-xi)^p)^(1/p)
+  if(is.null(func)) depth = depthLPCPP(u, X, pdim, a, b, threads = threads)
+  #norm = function(xi, z, p = 1) sum(abs(z-xi)^p)^(1/p)
   
   new("DepthLP", depth, u = u, X = X, method = "LP", name = name)
 }

@@ -75,8 +75,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // depthLPCPP
-SEXP depthLPCPP(SEXP ru, SEXP rX, double p, double a, double b);
-RcppExport SEXP depthproc_depthLPCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP pSEXP, SEXP aSEXP, SEXP bSEXP) {
+SEXP depthLPCPP(SEXP ru, SEXP rX, double p, double a, double b, int threads);
+RcppExport SEXP depthproc_depthLPCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP pSEXP, SEXP aSEXP, SEXP bSEXP, SEXP threadsSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -86,7 +86,8 @@ BEGIN_RCPP
         Rcpp::traits::input_parameter< double >::type p(pSEXP );
         Rcpp::traits::input_parameter< double >::type a(aSEXP );
         Rcpp::traits::input_parameter< double >::type b(bSEXP );
-        SEXP __result = depthLPCPP(ru, rX, p, a, b);
+        Rcpp::traits::input_parameter< int >::type threads(threadsSEXP );
+        SEXP __result = depthLPCPP(ru, rX, p, a, b, threads);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

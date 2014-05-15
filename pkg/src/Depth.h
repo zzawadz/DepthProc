@@ -3,12 +3,15 @@
 
 #include "RobCovLibConfig.h"
 #include "armadillo"
+#include <omp.h>
 
 namespace Depth
 {
-	// LPDepth
- arma::vec LPDepth(const arma::mat& X, const double &p, const double& a, const double& b);
- arma::vec LPDepth(const arma::mat& X, const arma::mat& Y, const double &p, const double& a, const double& b);
+
+ // LPDepth
+ arma::vec LPDepth(const arma::mat& X, const double &p, const double& a, const double& b, const int& threads);
+ arma::vec LPDepth(const arma::mat& X, const arma::mat& Y, const double &p, const double& a, const double& b, const int& threads);
+
 
 	// Mahalanobis Depth
  arma::vec MahalanobisDepth(const arma::mat& X);

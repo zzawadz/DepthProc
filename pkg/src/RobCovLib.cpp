@@ -21,7 +21,7 @@ namespace RobCovLib
 
 	arma::mat LPDepthCovarianceEstimator(const arma::mat& X, const double &p, const double& a, const double& b)
 	{
-		arma::vec weights = Depth::LPDepth(X, p, a, b);
+		arma::vec weights = Depth::LPDepth(X, p, a, b,-1);
 		arma::rowvec locX = Location::WeightedLocationEstimator(X, weights);
 		return WeightedCovarianceEstimator(X, locX, weights);
 	}

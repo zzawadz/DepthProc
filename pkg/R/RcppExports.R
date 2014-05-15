@@ -17,8 +17,8 @@ depthProjCPP <- function(ru, rX, nproj, seed) {
     .Call('depthproc_depthProjCPP', PACKAGE = 'depthproc', ru, rX, nproj, seed)
 }
 
-depthLPCPP <- function(ru, rX, p, a, b) {
-    .Call('depthproc_depthLPCPP', PACKAGE = 'depthproc', ru, rX, p, a, b)
+depthLPCPP <- function(ru, rX, p, a, b, threads) {
+    .Call('depthproc_depthLPCPP', PACKAGE = 'depthproc', ru, rX, p, a, b, threads)
 }
 
 sampleDepthContForMuCPP <- function(d, mu, rY) {

@@ -7,12 +7,12 @@ namespace Depth{
 
 	// LPDEPTH
 
-	arma::vec LPDepth(const arma::mat& X, const double &p, const double& a, const double& b)
-	{
-		return LPDepth(X,X,p,a,b);
+	arma::vec LPDepth(const arma::mat& X, const double &p, const double& a, const double& b, const int& threads)
+  {
+		return LPDepth(X, X, p, a, b, threads);
 	}
 
-	arma::vec LPDepth(const arma::mat& X, const arma::mat& Y, const double &p, const double& a, const double& b)
+	arma::vec LPDepth(const arma::mat& X, const arma::mat& Y, const double &p, const double& a, const double& b, const int& threads)
 	{
 		size_t d = Y.n_cols;
 		size_t n_y = Y.n_rows;
@@ -25,12 +25,14 @@ namespace Depth{
 		arma::rowvec tmp = arma::zeros<arma::rowvec>(d);
 		double sum_res = 0;
 		double tmp_sum;
-
-
-		for(size_t k = 0; k< n_x; k++)
+    size_t k,i;
+    
+    if(threads > 0) omp_set_num_threads(threads);
+    #pragma omp parallel for shared(X, n_x, n_y, p, b, a) private(k, i, sum_res, tmp, tmp_sum)
+		for(k = 0; k< n_x; k++)
 		{
 			sum_res = 0;
-			for(size_t i = 0; i < n_y; i++)
+			for(i = 0; i < n_y; i++)
 			{
 				tmp = X.row(k) - Y.row(i);
 				tmp = arma::abs(tmp);
@@ -115,5 +117,14 @@ namespace Depth{
 		
 		return depth;
 	}
+  
+  
+  /// Under development!!!
+
+  
+  
+  
+  
+  
  }
  

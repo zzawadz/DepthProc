@@ -17,7 +17,7 @@ namespace Location
 
 	arma::rowvec LPDepthLocationEstimator(const arma::mat& X, const double &p, const double& a, const double& b)
 	{
-		arma::vec weights = Depth::LPDepth(X,p,a,b);
+		arma::vec weights = Depth::LPDepth(X,p,a,b,-1);
 		return WeightedLocationEstimator(X, weights);
 	}
 }
