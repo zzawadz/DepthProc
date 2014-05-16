@@ -41,15 +41,18 @@ BEGIN_RCPP
 END_RCPP
 }
 // depthMahCPP
-SEXP depthMahCPP(SEXP ru, SEXP rX);
-RcppExport SEXP depthproc_depthMahCPP(SEXP ruSEXP, SEXP rXSEXP) {
+SEXP depthMahCPP(SEXP ru, SEXP rX, SEXP rcov, SEXP rmean, int threads);
+RcppExport SEXP depthproc_depthMahCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP rcovSEXP, SEXP rmeanSEXP, SEXP threadsSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< SEXP >::type ru(ruSEXP );
         Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP );
-        SEXP __result = depthMahCPP(ru, rX);
+        Rcpp::traits::input_parameter< SEXP >::type rcov(rcovSEXP );
+        Rcpp::traits::input_parameter< SEXP >::type rmean(rmeanSEXP );
+        Rcpp::traits::input_parameter< int >::type threads(threadsSEXP );
+        SEXP __result = depthMahCPP(ru, rX, rcov, rmean, threads);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
@@ -159,6 +162,38 @@ BEGIN_RCPP
         Rcpp::traits::input_parameter< double >::type p(pSEXP );
         Rcpp::traits::input_parameter< int >::type seed(seedSEXP );
         SEXP __result = runifsphereCPP(n, p, seed);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// covCPP
+SEXP covCPP(SEXP rX, int threads);
+RcppExport SEXP depthproc_covCPP(SEXP rXSEXP, SEXP threadsSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP );
+        Rcpp::traits::input_parameter< int >::type threads(threadsSEXP );
+        SEXP __result = covCPP(rX, threads);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// meanCPP
+SEXP meanCPP(SEXP rX, int threads);
+RcppExport SEXP depthproc_meanCPP(SEXP rXSEXP, SEXP threadsSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP );
+        Rcpp::traits::input_parameter< int >::type threads(threadsSEXP );
+        SEXP __result = meanCPP(rX, threads);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

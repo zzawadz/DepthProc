@@ -86,7 +86,8 @@ do.call(filled.contour, c(list(x = x_axis, y = y_axis, z = depth_surface,
 					}
 				if(pdmedian)
 					{
-						dmedian = depthMedian(x,method = method)
+            depth_params$u = x
+						dmedian = do.call(depthMedian,depth_params)#depthMedian(x,method = method)
 						points(dmedian[1],dmedian[2] ,pch = 4,col = mecol, cex = 1.5,lwd = 2.5)
 						#abline(h = dmedian[2], col = mecol, lwd = 1.8)
 					}

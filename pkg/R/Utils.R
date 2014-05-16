@@ -11,10 +11,14 @@
 .extractDepthParams = function(u, X,...)
 {
   tmp = list(...)
-  params = c("method", "ndir", "seed", "name", "a", "b", "pdim", "depth1", "depth2", "beta","threads")
-  def_param = list(method="Projection", ndir=1000, seed = 1, name = "X", a = 1, b = 1, pdim = 1, depth1 = "Projection", depth2 = "Projection", beta = 0.5, threads = -1)
+  #print(tmp)
+  params = c("method", "ndir", "seed", "name", "a", "b", "pdim", "depth1", "depth2", "beta","threads", "mean", "cov")
+  def_param = list(method="Projection", ndir=1000, seed = 1, name = "X", a = 1, b = 1, pdim = 1, depth1 = "Projection", depth2 = "Projection", beta = 0.5, threads = -1, mean = "NULL", cov = "NULL")
   fastIfElse = function(name, tmp, def){
-    ifelse(is.null(tmp[[name]]),def[[name]],tmp[[name]])
+    x = ifelse(is.null(tmp[[name]]),def[[name]],tmp[[name]])
+    if(name == "mean") return(tmp[[name]])
+    if(name == "cov") return(tmp[[name]])
+    return(x)
   }
   
   tmp = sapply(params, fastIfElse, tmp, def_param, simplify=FALSE)
@@ -26,7 +30,7 @@
 .removeDepthParams = function(...)
 {
   tmp = list(...)
-  params = c("method", "ndir", "seed", "name", "a", "b", "pdim", "depth1", "depth2","beta","threads")
+  params = c("method", "ndir", "seed", "name", "a", "b", "pdim", "depth1", "depth2","beta","threads","mean", "mean", "cov")
   names = names(tmp)
   tmp = sapply(names, function(x) {
     ifelse(x %in% params, NA, tmp[x])

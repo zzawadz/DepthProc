@@ -64,7 +64,7 @@ depth = function(u, X, method="Projection", name = "X", threads = -1,...)
   ###################################
   if (method=="Mahalanobis")
   {	
-    return(depthMah(u, X, name = name))      
+    return(depthMah(u, X, name = name, threads = threads, ...))      
   }
   ####################################
   if (method=="Euclidean")
@@ -168,9 +168,11 @@ depthEuclid = function(u, X, name = "X", ...)
 #'  multivariate
 #'  nonparametric
 #'  depth function
-depthMah = function(u, X, name = "X", ...)
+depthMah = function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1, ...)
 {
-  depth = depthMahCPP(u,X)
+  if(!is.null(mean)) mean = matrix(mean, nc = length(mean))
+  
+  depth = depthMahCPP(u,X, cov, mean, threads)
   new("DepthMahalanobis", depth, u = u, X = X, method = "Mahalanobis", name = name)
 }
 

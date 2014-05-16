@@ -15,4 +15,71 @@ namespace Utils
 		return X;
 	}
 
+
+///////////////////////////////////////////////////////////////////////////////
+  arma::rowvec mean(const arma::mat& X, int threads)
+  {
+    size_t d = X.n_cols;
+    size_t n = X.n_rows;
+    double n1= n;
+    size_t i,k;
+    arma::rowvec meanr(d);
+    double tmp;
+    
+    if(threads > 0) omp_set_num_threads(threads);
+    
+    for(i = 0; i < d; i++)
+    {
+        tmp = 0;
+        #pragma omp parallel for shared(X,d,n,i) private(k) reduction(+:tmp)
+        for(k = 0; k < n; k++)
+        {
+          tmp += X.at(k,i);
+        }
+        meanr.at(i) = tmp/n1;
+    }
+    
+    return meanr;
+  }
+
+///////////////////////////////////////////////////////////////////////////////
+
+  arma::mat cov(const arma::mat& X, int threads)
+  {
+    size_t d = X.n_cols;
+    size_t n = X.n_rows;
+    double n1= n-1;
+    size_t i,j,k;
+    arma::mat cov(d,d);
+    
+    arma::rowvec meanr = Utils::mean(X, threads);
+    
+    double m1,m2;
+    double tmp;
+    
+    if(threads > 0) omp_set_num_threads(threads);
+    
+    #pragma omp parallel for shared(X,n,n1,meanr) private(i,j, k, m1, m2, tmp)
+    for(i = 0; i < d; i++)
+    {
+      m1 = meanr.at(i);
+      
+      for(j = i; j < d; j++)
+      {
+        m2 = meanr.at(j);
+        tmp = 0;
+        
+        for(k = 0; k < n; k++)
+        {
+          tmp += (X.at(k,i) - m1)*(X.at(k,j) - m2);
+        }
+        tmp = tmp/n1;
+        cov.at(i,j) = tmp;
+        cov.at(j,i) = tmp;
+      }
+    }
+    
+    return cov;
+  }
+ 
 }

@@ -47,20 +47,38 @@ namespace Depth{
 	}
 
 	// Mahalanobis Depth
-	arma::vec MahalanobisDepth(const arma::mat& X)
+	arma::vec MahalanobisDepth(const arma::mat& X, int threads)
 	{
-		return(MahalanobisDepth(X,X));
+		return(MahalanobisDepth(X,X,threads));
 	}
-	arma::vec MahalanobisDepth(const arma::mat& X, const arma::mat& Y)
+	arma::vec MahalanobisDepth(const arma::mat& X, const arma::mat& Y, int threads)
 	{
-		size_t n = X.n_rows;
-		arma::mat covY = arma::cov(Y);
-		covY = covY.i();
+		arma::mat cov = arma::cov(Y);
 		arma::rowvec mean = arma::mean(Y);
 		
-		arma::vec depth(n);
+		return(MahalanobisDepth(X,Y,cov,mean,threads));
+	}
 
-		arma::rowvec tmpX;
+  
+ arma::vec MahalanobisDepth(const arma::mat& X, const arma::mat& Y, const arma::mat& cov, int threads)
+ {
+    arma::rowvec mean = arma::mean(Y);
+    return(MahalanobisDepth(X,Y,cov,mean,threads));
+ }
+ 
+ arma::vec MahalanobisDepth(const arma::mat& X, const arma::mat& Y, const arma::rowvec& mean, int threads)
+ {
+    arma::mat cov = arma::cov(Y);
+    return(MahalanobisDepth(X,Y,cov,mean,threads));
+ }
+ 
+ arma::vec MahalanobisDepth(const arma::mat& X, const arma::mat& Y, const arma::mat& cov, const arma::rowvec& mean, int threads)
+ {
+    size_t n = X.n_rows;
+    arma::vec depth(n);
+    arma::mat covY = cov.i();
+    
+  	arma::rowvec tmpX;
 		double dist;
 
 		for(size_t i = 0; i < n; i++)
@@ -71,7 +89,8 @@ namespace Depth{
 			depth(i) = dist;
 		}
 		return(depth);
-	}
+ }
+
 
 
 	// Projection Depth

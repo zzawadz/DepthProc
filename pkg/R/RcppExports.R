@@ -9,8 +9,8 @@ depth2dcpp <- function(R_x, R_y) {
     .Call('depthproc_depth2dcpp', PACKAGE = 'depthproc', R_x, R_y)
 }
 
-depthMahCPP <- function(ru, rX) {
-    .Call('depthproc_depthMahCPP', PACKAGE = 'depthproc', ru, rX)
+depthMahCPP <- function(ru, rX, rcov, rmean, threads) {
+    .Call('depthproc_depthMahCPP', PACKAGE = 'depthproc', ru, rX, rcov, rmean, threads)
 }
 
 depthProjCPP <- function(ru, rX, nproj, seed) {
@@ -35,5 +35,13 @@ sampleMaxLocScaleDepthCPP <- function(ry, iter, eps, p_length) {
 
 runifsphereCPP <- function(n, p, seed) {
     .Call('depthproc_runifsphereCPP', PACKAGE = 'depthproc', n, p, seed)
+}
+
+covCPP <- function(rX, threads) {
+    .Call('depthproc_covCPP', PACKAGE = 'depthproc', rX, threads)
+}
+
+meanCPP <- function(rX, threads) {
+    .Call('depthproc_meanCPP', PACKAGE = 'depthproc', rX, threads)
 }
 
