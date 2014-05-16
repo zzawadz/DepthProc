@@ -260,7 +260,7 @@ depthProjection = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1
 #'  depth function
 
 
-depthTukey = function(u, X, ndir, seed = 1, name = "X",...)
+depthTukey = function(u, X, ndir = 1000, seed = 1, name = "X",...)
 {
   tukey1d = function(u,X)
   {

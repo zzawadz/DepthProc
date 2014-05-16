@@ -1,12 +1,12 @@
 README
 *.zip
-*.png
+
 .RData
 .Rhistory
 *.o
 *.def
 *.dll
-
+cache
 *.vcxproj*
 
 *.pdf
