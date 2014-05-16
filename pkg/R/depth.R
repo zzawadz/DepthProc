@@ -74,7 +74,7 @@ depth = function(u, X, method="Projection", name = "X", threads = -1,...)
   ####################################
   if(method == "Projection")
   {
-    return(depthProjection(u, X, name = name, ...))
+    return(depthProjection(u, X, name = name, threads = threads, ...))
   }
   #######################################################################
   if (method=="Tukey")
@@ -215,9 +215,9 @@ depthMah = function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1, ...
 #'  nonparametric
 #'  depth function
 
-depthProjection = function(u, X, ndir = 1000, seed = 1, name = "X",...)
+depthProjection = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1,...)
 {
-  depth = depthProjCPP(u, X, ndir, seed)
+  depth = depthProjCPP(u, X, ndir, seed, threads)
   new("DepthProjection", depth, u = u, X = X, method = "Projection", name = name)
 }
 

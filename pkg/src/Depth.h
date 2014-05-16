@@ -21,8 +21,8 @@ namespace Depth
  arma::vec MahalanobisDepth(const arma::mat& X, const arma::mat& Y, const arma::mat& cov, const arma::rowvec& mean, int threads);
 
 	// Projection Depth
-	arma::vec ProjectionDepth(const arma::mat& X, size_t nproj, double seed);
-	arma::vec ProjectionDepth(const arma::mat& X, const arma::mat& Y, size_t nproj, double seed);
+	arma::vec ProjectionDepth(const arma::mat& X, size_t nproj, double seed, int threads);
+	arma::vec ProjectionDepth(const arma::mat& X, const arma::mat& Y, size_t nproj, double seed, int threads);
 }
 
 #endif

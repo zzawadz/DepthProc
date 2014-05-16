@@ -13,8 +13,8 @@ depthMahCPP <- function(ru, rX, rcov, rmean, threads) {
     .Call('depthproc_depthMahCPP', PACKAGE = 'depthproc', ru, rX, rcov, rmean, threads)
 }
 
-depthProjCPP <- function(ru, rX, nproj, seed) {
-    .Call('depthproc_depthProjCPP', PACKAGE = 'depthproc', ru, rX, nproj, seed)
+depthProjCPP <- function(ru, rX, nproj, seed, threads) {
+    .Call('depthproc_depthProjCPP', PACKAGE = 'depthproc', ru, rX, nproj, seed, threads)
 }
 
 depthLPCPP <- function(ru, rX, p, a, b, threads) {

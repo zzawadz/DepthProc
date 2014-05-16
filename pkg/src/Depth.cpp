@@ -125,13 +125,15 @@ namespace Depth{
 
 
 	// Projection Depth
-	arma::vec ProjectionDepth(const arma::mat& X, size_t nproj, double seed)
+	arma::vec ProjectionDepth(const arma::mat& X, size_t nproj, double seed, int threads)
 	{
-		return ProjectionDepth(X, X, nproj, seed);
+		return ProjectionDepth(X, X, nproj, seed, threads);
 	}
 
-	arma::vec ProjectionDepth(const arma::mat& X, const arma::mat& Y, size_t nproj, double seed)
+	arma::vec ProjectionDepth(const arma::mat& X, const arma::mat& Y, size_t nproj, double seed, int threads)
 	{
+    if(threads < 1) threads = omp_get_max_threads();
+    
 		size_t nx = X.n_rows;
 		size_t ny = Y.n_rows;
 		size_t d  = Y.n_cols;
@@ -144,8 +146,11 @@ namespace Depth{
 		arma::vec tmpProj(ny);
 		arma::rowvec medians(nproj);
 		arma::rowvec mads(nproj);
-
-		for(size_t i = 0; i < nproj; i++)
+    
+    size_t i;
+    
+    #pragma omp parallel for shared(nproj,Y,medians,mads,directions) private(tmpProj,i) num_threads(threads)
+		for(i = 0; i < nproj; i++)
 		{
 			tmpProj = Y * directions.col(i);
 			medians(i) = arma::median(tmpProj);
@@ -153,8 +158,9 @@ namespace Depth{
 		}
 
 		arma::rowvec tmpX(nproj);
-
-		for(size_t i = 0; i < nx; i++)
+    
+    #pragma omp parallel for shared(X,directions,medians,mads,nx,depth) private(i, tmpX) num_threads(threads)
+		for(i = 0; i < nx; i++)
 		{
 			tmpX = X.row(i) * directions;
 			tmpX -= medians;

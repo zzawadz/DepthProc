@@ -60,8 +60,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // depthProjCPP
-SEXP depthProjCPP(SEXP ru, SEXP rX, double nproj, double seed);
-RcppExport SEXP depthproc_depthProjCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP nprojSEXP, SEXP seedSEXP) {
+SEXP depthProjCPP(SEXP ru, SEXP rX, double nproj, double seed, int threads);
+RcppExport SEXP depthproc_depthProjCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP nprojSEXP, SEXP seedSEXP, SEXP threadsSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -70,7 +70,8 @@ BEGIN_RCPP
         Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP );
         Rcpp::traits::input_parameter< double >::type nproj(nprojSEXP );
         Rcpp::traits::input_parameter< double >::type seed(seedSEXP );
-        SEXP __result = depthProjCPP(ru, rX, nproj, seed);
+        Rcpp::traits::input_parameter< int >::type threads(threadsSEXP );
+        SEXP __result = depthProjCPP(ru, rX, nproj, seed, threads);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
