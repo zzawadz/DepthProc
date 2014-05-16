@@ -7,12 +7,12 @@ namespace Depth{
 
 	// LPDEPTH
 
-	arma::vec LPDepth(const arma::mat& X, const double &p, const double& a, const double& b, const int& threads)
+	arma::vec LPDepth(const arma::mat& X, const double &p, const double& a, const double& b, int threads)
   {
 		return LPDepth(X, X, p, a, b, threads);
 	}
 
-	arma::vec LPDepth(const arma::mat& X, const arma::mat& Y, const double &p, const double& a, const double& b, const int& threads)
+	arma::vec LPDepth(const arma::mat& X, const arma::mat& Y, const double &p, const double& a, const double& b, int threads)
 	{
 		size_t d = Y.n_cols;
 		size_t n_y = Y.n_rows;
@@ -27,8 +27,9 @@ namespace Depth{
 		double tmp_sum;
     size_t k,i;
     
-    if(threads > 0) omp_set_num_threads(threads);
-    #pragma omp parallel for shared(X, n_x, n_y, p, b, a) private(k, i, sum_res, tmp, tmp_sum)
+    if(threads < 1) threads = omp_get_max_threads();
+    
+    #pragma omp parallel for shared(X, n_x, n_y, p, b, a) private(k, i, sum_res, tmp, tmp_sum) num_threads(threads)
 		for(k = 0; k< n_x; k++)
 		{
 			sum_res = 0;
@@ -53,22 +54,48 @@ namespace Depth{
 	}
 	arma::vec MahalanobisDepth(const arma::mat& X, const arma::mat& Y, int threads)
 	{
-		arma::mat cov = arma::cov(Y);
-		arma::rowvec mean = arma::mean(Y);
+		arma::mat cov;
+		arma::rowvec mean;
 		
+    // if threads == -2 uses paraller function to compute 
+    // covariance matrix and mean vector
+    if(threads == -2)
+    {
+      mean = Utils::mean(Y, threads);
+      cov = Utils::cov(Y, threads);
+    } else
+    {
+       cov = arma::cov(Y);
+       mean = arma::mean(Y);
+    }
+    
 		return(MahalanobisDepth(X,Y,cov,mean,threads));
 	}
 
   
  arma::vec MahalanobisDepth(const arma::mat& X, const arma::mat& Y, const arma::mat& cov, int threads)
  {
-    arma::rowvec mean = arma::mean(Y);
+    arma::rowvec mean;
+    if(threads == -2)
+    {
+      mean = Utils::mean(Y, threads);
+    }
+    else {
+      mean = arma::mean(Y);
+    }
     return(MahalanobisDepth(X,Y,cov,mean,threads));
  }
  
  arma::vec MahalanobisDepth(const arma::mat& X, const arma::mat& Y, const arma::rowvec& mean, int threads)
  {
-    arma::mat cov = arma::cov(Y);
+    arma::mat cov;
+    if(threads == -2)
+    {
+      cov = Utils::cov(Y, threads);
+    } else
+    {
+       cov = arma::cov(Y);
+    }
     return(MahalanobisDepth(X,Y,cov,mean,threads));
  }
  
@@ -80,8 +107,12 @@ namespace Depth{
     
   	arma::rowvec tmpX;
 		double dist;
-
-		for(size_t i = 0; i < n; i++)
+    size_t i;
+    
+    if(threads < 1) threads = omp_get_max_threads();
+    
+    #pragma omp parallel for shared(X,n,mean, covY) private(i, tmpX, dist) num_threads(threads)
+		for(i = 0; i < n; i++)
 		{
 			tmpX = X.row(i) - mean;
 			tmpX = tmpX * covY *tmpX.t();

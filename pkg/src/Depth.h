@@ -9,8 +9,8 @@ namespace Depth
 {
 
  // LPDepth
- arma::vec LPDepth(const arma::mat& X, const double &p, const double& a, const double& b, const int& threads);
- arma::vec LPDepth(const arma::mat& X, const arma::mat& Y, const double &p, const double& a, const double& b, const int& threads);
+ arma::vec LPDepth(const arma::mat& X, const double &p, const double& a, const double& b, int threads);
+ arma::vec LPDepth(const arma::mat& X, const arma::mat& Y, const double &p, const double& a, const double& b, int threads);
 
 
 	// Mahalanobis Depth

@@ -26,12 +26,12 @@ namespace Utils
     arma::rowvec meanr(d);
     double tmp;
     
-    if(threads > 0) omp_set_num_threads(threads);
+    if(threads < 1) threads = omp_get_max_threads();
     
     for(i = 0; i < d; i++)
     {
         tmp = 0;
-        #pragma omp parallel for shared(X,d,n,i) private(k) reduction(+:tmp)
+        #pragma omp parallel for shared(X,d,n,i) private(k) reduction(+:tmp) num_threads(threads)
         for(k = 0; k < n; k++)
         {
           tmp += X.at(k,i);
@@ -57,9 +57,9 @@ namespace Utils
     double m1,m2;
     double tmp;
     
-    if(threads > 0) omp_set_num_threads(threads);
+    if(threads < 1) threads = omp_get_max_threads();
     
-    #pragma omp parallel for shared(X,n,n1,meanr) private(i,j, k, m1, m2, tmp)
+    #pragma omp parallel for shared(X,n,n1,meanr) private(i,j, k, m1, m2, tmp) num_threads(threads)
     for(i = 0; i < d; i++)
     {
       m1 = meanr.at(i);
