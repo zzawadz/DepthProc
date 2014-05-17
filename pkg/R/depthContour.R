@@ -21,7 +21,7 @@
 #'  @seealso \code{\link{depthPersp}}
 #'  
 #'  @examples
-#'
+#' require(MASS)
 #' x = mvrnorm(1000,c(0,0),diag(2))
 #' depthContour(x)
 #' #with points

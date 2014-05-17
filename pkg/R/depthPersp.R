@@ -1,6 +1,7 @@
 #' @name depthPersp
 #' @title Perspective plot for depth functions
 #' @export
+#' @importFrom lattice wireframe
 #' @description Draws a perspective plot of depth function over x-y plane.
 #' 
 #' @param x bivariate data
@@ -20,6 +21,7 @@
 #' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #' 
 #' @examples
+#'  require(MASS)
 #'  x = mvrnorm(100,c(0,0),diag(2))
 #'  depthPersp(x, method = "Euclidean")
 #' 

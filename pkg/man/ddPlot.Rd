@@ -36,7 +36,11 @@ When \code{distribution} is "mvnorm" the sample dataset is compared with multivi
  When \code{distribution} is "st" the sample dataset is compared with multivirate skew t-Student distribution with given parameters. \code{xi}, \code{Omega} and \code{alpha} must be specified. \code{df=Inf} by default.
 }
 \examples{
-## Location difference
+require(MASS)
+require(sn)
+require(mvtnorm)
+
+ ## Location difference
 Standard <- mvrnorm(1000, c(0,0), diag(2))
 Shift <- mvrnorm(1000, c(0.5, 0), diag(2))
 ddPlot(x=Standard, y=Shift)

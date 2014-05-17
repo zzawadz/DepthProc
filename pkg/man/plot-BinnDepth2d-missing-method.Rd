@@ -50,7 +50,8 @@
 Binning 2d
 }
 \examples{
-tmp = binningDepth2D(x = mvrnorm(100,rep(0,2),diag(2)))
+require(MASS)
+ tmp = binningDepth2D(x = mvrnorm(100,rep(0,2),diag(2)))
  plot(tmp)
 }
 \seealso{

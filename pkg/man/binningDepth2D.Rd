@@ -25,7 +25,8 @@ binningDepth2D(x, binmethod = "LocDepth", nbins = 8, k = 1,
 Binning 2d
 }
 \examples{
-binningDepth2D(x = mvrnorm(100,rep(0,2),diag(2)))
+require(MASS)
+ binningDepth2D(x = mvrnorm(100,rep(0,2),diag(2)))
 }
 \seealso{
 \code{\link{depth}}

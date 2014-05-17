@@ -33,6 +33,8 @@ Draws a asymmetry curve estimated from given data.
 Asymmetrycurve takes advantage of function \code{convhulln} to compute volume of central area's convex hull.
 }
 \examples{
+require(MASS)
+require(sn)
 xi = c(0,0)
 alpha <- c(2,-5)
 Omega <- diag(2)*5

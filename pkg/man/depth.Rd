@@ -27,7 +27,9 @@ Irrespective of dimension, Projection and Tukey's depth is obtained by approxima
  Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
 }
 \examples{
-## Calculation of Projection depth
+require(robustbase)
+
+ ## Calculation of Projection depth
  data(starsCYG, package = "robustbase")
  depth(t(colMeans(starsCYG)), starsCYG)
 

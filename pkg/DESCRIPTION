@@ -7,21 +7,19 @@ Maintainer: Core Tean <z@gmail.com>
 Description: Package for depths
 License: GPL-2
 Depends:
-    R (>= 2.13.1),
-    geometry,
+    R (>= 3.0.0),
     ggplot2,
-    lattice,
-    sn,
-    MASS,
-    robustbase,
     Rcpp (>= 0.10.1),
     RcppArmadillo,
     rrcov,
-    sm,
-    boot,
-    methods,
     roxygen2,
-    devtools
+    devtools,
+Imports:
+    lattice,
+    sm,
+    geometry,
+    robustbase,
+    boot
 LinkingTo: Rcpp, RcppArmadillo
 Packaged: 2012-11-10 23:48:39 UTC; Dom
 Roxygen: list(wrap = FALSE)

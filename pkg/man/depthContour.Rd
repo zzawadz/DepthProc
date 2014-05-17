@@ -38,6 +38,7 @@ depthContour(x, xlim = extendrange(x[, 1], f = 0.1), ylim = extendrange(x[,
 Draws an approximate contours of depth for bivariate data.
 }
 \examples{
+require(MASS)
 x = mvrnorm(1000,c(0,0),diag(2))
 depthContour(x)
 #with points

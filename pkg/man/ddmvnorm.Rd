@@ -28,6 +28,7 @@ Produces a  normal DD plot of a multivirate dataset.
 In the first step the location and scale of \code{x} are estimated and theoretical sample of normal distribution with those parameters is generated. The plot presents the depth o empirical points with reference to \code{x} and theoretical sample.
 }
 \examples{
+require(MASS)
 norm <- mvrnorm(1000, c(0,0,0), diag(3))
 con <- mvrnorm(100, c(1,2,5), 3*diag(3))
 sample <- rbind(norm, con)

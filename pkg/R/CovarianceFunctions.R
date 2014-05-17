@@ -29,6 +29,7 @@ setClass("CovDepthWeighted", representation(depth = "character"), contains="CovR
 #'  @seealso \code{\link{depthContour}} and \code{\link{depthPersp}} for depth graphics.
 #'  
 #'  @examples
+#'  require(MASS)
 #'  x = mvrnorm(n = 100, mu = c(0,0), Sigma = 3*diag(2))
 #'  cov_x = CovLP(x,1,1,1)
 #'  

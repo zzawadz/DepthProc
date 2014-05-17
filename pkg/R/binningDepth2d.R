@@ -1,5 +1,5 @@
 #'@title 2d Binning
-#'
+#'@importFrom sm binning
 #'@description Binning 2d
 #'
 #'  @param x bivariate matrix
@@ -16,6 +16,7 @@
 #'  
 #'  @examples
 #'  
+#'  require(MASS)
 #'  binningDepth2D(x = mvrnorm(100,rep(0,2),diag(2)))
 #'  
 #'  @keywords
@@ -116,6 +117,7 @@ binningDepth2D = function(x, binmethod = "LocDepth", nbins = 8, k = 1, remove_bo
 #'  
 #'  @examples
 #'  
+#'  require(MASS)
 #'  tmp = binningDepth2D(x = mvrnorm(100,rep(0,2),diag(2)))
 #'  plot(tmp)
 #'  @keywords
