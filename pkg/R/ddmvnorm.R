@@ -37,7 +37,7 @@ ddMvnorm <-function(x, size = nrow(x), robust=FALSE, alpha=0.05, plot = TRUE,tit
   if(robust == TRUE) 
   {
   	varcov <- cov(x[depth_sample>=quantile(depth_sample, alpha),])
-  	location <- depthMedian(x, method=method, ...)
+  	location <- depthMedian(x, ...)
   } 
   else
   { 

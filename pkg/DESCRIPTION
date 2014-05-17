@@ -19,7 +19,9 @@ Depends:
     rrcov,
     sm,
     boot,
-    methods
+    methods,
+    roxygen2,
+    devtools
 LinkingTo: Rcpp, RcppArmadillo
 Packaged: 2012-11-10 23:48:39 UTC; Dom
 Roxygen: list(wrap = FALSE)
