@@ -1,6 +1,6 @@
 #' @name depthPersp
 #' @title Perspective plot for depth functions
-#' 
+#' @export
 #' @description Draws a perspective plot of depth function over x-y plane.
 #' 
 #' @param x bivariate data

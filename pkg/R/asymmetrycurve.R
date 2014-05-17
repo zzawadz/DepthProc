@@ -30,6 +30,8 @@
 #'  
 #'  @seealso \code{\link{scaleCurve}}, \code{\link{depth}}
 #'  
+#'  @export
+#'  
 #'  @examples
 #'
 #' xi = c(0,0)
@@ -49,10 +51,6 @@
 #'  depth function
 #'  asymmetry
 #'
-
-
-
-
 asymmetryCurve<-function(x, y = NULL, alpha = seq(0,1,0.01), method = "Projection",
 	movingmedian = FALSE,plot = TRUE, name = "X", name_y = "Y",...)
 {

@@ -1,5 +1,7 @@
 #' @name trimProjReg2d
 #' @title trimProjReg2d
+#' @export
+#' 
 #' @description Computes projection trimmed regression in 2 dimensions.
 #'
 #' @param x Independent variable

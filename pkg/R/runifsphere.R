@@ -1,5 +1,5 @@
 #'@title Random number generation from unit sphere.
-#'
+#'@export
 #'  @description This function generates random numbers from p-dimensional unit sphere.
 #'
 #'  @param n number of random samples.

@@ -1,3 +1,7 @@
+#' @title CovLP
+#'
+#' @export
+#'
 setClass("CovDepthWeighted", representation(depth = "character"), contains="CovRobust")
 
 #'@title CovLp
@@ -21,6 +25,7 @@ setClass("CovDepthWeighted", representation(depth = "character"), contains="CovR
 #'  
 #'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #'  
+#'  @export
 #'  @seealso \code{\link{depthContour}} and \code{\link{depthPersp}} for depth graphics.
 #'  
 #'  @examples
@@ -34,8 +39,6 @@ setClass("CovDepthWeighted", representation(depth = "character"), contains="CovR
 #'  robust
 #'  depth function
 #'  
-
-
 CovLP = function(x, p=1, a=1, b=1)
 {
   cov = CovLPCPP(x, p, a, b)

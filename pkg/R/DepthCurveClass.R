@@ -1,6 +1,21 @@
+
+setGeneric("plot")
+
+#' @title plot
+#'
+#'  @description Plot Depth curve
+#' @export
+#' @name plot_depthproc
 setMethod("plot", signature = c(x = "DepthCurve", y = "missing"), function(x, y = "missing")
 {
  plot(new(paste0(class(x),"List"),x))
+})
+
+
+setMethod("plot", signature = c(x = "DepthCurveList", y = "missing"), function(x, y = "missing")
+{
+  p = getPlot(x)
+  print(p)
 })
 
 #############################################################
@@ -18,12 +33,6 @@ setMethod("initialize","DepthCurveList", function(.Object, ...)
 })
 
 #######################################################################
-
-setMethod("plot", signature = c(x = "DepthCurveList", y = "missing"), function(x, y = "missing")
-{
-  p = getPlot(x)
-  print(p)
-})
 
 
 #######################################################################

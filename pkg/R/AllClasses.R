@@ -19,7 +19,7 @@
 #' @name Depth
 #' @aliases DepthEuclid DepthProjection DepthMahalanobis DepthTukey DepthLP DepthLocal
 #' @rdname Depth-class
-#' @exportClass 
+#' @export 
 setClass("Depth", representation(u = "matrix", X = "matrix", method = "character", name = "character", "VIRTUAL"))
 setClass("DepthEuclid", representation(), contains = c("Depth","numeric"))
 setClass("DepthProjection", representation(), contains = c("Depth","numeric"))
@@ -46,8 +46,8 @@ setClass("DepthLocal", representation(), contains = c("Depth","numeric"))
 #'
 #' @name DDPlot
 #' @rdname DDPlot-class
-#' @exportClass 
-setClass("DDPlot", representation(X = c("Depth"), Y = "Depth"))
+#' @export 
+setClass("DDPlot", representation(X = c("Depth"), Y = "Depth", title = "character"))
 
 #####################################
 ######### DepthCurve ################
@@ -81,8 +81,8 @@ setClass("DDPlot", representation(X = c("Depth"), Y = "Depth"))
 #' @name DepthCurve
 #' @aliases DepthCurve DepthCurveList
 #' @rdname DepthCurve-class 
-#' @exportClass  
-setClass("DepthCurve", representation(depth = "Depth","VIRTUAL"))
+#' @export  
+setClass("DepthCurve", representation(depth = "Depth", title = "character","VIRTUAL"))
 setClass("DepthCurveList", representation("VIRTUAL"))
 
 
@@ -121,7 +121,7 @@ setClass("DepthCurveList", representation("VIRTUAL"))
 #' @name ScaleCurve
 #' @aliases ScaleCurve ScaleCurveList
 #' @rdname ScaleCurve-class 
-#' @exportClass  
+#' @export  
 setClass("ScaleCurve", representation(alpha = "numeric")                                          , contains=c("numeric","DepthCurve"))
 setClass("ScaleCurveList", contains=c("DepthCurveList", "list"))
 
@@ -145,7 +145,7 @@ setClass("ScaleCurveList", contains=c("DepthCurveList", "list"))
 #' @name AsymmetryCurve
 #' @aliases AsymmetryCurve AsymmetryCurveList
 #' @rdname AsymmetryCurve-class 
-#' @exportClass 
+#' @export 
 setClass("AsymmetryCurve", representation(alpha = "numeric")
          , contains=c("numeric","DepthCurve"))
 setClass("AsymmetryCurveList", contains=c("DepthCurveList", "list"))
@@ -171,10 +171,10 @@ setClass("AsymmetryCurveList", contains=c("DepthCurveList", "list"))
 #'  
 #' @name BinnDepth2d
 #' @rdname BinnDepth2d
-#' @exportClass 
+#' @export
 setClass("BinnDepth2d", representation=list(freq = "matrix", mid_x = "numeric", mid_y = "numeric", breaks_x = "numeric", breaks_y = "numeric", input_data = "matrix", max_depth_x = "numeric", max_depth_y = "numeric"))
 
-#' @genericMethods
+#' @export
 #' @title Create plot from DepthCurve and DepthCurveList.
 #'
 #'  @description Create an object of class ggplot from DepthCurve and DepthCurveList.
@@ -182,7 +182,7 @@ setClass("BinnDepth2d", representation=list(freq = "matrix", mid_x = "numeric", 
 setGeneric("getPlot", function(object) standardGeneric("getPlot"))
 setGeneric(".getPlot", function(object) standardGeneric(".getPlot"))
 
-#' @genericMethods
+#' @export
 #' @title As matrix method for DepthCurve and DepthCurveList.
 #'
 #'  @description Create a matrix from DepthCurve and DepthCurveList.
@@ -205,7 +205,7 @@ setGeneric("as.matrix", function(x,...) standardGeneric("as.matrix"))
 #'  
 #' @name RobReg
 #' @rdname RobReg
-#' @exportClass 
+#' @export
 setClass("RobReg", representation(coef = "numeric", "VIRTUAL"))
 
 #' DeepReg2d
@@ -221,7 +221,7 @@ setClass("RobReg", representation(coef = "numeric", "VIRTUAL"))
 #'  
 #' @name DeepReg2d
 #' @rdname RDeepReg2d
-#' @exportClass 
+#' @export
 setClass("DeepReg2d", representation=list(depth = "numeric"), contains="RobReg")
 
 #' TrimReg2d
@@ -236,7 +236,7 @@ setClass("DeepReg2d", representation=list(depth = "numeric"), contains="RobReg")
 #'  
 #' @name TrimReg2d
 #' @rdname TrimReg2d
-#' @exportClass 
+#' @export
 setClass("TrimReg2d", contains="RobReg")
 
 
@@ -245,5 +245,7 @@ setClass("TrimReg2d", contains="RobReg")
 #' @title Add line to plot
 #'
 #'  @description Add fitted line to a plot. This is overloaded function for robust regression methods from package depthproc.
+#' @export
 #' @name abline_depthproc
 setMethod("abline", "RobReg",function(a, ...) { abline(a@coef, ...)})
+

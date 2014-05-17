@@ -24,3 +24,9 @@ depthContour(u,method = "LP",points=TRUE)
 depthContour(DATA,method = "Local",points=TRUE, depth1="LP",depth2="LP")
 depthContour(DATA,method = "Local",points=TRUE, depth1="Projection",depth2="Projection",beta=0.7)
 
+
+
+
+x = mvrnorm(n = 100, mu = c(0,0), Sigma = 3*diag(2))
+y = rmvt(n = 100, sigma = diag(2), df = 2)
+scaleCurve(x, y, method = "Projection", plot = TRUE, title = "AAA")

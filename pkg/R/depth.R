@@ -1,4 +1,5 @@
 #'@title Depth calculation
+#'@export
 #'
 #'@description Computes the depth of a point or vectors of points with respect to a multivariate data set.
 #'
@@ -53,7 +54,6 @@
 #'  depth function
 #'  
 #'
-
 depth = function(u, X, method="Projection", name = "X", threads = -1,...)
 {  
   if(is.data.frame(u)) u = as.matrix(u)
@@ -97,6 +97,7 @@ depth = function(u, X, method="Projection", name = "X", threads = -1,...)
 ############################################
 
 #'@title Euclidean Depth
+#'@export
 #'
 #'@description Computes the euclidean depth of a point or vectors of points with respect to a multivariate data set.
 #'
@@ -141,7 +142,7 @@ depthEuclid = function(u, X, name = "X", ...)
 ############################################
 
 #'@title Mahalanobis Depth
-#'
+#'@export
 #'@description Computes the mahalanobis depth of a point or vectors of points with respect to a multivariate data set.
 #'
 #'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
@@ -182,7 +183,7 @@ depthMah = function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1, ...
 ############################################
 
 #'@title Projection Depth
-#'
+#'@export
 #'@description Computes the Projection depth of a point or vectors of points with respect to a multivariate data set.
 #'
 #'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
@@ -226,7 +227,7 @@ depthProjection = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1
 ############################################
 
 #'@title Tukey Depth
-#'
+#'@export
 #'@description Computes the Tukey depth of a point or vectors of points with respect to a multivariate data set.
 #'
 #'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
@@ -258,8 +259,6 @@ depthProjection = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1
 #'  multivariate
 #'  nonparametric
 #'  depth function
-
-
 depthTukey = function(u, X, ndir = 1000, seed = 1, name = "X",...)
 {
   tukey1d = function(u,X)
@@ -299,7 +298,7 @@ depthTukey = function(u, X, ndir = 1000, seed = 1, name = "X",...)
 }
 
 #'@title LP Depth
-#'
+#'@export
 #'@description Computes the LP depth of a point or vectors of points with respect to a multivariate data set.
 #'
 #'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
@@ -327,7 +326,6 @@ depthTukey = function(u, X, ndir = 1000, seed = 1, name = "X",...)
 #'  multivariate
 #'  nonparametric
 #'  depth function
-
 depthLP = function(u, X, pdim = 1, a = 1, b = 1, name = "X", threads = -1, func = NULL,...)
 {
   if(is.null(func)) depth = depthLPCPP(u, X, pdim, a, b, threads = threads)

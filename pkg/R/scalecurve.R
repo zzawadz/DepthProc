@@ -1,5 +1,5 @@
 #'@title Scale curve
-#'
+#'@export
 #'@description Draws a scale curve: measure of dispersion.
 #'
 #'  @param x Multivariate data as a matrix.
@@ -62,7 +62,7 @@
 
 
 scaleCurve<-function(x,y=NULL,alpha = seq(0,1,0.01),method = "Projection",plot = TRUE,
-	name = "X", name_y = "Y",...)
+	name = "X", name_y = "Y", title = "Scale Curve",...)
 {
   if(is.data.frame(x)) x = as.matrix(x)
   if(!is.matrix(x)) stop("x must be a matrix or data frame!")
@@ -95,7 +95,7 @@ scaleCurve<-function(x,y=NULL,alpha = seq(0,1,0.01),method = "Projection",plot =
 	}
 	
 
-	scale_curve = new("ScaleCurve",rev(vol), alpha = alpha, depth = depth_est)
+	scale_curve = new("ScaleCurve",rev(vol), alpha = alpha, depth = depth_est, title = title)
   
   if(!is.null(y))
   {

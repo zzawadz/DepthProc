@@ -15,7 +15,7 @@ setMethod("getPlot", "DDPlot", function(object){
   p = p + geom_point(data = a_est, aes(eval(as.name("x")),eval(as.name("y"))), color = "blue", 
                      shape = 1, size = 3)
   p = p + theme_bw() + .depTheme()
-  p = p + ggtitle("Depth vs. depth plot")
+  p = p + ggtitle(object@title)
   p = p + xlab("X depth")
   p = p + ylab("Y depth")
   p = p + ylim(c(0, max(a_est$y)))

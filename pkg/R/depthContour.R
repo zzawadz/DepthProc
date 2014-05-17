@@ -1,5 +1,5 @@
 #' @title Approximate depth contours
-#'
+#' @export
 #'  @description Draws an approximate contours of depth for bivariate data.
 #'  
 #' @param x Bivariate data

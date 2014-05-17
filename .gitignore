@@ -8,6 +8,7 @@ README
 *.dll
 cache
 *.vcxproj*
+depthproc.Rcheck
 
 *.pdf
 *.tex

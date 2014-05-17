@@ -1,5 +1,5 @@
 #'@title Simple deepest regression method.
-#'
+#'@export
 #'  @description This function calculate estimator of simple regression model y=ax+b
 #'
 #'  @param x Independent variable.
@@ -19,8 +19,6 @@
 #' plot(pension)
 #' abline(lm(Reserves~Income,data = pension), lty = 3, lwd = 2) #lm
 #' abline(deepReg2d(pension[,1],pension[,2]), lwd = 2) #deepreg2d
-
-
 deepReg2d<-function(x,y)
 {
   y <- y[order(x)]
