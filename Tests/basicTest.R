@@ -30,3 +30,22 @@ depthContour(DATA,method = "Local",points=TRUE, depth1="Projection",depth2="Proj
 x = mvrnorm(n = 100, mu = c(0,0), Sigma = 3*diag(2))
 y = rmvt(n = 100, sigma = diag(2), df = 2)
 scaleCurve(x, y, method = "Projection", plot = TRUE, title = "AAA")
+
+
+
+
+
+
+
+
+
+
+
+data(pension)
+plot(pension)
+abline(lm(Reserves~Income,data = pension), lty = 3, lwd = 2) #lm
+abline(trimProjReg2d(pension[,1],pension[,2]), lwd = 2) #trimprojreg2d
+legend("bottomright", c("OLS","TrimLS"), lty = 1:2)
+
+
+

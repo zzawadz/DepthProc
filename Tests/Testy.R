@@ -19,4 +19,4 @@ for(i in 1:length(x))
 return(res)
 }
 
-findPattern("require")
+findPattern("sn")

@@ -3,7 +3,7 @@ Version: 1.0
 Title: depthproc
 Author: Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt
     Zawadzki from Cracow University of Economics.
-Maintainer: Core Tean <z@gmail.com>
+Maintainer: Zygmunt Zawadzlo <zawadzkizygmunt@gmail.com>
 Description: Package for depths
 License: GPL-2
 Depends:
