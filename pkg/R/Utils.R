@@ -12,8 +12,8 @@
 {
   tmp = list(...)
   #print(tmp)
-  params = c("method", "ndir", "seed", "name", "a", "b", "pdim", "depth1", "depth2", "beta","threads", "mean", "cov")
-  def_param = list(method="Projection", ndir=1000, seed = 1, name = "X", a = 1, b = 1, pdim = 1, depth1 = "Projection", depth2 = "Projection", beta = 0.5, threads = -1, mean = "NULL", cov = "NULL")
+  params = c("method", "ndir", "seed", "name", "la", "lb", "pdim", "depth1", "depth2", "beta","threads", "mean", "cov")
+  def_param = list(method="Projection", ndir=1000, seed = 1, name = "X", la = 1, lb = 1, pdim = 1, depth1 = "Projection", depth2 = "Projection", beta = 0.5, threads = -1, mean = "NULL", cov = "NULL")
   fastIfElse = function(name, tmp, def){
     x = ifelse(is.null(tmp[[name]]),def[[name]],tmp[[name]])
     if(name == "mean") return(tmp[[name]])
@@ -30,7 +30,7 @@
 .removeDepthParams = function(...)
 {
   tmp = list(...)
-  params = c("method", "ndir", "seed", "name", "a", "b", "pdim", "depth1", "depth2","beta","threads","mean", "mean", "cov")
+  params = c("method", "ndir", "seed", "name", "la", "lb", "pdim", "depth1", "depth2","beta","threads","mean", "mean", "cov")
   names = names(tmp)
   tmp = sapply(names, function(x) {
     ifelse(x %in% params, NA, tmp[x])

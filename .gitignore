@@ -1,6 +1,8 @@
 README
 *.zip
 
+LSD
+
 .RData
 .Rhistory
 *.o

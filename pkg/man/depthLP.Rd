@@ -3,7 +3,7 @@
 \alias{depthLP}
 \title{LP Depth}
 \usage{
-depthLP(u, X, pdim = 1, a = 1, b = 1, name = "X", threads = -1,
+depthLP(u, X, pdim = 1, la = 1, lb = 1, name = "X", threads = -1,
   func = NULL, ...)
 }
 \arguments{
