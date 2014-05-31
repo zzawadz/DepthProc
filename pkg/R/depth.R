@@ -328,9 +328,9 @@ depthTukey = function(u, X, ndir = 1000, seed = 1, name = "X",...)
 #'  multivariate
 #'  nonparametric
 #'  depth function
-depthLP = function(u, X, pdim = 1, a = 1, b = 1, name = "X", threads = -1, func = NULL,...)
+depthLP = function(u, X, pdim = 1, la = 1, lb = 1, name = "X", threads = -1, func = NULL,...)
 {
-  if(is.null(func)) depth = depthLPCPP(u, X, pdim, a, b, threads = threads)
+  if(is.null(func)) depth = depthLPCPP(u, X, pdim, la, lb, threads = threads)
   #norm = function(xi, z, p = 1) sum(abs(z-xi)^p)^(1/p)
   
   new("DepthLP", depth, u = u, X = X, method = "LP", name = name)
