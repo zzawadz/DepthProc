@@ -3,15 +3,11 @@
 namespace LSD
 {
 
-arma::vec sampleDepthContForMu(size_t d, double mu, const arma::vec& y, size_t m, bool from_rcpp) 
+arma::vec sampleDepthContForMu(size_t d, double mu, const arma::vec& y, size_t m) 
 {
 /* Returns vector with lbound, ubound, tbound, case, M */
   size_t n = y.n_elem;
-  if(from_rcpp) 
-  {
-    m = 0;
-    for(size_t i = 0; i < n; i++) if(y[i]<mu) m++;
-  }
+  
   
   bool case_ = false;  
   bool tbound = false;  
@@ -72,7 +68,7 @@ arma::vec sampleMaxDepthForMu(double mu,const arma::vec& y, size_t d_min, size_t
   
   size_t d = y[m]>mu ? std::min(m,n-m) : std::min(m,n-m-1);
        
-  arma::vec cont = sampleDepthContForMu(d, mu, y, m, false); 
+  arma::vec cont = sampleDepthContForMu(d, mu, y, m); 
   double difbound = cont[1]-cont[0]; //difbound<-cont["ubound"]-cont["lbound"];
 
 
@@ -91,7 +87,7 @@ arma::vec sampleMaxDepthForMu(double mu,const arma::vec& y, size_t d_min, size_t
       iter++;
       (difbound < -eps ? d_up : d_low) = d; 
       d = rint(static_cast<double>(d_up+d_low)/2);
-      cont = sampleDepthContForMu(d, mu, y, m, false);
+      cont = sampleDepthContForMu(d, mu, y, m);
       difbound = cont[1]-cont[0];
     }
   }
@@ -99,7 +95,7 @@ arma::vec sampleMaxDepthForMu(double mu,const arma::vec& y, size_t d_min, size_t
   if(difbound< -eps)
   {        
     d = d-1;
-    cont = sampleDepthContForMu(d, mu, y, m, false);
+    cont = sampleDepthContForMu(d, mu, y, m);
     difbound = cont[1]-cont[0];
   }
   

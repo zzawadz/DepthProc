@@ -10,7 +10,7 @@
 
 namespace LSD
 {
-  arma::vec sampleDepthContForMu(size_t d, double mu, const arma::vec& y, size_t m, bool from_rcpp);
+  arma::vec sampleDepthContForMu(size_t d, double mu, const arma::vec& y, size_t m);
   arma::vec sampleMaxDepthForMu(double mu,const arma::vec& y, size_t d_min, size_t max_iter, double eps);
 }
 

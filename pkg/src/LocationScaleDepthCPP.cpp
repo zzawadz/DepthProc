@@ -11,7 +11,11 @@ SEXP sampleDepthContForMuCPP(double d, double mu, SEXP rY)
     arma::vec y(cY); 
     y = arma::sort(y);
     
-    arma::vec result = LSD::sampleDepthContForMu(d, mu, y, 0, true);
+    size_t m = 0;
+    size_t n = y.n_elem;
+    for(size_t i = 0; i < n; i++) if(y[i]<mu) m++;
+  
+    arma::vec result = LSD::sampleDepthContForMu(d, mu, y, m);
     return wrap(result);
 }
 
