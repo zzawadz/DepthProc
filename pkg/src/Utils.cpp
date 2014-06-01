@@ -14,6 +14,16 @@ namespace Utils
 		X.each_col() /= norm;
 		return X;
 	}
+  
+////////////// seq for Armadillo - works as seq in R
+arma::vec seq(const double& x, const double& y, const size_t& length)
+{
+  arma::vec result(length);
+  double step = (y-x)/static_cast<double>(length-1);
+  result(0) = x;
+  for(size_t i = 1; i < length; i++) result(i) = result(i-1) + step;
+  return(result);
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
