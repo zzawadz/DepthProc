@@ -103,4 +103,22 @@ setMethod("getLSDContour", signature = "LSDepthContour",function(x, cont, ...)
   sampleDepthContours(x@sample, depth = cont)[[1]] 
 })
 
+#' @title Generic function for addLSDContour
+#' @export
+setGeneric("addLSDContour", function(x, cont = NULL,...) standardGeneric("addLSDContour"))
+#' @title Add location-scale depth contour to a plot 
+#' @export
+setMethod("addLSDContour", signature = c(x = "LSDepthContour"), function(x, cont = NULL, ...) 
+{
+  contour = getLSDContour(x, cont)
+  
+  if(!contour$cont.exist) cat(" No contour for the depth ", cont, "\n")
 
+  mubound = contour$mubound
+  lbound  = contour$lbound
+  ubound  = contour$ubound
+  d   = contour$d
+  lmu = length(mubound)
+    
+  polygon(c(mubound, rev(mubound)), c(ubound, rev(lbound)), ...)
+})
