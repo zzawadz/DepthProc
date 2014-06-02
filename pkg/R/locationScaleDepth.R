@@ -20,6 +20,11 @@ setClass("LSDepth", slots = c(max_depth = "numeric",
                               sigma = "numeric"))
 
 
+#' @title Location-Scale depth contour class
+#' @export
+setClass("LSDepthContour", slots = c(cont_depth = "numeric", sample = "numeric"), contains = "list")
+
+
 #' @title Calculates the maximum sample location-scale depth
 #' @export
 maxSampleLocScaleDepth = function(x,iter=100,eps=0.0001,p_length=10)
@@ -35,8 +40,9 @@ maxSampleLocScaleDepth = function(x,iter=100,eps=0.0001,p_length=10)
 
 #' @title Calculate sample location scale depth contours
 #' @export
-sampleDepthContours = function(x, depth = round(c(0.1,0.2,0.3,0.4)*length(x)), lengthmu=1000)
+sampleDepthContours = function(x, depth = c(0.1,0.2,0.3,0.4), lengthmu=1000)
 {
+  depth = round(depth*length(x))
   x = sort(x)
   n = length(x)  
   
@@ -68,6 +74,7 @@ sampleDepthContours = function(x, depth = round(c(0.1,0.2,0.3,0.4)*length(x)), l
     
   }
   cont.all
+  new("LSDepthContour", cont.all, cont_depth = depth/length(x), sample = x)
 }
 
 
@@ -82,4 +89,18 @@ getMuLS = function(x,n,d,lengthmu)
   }
   mu
 }
+
+
+#' @title Generic class for getLSDContour
+#' @export
+setGeneric("getLSDContour", function(x, cont,...) standardGeneric("getLSDContour"))
+#' @title Get location scale contour from LSDepthContour object
+#' @export
+setMethod("getLSDContour", signature = "LSDepthContour",function(x, cont, ...)
+{
+  i = which(x@cont_depth == cont)
+  if(length(i) > 0) return(x@.Data[[i]])
+  sampleDepthContours(x@sample, depth = cont)[[1]] 
+})
+
 

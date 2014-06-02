@@ -3,8 +3,7 @@
 \alias{sampleDepthContours}
 \title{Calculate sample location scale depth contours}
 \usage{
-sampleDepthContours(x, depth = round(c(0.1, 0.2, 0.3, 0.4) * length(x)),
-  lengthmu = 1000)
+sampleDepthContours(x, depth = c(0.1, 0.2, 0.3, 0.4), lengthmu = 1000)
 }
 \description{
 Calculate sample location scale depth contours
