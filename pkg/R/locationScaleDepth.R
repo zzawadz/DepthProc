@@ -122,3 +122,34 @@ setMethod("addLSDContour", signature = c(x = "LSDepthContour"), function(x, cont
     
   polygon(c(mubound, rev(mubound)), c(ubound, rev(lbound)), ...)
 })
+
+#' @title Plot Location-Scale depth contours.
+#' @export
+setMethod("plot", signature = c(x = "LSDepthContour"), function(x, cont = NULL, ratio=1,mu_min=NULL,mu_max=NULL, col = NULL, border = NULL,...)
+{
+  
+  if(is.null(cont))   cont   = x@cont_depth
+  ## numbers of conturs
+  k = length(cont)
+  
+  tmp_cont = getLSDContour(x,cont[1])
+  
+  mubound = tmp_cont$mubound
+  lbound  = tmp_cont$lbound
+  ubound  = tmp_cont$ubound
+  
+  if(is.null(mu_min)) mu_min = mubound[1]
+  if(is.null(mu_max)) mu_max = tail(mubound,1)
+  
+  if(is.null(col)) col = 0
+  if(is.null(border)) border = 1
+  if(length(col) != k) col = rep(col,k)
+  if(length(border) != k) border = rep(border,k)
+  
+  plot(mubound,ubound,type="n", ylim=c(0,(1/ratio)*(mu_max-mu_min)),
+         xlim=c(mu_min,mu_max), ylab=expression(sigma),xlab=expression(mu))
+  sapply(1:length(cont), function(i,...) addLSDContour(x,cont[i], col = col[i], border = border[i],...), ...)
+
+  
+  return(invisible())
+})
