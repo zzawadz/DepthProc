@@ -6,7 +6,22 @@
 \usage{
 \S4method{getLSDContour}{LSDepthContour}(x, cont, ...)
 }
+\arguments{
+\item{x}{object of class LSDepthContour}
+
+\item{cont}{single numeric - depth of contour to return}
+}
 \description{
 Get location scale contour from LSDepthContour object
+}
+\examples{
+dcont = sampleDepthContours(rf(200,4,7), depth = c(0.1,0.2))
+
+#get contour that is present in dcont object
+getLSDContour(dcont,0.1)
+
+# get contour that is not present in dcont
+# it will be automatically calculated
+getLSDContour(dcont,0.3)
 }
 

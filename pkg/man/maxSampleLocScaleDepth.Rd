@@ -5,7 +5,22 @@
 \usage{
 maxSampleLocScaleDepth(x, iter = 100, eps = 1e-04, p_length = 10)
 }
+\arguments{
+\item{x}{one dimensional vector with sample}
+
+\item{iter}{maximum number of iterations in algorith for calculation Location-Scale Depth}
+
+\item{eps}{tolerance level}
+
+\item{p_length}{is the maximum length of the precision step at the end}
+}
 \description{
 Calculates the maximum sample location-scale depth
+}
+\examples{
+x = rnorm(100)
+maxSampleLocScaleDepth(x)
+y = rf(100, 4,10)
+maxSampleLocScaleDepth(y)
 }
 

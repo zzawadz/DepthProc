@@ -5,7 +5,21 @@
 \usage{
 addLSDContour(x, cont = NULL, ...)
 }
+\arguments{
+\item{x}{object of class LSDepthContour}
+
+\item{cont}{depth of contour to plot}
+
+\item{...}{other arguments passed to polygon function}
+}
 \description{
 Generic function for addLSDContour
+}
+\examples{
+smp = rf(100,5,10)
+x = sampleDepthContours(smp)
+plot(x)
+addLSDContour(x,0.1, col = "grey50")
+addLSDContour(x,0.3, col = "grey10", border = "red", lwd = 4)
 }
 

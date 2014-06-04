@@ -26,7 +26,19 @@ setClass("LSDepthContour", slots = c(cont_depth = "numeric", sample = "numeric")
 
 
 #' @title Calculates the maximum sample location-scale depth
+#' 
+#' @param x one dimensional vector with sample
+#' @param iter maximum number of iterations in algorith for calculation Location-Scale Depth
+#' @param eps tolerance level
+#' @param p_length is the maximum length of the precision step at the end
+#' 
 #' @export
+#' 
+#' @examples
+#' x = rnorm(100)
+#' maxSampleLocScaleDepth(x)
+#' y = rf(100, 4,10)
+#' maxSampleLocScaleDepth(y)
 maxSampleLocScaleDepth = function(x,iter=100,eps=0.0001,p_length=10)
 {
   res = sampleMaxLocScaleDepthCPP(ry=as.numeric(x),iter=iter, eps=eps, p_length)
@@ -39,7 +51,23 @@ maxSampleLocScaleDepth = function(x,iter=100,eps=0.0001,p_length=10)
 
 
 #' @title Calculate sample location scale depth contours
+#' 
+#' @param x one dimensional vector with sample
+#' @param depth depth level for contours
+#' @param lengthmu number of points to evalute depth
+#' 
 #' @export
+#' 
+#' @examples
+#' ## Example for F-distribution
+#' dcont = sampleDepthContours(rf(200,4,7))
+#' plot(dcont)
+#' 
+#' ## Example for normal distribution
+#' ## - more contours calculated 
+#' dcont_norm = sampleDepthContours(rnorm(100),seq(0.05,0.4,0.05))
+#' plot(dcont_norm)
+
 sampleDepthContours = function(x, depth = c(0.1,0.2,0.3,0.4), lengthmu=1000)
 {
   depth = round(depth*length(x))
@@ -96,6 +124,19 @@ getMuLS = function(x,n,d,lengthmu)
 setGeneric("getLSDContour", function(x, cont,...) standardGeneric("getLSDContour"))
 #' @title Get location scale contour from LSDepthContour object
 #' @export
+#' 
+#' @param x object of class LSDepthContour
+#' @param cont single numeric - depth of contour to return 
+#'  
+#' @examples
+#' dcont = sampleDepthContours(rf(200,4,7), depth = c(0.1,0.2))
+#' 
+#' #get contour that is present in dcont object
+#' getLSDContour(dcont,0.1)
+#' 
+#' # get contour that is not present in dcont
+#' # it will be automatically calculated
+#' getLSDContour(dcont,0.3)
 setMethod("getLSDContour", signature = "LSDepthContour",function(x, cont, ...)
 {
   i = which(x@cont_depth == cont)
@@ -105,8 +146,19 @@ setMethod("getLSDContour", signature = "LSDepthContour",function(x, cont, ...)
 
 #' @title Generic function for addLSDContour
 #' @export
+#' 
+#' @param x object of class LSDepthContour
+#' @param cont depth of contour to plot
+#' @param ... other arguments passed to polygon function
+#' 
+#' @examples
+#' smp = rf(100,5,10)
+#' x = sampleDepthContours(smp)
+#' plot(x)
+#' addLSDContour(x,0.1, col = "grey50")
+#' addLSDContour(x,0.3, col = "grey10", border = "red", lwd = 4)
 setGeneric("addLSDContour", function(x, cont = NULL,...) standardGeneric("addLSDContour"))
-#' @title Add location-scale depth contour to a plot 
+### @title Add location-scale depth contour to a plot 
 #' @export
 setMethod("addLSDContour", signature = c(x = "LSDepthContour"), function(x, cont = NULL, ...) 
 {
@@ -125,12 +177,29 @@ setMethod("addLSDContour", signature = c(x = "LSDepthContour"), function(x, cont
 
 #' @title Plot Location-Scale depth contours.
 #' @export
+#' 
+#' @param x object of class LSDepthContour
+#' @param cont plotted contours. Default NULL means that all contours stored in x will be plotted
+#' @param ratio ratio
+#' @param mu_min mu_min
+#' @param mu_max mu_max
+#' @param col vectors with area colors passed to polygon function
+#' @param borders vector with colors for borders
+#' @param ... other parameters passed to polygon
+#' 
+#' @examples
+#' 
+#' smp = rf(100,5,10)
+#' x = sampleDepthContours(smp)
+#' plot(x, col = paste0("grey", col = rev(seq(10,40,10))))
+#' 
 setMethod("plot", signature = c(x = "LSDepthContour"), function(x, cont = NULL, ratio=1,mu_min=NULL,mu_max=NULL, col = NULL, border = NULL,...)
 {
   
   if(is.null(cont))   cont   = x@cont_depth
   ## numbers of conturs
   k = length(cont)
+  cont = sort(cont)
   
   tmp_cont = getLSDContour(x,cont[1])
   
