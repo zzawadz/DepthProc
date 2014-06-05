@@ -83,7 +83,7 @@ setClass("DDPlot", representation(X = c("Depth"), Y = "Depth", title = "characte
 #' @aliases DepthCurve DepthCurveList
 #' @rdname DepthCurve-class 
 #' @export  
-setClass("DepthCurve", representation(depth = "Depth", title = "character","VIRTUAL"))
+setClass("DepthCurve", representation(depth = "Depth", title = "character", alpha = "numeric","VIRTUAL"))
 setClass("DepthCurveList", representation("VIRTUAL"))
 
 
@@ -124,7 +124,7 @@ setClass("DepthCurveList", representation("VIRTUAL"))
 #' @aliases ScaleCurve ScaleCurveList
 #' @rdname ScaleCurve-class 
 #' @export  
-setClass("ScaleCurve", representation(alpha = "numeric")                                          , contains=c("numeric","DepthCurve"))
+setClass("ScaleCurve", contains=c("numeric","DepthCurve"))
 setClass("ScaleCurveList", contains=c("DepthCurveList", "list"))
 
 
@@ -148,8 +148,7 @@ setClass("ScaleCurveList", contains=c("DepthCurveList", "list"))
 #' @aliases AsymmetryCurve AsymmetryCurveList
 #' @rdname AsymmetryCurve-class 
 #' @export 
-setClass("AsymmetryCurve", representation(alpha = "numeric")
-         , contains=c("numeric","DepthCurve"))
+setClass("AsymmetryCurve", contains=c("numeric","DepthCurve"))
 setClass("AsymmetryCurveList", contains=c("DepthCurveList", "list"))
 
 
