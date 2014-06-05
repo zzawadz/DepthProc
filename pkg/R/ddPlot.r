@@ -37,31 +37,31 @@
 #' require(mvtnorm)
 #' 
 #'  ## Location difference
-#' Standard <- mvrnorm(1000, c(0,0), diag(2))
-#' Shift <- mvrnorm(1000, c(0.5, 0), diag(2))
-#' ddPlot(x=Standard, y=Shift)
-#' ddPlot(x=Standard, y=Shift, location=TRUE)
+#' standard = mvrnorm(1000, c(0,0), diag(2))
+#' shift    =  mvrnorm(1000, c(0.5, 0), diag(2))
+#' ddPlot(x = standard, y = shift, title = "Difference in position")
+#' ddPlot(x = standard, y = shift, location = TRUE, title = "Location aligned")
 #' 
 #' ## Scale difference
-#' Standard <- mvrnorm(1000, c(0,0), diag(2))
-#' Scale <- mvrnorm(1000, c(0,0), 4*diag(2))
-#' ddPlot(x=Standard, y=Scale)
-#' ddPlot(x=Standard, y=Scale, scale=TRUE)
+#' standard <- mvrnorm(1000, c(0,0), diag(2))
+#' scale <- mvrnorm(1000, c(0,0), 4*diag(2))
+#' ddPlot(x=standard, y=scale)
+#' ddPlot(x=standard, y=scale, scale=TRUE)
 #' 
 #' 
 #' ## Skewness difference
 #' require(MASS)
 #' require(sn)
-#' Standard <- mvrnorm(1000, c(0,0), diag(2))
-#' Skew <- rmsn(1000, xi=c(0,0), Omega= diag(2), alpha=c(6,1))
-#' ddPlot(x=Standard, y=Skew)    
+#' standard <- mvrnorm(1000, c(0,0), diag(2))
+#' skew <- rmsn(1000, xi=c(0,0), Omega= diag(2), alpha=c(6,1))
+#' ddPlot(x=standard, y=skew)    
 #'   
 #' ## Kurtosis difference
 #' require(MASS)
 #' require(mnormt)
-#' Standard <- mvrnorm(1000, c(0,0), diag(2))
-#' Kurt <-rmt(1000, mean=c(0,0), S=diag(2), df=1)
-#' ddPlot(x=Standard, y=Kurt)
+#' standard <- mvrnorm(1000, c(0,0), diag(2))
+#' kurt <-rmt(1000, mean=c(0,0), S=diag(2), df=1)
+#' ddPlot(x=standard, y=kurt)
 
 ddPlot <- function (x, y, scale = FALSE, location = FALSE, plot = TRUE, name_x = "X", name_y = "Y", title = "Depth vs. depth plot", ...) 
 {
