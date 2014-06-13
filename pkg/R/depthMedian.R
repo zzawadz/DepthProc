@@ -1,8 +1,8 @@
-depthMedian = function(X, method="Projection",...)
+depthMedian = function(x,...)
 {
-  depths = depth(X, X, method = method,...)
-  med = X[depths == max(depths),]
-  if(ncol(X) != length(med)) med = colMeans(med)
+  depths = depth(x,x,...)
+  med = x[depths == max(depths),]
+  if(ncol(x) != length(med)) med = colMeans(med)
   med
 }
 

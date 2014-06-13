@@ -55,4 +55,7 @@ x = depthproc:::.testNorm()
 
 depth(x,x,method = "Tukey")
 
-depthContour(x,method = "Tukey")
+depthContour(x, method = "Tukey")
+depthproc:::depthMedian(x,method = "Tukey")
+
+depth(x,x,method = "Tukey")
