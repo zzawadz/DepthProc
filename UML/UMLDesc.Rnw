@@ -1,0 +1,65 @@
+\documentclass{article}
+
+%\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage{graphicx}
+
+\begin{document}
+
+<<cache=FALSE,echo=FALSE,message=FALSE,results='hide'>>=
+require(knitr)
+opts_chunk$set(cache = TRUE)
+require(depthproc)
+require(MASS)
+@
+
+
+\section{Depth visualisation}
+
+Depthproc provides two functions for visualisation of depths functions for bivariate data. Method and parameters for calculating depth values can be passed by with "...". Also parameters for modification plot appearance can be set with "...". This functionality is shown in examples.
+
+First function depthContour creates two dimensional contour plot. It uses R graphics library, so the plot can be easily modificated with stadard parameters.
+
+<<results='hide',out.width='.49\\linewidth', fig.show='hold'>>=
+x = rbind(mvrnorm(180, c(0,0), diag(2)),
+          mvrnorm(20, c(-4,4), diag(2)))
+# Parameter main passed to graphics library
+depthContour(x, points = TRUE, main = "Projection Depth")
+
+# Parameters passed to depth function and graphics library
+depthContour(x, points = TRUE, method = "Local", 
+             depth1 = "Mahalanobis", lwd = 2, main = "Local Depth")
+@
+
+Second function creates perspective plot. By default it uses lattice to render a chart, but also rgl can be used.
+<<>>=
+require(rgl)
+depthPersp(x, plot_title = "Mahalanobis depth", method = "Mahalanobis")
+depthPersp(x, plot_method = "rgl",plot_title = "Mahalanobis depth", method = "Mahalanobis")
+@
+
+
+\section{DDPlot}
+
+%\begin{figure}
+%\includegraphics[scale=0.5]{DDPlot}
+%\end{figure}
+
+<<results='hide',out.width='.49\\linewidth', fig.show='hold'>>=
+standard = mvrnorm(1000, c(0,0), diag(2))
+shift    =  mvrnorm(1000, c(0.5, 0), diag(2))
+ddPlot(x = standard, y = shift, 
+       title = "Difference in position")
+ddPlot(x = standard, y = shift, location = TRUE, 
+       title = "Location aligned")
+
+@
+
+\section{DepthCurve}
+
+\begin{figure}
+\includegraphics[scale=0.5]{DepthCurve}
+\end{figure}
+
+\end{document}
