@@ -58,4 +58,9 @@ depth(x,x,method = "Tukey")
 depthContour(x, method = "Tukey")
 depthproc:::depthMedian(x,method = "Tukey")
 
-depth(x,x,method = "Tukey")
+max(depth(x,x,method = "Tukey") - depth(x,x,method = "Tukey",exact = FALSE))
+
+system.time(depth(x,x,method = "Tukey"))
+system.time(depth(x,x,method = "Tukey",exact = FALSE))
+
+x = cbind(rnorm(20000),rnorm(20000))
