@@ -1,5 +1,4 @@
 #include "Depth.h"
-#include "Utils.h"
 #include <stdio.h>
 #include <iostream>
 
@@ -18,7 +17,7 @@ namespace Depth{
 		size_t n_y = Y.n_rows;
 		size_t n_x = X.n_rows;
 
-		const double pr = 1/p;
+		//const double pr = 1/p;
 
 		arma::vec depth(n_x);
 
@@ -175,11 +174,21 @@ namespace Depth{
 	}
   
   
-  /// Under development!!!
-
-  
-  
-  
+  // Tukey Depth - Exact algorithm
+  arma::vec TukeyDepth(const arma::mat& X, const arma::mat& Y,bool exact, int threads)
+  {
+    if(threads < 1) threads = omp_get_max_threads();
+    
+    size_t n = X.n_rows;
+    arma::vec depth(n);
+    size_t i;
+    #pragma omp parallel for shared(X,Y,depth,n) private(i) num_threads(threads)
+  	for(i = 0; i < n; i++)
+		{
+      depth[i] = Tukey::depthTukey2dExact(X.at(i,0),X.at(i,1),Y);
+		}
+    return depth;
+  }
   
   
  }

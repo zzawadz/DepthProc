@@ -2,6 +2,8 @@
 #define DEPTH_INCLUDES
 
 #include "RobCovLibConfig.h"
+#include "Utils.h"
+#include "TukeyDepth.h"
 #include "armadillo"
 #include <omp.h>
 
@@ -23,6 +25,8 @@ namespace Depth
 	// Projection Depth
 	arma::vec ProjectionDepth(const arma::mat& X, size_t nproj, double seed, int threads);
 	arma::vec ProjectionDepth(const arma::mat& X, const arma::mat& Y, size_t nproj, double seed, int threads);
+
+  arma::vec TukeyDepth(const arma::mat& X, const arma::mat& Y,bool exact, int threads);
 }
 
 #endif

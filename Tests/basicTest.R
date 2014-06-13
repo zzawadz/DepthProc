@@ -49,3 +49,10 @@ legend("bottomright", c("OLS","TrimLS"), lty = 1:2)
 
 
 
+
+require(MASS)
+x = depthproc:::.testNorm()
+
+depth(x,x,method = "Tukey")
+
+depthContour(x,method = "Tukey")

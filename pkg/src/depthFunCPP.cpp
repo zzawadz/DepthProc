@@ -82,6 +82,18 @@ SEXP depthLPCPP(SEXP ru, SEXP rX, double p, double a, double b, int threads)
   return wrap(depth);
 }
 
-
+// [[Rcpp::export]]
+SEXP depthTukeyCPP(SEXP ru, SEXP rX, int threads) 
+{
+  Rcpp::NumericMatrix cu(ru);
+  arma::mat u(cu.begin(), cu.nrow(), cu.ncol(), false);
+  
+  Rcpp::NumericMatrix cX(rX);
+  arma::mat X(cX.begin(), cX.nrow(), cX.ncol(), false);
+  
+  
+  arma::vec depth = Depth::TukeyDepth(u, X, true, threads);
+  return wrap(depth);
+}
 
 

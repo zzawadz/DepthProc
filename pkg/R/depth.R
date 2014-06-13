@@ -261,7 +261,7 @@ depthProjection = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1
 #'  multivariate
 #'  nonparametric
 #'  depth function
-depthTukey = function(u, X, ndir = 1000, seed = 1, name = "X",...)
+depthTukey = function(u, X, ndir = 1000, seed = 1, threads = -1, name = "X",...)
 {
   tukey1d = function(u,X)
   {
@@ -277,16 +277,16 @@ depthTukey = function(u, X, ndir = 1000, seed = 1, name = "X",...)
   if (ncol(X)==1)
   {
     depth= tukey1d(u,X)
-  }
-  
-  #### 
-  else  # czyli jesli wymiar d>2
+  } else if(ncol(X) == 2)
+  {
+    depth = depthproc:::depthTukeyCPP(u,X,threads)
+  } else  # czyli jesli wymiar d>2
   {
     proj = t(runifsphere(ndir, ncol(X)))
     xut = X%*%proj
     uut = u%*%proj
     
-    OD<-matrix(nrow=nrow(uut),ncol=ncol(uut))
+    OD = matrix(nrow=nrow(uut),ncol=ncol(uut))
     
     for (i in 1:ndir)
     {
@@ -294,7 +294,7 @@ depthTukey = function(u, X, ndir = 1000, seed = 1, name = "X",...)
       OD[,i]=tukey1d(uut[,i],xut[,i])  
     }
     
-    depth<-apply(OD,1,min)
+    depth = apply(OD,1,min)
   }
   new("DepthTukey", depth, u = u, X = X, method = "Tukey", name = name)
 }
