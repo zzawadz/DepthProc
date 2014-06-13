@@ -23,7 +23,7 @@ double getHDEP(size_t NT, size_t N, double NUMH)
 }
 
 
-arma::vec getALPHA(arma::vec X,arma::vec Y, double U, double V, const double P, const double P2,const double EPS)
+arma::vec getALPHA(const arma::vec& X, const arma::vec& Y,const double& U,const double& V, const double& P, const double& P2,const double& EPS)
 {
 
   //Rcpp::NumericVector cX(rX);
