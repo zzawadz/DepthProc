@@ -29,7 +29,7 @@ Plot Location-Scale depth contours.
 }
 \examples{
 smp = rf(100,5,10)
-x = sampleDepthContours(smp)
+x = lsdSampleDepthContours(smp)
 plot(x, col = paste0("grey", col = rev(seq(10,40,10))))
 }
 

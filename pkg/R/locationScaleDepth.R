@@ -4,14 +4,14 @@
 
 # Functions names from lsd were translated to harmonize name
 # conventions in depthproc (lowerCamelCase for functions)
-## - sample.max.depth -> maxSampleLocScaleDepth (CPP)
-## - sample.depth.contours -> sampleDepthContours (R)
+## - sample.max.depth -> lsdSampleDepth (CPP)
+## - sample.depth.contours -> lsdSampleDepthContours (R)
 
 ## TO DO: 
 ## Write interface to all C++ functions
 ## Wirte documentation
 ## Tests!!!
-## Refactor code for sampleDepthContours? Proper object function itp.
+## Refactor code for lsdSampleDepthContours? Proper object function itp.
 
 #' @title Location-Scale depth class
 #' @export
@@ -36,10 +36,10 @@ setClass("LSDepthContour", slots = c(cont_depth = "numeric", sample = "numeric")
 #' 
 #' @examples
 #' x = rnorm(100)
-#' maxSampleLocScaleDepth(x)
+#' lsdSampleMaxDepth(x)
 #' y = rf(100, 4,10)
-#' maxSampleLocScaleDepth(y)
-maxSampleLocScaleDepth = function(x,iter=100,eps=0.0001,p_length=10)
+#' lsdSampleMaxDepth(y)
+lsdSampleMaxDepth = function(x,iter=100,eps=0.0001,p_length=10)
 {
   res = sampleMaxLocScaleDepthCPP(ry=as.numeric(x),iter=iter, eps=eps, p_length)
   res = as.numeric(res)
@@ -60,15 +60,15 @@ maxSampleLocScaleDepth = function(x,iter=100,eps=0.0001,p_length=10)
 #' 
 #' @examples
 #' ## Example for F-distribution
-#' dcont = sampleDepthContours(rf(200,4,7))
+#' dcont = lsdSampleDepthContours(rf(200,4,7))
 #' plot(dcont)
 #' 
 #' ## Example for normal distribution
 #' ## - more contours calculated 
-#' dcont_norm = sampleDepthContours(rnorm(100),seq(0.05,0.4,0.05))
+#' dcont_norm = lsdSampleDepthContours(rnorm(100),seq(0.05,0.4,0.05))
 #' plot(dcont_norm)
 
-sampleDepthContours = function(x, depth = c(0.1,0.2,0.3,0.4), lengthmu=1000)
+lsdSampleDepthContours = function(x, depth = c(0.1,0.2,0.3,0.4), lengthmu=1000)
 {
   depth = round(depth*length(x))
   x = sort(x)
@@ -129,7 +129,7 @@ setGeneric("getLSDContour", function(x, cont,...) standardGeneric("getLSDContour
 #' @param cont single numeric - depth of contour to return 
 #'  
 #' @examples
-#' dcont = sampleDepthContours(rf(200,4,7), depth = c(0.1,0.2))
+#' dcont = lsdSampleDepthContours(rf(200,4,7), depth = c(0.1,0.2))
 #' 
 #' #get contour that is present in dcont object
 #' getLSDContour(dcont,0.1)
@@ -141,10 +141,10 @@ setMethod("getLSDContour", signature = "LSDepthContour",function(x, cont, ...)
 {
   i = which(x@cont_depth == cont)
   if(length(i) > 0) return(x@.Data[[i]])
-  sampleDepthContours(x@sample, depth = cont)[[1]] 
+  lsdSampleDepthContours(x@sample, depth = cont)[[1]] 
 })
 
-#' @title Generic function for addLSDContour
+#' @title Generic function for lsdAddContour
 #' @export
 #' 
 #' @param x object of class LSDepthContour
@@ -153,14 +153,14 @@ setMethod("getLSDContour", signature = "LSDepthContour",function(x, cont, ...)
 #' 
 #' @examples
 #' smp = rf(100,5,10)
-#' x = sampleDepthContours(smp)
+#' x = lsdSampleDepthContours(smp)
 #' plot(x)
-#' addLSDContour(x,0.1, col = "grey50")
-#' addLSDContour(x,0.3, col = "grey10", border = "red", lwd = 4)
-setGeneric("addLSDContour", function(x, cont = NULL,...) standardGeneric("addLSDContour"))
+#' lsdAddContour(x,0.1, col = "grey50")
+#' lsdAddContour(x,0.3, col = "grey10", border = "red", lwd = 4)
+setGeneric("lsdAddContour", function(x, cont = NULL,...) standardGeneric("lsdAddContour"))
 ### @title Add location-scale depth contour to a plot 
 #' @export
-setMethod("addLSDContour", signature = c(x = "LSDepthContour"), function(x, cont = NULL, ...) 
+setMethod("lsdAddContour", signature = c(x = "LSDepthContour"), function(x, cont = NULL, ...) 
 {
   contour = getLSDContour(x, cont)
   
@@ -190,7 +190,7 @@ setMethod("addLSDContour", signature = c(x = "LSDepthContour"), function(x, cont
 #' @examples
 #' 
 #' smp = rf(100,5,10)
-#' x = sampleDepthContours(smp)
+#' x = lsdSampleDepthContours(smp)
 #' plot(x, col = paste0("grey", col = rev(seq(10,40,10))))
 #' 
 setMethod("plot", signature = c(x = "LSDepthContour"), function(x, cont = NULL, ratio=1,mu_min=NULL,mu_max=NULL, col = NULL, border = NULL,...)
@@ -217,7 +217,7 @@ setMethod("plot", signature = c(x = "LSDepthContour"), function(x, cont = NULL, 
   
   plot(mubound,ubound,type="n", ylim=c(0,(1/ratio)*(mu_max-mu_min)),
          xlim=c(mu_min,mu_max), ylab=expression(sigma),xlab=expression(mu))
-  sapply(1:length(cont), function(i,...) addLSDContour(x,cont[i], col = col[i], border = border[i],...), ...)
+  sapply(1:length(cont), function(i,...) lsdAddContour(x,cont[i], col = col[i], border = border[i],...), ...)
 
   
   return(invisible())

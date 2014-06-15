@@ -15,7 +15,7 @@
 Get location scale contour from LSDepthContour object
 }
 \examples{
-dcont = sampleDepthContours(rf(200,4,7), depth = c(0.1,0.2))
+dcont = lsdSampleDepthContours(rf(200,4,7), depth = c(0.1,0.2))
 
 #get contour that is present in dcont object
 getLSDContour(dcont,0.1)
