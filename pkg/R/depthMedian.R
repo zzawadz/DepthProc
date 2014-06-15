@@ -1,3 +1,5 @@
+#' @title Depth median
+#' @export
 depthMedian = function(x,...)
 {
   depths = depth(x,x,...)

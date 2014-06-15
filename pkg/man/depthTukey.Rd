@@ -3,7 +3,8 @@
 \alias{depthTukey}
 \title{Tukey Depth}
 \usage{
-depthTukey(u, X, ndir = 1000, seed = 1, name = "X", ...)
+depthTukey(u, X, ndir = 1000, seed = 1, name = "X", threads = -1,
+  exact = TRUE, ...)
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}
