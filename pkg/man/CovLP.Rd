@@ -6,30 +6,41 @@
 CovLP(x, p = 1, a = 1, b = 1)
 }
 \arguments{
-\item{x}{x}
+\item{x}{The data as a matrix or data frame. If it is a matrix or data frame, then each row is viewed as one multivariate observation.}
 
-\item{p}{p}
+\item{p}{The parameter of the weighted \eqn{L^p} depth}
 
-\item{a}{a}
+\item{a}{parameter of a simple weight function w=a*x+b}
 
-\item{b}{b}
+\item{b}{parameter of a simple weight function w=a*x+b}
 }
 \value{
+loc: Robust Estimate of Location:
+
+cov:  Robust Estimate of Covariance:
+
 Returns depth weighted covariance matrix.
 }
 \description{
-Claculate covariance matrix
+Weighted by \eqn{L^p} depth (outlyingness) multivariate location and scatter estimators.
 }
 \details{
-Under construction.
+Using depth function one can define a depth-weighted location and scatter estimators. In case of location estimator we have                                                                                                                                                                                                                                                                                      \deqn{ L(F)={\int{{x}{{w}_{1}}(D({x},F))dF({x})}}/{{{w}_{1}}(D({x},F))dF({x})}, }                                                                                                                                                                                                                                                                                        Subsequently, a depth-weighted scatter estimator is defined as                                                                                                                                                                                                                                                                                      \deqn{ S(F)=\frac{\int{({x}-L(F)){{({x}-L(F))}^{T}}{{w}_{2}}(D({x},F))dF({x})}}{\int{{{w}_{2}}(D({x},F))dF({x})}}, }                                                                                                                                                                                                                                                                                        where  \eqn{ {{w}_{2}}(\cdot ) }  is a suitable weight function that can be different from  \eqn{ {{w}_{1}}(\cdot ) } .
+
+ The \pkg{DepthProc} package offers these estimators for weighted  \eqn{ {L}^{p} } depth. Note that \eqn{ L(\cdot ) }  and  \eqn{ S(\cdot ) }  include multivariate versions of trimmed means and covariance matrices. Their sample counterparts take the form                                                                                                                                                                                                                                                                                      \deqn{ {{T}_{WD}}({{{X}}^{n}})={\sum\limits_{i=1}^{n}{{{d}_{i}}{{X}_{i}}}}/{\sum\limits_{i=1}^{n}{{{d}_{i}}}} , }                                                                                                                                                                                                                                                                                         \deqn{ DIS({{{X}}^{n}})=\frac{\sum\limits_{i=1}^{n}{{{d}_{i}}\left( {{{X}}_{i}}-{{T}_{WD}}({{{X}}^{n}}) \right){{\left( {{{X}}_{i}}-{{T}_{WD}}({{{X}}^{n}})                                                     \right)}^{T}}}}{\sum\limits_{i=1}^{n}{{{d}_{i}}}}, }    where  \eqn{ {{d}_{i}} }  are sample depth weights,   \eqn{ {{w}_{1}}(x)={{w}_{2}}(x)=x } .
 }
 \examples{
 require(MASS)
  x = mvrnorm(n = 100, mu = c(0,0), Sigma = 3*diag(2))
  cov_x = CovLP(x,1,1,1)
+
+ # EXAMPLE 2
+ data(under5.mort,inf.mort,maesles.imm)
+ data1990 = na.omit(cbind(under5.mort[,1],inf.mort[,1],maesles.imm[,1]))
+ CovLP(data1990)
 }
 \author{
-Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+Daniel Kosiorowski and Zygmunt Zawadzki from Cracow University of Economics.
 }
 \seealso{
 \code{\link{depthContour}} and \code{\link{depthPersp}} for depth graphics.

@@ -6,24 +6,26 @@ setClass("CovDepthWeighted", representation(depth = "character"), contains="CovR
 
 #'@title CovLp
 #'
-#'@description Claculate covariance matrix
+#'@description Weighted by \eqn{L^p} depth (outlyingness) multivariate location and scatter estimators.
 #'
-#'  @param x x
-#'  @param p p
-#'  @param a a
-#'  @param b b
+#'  @param x The data as a matrix or data frame. If it is a matrix or data frame, then each row is viewed as one multivariate observation.
+#'  @param p The parameter of the weighted \eqn{L^p} depth
+#'  @param a parameter of a simple weight function w=a*x+b
+#'  @param b parameter of a simple weight function w=a*x+b
 #'
-#'@details 
 #'  
-#'  Under construction.
+#'  @return loc: Robust Estimate of Location:
+#'  @return cov:  Robust Estimate of Covariance:
+#'  @return Returns depth weighted covariance matrix.
 #'  
-#'@return
 #'
-#'  Returns depth weighted covariance matrix.
-#'
-#'    
+#'  @details
 #'  
-#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#'  Using depth function one can define a depth-weighted location and scatter estimators. In case of location estimator we have                                                                                                                                                                                                                                                                                      \deqn{ L(F)={\int{{x}{{w}_{1}}(D({x},F))dF({x})}}/{{{w}_{1}}(D({x},F))dF({x})}, }                                                                                                                                                                                                                                                                                        Subsequently, a depth-weighted scatter estimator is defined as                                                                                                                                                                                                                                                                                      \deqn{ S(F)=\frac{\int{({x}-L(F)){{({x}-L(F))}^{T}}{{w}_{2}}(D({x},F))dF({x})}}{\int{{{w}_{2}}(D({x},F))dF({x})}}, }                                                                                                                                                                                                                                                                                        where  \eqn{ {{w}_{2}}(\cdot ) }  is a suitable weight function that can be different from  \eqn{ {{w}_{1}}(\cdot ) } .                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+#'  
+#'  The \pkg{DepthProc} package offers these estimators for weighted  \eqn{ {L}^{p} } depth. Note that \eqn{ L(\cdot ) }  and  \eqn{ S(\cdot ) }  include multivariate versions of trimmed means and covariance matrices. Their sample counterparts take the form                                                                                                                                                                                                                                                                                      \deqn{ {{T}_{WD}}({{{X}}^{n}})={\sum\limits_{i=1}^{n}{{{d}_{i}}{{X}_{i}}}}/{\sum\limits_{i=1}^{n}{{{d}_{i}}}} , }                                                                                                                                                                                                                                                                                         \deqn{ DIS({{{X}}^{n}})=\frac{\sum\limits_{i=1}^{n}{{{d}_{i}}\left( {{{X}}_{i}}-{{T}_{WD}}({{{X}}^{n}}) \right){{\left( {{{X}}_{i}}-{{T}_{WD}}({{{X}}^{n}})                                                     \right)}^{T}}}}{\sum\limits_{i=1}^{n}{{{d}_{i}}}}, }    where  \eqn{ {{d}_{i}} }  are sample depth weights,   \eqn{ {{w}_{1}}(x)={{w}_{2}}(x)=x } .
+#'  
+#'  @author Daniel Kosiorowski and Zygmunt Zawadzki from Cracow University of Economics.
 #'  
 #'  @export
 #'  @seealso \code{\link{depthContour}} and \code{\link{depthPersp}} for depth graphics.
@@ -32,6 +34,11 @@ setClass("CovDepthWeighted", representation(depth = "character"), contains="CovR
 #'  require(MASS)
 #'  x = mvrnorm(n = 100, mu = c(0,0), Sigma = 3*diag(2))
 #'  cov_x = CovLP(x,1,1,1)
+#'  
+#'  # EXAMPLE 2
+#'  data(under5.mort,inf.mort,maesles.imm)
+#'  data1990 = na.omit(cbind(under5.mort[,1],inf.mort[,1],maesles.imm[,1]))
+#'  CovLP(data1990)
 #'  
 #'  
 #'  @keywords
