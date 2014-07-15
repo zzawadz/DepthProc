@@ -15,6 +15,7 @@ require(depthproc)
 
 \section{Available depths functions}
 <<>>=
+require(MASS)
 x = depthproc:::.testNorm() # Dane testowe
 d = depth(x,x,method="Mahalanobis")
 d = depth(x,x,method="Euclidean")
@@ -62,7 +63,7 @@ w+xlab("Tekst")+ggtitle("Wykres")
 
 Comparsion with multivariate normal distribution:
 <<fig.width=6,fig.height=4>>=
-ddmvnorm(x)
+ddMvnorm(x)
 @
 
 \subsection{Scale curve:}

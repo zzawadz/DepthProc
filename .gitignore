@@ -1,7 +1,12 @@
 Rprof.out
 README
 *.zip
-
+.Rd2*
+plain_doc.R
+plain_doc.txt
+tmp.R
+tmp.txt
+*.csv
 LSD
 
 .RData
