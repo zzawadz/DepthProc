@@ -3,9 +3,8 @@
 #' @export
 #' @importFrom boot boot
 #'
-medianDepthConfInterval = function(X, method="Projection", R = 1000, ...)
+medianDepthConfInterval = function(x, method="Projection", R = 1000, ...)
 { 
-  boot
-  depthTMP = function(X, indices, ...) depthMedian(X=X[indices,],...)  
-  boot(X,depthTMP, R = R, method = method,...)
+  depthTMP = function(x, indices, ...) depthMedian(x=x[indices,],...)  
+  boot(x,depthTMP, R = R, method = method,...)
 }

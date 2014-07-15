@@ -3,7 +3,7 @@
 \alias{medianDepthConfInterval}
 \title{Bootstrap confidence interval for depth median}
 \usage{
-medianDepthConfInterval(X, method = "Projection", R = 1000, ...)
+medianDepthConfInterval(x, method = "Projection", R = 1000, ...)
 }
 \description{
 Bootstrap confidence interval for depth median
