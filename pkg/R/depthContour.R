@@ -16,25 +16,33 @@
 #' @param points Logical. If TRUE points from matrix x will be drawn.
 #' @param \dots Any additional parameters for function depth
 #'  
+#'  
+#'  @details
+#'  
+#'  The set of all points that have depth at least  \eqn{ \alpha  }  is called { \eqn{ \alpha - }  trimmed region}. The  \eqn{ \alpha - }  trimmed region w.r.t.  \eqn{ F }  is denoted by  \eqn{ {D}_{\alpha }(F) }  , i.e.,  
+#'  \deqn{ {D}_{\alpha }(F)=\left\{ z\in {{{R}}^{d}}:D(z,F)\ge \alpha  \right\}}.
+#'  
 #'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #'  
 #'  @seealso \code{\link{depthPersp}}
 #'  
 #'  @examples
+#' # EXAMPLE 1
 #' require(MASS)
 #' x = mvrnorm(1000,c(0,0),diag(2))
 #' depthContour(x)
 #' #with points
 #' depthContour(x, points = TRUE)
 #'  
+#'  #EXAMPLE 2
+#'  data(inf.mort,maesles.imm)
+#'  data1990=na.omit(cbind(inf.mort[,1],maesles.imm[,1]))
+#'  depthContour(data1990, n = 50, pmean = TRUE, mcol = "blue", pdmedian = TRUE, mecol = "brown", legend = TRUE, points = TRUE,xlab="infant mortality rate per 1000 live birth", ylab="against masles immunized percentage", main='L2 depth, UN Fourth Goal 2011 year',method = "LP")
 #'  
 #'  
 #'  @keywords
 #'  contour
 #'  depth
-
-
-
 depthContour<-function(x, xlim = extendrange(x[,1],f=0.1), ylim = extendrange(x[,2],f=0.1),n=50,pmean = TRUE,mcol = "blue", pdmedian = TRUE, mecol = "brown",legend = TRUE,points = FALSE, ...)
 { 
 			x_axis = seq(xlim[1],xlim[2],length.out = n)

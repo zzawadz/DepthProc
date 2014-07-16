@@ -15,14 +15,9 @@
 #'
 #' @details
 #'  
-#'  When \code{distribution} is "mvnorm" the sample dataset is compared with multivirate normal distribution with given parameters. \code{mean} and \code{varcov} must be specified.
-#'  
-#'  When \code{distribution} is "t" the sample dataset is compared with multivirate t-Student distribution with given parameters. \code{mean} and \code{S} must be specified. \code{df=Inf} by default.
-#'  
-#'  When \code{distribution} is "smvnorm" the sample dataset is compared with multivirate skew normal distribution with given parameters. \code{xi}, \code{Omega} and \code{alpha} must be specified.
-#'  
-#'  When \code{distribution} is "st" the sample dataset is compared with multivirate skew t-Student distribution with given parameters. \code{xi}, \code{Omega} and \code{alpha} must be specified. \code{df=Inf} by default.
-#'  
+#' For two probability distributions  \eqn{ F }  and  \eqn{ G } , both in  \eqn{ {{{R}}^{d}} } , we can define {depth vs. depth} plot being very useful generalization of the one dimensional quantile-quantile plot:    \deqn{ DD(F,G)=\left\{ \left( D({z},F),D({z},G) \right),{z}\in {{{R}}^{d}} \right\} }    
+#' Its sample counterpart calculated for two samples  \eqn{ {{{X}}^{n}}=\{{{X}_{1}},.,{{X}_{n}}\} }  from  \eqn{ F } , and  \eqn{ {{Y}^{m}}=\{{{Y}_{1}},...,{{Y}_{m}}\} }  from  \eqn{ G }  is defined as
+#' \deqn{ DD({{F}_{n}},{{G}_{m}})=\left\{ \left( D({z},{{F}_{n}}),D({z},{{G}_{m}}) \right),{z}\in \{{{{X}}^{n}}\cup {{{Y}}^{m}}\} \right\}}  
 #'
 #' @references
 #' Liu, R.Y., Parelius, J.M. and Singh, K. (1999), Multivariate analysis by data depth: Descriptive statistics, graphics and inference (with discussion), \emph{Ann. Statist.}, \bold{27}, 822--831.
@@ -36,33 +31,18 @@
 #' require(sn)
 #' require(mvtnorm)
 #' 
-#'  ## Location difference
+#' # EXAMPLE 1: Location difference
 #' standard = mvrnorm(1000, c(0,0), diag(2))
 #' shift    =  mvrnorm(1000, c(0.5, 0), diag(2))
 #' ddPlot(x = standard, y = shift, title = "Difference in position")
 #' ddPlot(x = standard, y = shift, location = TRUE, title = "Location aligned")
 #' 
-#' ## Scale difference
+#' ## EXAMPLE 2: Scale difference
 #' standard <- mvrnorm(1000, c(0,0), diag(2))
 #' scale <- mvrnorm(1000, c(0,0), 4*diag(2))
 #' ddPlot(x=standard, y=scale)
 #' ddPlot(x=standard, y=scale, scale=TRUE)
-#' 
-#' 
-#' ## Skewness difference
-#' require(MASS)
-#' require(sn)
-#' standard <- mvrnorm(1000, c(0,0), diag(2))
-#' skew <- rmsn(1000, xi=c(0,0), Omega= diag(2), alpha=c(6,1))
-#' ddPlot(x=standard, y=skew)    
 #'   
-#' ## Kurtosis difference
-#' require(MASS)
-#' require(mnormt)
-#' standard <- mvrnorm(1000, c(0,0), diag(2))
-#' kurt <-rmt(1000, mean=c(0,0), S=diag(2), df=1)
-#' ddPlot(x=standard, y=kurt)
-
 ddPlot <- function (x, y, scale = FALSE, location = FALSE, plot = TRUE, name_x = "X", name_y = "Y", title = "Depth vs. depth plot", ...) 
 {
 #   if (is.null(y)) {

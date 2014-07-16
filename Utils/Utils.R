@@ -17,7 +17,7 @@ convertDolarToEqn = function(path, lines)
    text = text[-2]
   }
   
-  remove_list = c("\\\\mathbb","\\\\textbf")
+  remove_list = c("\\\\mathbb","\\\\textbf", "\\\\mathbf")
   for(rem in remove_list) text = gsub(rem,"",text)
   cat(text)
   
@@ -29,3 +29,11 @@ convertDolarToEqn(path, 51:58)
 convertDolarToEqn(path, 110:114)
 #CovLP
 convertDolarToEqn(path, 154:165)
+#ddplot
+convertDolarToEqn(path, 239:244)
+#depth
+convertDolarToEqn(path, 287:312)
+
+convertDolarToEqn(path, 363:364)
+
+convertDolarToEqn(path, 432:440)
