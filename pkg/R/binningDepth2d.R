@@ -79,7 +79,7 @@ binningDepth2D = function(x, binmethod = "LocDepth", nbins = 8, k = 1, remove_bo
       if(!devel) dep_stat = sample.max.depth(as.numeric(x)) 
       else 
       {
-        dep_stat = maxSampleLocScaleDepth(x)
+        dep_stat = lsdSampleMaxDepth(x)
       }
       mean = dep_stat["mu"]
       sigma = k*dep_stat["sigma"]
