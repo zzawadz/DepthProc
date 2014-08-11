@@ -27,7 +27,7 @@ setMethod("initialize","DepthCurveList", function(.Object, ...)
   if(n>0)
   {
     .Object[[1]] = tmp[[1]]
-    if(n > 1) for(i in 2:length(tmp)) .Object = .Object + tmp[[i]]
+    if(n > 1) for(i in 2:length(tmp)) .Object = .Object %+% tmp[[i]]
   }
   return(.Object)
 })
@@ -37,7 +37,7 @@ setMethod("initialize","DepthCurveList", function(.Object, ...)
 
 #######################################################################
 
-setMethod("+", signature(e1 = "DepthCurveList", e2 = "DepthCurve"), function(e1, e2)
+setMethod("%+%", signature(e1 = "DepthCurveList", e2 = "DepthCurve"), function(e1, e2)
 {
   names = sapply(e1,function(x) x@depth@name)
   new_name = e2@depth@name
@@ -56,12 +56,12 @@ setMethod("+", signature(e1 = "DepthCurveList", e2 = "DepthCurve"), function(e1,
 })
 
 
-setMethod("+", signature(e1 = "DepthCurve", e2 = "DepthCurveList"), function(e1, e2)
+setMethod("%+%", signature(e1 = "DepthCurve", e2 = "DepthCurveList"), function(e1, e2)
 {
-  return(e2+e1)
+  return(e2 %+% e1)
 })
 
-setMethod("+", signature(e1 = "DepthCurve", e2 = "DepthCurve"), function(e1, e2)
+setMethod("%+%", signature(e1 = "DepthCurve", e2 = "DepthCurve"), function(e1, e2)
 {
   return(new(paste0(class(e1),"List"), e1, e2))
 })

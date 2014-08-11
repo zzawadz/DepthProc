@@ -105,7 +105,7 @@ scaleCurve<-function(x,y=NULL,alpha = seq(0,1,0.01),method = "Projection",plot =
   {
     sc_tmp = scaleCurve(x=y,y=NULL,alpha = alpha, method = method,plot = FALSE,
                          name = name_y, name_y = "Y",...)
-    scale_curve = scale_curve + sc_tmp
+    scale_curve = scale_curve %+% sc_tmp
   }
 
   if(plot) plot(scale_curve)

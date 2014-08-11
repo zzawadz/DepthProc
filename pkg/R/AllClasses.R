@@ -1,3 +1,6 @@
+setGeneric("%+%", function(e1,e2) standardGeneric("%+%"))
+
+
 #####################################
 ######### Depth definitions #########
 #####################################
@@ -59,7 +62,7 @@ setClass("DDPlot", representation(X = c("Depth"), Y = "Depth", title = "characte
 #'
 #' @section DepthCurve and DepthCurveList:
 #' 
-#' DepthCurve is a virtual class that contains methods (getPlot(...) and plot(...)) for rendering single curve such as ScaleCurve or AsymmetryCurve. Such object can be added by overloaded operator '+'. This 'addition' create DepthCurveList that can be used for rendering plot with multiple curves. Sample session (using ScaleCurve) is shown in Examples section.
+#' DepthCurve is a virtual class that contains methods (getPlot(...) and plot(...)) for rendering single curve such as ScaleCurve or AsymmetryCurve. Such object can be added by overloaded operator '%+%'. This 'addition' create DepthCurveList that can be used for rendering plot with multiple curves. Sample session (using ScaleCurve) is shown in Examples section.
 #' 
 #' @examples
 #' require(MASS)
@@ -70,13 +73,13 @@ setClass("DDPlot", representation(X = c("Depth"), Y = "Depth", title = "characte
 #' s2 = scaleCurve(y, method = "Projection", plot = FALSE, name = "Set2")
 #' 
 #' 
-#' sc_list = s1 + s2 # Add one curve to another
+#' sc_list = s1 %+% s2 # Add one curve to another
 #' 
 #' plot(sc_list) # Draw plot with two curves
 #' 
 #' z = mvrnorm(n = 100, mu = c(0,0), Sigma = 1*diag(2))
 #' s3 = scaleCurve(z, method = "Projection", plot = FALSE)
-#' plot(sc_list+s3) # Add third curve and draw a plot
+#' plot(sc_list%+%s3) # Add third curve and draw a plot
 #' 
 #'
 #' @name DepthCurve
@@ -111,13 +114,13 @@ setClass("DepthCurveList", representation("VIRTUAL"))
 #' s2 = scaleCurve(y, method = "Projection", plot = FALSE, name = "Set2")
 #' 
 #' 
-#' sc_list = s1 + s2 # Add one curve to another
+#' sc_list = s1 %+% s2 # Add one curve to another
 #' 
 #' plot(sc_list) # Draw plot with two curves
 #' 
 #' z = mvrnorm(n = 100, mu = c(0,0), Sigma = 1*diag(2))
 #' s3 = scaleCurve(z, method = "Projection", plot = FALSE)
-#' plot(sc_list+s3) # Add third curve and draw a plot
+#' plot(sc_list%+%s3) # Add third curve and draw a plot
 #' 
 #'
 #' @name ScaleCurve
