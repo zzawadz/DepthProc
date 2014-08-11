@@ -56,7 +56,7 @@ data1990=cbind(under5.mort[,1],inf.mort[,1],maesles.imm[,1])
 data2011=cbind(under5.mort[,22],inf.mort[,22],maesles.imm[,22])
 as1990=asymmetryCurve(data1990,name='scale curve 1990')
 as2011=asymmetryCurve(data2011,name='scale curve 2011')
-figure=getPlot(as1990+as2011)+ggtitle('Scale curves')
+figure=getPlot(as1990 \%+\% as2011)+ggtitle('Scale curves')
 figure
 }
 \author{
