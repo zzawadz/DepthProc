@@ -1,3 +1,6 @@
+#' Adds plots
+#' 
+#' @export
 setGeneric("%+%", function(e1,e2) standardGeneric("%+%"))
 
 
