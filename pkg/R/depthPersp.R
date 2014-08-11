@@ -25,7 +25,7 @@
 #'  x = mvrnorm(100,c(0,0),diag(2))
 #'  depthPersp(x, method = "Euclidean")
 #' 
-#' EXAMPLE 2
+#' # EXAMPLE 2
 #' data(inf.mort,maesles.imm)
 #' data1990=na.omit(cbind(inf.mort[,1],maesles.imm[,1]))
 #' require(rgl)

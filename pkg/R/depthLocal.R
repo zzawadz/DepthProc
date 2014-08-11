@@ -43,7 +43,7 @@
 #'  
 #'  @examples
 #'  
-#' EXAMPLE 1
+#' # EXAMPLE 1
 #' require(MASS)
 #' data = mvrnorm(100, c(0,5), diag(2)*5)
 #' #by default depth2 = depth1
@@ -51,7 +51,7 @@
 #' depthLocal(data, data, depth1 = "LP", depth2 = "Projection")
 #' ## Depthcontour
 #' depthContour(data, method = "Local", depth1 = "LP")
-#' #EXAMPLE 2
+#' # EXAMPLE 2
 #' data(inf.mort,maesles.imm)
 #' data1990=na.omit(cbind(inf.mort[,1],maesles.imm[,1]))
 #' depthContour(data1990, method = "Local", depth1 = "LP",beta=0.3)
