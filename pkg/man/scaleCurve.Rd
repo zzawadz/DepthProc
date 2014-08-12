@@ -30,13 +30,17 @@ Returns the volume of the convex hull containing subsequent central points of \c
 Draws a scale curve: measure of dispersion.
 }
 \details{
-The scale curve is a two-dimensional method to describe the dispersion of random vector around the median induced by considered depth function.
+For sample depth function  \eqn{ D({x},{{{Z}}^{n}}) } ,  \eqn{ {x}\in {{{R}}^{d}} } ,  \eqn{ d\ge 2 } ,  \eqn{ {Z}^{n}=\{{{{z}}_{1}},...,{{{z}}_{n}}\}\subset {{{R}}^{d}} } ,   \eqn{ {{D}_{\alpha }}({{{Z}}^{n}}) }  denoting  \eqn{ \alpha- }  central region, we can define {the scale curve}
 
- Function \code{scalecurve}, when determining the volumes of the convex hull containing subsequent points from alpha central region, uses function \code{convhulln} from \code{geometry} package.
+ \eqn{ SC(\alpha )=\left( \alpha ,vol({{D}_{\alpha }}({{{Z}}^{n}}) \right)\subset {{{R}}^{2}},   for  \alpha \in [0,1] }
 
- The minimal dimension of data in X or Y is 2.
+   The scale curve is a two-dimensional method of describing the dispersion of random vector around the depth induced median.
 
- \code{ggplot2} package is used to draw a plot.
+Function scalecurve for determining the volumes of the convex hull containing points from alpha central regions, uses function convhulln from geometry package.
+
+The minimal dimension of data in X or Y is 2.
+
+ggplot2  package is used to draw a plot.
 }
 \examples{
 require(mvtnorm)

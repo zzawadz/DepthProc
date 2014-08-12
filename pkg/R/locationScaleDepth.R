@@ -27,12 +27,24 @@ setClass("LSDepthContour", slots = c(cont_depth = "numeric", sample = "numeric")
 
 #' @title Calculates the maximum sample location-scale depth
 #' 
+#' @description Calculates the maximum Student depth estimator of location and scale for one dimensional data (an alternative for MED and MAD or for the mean and standard deviation).
+#' 
 #' @param x one dimensional vector with sample
 #' @param iter maximum number of iterations in algorith for calculation Location-Scale Depth
 #' @param eps tolerance level
 #' @param p_length is the maximum length of the precision step at the end
 #' 
+#' @details
+#' 
+#' Calculates Student median using lsdepth algorithm written by Ch. Muller.
+#' 
 #' @export
+#' 
+#' @references
+#' 
+#' References:
+#' Mizera, I., Muller, C. H., 2004. Location-scale depth (with discussion). Journal of the American Statistical Association 99, 949 - 966.
+#' 
 #' 
 #' @examples
 #' x = rnorm(100)
@@ -50,7 +62,7 @@ lsdSampleMaxDepth = function(x,iter=100,eps=0.0001,p_length=10)
 }
 
 
-#' @title Calculate sample location scale depth contours
+#' @title Calculate sample Mizera and Muller Student depth contours
 #' 
 #' @param x one dimensional vector with sample
 #' @param depth depth level for contours
@@ -58,12 +70,19 @@ lsdSampleMaxDepth = function(x,iter=100,eps=0.0001,p_length=10)
 #' 
 #' @export
 #' 
+#' @description
+#' Calculate sample Student depth contours using Lsdepth - algorithm written by Ch. Muller.
+#' 
+#' @references
+#' 
+#' Mizera, I., Muller, C. H., 2004. Location-scale depth (with discussion).  Journal of the American Statistical Association 99, 949-966.
+#' 
 #' @examples
-#' ## Example for F-distribution
+#' ## EXAMPLE 1 for F-distribution
 #' dcont = lsdSampleDepthContours(rf(200,4,7))
 #' plot(dcont)
 #' 
-#' ## Example for normal distribution
+#' ## EXAMPLE 2 for normal distribution
 #' ## - more contours calculated 
 #' dcont_norm = lsdSampleDepthContours(rnorm(100),seq(0.05,0.4,0.05))
 #' plot(dcont_norm)

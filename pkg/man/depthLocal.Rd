@@ -28,7 +28,7 @@ A successful concept of {local depth } was proposed by Paidaveine and Van Bever 
  Formally, let  \eqn{ D(\cdot,P) }  be a depth function. Then the {local depth }with the locality parameter  \eqn{ \beta  }  and w.r.t. a point  \eqn{ x }  is defined as  \deqn{ L{{D}^{\beta }}(z,P):z\to D(z,P_{x}^{\beta }), }  where  \eqn{ P_{x}^{\beta }(\cdot )=P\left( \cdot |R_{x}^{\beta }(P) \right) }  is cond. distr. of  \eqn{ P }  conditioned on  \eqn{ R_{x}^{\beta }(P) } .
 }
 \examples{
-EXAMPLE 1
+# EXAMPLE 1
 require(MASS)
 data = mvrnorm(100, c(0,5), diag(2)*5)
 #by default depth2 = depth1
@@ -36,7 +36,7 @@ depthLocal(data, data, depth1 = "LP")
 depthLocal(data, data, depth1 = "LP", depth2 = "Projection")
 ## Depthcontour
 depthContour(data, method = "Local", depth1 = "LP")
-#EXAMPLE 2
+# EXAMPLE 2
 data(inf.mort,maesles.imm)
 data1990=na.omit(cbind(inf.mort[,1],maesles.imm[,1]))
 depthContour(data1990, method = "Local", depth1 = "LP",beta=0.3)

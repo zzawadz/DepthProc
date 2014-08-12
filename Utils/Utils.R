@@ -37,3 +37,9 @@ convertDolarToEqn(path, 287:312)
 convertDolarToEqn(path, 363:364)
 
 convertDolarToEqn(path, 432:440)
+
+convertDolarToEqn(path, 547:556)
+
+convertDolarToEqn(path, 597:608)
+
+convertDolarToEqn(path, 640:656)

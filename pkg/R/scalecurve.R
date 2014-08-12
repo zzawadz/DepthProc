@@ -17,13 +17,17 @@
 #'
 #'@details 
 #'  
-#'  The scale curve is a two-dimensional method to describe the dispersion of random vector around the median induced by considered depth function.
-#'
-#'  Function \code{scalecurve}, when determining the volumes of the convex hull containing subsequent points from alpha central region, uses function \code{convhulln} from \code{geometry} package.
-#'
-#'  The minimal dimension of data in X or Y is 2.
-#'
-#'  \code{ggplot2} package is used to draw a plot.
+#' For sample depth function  \eqn{ D({x},{{{Z}}^{n}}) } ,  \eqn{ {x}\in {{{R}}^{d}} } ,  \eqn{ d\ge 2 } ,  \eqn{ {Z}^{n}=\{{{{z}}_{1}},...,{{{z}}_{n}}\}\subset {{{R}}^{d}} } ,   \eqn{ {{D}_{\alpha }}({{{Z}}^{n}}) }  denoting  \eqn{ \alpha- }  central region, we can define {the scale curve} 
+#' 
+#'  \eqn{ SC(\alpha )=\left( \alpha ,vol({{D}_{\alpha }}({{{Z}}^{n}}) \right)\subset {{{R}}^{2}},   for  \alpha \in [0,1] }
+#'  
+#'    The scale curve is a two-dimensional method of describing the dispersion of random vector around the depth induced median. 
+#' 
+#' Function scalecurve for determining the volumes of the convex hull containing points from alpha central regions, uses function convhulln from geometry package. 
+#' 
+#' The minimal dimension of data in X or Y is 2. 
+#' 
+#' ggplot2  package is used to draw a plot.
 #'  
 #'@return
 #'
@@ -54,8 +58,6 @@
 #'  z = mvrnorm(20, c(5,5), diag(2))
 #'  scaleCurve(x, rbind(y,z), method = "Projection", plot = TRUE, nameX = "N", nameY = "Mixture of N")
 #'  
-#'  
-#'  
 #'  @keywords
 #'  multivariate
 #'  nonparametric
@@ -63,9 +65,7 @@
 #'  depth function
 #'  scale curve
 #'  
-
-
-scaleCurve<-function(x,y=NULL,alpha = seq(0,1,0.01),method = "Projection",plot = TRUE,
+scaleCurve = function(x,y=NULL,alpha = seq(0,1,0.01),method = "Projection",plot = TRUE,
 	name = "X", name_y = "Y", title = "Scale Curve",...)
 {
   if(is.data.frame(x)) x = as.matrix(x)
