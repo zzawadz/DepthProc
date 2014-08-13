@@ -1,8 +1,6 @@
 #' @title Depth median
 #' @export
 #' 
-
-?setMethod
 setGeneric("depthMedian", function(x,...) standardGeneric("depthMedian"))
 
 setMethod("depthMedian", "matrix", function(x,...)
