@@ -68,10 +68,15 @@
 #' data<-BALLOT[train,]
 #' depthContour(data, method = "Local", depth1 = "Projection",beta=0.3)
 depthLocal = function(u, X, beta=0.5,
-                      depth1="Projection", depth2=depth1,name = "X", ...) {
+                      depth1="Projection", depth2=depth1,name = "X", ...) 
+{
+  if(missing(X)) X = u
+  
   depths = 1:nrow(u)
   for(i in 1:nrow(u)) depths[i] = .depthLocal(u[i,,drop = FALSE],X,beta,depth1,depth2)
-  return(depths)
+  
+  new("DepthLocal", depths, u = u, X = X, method = "Local", name = name,depth1 = depth1, depth2 = depth2)
+  
 }
  
 
