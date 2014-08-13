@@ -70,19 +70,20 @@
 #'  nonparametric
 #'  robust
 #'  depth function
-binningDepth2D = function(x, binmethod = "LocDepth", nbins = 8, k = 1, remove_borders = FALSE, devel = FALSE, ...)
+binningDepth2D = function(x, binmethod = "LocDepth", nbins = 8, k = 1, remove_borders = FALSE,  ...)
 {
   createBin = function(x, nbins, mean = NULL)
   {
     if(binmethod == "LocDepth")
     {
-      if(!devel) dep_stat = sample.max.depth(as.numeric(x)) 
-      else 
-      {
+      #if(!devel) dep_stat = sample.max.depth(as.numeric(x)) 
+      #else 
+      #{
         dep_stat = lsdSampleMaxDepth(x)
-      }
-      mean = dep_stat["mu"]
-      sigma = k*dep_stat["sigma"]
+      #}
+      mean = dep_stat@mu#["mu"]
+      sigma = k*dep_stat@sigma#["sigma"]
+      dep_stat = c(dep_stat@max_depth,dep_stat@mu, dep_stat@sigma)    
     }
     if(binmethod == "LP")
     {
