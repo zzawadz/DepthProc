@@ -32,7 +32,7 @@ setClass("DepthProjection", representation(), contains = c("Depth","numeric"))
 setClass("DepthMahalanobis", representation(), contains = c("Depth","numeric"))
 setClass("DepthTukey", representation(), contains = c("Depth","numeric"))
 setClass("DepthLP", representation(), contains = c("Depth","numeric"))
-setClass("DepthLocal", representation(), contains = c("Depth","numeric"))
+setClass("DepthLocal", representation("depth1" = "character","depth2" = "character"), contains = c("Depth","numeric"))
 
 #####################################
 ######### DDPlot ####################
@@ -255,4 +255,15 @@ setClass("TrimReg2d", contains="RobReg")
 #' @export
 #' @name abline_depthproc
 setMethod("abline", "RobReg",function(a, ...) { abline(a@coef, ...)})
+
+
+setMethod("show", "Depth", function(object)
+{
+  cat("Depth method: ", object@method, "\n")
+  cat("Set name:", object@name, "\n")
+  
+  print(object@.Data,width = 20)
+})
+
+
 
