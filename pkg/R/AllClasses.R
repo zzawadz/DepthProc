@@ -266,4 +266,11 @@ setMethod("show", "Depth", function(object)
 })
 
 
+################################### Depth Density ############################
+setClass("DepthDensity", representation=list(
+  xgrid = "numeric",
+  ygrid = "numeric",
+  dep_scale = "matrix",
+  density_raw = "matrix",
+  density = "matrix"))
 
