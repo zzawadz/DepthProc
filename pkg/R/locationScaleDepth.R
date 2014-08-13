@@ -138,9 +138,9 @@ getMuLS = function(x,n,d,lengthmu)
 }
 
 
-#' @title Generic class for getLSDContour
+#' @title Generic class for lsdGetContour
 #' @export
-setGeneric("getLSDContour", function(x, cont,...) standardGeneric("getLSDContour"))
+setGeneric("lsdGetContour", function(x, cont,...) standardGeneric("lsdGetContour"))
 #' @title Get location scale contour from LSDepthContour object
 #' @export
 #' 
@@ -151,12 +151,12 @@ setGeneric("getLSDContour", function(x, cont,...) standardGeneric("getLSDContour
 #' dcont = lsdSampleDepthContours(rf(200,4,7), depth = c(0.1,0.2))
 #' 
 #' #get contour that is present in dcont object
-#' getLSDContour(dcont,0.1)
+#' lsdGetContour(dcont,0.1)
 #' 
 #' # get contour that is not present in dcont
 #' # it will be automatically calculated
-#' getLSDContour(dcont,0.3)
-setMethod("getLSDContour", signature = "LSDepthContour",function(x, cont, ...)
+#' lsdGetContour(dcont,0.3)
+setMethod("lsdGetContour", signature = "LSDepthContour",function(x, cont, ...)
 {
   i = which(x@cont_depth == cont)
   if(length(i) > 0) return(x@.Data[[i]])
@@ -181,7 +181,7 @@ setGeneric("lsdAddContour", function(x, cont = NULL,...) standardGeneric("lsdAdd
 #' @export
 setMethod("lsdAddContour", signature = c(x = "LSDepthContour"), function(x, cont = NULL, ...) 
 {
-  contour = getLSDContour(x, cont)
+  contour = lsdGetContour(x, cont)
   
   if(!contour$cont.exist) cat(" No contour for the depth ", cont, "\n")
 
@@ -220,7 +220,7 @@ setMethod("plot", signature = c(x = "LSDepthContour"), function(x, cont = NULL, 
   k = length(cont)
   cont = sort(cont)
   
-  tmp_cont = getLSDContour(x,cont[1])
+  tmp_cont = lsdGetContour(x,cont[1])
   
   mubound = tmp_cont$mubound
   lbound  = tmp_cont$lbound
