@@ -4,7 +4,7 @@
 \title{2d Binning}
 \usage{
 binningDepth2D(x, binmethod = "LocDepth", nbins = 8, k = 1,
-  remove_borders = FALSE, devel = FALSE, ...)
+  remove_borders = FALSE, ...)
 }
 \arguments{
 \item{bivariate}{matrix containing data. Each row is viewed as one two-dimensional observation.}

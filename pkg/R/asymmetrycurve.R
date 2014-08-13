@@ -7,7 +7,6 @@
 #'  @param alpha  An ordered vector containing indices of central regins used for asymmetry curve calculation.
 #'  @param method Character string which determines the depth function used. The method can be "Projection" (the default), "Mahalanobis", "Euclidean", "Tukey" or 'LP'.  For details see \code{\link{depth}.}
 #' @param movingmedian  Logical. For default FALSE only one depth median is used to compute asymmetry norm. If TRUE - for every central area, a new depth median will be used - this approach needs much more time.
-#' @param plot  Logical. Default TRUE - produces asymmetry curve plot; otherwise, returns a data frame containing the central regions and asymmetry norm values indexed by values of the vector alpha.
 #' @param name Name of set X - used in plot legend
 #' @param name_y Name of set Y - used in plot legend
 #' @param ... Any additional parameters for function depth
@@ -71,8 +70,10 @@
 #'  asymmetry
 #'
 asymmetryCurve<-function(x, y = NULL, alpha = seq(0,1,0.01), method = "Projection",
-	movingmedian = FALSE,plot = TRUE, name = "X", name_y = "Y",...)
+	movingmedian = FALSE, name = "X", name_y = "Y",...)
 {
+  x = na.omit(x)
+  
   if(nrow(x)<100) stop("Too small sample!")
 	if(!is.matrix(x)) stop("X must be a matrix!")
 	if(!is.null(y)) if(!is.matrix(y)) stop("Y must be a matrix!")
@@ -87,7 +88,7 @@ asymmetryCurve<-function(x, y = NULL, alpha = seq(0,1,0.01), method = "Projectio
   
   if(!is.null(y)){
     asc = asc %+% asymmetryCurve(y, y =NULL, alpha, method,
-                                         movingmedian, plot = FALSE, name = name_y, name_y = "Y",...)
+                                         movingmedian, name = name_y, name_y = "Y",...)
   }
 	return(asc)
 }

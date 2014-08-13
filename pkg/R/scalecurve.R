@@ -9,7 +9,6 @@
 #'  @param y Additional matrix with multivariate data.
 #'  @param alpha Vector with values of central area to be used in computation.
 #'  @param method Character string which determines the depth function used. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}
-#'  @param plot Logical. Default TRUE produces scalecurve plot; otherwise, returns a data frame containing the central areas and their volume.
 #'  @param name Name of matrix X used in legend.
 #'  @param name_y Name of matrix Y used in legend.
 #'  @param ... Any additional parameters for function \code{depth}.
@@ -65,9 +64,11 @@
 #'  depth function
 #'  scale curve
 #'  
-scaleCurve = function(x,y=NULL,alpha = seq(0,1,0.01),method = "Projection",plot = TRUE,
+scaleCurve = function(x,y=NULL,alpha = seq(0,1,0.01),method = "Projection",
 	name = "X", name_y = "Y", title = "Scale Curve",...)
 {
+  x = na.omit(x)
+  
   if(is.data.frame(x)) x = as.matrix(x)
   if(!is.matrix(x)) stop("x must be a matrix or data frame!")
   if(!is.null(y)) 
@@ -103,12 +104,12 @@ scaleCurve = function(x,y=NULL,alpha = seq(0,1,0.01),method = "Projection",plot 
   
   if(!is.null(y))
   {
-    sc_tmp = scaleCurve(x=y,y=NULL,alpha = alpha, method = method,plot = FALSE,
+    sc_tmp = scaleCurve(x=y,y=NULL,alpha = alpha, method = method,
                          name = name_y, name_y = "Y",...)
     scale_curve = scale_curve %+% sc_tmp
   }
 
-  if(plot) plot(scale_curve)
+  #if(plot) plot(scale_curve)
   return(scale_curve)
 	
 }

@@ -4,7 +4,7 @@
 \title{Scale curve}
 \usage{
 scaleCurve(x, y = NULL, alpha = seq(0, 1, 0.01), method = "Projection",
-  plot = TRUE, name = "X", name_y = "Y", title = "Scale Curve", ...)
+  name = "X", name_y = "Y", title = "Scale Curve", ...)
 }
 \arguments{
 \item{x}{Multivariate data as a matrix.}
@@ -14,8 +14,6 @@ scaleCurve(x, y = NULL, alpha = seq(0, 1, 0.01), method = "Projection",
 \item{alpha}{Vector with values of central area to be used in computation.}
 
 \item{method}{Character string which determines the depth function used. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}}
-
-\item{plot}{Logical. Default TRUE produces scalecurve plot; otherwise, returns a data frame containing the central areas and their volume.}
 
 \item{name}{Name of matrix X used in legend.}
 
