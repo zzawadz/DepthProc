@@ -55,6 +55,7 @@
 #'
 depth = function(u, X, method="Projection", name = "X", threads = -1,...)
 {  
+  if(missing(X)) X = u
   if(is.data.frame(u)) u = as.matrix(u)
   if(is.data.frame(X)) X = as.matrix(X)
   if(is.vector(X)) X = matrix(X,ncol = 1)
@@ -127,6 +128,7 @@ depth = function(u, X, method="Projection", name = "X", threads = -1,...)
 
 depthEuclid = function(u, X, name = "X", ...)
 {
+  if(missing(X)) X = u
   n = dim(u)[1]
   center = colMeans(X)
   center = matrix(rep(center,n),nrow=n,byrow=TRUE)
@@ -170,6 +172,7 @@ depthEuclid = function(u, X, name = "X", ...)
 #'  depth function
 depthMah = function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1, ...)
 {
+  if(missing(X)) X = u
   if(!is.null(mean)) mean = matrix(mean, nc = length(mean))
   
   depth = depthMahCPP(u,X, cov, mean, threads)
@@ -217,6 +220,7 @@ depthMah = function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1, ...
 
 depthProjection = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1,...)
 {
+  if(missing(X)) X = u
   depth = depthProjCPP(u, X, ndir, seed, threads)
   new("DepthProjection", depth, u = u, X = X, method = "Projection", name = name)
 }
@@ -260,6 +264,7 @@ depthProjection = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1
 #'  depth function
 depthTukey = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1, exact = TRUE,...)
 {
+  if(missing(X)) X = u
   tukey1d = function(u,X)
   {
     Xecdf = ecdf(X)
@@ -327,6 +332,7 @@ depthTukey = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1, exa
 #'  depth function
 depthLP = function(u, X, pdim = 1, la = 1, lb = 1, name = "X", threads = -1, func = NULL,...)
 {
+  if(missing(X)) X = u
   if(is.null(func)) depth = depthLPCPP(u, X, pdim, la, lb, threads = threads)
   #norm = function(xi, z, p = 1) sum(abs(z-xi)^p)^(1/p)
   
