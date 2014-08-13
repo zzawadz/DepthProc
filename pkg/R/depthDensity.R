@@ -1,8 +1,6 @@
 #' @title Depth weighted density estimator
 #' 
 #' @export
-#' @importFrom np npudens
-#' 
 #' @examples
 #'  
 #' data = depthproc:::.sampleData(1:5, 100)

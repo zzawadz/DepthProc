@@ -253,7 +253,7 @@ setClass("TrimReg2d", contains="RobReg")
 #'
 #'  @description Add fitted line to a plot. This is overloaded function for robust regression methods from package depthproc.
 #' @export
-#' @name abline_depthproc
+#' 
 setMethod("abline", "RobReg",function(a, ...) { abline(a@coef, ...)})
 
 
