@@ -19,6 +19,8 @@ scaleCurve(x, y = NULL, alpha = seq(0, 1, 0.01), method = "Projection",
 
 \item{name_y}{Name of matrix Y used in legend.}
 
+\item{title}{title of the plot.}
+
 \item{...}{Any additional parameters for function \code{depth}.}
 }
 \value{

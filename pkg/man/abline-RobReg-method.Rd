@@ -8,7 +8,9 @@
   reg = NULL, coef = NULL, untf = FALSE, ...)
 }
 \arguments{
-\item{a}{the intercept and slope, single values.}
+\item{a}{an object of class RobReg}
+
+\item{...}{Arguments to be passed to methods, such as graphical parameters (see par).}
 
 \item{h}{the y-value(s) for horizontal line(s).}
 
@@ -20,11 +22,6 @@
 
 \item{untf}{logical asking whether to \emph{untransform}.  See
     \sQuote{Details}.}
-
-\item{...}{\link{graphical parameters} such as
-    \code{col}, \code{lty} and  \code{lwd} (possibly as vectors: see
-    \sQuote{Details}) and \code{xpd} and the line characteristics
-    \code{lend}, \code{ljoin} and \code{lmitre}.}
 }
 \description{
 Add fitted line to a plot. This is overloaded function for robust regression methods from package depthproc.

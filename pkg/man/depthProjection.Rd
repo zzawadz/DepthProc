@@ -15,7 +15,11 @@ depthProjection(u, X, ndir = 1000, seed = 1, name = "X", threads = -1,
 
 \item{seed}{this seed is used in random number generator in C++ code. Value -1 means that seed is not set.}
 
+\item{threads}{number of threads used in parallel computations. Default value -1 means that all possible cores will be used.}
+
 \item{name}{name for this data set - it will be used on plots from depthproc.}
+
+\item{\dots}{currently not supported.}
 }
 \description{
 Computes the Projection depth of a point or vectors of points with respect to a multivariate data set.

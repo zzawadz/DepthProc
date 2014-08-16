@@ -13,11 +13,17 @@ depthLP(u, X, pdim = 1, la = 1, lb = 1, name = "X", threads = -1,
 
 \item{pdim}{1}
 
-\item{a}{1}
+\item{la}{1}
 
-\item{b}{1}
+\item{lb}{1}
 
 \item{name}{name for this data set - it will be used on plots from depthproc.}
+
+\item{threads}{number of threads used in parallel computations. Default value -1 means that all possible cores will be used.}
+
+\item{func}{the weighing function. Currently it is not supported.}
+
+\item{\dots}{currently not supported.}
 }
 \description{
 Computes the LP depth of a point or vectors of points with respect to a multivariate data set.

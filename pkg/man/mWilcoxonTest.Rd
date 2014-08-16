@@ -5,6 +5,13 @@
 \usage{
 mWilcoxonTest(x, y, alternative = "greater")
 }
+\arguments{
+\item{x}{data matrix}
+
+\item{y}{data matrix}
+
+\item{alternative}{a character string specifying the alternative hypothesis, must be one of "two.sided" (default), "greater" or "less".}
+}
 \description{
 Depth based multivariate Wilcoxon test for a scale difference.
 }

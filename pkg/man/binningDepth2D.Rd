@@ -7,7 +7,7 @@ binningDepth2D(x, binmethod = "LocDepth", nbins = 8, k = 1,
   remove_borders = FALSE, ...)
 }
 \arguments{
-\item{bivariate}{matrix containing data. Each row is viewed as one two-dimensional observation.}
+\item{x}{bivariate matrix containing data. Each row is viewed as one two-dimensional observation.}
 
 \item{binmethod}{A method for calculation center and dispersion measures. "LocDepth" uses location-scale depth, ?MAD? uses median and MAD in each dimension.}
 
@@ -16,8 +16,6 @@ binningDepth2D(x, binmethod = "LocDepth", nbins = 8, k = 1,
 \item{k}{responsible for tightness of bins.}
 
 \item{remove_borders}{Logical, include or not marginal bins}
-
-\item{devel}{this is only for devel purposes and soon will be removed}
 
 \item{...}{other arguments passed to depthMedian}
 }

@@ -10,10 +10,6 @@ depthContour(x, xlim = extendrange(x[, 1], f = 0.1), ylim = extendrange(x[,
 \arguments{
 \item{x}{Bivariate data}
 
-\item{method}{Character string which determines the depth function. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}}
-
-\item{plot_title}{Title of the plot}
-
 \item{xlim}{Determines the width of x-axis.}
 
 \item{ylim}{Determines the width of y-axis.}
@@ -32,7 +28,7 @@ depthContour(x, xlim = extendrange(x[, 1], f = 0.1), ylim = extendrange(x[,
 
 \item{points}{Logical. If TRUE points from matrix x will be drawn.}
 
-\item{\dots}{Any additional parameters for function depth}
+\item{\dots}{Any additional parameters for function depth (such as method) or graphical parameters (e.g. lwd, lty, main).}
 }
 \description{
 Draws an approximate contours of depth for bivariate data.

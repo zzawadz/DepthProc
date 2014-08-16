@@ -3,7 +3,7 @@
 \alias{ddPlot}
 \title{Depth versus depth plot}
 \usage{
-ddPlot(x, y, scale = FALSE, location = FALSE, plot = TRUE, name_x = "X",
+ddPlot(x, y, scale = FALSE, location = FALSE, name_x = "X",
   name_y = "Y", title = "Depth vs. depth plot", ...)
 }
 \arguments{
@@ -11,15 +11,15 @@ ddPlot(x, y, scale = FALSE, location = FALSE, plot = TRUE, name_x = "X",
 
 \item{y}{The second data sample. \code{x} and \code{y} must be of the same space.}
 
-\item{scale}{}
+\item{scale}{logical. determines whether the dispersion is to be aligned.}
 
-\item{loaction}{}
+\item{location}{determines whether the location is to be aligned to 0 vector with depth median.}
 
-\item{plot}{}
+\item{name_x}{name for data set x. It will be passed to drawing function.}
 
-\item{name_x}{}
+\item{name_y}{name for data set y.}
 
-\item{name_y}{}
+\item{title}{title of the plot.}
 
 \item{...}{Parameters passed to depth function}
 }

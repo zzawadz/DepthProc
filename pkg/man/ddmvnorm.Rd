@@ -4,7 +4,7 @@
 \alias{ddmvnorm}
 \title{Normal depth versus depth plot}
 \usage{
-ddMvnorm(x, size = nrow(x), robust = FALSE, alpha = 0.05, plot = TRUE,
+ddMvnorm(x, size = nrow(x), robust = FALSE, alpha = 0.05,
   title = "ddMvnorm", ...)
 }
 \arguments{
@@ -14,7 +14,9 @@ ddMvnorm(x, size = nrow(x), robust = FALSE, alpha = 0.05, plot = TRUE,
 
 \item{robust}{Logical. Dafault \code{FALSE}. If \code{TRUE}, robust measures are used to specify the parameters of theoretical distribution.}
 
-\item{alpha}{cutoff point for robust measure of covariance}
+\item{alpha}{cutoff point for robust measure of covariance.}
+
+\item{title}{title of a plot.}
 
 \item{...}{Parameters passed to \code{depth}}
 }

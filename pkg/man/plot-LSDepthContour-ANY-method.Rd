@@ -20,7 +20,7 @@
 
 \item{col}{vectors with area colors passed to polygon function}
 
-\item{borders}{vector with colors for borders}
+\item{border}{vector with colors for borders}
 
 \item{...}{other parameters passed to polygon}
 }

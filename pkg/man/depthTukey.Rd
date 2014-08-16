@@ -4,7 +4,7 @@
 \title{Tukey Depth}
 \usage{
 depthTukey(u, X, ndir = 1000, seed = 1, name = "X", threads = -1,
-  exact = TRUE, ...)
+  exact = FALSE, ...)
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}
@@ -15,7 +15,13 @@ depthTukey(u, X, ndir = 1000, seed = 1, name = "X", threads = -1,
 
 \item{seed}{this seed is used in random number generator in C++ code. Value -1 means that seed is not set.}
 
+\item{threads}{number of threads used in parallel computations. Default value -1 means that all possible cores will be used.}
+
 \item{name}{name for this data set - it will be used on plots from depthproc.}
+
+\item{exact}{if TRUE exact alhorithm will be used . Currently it works only for 2 dimensional data set.}
+
+\item{\dots}{currently not supported.}
 }
 \description{
 Computes the Tukey depth of a point or vectors of points with respect to a multivariate data set.

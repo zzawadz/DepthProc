@@ -40,8 +40,11 @@ require(MASS)
 # EXAMPLE 2
 data(inf.mort,maesles.imm)
 data1990=na.omit(cbind(inf.mort[,1],maesles.imm[,1]))
+
+\dontrun{
 require(rgl)
 depthPersp(data1990, method = "Projection",plot_method= "rgl")
+}
 }
 \author{
 Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.

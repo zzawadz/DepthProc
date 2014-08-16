@@ -5,6 +5,19 @@
 \usage{
 depthDensity(x, y, nx = 5, ny = 32, xg = NULL, yg = NULL, ...)
 }
+\arguments{
+\item{x}{numeric vector}
+
+\item{y}{numeric vector}
+
+\item{nx}{the number of equally spaced points at which the density is to be estimated in x-dimension.}
+
+\item{ny}{the number of equally spaced points at which the density is to be estimated in x-dimension.}
+
+\item{xg}{vector of point at which the density is to be estimated.}
+
+\item{yg}{vector of point at which the density is to be estimated.}
+}
 \description{
 Depth weighted density estimator
 }

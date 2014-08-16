@@ -17,6 +17,8 @@ depthLocal(u, X, beta = 0.5, depth1 = "Projection", depth2 = depth1,
 
 \item{depth2}{depth method for calculation depth of given point}
 
+\item{name}{name for this data set - it will be used on plots.}
+
 \item{...}{additional parameters passed to depth1 and depth2}
 }
 \description{
