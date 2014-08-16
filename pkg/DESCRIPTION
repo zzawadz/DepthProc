@@ -9,11 +9,9 @@ License: GPL-2
 Depends:
     R (>= 3.0.0),
     ggplot2,
-    Rcpp (>= 0.10.1),
+    Rcpp (>= 0.11.2),
     RcppArmadillo,
     rrcov,
-    roxygen2,
-    devtools,
     np
 Imports:
     lattice,
@@ -22,7 +20,8 @@ Imports:
     robustbase,
     boot,
     sn,
-    hdrcde, 
+    hdrcde
+Suggests: MASS, mvtnorm, rgl
 LinkingTo: Rcpp, RcppArmadillo
 Packaged: 2012-11-10 23:48:39 UTC; Dom
 Roxygen: list(wrap = FALSE)
