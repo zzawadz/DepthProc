@@ -2,12 +2,11 @@
 #'@importFrom sm binning
 #'@description A robust method of decreasing a sample size and therefore a complexity of a statistical procedure. The method may be used within a kernel density or a predictive distribution estimation.
 #'
-#'  @param bivariate matrix containing data. Each row is viewed as one two-dimensional observation.
+#'  @param x bivariate matrix containing data. Each row is viewed as one two-dimensional observation.
 #'  @param binmethod A method for calculation center and dispersion measures. "LocDepth" uses location-scale depth, ?MAD? uses median and MAD in each dimension.
 #'  @param nbins number of bins in each dimension
 #'  @param k responsible for tightness of bins.
 #'  @param remove_borders Logical, include or not marginal bins
-#'  @param devel this is only for devel purposes and soon will be removed
 #'  @param ... other arguments passed to depthMedian
 #'  
 #'  @return freq: a matrix containing the binned frequencies
@@ -158,6 +157,12 @@ binningDepth2D = function(x, binmethod = "LocDepth", nbins = 8, k = 1, remove_bo
 #'@docType methods
 #'@title 2d Binning plot
 #'
+#'  @param x object of class BinnDepth2d
+#'  @param \dots graphical parameters passed to plot
+#'  @param alpha alpha value for rgb function
+#'  @param bg_col backgroud color
+#'  @param add_mid logical. If TRUE centers of binns will be marked.
+#'
 #'@description Binning 2d
 #'@export
 #'  @seealso \code{\link{depth}}
@@ -172,7 +177,7 @@ binningDepth2D = function(x, binmethod = "LocDepth", nbins = 8, k = 1, remove_bo
 #'  nonparametric
 #'  robust
 #'  depth function
-setMethod("plot", signature = c(x = "BinnDepth2d", y = "missing"), function(x, y = "missing",..., alpha = 0.1, bg_col = "red", add_mid = TRUE){
+setMethod("plot", signature = c(x = "BinnDepth2d"), function(x,..., alpha = 0.1, bg_col = "red", add_mid = TRUE){
   
   breaks_y = x@breaks_y
   breaks_x = x@breaks_x

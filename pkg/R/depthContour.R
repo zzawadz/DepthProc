@@ -3,8 +3,6 @@
 #'  @description Draws an approximate contours of depth for bivariate data.
 #'  
 #' @param x Bivariate data
-#' @param method Character string which determines the depth function. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}
-#' @param plot_title Title of the plot
 #' @param xlim Determines the width of x-axis.
 #' @param ylim Determines the width of y-axis.
 #' @param n Number of points in each coordinate direction to be used in contour plot.
@@ -14,7 +12,7 @@
 #' @param mecol Determines the color of lines describing the depth median. 
 #' @param legend Logical. If TRUE legend for mean and depth median will be drawn.
 #' @param points Logical. If TRUE points from matrix x will be drawn.
-#' @param \dots Any additional parameters for function depth
+#' @param \dots Any additional parameters for function depth (such as method) or graphical parameters (e.g. lwd, lty, main).
 #'  
 #'  
 #'  @details

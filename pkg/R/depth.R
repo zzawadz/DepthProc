@@ -1,7 +1,18 @@
 #'@title Depth calculation
+#'
+#' @details Calculate depth functions.
+#'
 #'@export
 #'
-#'@description 
+#'
+#'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
+#'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
+#'  @param method Character string which determines the depth function. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}
+#'  @param name name for this data set - it will be used on plots.
+#'  @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used. 
+#'  @param ... parameters specific to method - see \code{\link{depthEuclid}}
+#'
+#' @details
 #'
 #' {the Mahalanobis depth}  \deqn{ {D}_{MAH}(y,{X}^{n})=\frac{1}{1+{{(y-\bar{x})}^{T}}{{S}^{-1}}(y-\bar{x})}, }    where  \eqn{ S }  denotes the sample covariance matrix  \eqn{ {X}^{n} } .  
 #' 
@@ -12,11 +23,6 @@
 #' 
 #' The Projection and Tukey's depths are calculated using an approximate algorithm. Calculations of Mahalanobis, Euclidean and  \eqn{ L^p }  depths are exact. Returns the depth of multivariate point  u  with respect to data set  X.
 #'
-#'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
-#'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#'  @param method Character string which determines the depth function. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}
-#'  @param name name for this data set - it will be used on plots from depthproc.
-#'  @param ... parameters specific to method - see \code{\link{depthEuclid}}
 #' 
 #'  @references 
 #'  
@@ -104,6 +110,7 @@ depth = function(u, X, method="Projection", name = "X", threads = -1,...)
 #'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
 #'  @param name name for this data set - it will be used on plots from depthproc.
+#'  @param \dots currently not supported.
 #'
 #'
 #'@details 
@@ -125,8 +132,7 @@ depth = function(u, X, method="Projection", name = "X", threads = -1,...)
 #'  multivariate
 #'  nonparametric
 #'  depth function
-
-depthEuclid = function(u, X, name = "X", ...)
+depthEuclid = function(u, X, name = "X",...)
 {
   if(missing(X)) X = u
   n = dim(u)[1]
@@ -148,8 +154,11 @@ depthEuclid = function(u, X, name = "X", ...)
 #'
 #'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#'  @param name name for this data set - it will be used on plots from depthproc.
-#'
+#'  @param name name for this data set - it will be used on plots.
+#'  @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
+#'  @param cov custom covariance matrix passed. If NULL standard calculations will be based on standard covariance estimator.
+#'  @param mean custom mean vector. If null mean average will be used.
+#'  @param \dots currently not supported.
 #'
 #'@details 
 #'
@@ -173,7 +182,7 @@ depthEuclid = function(u, X, name = "X", ...)
 depthMah = function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1, ...)
 {
   if(missing(X)) X = u
-  if(!is.null(mean)) mean = matrix(mean, nc = length(mean))
+  if(!is.null(mean)) mean = matrix(mean, ncol = length(mean))
   
   depth = depthMahCPP(u,X, cov, mean, threads)
   new("DepthMahalanobis", depth, u = u, X = X, method = "Mahalanobis", name = name)
@@ -192,8 +201,9 @@ depthMah = function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1, ...
 #'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
 #'  @param ndir number of directions used in computations
 #'  @param seed this seed is used in random number generator in C++ code. Value -1 means that seed is not set.
+#'  @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
 #'  @param name name for this data set - it will be used on plots from depthproc.
-#'
+#'  @param \dots currently not supported.
 #'
 #'@details 
 #'
@@ -217,7 +227,6 @@ depthMah = function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1, ...
 #'  multivariate
 #'  nonparametric
 #'  depth function
-
 depthProjection = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1,...)
 {
   if(missing(X)) X = u
@@ -237,8 +246,10 @@ depthProjection = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1
 #'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
 #'  @param ndir number of directions used in computations
 #'  @param seed this seed is used in random number generator in C++ code. Value -1 means that seed is not set.
+#'  @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
 #'  @param name name for this data set - it will be used on plots from depthproc.
-#'
+#'  @param exact if TRUE exact alhorithm will be used . Currently it works only for 2 dimensional data set.
+#'  @param \dots currently not supported.
 #'
 #'@details 
 #'
@@ -262,7 +273,7 @@ depthProjection = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1
 #'  multivariate
 #'  nonparametric
 #'  depth function
-depthTukey = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1, exact = TRUE,...)
+depthTukey = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1, exact = FALSE,...)
 {
   if(missing(X)) X = u
   tukey1d = function(u,X)
@@ -308,10 +319,12 @@ depthTukey = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1, exa
 #'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
 #'  @param pdim 1
-#'  @param a 1
-#'  @param b 1
+#'  @param la 1
+#'  @param lb 1
 #'  @param name name for this data set - it will be used on plots from depthproc.
-#'
+#'  @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
+#'  @param func the weighing function. Currently it is not supported.
+#'  @param \dots currently not supported.
 #'
 #'@details 
 #'  

@@ -6,11 +6,11 @@
 #'
 #' @param x The first or only data sample for ddPlot.
 #' @param y The second data sample. \code{x} and \code{y} must be of the same space.
-#' @param scale
-#' @param loaction
-#' @param plot
-#' @param name_x
-#' @param name_y
+#' @param scale logical. determines whether the dispersion is to be aligned.
+#' @param location determines whether the location is to be aligned to 0 vector with depth median.
+#' @param name_x name for data set x. It will be passed to drawing function.
+#' @param name_y name for data set y.
+#' @param title title of the plot.
 #' @param ... Parameters passed to depth function
 #'
 #' @details
@@ -43,29 +43,8 @@
 #' ddPlot(x=standard, y=scale)
 #' ddPlot(x=standard, y=scale, scale=TRUE)
 #'   
-ddPlot <- function (x, y, scale = FALSE, location = FALSE, plot = TRUE, name_x = "X", name_y = "Y", title = "Depth vs. depth plot", ...) 
+ddPlot <- function (x, y, scale = FALSE, location = FALSE, name_x = "X", name_y = "Y", title = "Depth vs. depth plot", ...) 
 {
-#   if (is.null(y)) {
-#     size = nrow(x)
-#     d    = ncol(x) 
-#     
-#     if (distribution == "mvnorm") {
-#       theoretical <- mvrnorm(n = size, ...)
-#     }
-#     else if (distribution == "t") {
-#       theoretical <- rmt(n = size, ...)
-#     }
-#     else if (distribution == "smvnorm") {
-#       theoretical <- rmsn(n = size, ...)
-#     }
-#     else if (distribution == "st") {
-#       theoretical <- rmst(n = size, ...)
-#     }
-#     depth_sample <- depth(x, x, method, name = name_x, ...)
-#     depth_theoretical <- depth(x, theoretical, method, name = name_y, ...)
-#     ddplot = new("DDPlot", X = depth_sample, Y = depth_theoretical)
-#   }
-#   else {
     if (ncol(x) != ncol(y)) {
       print("Wrong dimensions of the datasets! ncol(x)!=ncol(y)")
     }
@@ -98,8 +77,7 @@ ddPlot <- function (x, y, scale = FALSE, location = FALSE, plot = TRUE, name_x =
     depth_y <- depth(data, y_new,  name = name_y, ...)
     
     ddplot = new("DDPlot", X = depth_x, Y = depth_y, title = title)
-#  }
+
   
-  if(plot) plot(ddplot)
   return(ddplot)
 }

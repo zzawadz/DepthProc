@@ -11,6 +11,7 @@
 #'  @param method Character string which determines the depth function used. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}
 #'  @param name Name of matrix X used in legend.
 #'  @param name_y Name of matrix Y used in legend.
+#'  @param title title of the plot.
 #'  @param ... Any additional parameters for function \code{depth}.
 #'
 #'

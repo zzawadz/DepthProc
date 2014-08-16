@@ -28,8 +28,11 @@
 #' # EXAMPLE 2
 #' data(inf.mort,maesles.imm)
 #' data1990=na.omit(cbind(inf.mort[,1],maesles.imm[,1]))
+#' 
+#' \dontrun{
 #' require(rgl)
 #' depthPersp(data1990, method = "Projection",plot_method= "rgl")
+#' }
 depthPersp<-function(x,plot_method = "lattice",xlim = extendrange(x[,1],f=0.1),ylim = extendrange(x[,2],f=0.1),n=50,
 	xlab = "x", ylab = "y",plot_title=NULL,...)
 {

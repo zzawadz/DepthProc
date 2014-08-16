@@ -28,6 +28,7 @@
 #'  @param beta cutoff value for neighbourhood
 #'  @param depth1 depth method for symmetrised data
 #'  @param depth2 depth method for calculation depth of given point
+#'  @param name name for this data set - it will be used on plots.
 #'  @param ... additional parameters passed to depth1 and depth2
 #'  
 #'  
@@ -68,7 +69,7 @@
 #' data<-BALLOT[train,]
 #' depthContour(data, method = "Local", depth1 = "Projection",beta=0.3)
 depthLocal = function(u, X, beta=0.5,
-                      depth1="Projection", depth2=depth1,name = "X", ...) 
+                      depth1="Projection", depth2=depth1, name = "X", ...) 
 {
   if(missing(X)) X = u
   

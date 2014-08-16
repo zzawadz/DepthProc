@@ -1,10 +1,15 @@
 
-
-setMethod("plot", signature = c(x = "DDPlot", y = "missing"), function(x, y = "missing"){
+#' @rdname plot-methods
+#' @aliases plot,DDPlot
+#' @export
+setMethod("plot", signature = c(x = "DDPlot"), function(x){
   p = getPlot(x)
   print(p)
 })
 
+#' @rdname getPlot-methods
+#' @aliases getPlot,DDPlot
+#' @export
 setMethod("getPlot", "DDPlot", function(object){
   a_est = data.frame(x = object@X, y = object@Y)
   p = ggplot()

@@ -1,5 +1,15 @@
 #' Adds plots
 #' 
+#' @docType methods
+#' @rdname grapes-plus-grapes-methods
+#' 
+#' @param e1 object
+#' @param e2 object
+#' 
+#' @details 
+#' 
+#' See \code{\link{DepthCurve}} for description.
+#' 
 #' @export
 setGeneric("%+%", function(e1,e2) standardGeneric("%+%"))
 
@@ -182,18 +192,26 @@ setClass("AsymmetryCurveList", contains=c("DepthCurveList", "list"))
 setClass("BinnDepth2d", representation=list(freq = "matrix", mid_x = "numeric", mid_y = "numeric", breaks_x = "numeric", breaks_y = "numeric", input_data = "matrix", max_depth_x = "numeric", max_depth_y = "numeric"))
 
 #' @export
-#' @title Create plot from DepthCurve and DepthCurveList.
-#'
+#' @title Create ggplot object from DepthCurve, DepthCurveList and DDPlot classes.
+#' @rdname getPlot-methods
+#' @docType methods
+#' 
+#'  @param object a DDPlot ScaleCurve or AsymmetryCurve object class.
+#'  
 #'  @description Create an object of class ggplot from DepthCurve and DepthCurveList.
 #' @name getPlot
 setGeneric("getPlot", function(object) standardGeneric("getPlot"))
 setGeneric(".getPlot", function(object) standardGeneric(".getPlot"))
 
 #' @export
-#' @title As matrix method for DepthCurve and DepthCurveList.
+#' @title as.matrix method for DepthCurveList.
+#' @rdname as.matrix-methods
+#' @docType methods
 #'
+#'  @param x an object of class that inherits from DepthCurveList (ScaleCurveList or AsymmetryCurveList).
+#'  @param ... other arguments passed to standard as.matrix function.
+#'  
 #'  @description Create a matrix from DepthCurve and DepthCurveList.
-#' @name as.matrix_depthproc
 setGeneric("as.matrix", function(x,...) standardGeneric("as.matrix"))
 
 #####################################################
@@ -251,6 +269,9 @@ setClass("TrimReg2d", contains="RobReg")
 
 #' @title Add line to plot
 #'
+#'  @param a an object of class RobReg
+#'  @param ... Arguments to be passed to methods, such as graphical parameters (see par).
+#'  
 #'  @description Add fitted line to a plot. This is overloaded function for robust regression methods from package depthproc.
 #' @export
 #' 
@@ -274,3 +295,24 @@ setClass("DepthDensity", representation=list(
   density_raw = "matrix",
   density = "matrix"))
 
+
+
+
+
+#' @title Method for plotting DepthCurve and DDPlot object.
+#' @docType methods
+#' @rdname plot-methods
+#'  
+#' @param x object that inherits from DepthCurve class (ScaleCurve or AsymmetryCurve), or DDPlot class.
+#'  
+#'  @description Plot Depth curve
+#' @export
+#' 
+#' @examples
+#' 
+#' require(MASS)
+#' x = mvrnorm(n = 100, mu = c(0,0), Sigma = 3*diag(2))
+#' sc = scaleCurve(x)
+#' plot(sc)
+#' 
+setGeneric("plot")

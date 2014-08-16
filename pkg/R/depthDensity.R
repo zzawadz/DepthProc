@@ -1,5 +1,13 @@
 #' @title Depth weighted density estimator
 #' 
+#' @param x numeric vector
+#' @param y numeric vector
+#' @param nx the number of equally spaced points at which the density is to be estimated in x-dimension.
+#' @param ny the number of equally spaced points at which the density is to be estimated in x-dimension.
+#' @param xg vector of point at which the density is to be estimated.
+#' @param yg vector of point at which the density is to be estimated.
+#' 
+#' 
 #' @export
 #' @examples
 #'  
@@ -40,6 +48,10 @@ depthDensity = function(x, y, nx = 5, ny = 32, xg = NULL, yg = NULL, ...)
 
 
 #' @title Plot function for DepthDensity
+#' 
+#' @param x object of class DepthDensity
+#' @param type type of density that will be plotted. 'depth' is a depth scaled density, and 'raw' is denisty without scaling.
+#' @param ... graphical arguments. 
 #' 
 #' @export
 setMethod("plot", "DepthDensity", function(x, type = "depth", ...)

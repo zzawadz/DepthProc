@@ -5,7 +5,8 @@
 #' @param x The data sample for DD plot.
 #' @param size size of theoretical set
 #' @param robust Logical. Dafault \code{FALSE}. If \code{TRUE}, robust measures are used to specify the parameters of theoretical distribution.
-#' @param alpha cutoff point for robust measure of covariance
+#' @param alpha cutoff point for robust measure of covariance.
+#' @param title title of a plot.
 #' @param ... Parameters passed to \code{depth}
 #' 
 #' @description
@@ -42,7 +43,7 @@
 #' data1990=na.omit(cbind(under5.mort[,1],inf.mort[,1],maesles.imm[,1]))
 #' ddMvnorm(data1990, robust=FALSE)
 #' 
-ddMvnorm <-function(x, size = nrow(x), robust=FALSE, alpha=0.05, plot = TRUE,title = "ddMvnorm", ...)     
+ddMvnorm <-function(x, size = nrow(x), robust=FALSE, alpha=0.05, title = "ddMvnorm", ...)     
 {
   depth_sample <- depth(x, x,  ...)  
   
@@ -60,6 +61,5 @@ ddMvnorm <-function(x, size = nrow(x), robust=FALSE, alpha=0.05, plot = TRUE,tit
   depth_theoretical <- depth(x, theoretical, ...)
   ddplot = new("DDPlot",X = depth_sample, Y = depth_theoretical, title = title)
   
-  if(plot) plot(ddplot)
   return(ddplot)
 }

@@ -100,7 +100,7 @@ lsdSampleDepthContours = function(x, depth = c(0.1,0.2,0.3,0.4), lengthmu=1000)
   {
     d = depth[i]
     mu = getMuLS(x,n,d,lengthmu)
-    cont = t(sapply(mu, function(mu) as.numeric(depthproc:::sampleDepthContForMuCPP(d,mu[1],x))))
+    cont = t(sapply(mu, function(mu) as.numeric(sampleDepthContForMuCPP(d,mu[1],x))))
     colnames(cont) = c("lbound","ubound","tbound","case","M")
     
     if(sum(cont[,"tbound"])>1){
@@ -137,11 +137,9 @@ getMuLS = function(x,n,d,lengthmu)
   mu
 }
 
-
-#' @title Generic class for lsdGetContour
-#' @export
-setGeneric("lsdGetContour", function(x, cont,...) standardGeneric("lsdGetContour"))
-#' @title Get location scale contour from LSDepthContour object
+#' @title Get location-scale contour from LSDepthContour object
+#' @docType methods
+#' @rdname lsdGetContour-methods
 #' @export
 #' 
 #' @param x object of class LSDepthContour
@@ -156,14 +154,21 @@ setGeneric("lsdGetContour", function(x, cont,...) standardGeneric("lsdGetContour
 #' # get contour that is not present in dcont
 #' # it will be automatically calculated
 #' lsdGetContour(dcont,0.3)
-setMethod("lsdGetContour", signature = "LSDepthContour",function(x, cont, ...)
+setGeneric("lsdGetContour", function(x, cont) standardGeneric("lsdGetContour"))
+
+#' @rdname lsdGetContour-methods
+#' @aliases lsdGetContour,LSDepthContour
+#' @export
+setMethod("lsdGetContour", signature = "LSDepthContour",function(x, cont)
 {
   i = which(x@cont_depth == cont)
   if(length(i) > 0) return(x@.Data[[i]])
   lsdSampleDepthContours(x@sample, depth = cont)[[1]] 
 })
 
-#' @title Generic function for lsdAddContour
+#' @title Adds location scale depth contour to a plot.
+#' @docType methods
+#' @rdname lsdAddContour-methods
 #' @export
 #' 
 #' @param x object of class LSDepthContour
@@ -177,7 +182,8 @@ setMethod("lsdGetContour", signature = "LSDepthContour",function(x, cont, ...)
 #' lsdAddContour(x,0.1, col = "grey50")
 #' lsdAddContour(x,0.3, col = "grey10", border = "red", lwd = 4)
 setGeneric("lsdAddContour", function(x, cont = NULL,...) standardGeneric("lsdAddContour"))
-### @title Add location-scale depth contour to a plot 
+#' @rdname lsdAddContour-methods
+#' @aliases lsdAddContour,LSDepthContour
 #' @export
 setMethod("lsdAddContour", signature = c(x = "LSDepthContour"), function(x, cont = NULL, ...) 
 {
@@ -203,7 +209,7 @@ setMethod("lsdAddContour", signature = c(x = "LSDepthContour"), function(x, cont
 #' @param mu_min mu_min
 #' @param mu_max mu_max
 #' @param col vectors with area colors passed to polygon function
-#' @param borders vector with colors for borders
+#' @param border vector with colors for borders
 #' @param ... other parameters passed to polygon
 #' 
 #' @examples
