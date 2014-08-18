@@ -7,11 +7,16 @@
 #' @param xg vector of point at which the density is to be estimated.
 #' @param yg vector of point at which the density is to be estimated.
 #' 
+#' @references
+#' 
+#' Kosiorowski D. and Zawadzki Z. (2014) Notes on optimality of predictive distribution pseudo-estimators in the CHARME models and automatic trading strategies, FindEcon2014, submitted
 #' 
 #' @export
 #' @examples
-#'  
-#' data = depthproc:::.sampleData(1:5, 100)
+#'
+#' # .sampleData is special function for creating
+#' # data  for testing conditional denisty estimators
+#' data = DepthProc:::.sampleData(1:5, 100)
 #' x = data[,1]; y = data[,2]
 #' plot(x,y)
 #' dep = depthDensity(x,y)
