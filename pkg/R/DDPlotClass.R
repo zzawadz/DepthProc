@@ -31,6 +31,7 @@ setMethod("getPlot", "DDPlot", function(object){
 
 setMethod("show", "DDPlot", function(object){
   cat("DDPlot\n")
+  plot(object)
   cat("\nDepth Metohod:\n\t", object@X@method)
 })
 
