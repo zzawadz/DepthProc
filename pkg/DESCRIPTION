@@ -1,5 +1,6 @@
 Package: DepthProc
 Version: 1.0
+Date: 2014-08-18
 Title: DepthProc
 Author: Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt
     Zawadzki from Cracow University of Economics.
@@ -23,5 +24,4 @@ Imports:
     hdrcde
 Suggests: MASS, mvtnorm, rgl
 LinkingTo: Rcpp, RcppArmadillo
-Packaged: 2012-11-10 23:48:39 UTC; Dom
 Roxygen: list(wrap = FALSE)

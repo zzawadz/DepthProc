@@ -1,0 +1,15 @@
+citHeader("To cite package 'DepthProc' in publications use:")
+
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
+vers <- paste("R package version", meta$Version)
+
+citEntry(entry="Manual",
+         title = "DepthProc An R Package for Robust Exploration of Multidimensional Economic Phenomena",
+         author = personList(as.person("Daniel Kosiorowski"),
+                             as.person("Zygmunt Zawadzki")),
+         year = year,
+         
+         textVersion =
+         paste("Daniel Kosiorowski, Zygmunt Zawadzki (",
+               year,
+               "). DepthProc An R Package for Robust Exploration of Multidimensional Economic Phenomena. ", sep=""))
