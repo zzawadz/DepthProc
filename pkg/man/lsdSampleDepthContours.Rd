@@ -13,7 +13,10 @@ lsdSampleDepthContours(x, depth = c(0.1, 0.2, 0.3, 0.4), lengthmu = 1000)
 \item{lengthmu}{number of points to evalute depth}
 }
 \description{
-Calculate sample Student depth contours using Lsdepth - algorithm written by Ch. Muller.
+Calculate sample Mizera and Muller Student depth contours
+}
+\details{
+Calculations are based on lsdepth algorithm written by Ch. Muller.
 }
 \examples{
 ## EXAMPLE 1 for F-distribution

@@ -35,14 +35,12 @@ setClass("LSDepthContour", slots = c(cont_depth = "numeric", sample = "numeric")
 #' @param p_length is the maximum length of the precision step at the end
 #' 
 #' @details
-#' 
-#' Calculates Student median using lsdepth algorithm written by Ch. Muller.
+#' Calculations are based on lsdepth algorithm written by Ch. Muller.
 #' 
 #' @export
 #' 
 #' @references
 #' 
-#' References:
 #' Mizera, I., Muller, C. H., 2004. Location-scale depth (with discussion). Journal of the American Statistical Association 99, 949 - 966.
 #' 
 #' 
@@ -70,8 +68,8 @@ lsdSampleMaxDepth = function(x,iter=100,eps=0.0001,p_length=10)
 #' 
 #' @export
 #' 
-#' @description
-#' Calculate sample Student depth contours using Lsdepth - algorithm written by Ch. Muller.
+#' @details
+#' Calculations are based on lsdepth algorithm written by Ch. Muller.
 #' 
 #' @references
 #' 
@@ -143,7 +141,10 @@ getMuLS = function(x,n,d,lengthmu)
 #' @export
 #' 
 #' @param x object of class LSDepthContour
-#' @param cont single numeric - depth of contour to return 
+#' @param cont single numeric - depth of contour to return
+#' 
+#' @details
+#' Calculations are based on lsdepth algorithm written by Ch. Muller.
 #'  
 #' @examples
 #' dcont = lsdSampleDepthContours(rf(200,4,7), depth = c(0.1,0.2))

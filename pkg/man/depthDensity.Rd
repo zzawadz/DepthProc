@@ -22,11 +22,16 @@ depthDensity(x, y, nx = 5, ny = 32, xg = NULL, yg = NULL, ...)
 Depth weighted density estimator
 }
 \examples{
-data = depthproc:::.sampleData(1:5, 100)
+# .sampleData is special function for creating
+# data  for testing conditional denisty estimators
+data = DepthProc:::.sampleData(1:5, 100)
 x = data[,1]; y = data[,2]
 plot(x,y)
 dep = depthDensity(x,y)
 plot(dep, type = "raw")
 plot(dep, type = "depth")
+}
+\references{
+Kosiorowski D. and Zawadzki Z. (2014) Notes on optimality of predictive distribution pseudo-estimators in the CHARME models and automatic trading strategies, FindEcon2014, submitted
 }
 

@@ -74,7 +74,7 @@ asymmetryCurve<-function(x, y = NULL, alpha = seq(0,1,0.01), method = "Projectio
 {
   x = na.omit(x)
   
-  if(nrow(x)<100) stop("Too small sample!")
+  if(nrow(x)< NCOL(x)*10) stop("Too small sample!")
 	if(!is.matrix(x)) stop("X must be a matrix!")
 	if(!is.null(y)) if(!is.matrix(y)) stop("Y must be a matrix!")
   x = na.omit(x)

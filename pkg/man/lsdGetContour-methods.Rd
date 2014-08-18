@@ -18,6 +18,9 @@ lsdGetContour(x, cont)
 \description{
 Get location-scale contour from LSDepthContour object
 }
+\details{
+Calculations are based on lsdepth algorithm written by Ch. Muller.
+}
 \examples{
 dcont = lsdSampleDepthContours(rf(200,4,7), depth = c(0.1,0.2))
 

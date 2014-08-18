@@ -18,7 +18,7 @@ lsdSampleMaxDepth(x, iter = 100, eps = 1e-04, p_length = 10)
 Calculates the maximum Student depth estimator of location and scale for one dimensional data (an alternative for MED and MAD or for the mean and standard deviation).
 }
 \details{
-Calculates Student median using lsdepth algorithm written by Ch. Muller.
+Calculations are based on lsdepth algorithm written by Ch. Muller.
 }
 \examples{
 x = rnorm(100)
@@ -27,7 +27,6 @@ y = rf(100, 4,10)
 lsdSampleMaxDepth(y)
 }
 \references{
-References:
 Mizera, I., Muller, C. H., 2004. Location-scale depth (with discussion). Journal of the American Statistical Association 99, 949 - 966.
 }
 
