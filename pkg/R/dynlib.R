@@ -1,2 +1,2 @@
-#' @useDynLib depthproc
+#' @useDynLib DepthProc
 NULL

@@ -8,7 +8,7 @@ using namespace Rcpp;
 
 // CovLPCPP
 SEXP CovLPCPP(SEXP X, double p, double a, double b);
-RcppExport SEXP depthproc_CovLPCPP(SEXP XSEXP, SEXP pSEXP, SEXP aSEXP, SEXP bSEXP) {
+RcppExport SEXP DepthProc_CovLPCPP(SEXP XSEXP, SEXP pSEXP, SEXP aSEXP, SEXP bSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -26,7 +26,7 @@ END_RCPP
 }
 // depth2dcpp
 NumericVector depth2dcpp(SEXP R_x, SEXP R_y);
-RcppExport SEXP depthproc_depth2dcpp(SEXP R_xSEXP, SEXP R_ySEXP) {
+RcppExport SEXP DepthProc_depth2dcpp(SEXP R_xSEXP, SEXP R_ySEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -42,7 +42,7 @@ END_RCPP
 }
 // depthMahCPP
 SEXP depthMahCPP(SEXP ru, SEXP rX, SEXP rcov, SEXP rmean, int threads);
-RcppExport SEXP depthproc_depthMahCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP rcovSEXP, SEXP rmeanSEXP, SEXP threadsSEXP) {
+RcppExport SEXP DepthProc_depthMahCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP rcovSEXP, SEXP rmeanSEXP, SEXP threadsSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -61,7 +61,7 @@ END_RCPP
 }
 // depthProjCPP
 SEXP depthProjCPP(SEXP ru, SEXP rX, double nproj, double seed, int threads);
-RcppExport SEXP depthproc_depthProjCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP nprojSEXP, SEXP seedSEXP, SEXP threadsSEXP) {
+RcppExport SEXP DepthProc_depthProjCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP nprojSEXP, SEXP seedSEXP, SEXP threadsSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -80,7 +80,7 @@ END_RCPP
 }
 // depthLPCPP
 SEXP depthLPCPP(SEXP ru, SEXP rX, double p, double a, double b, int threads);
-RcppExport SEXP depthproc_depthLPCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP pSEXP, SEXP aSEXP, SEXP bSEXP, SEXP threadsSEXP) {
+RcppExport SEXP DepthProc_depthLPCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP pSEXP, SEXP aSEXP, SEXP bSEXP, SEXP threadsSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -100,7 +100,7 @@ END_RCPP
 }
 // depthTukeyCPP
 SEXP depthTukeyCPP(SEXP ru, SEXP rX, bool exact, int threads);
-RcppExport SEXP depthproc_depthTukeyCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP exactSEXP, SEXP threadsSEXP) {
+RcppExport SEXP DepthProc_depthTukeyCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP exactSEXP, SEXP threadsSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -118,7 +118,7 @@ END_RCPP
 }
 // sampleDepthContForMuCPP
 SEXP sampleDepthContForMuCPP(double d, double mu, SEXP rY);
-RcppExport SEXP depthproc_sampleDepthContForMuCPP(SEXP dSEXP, SEXP muSEXP, SEXP rYSEXP) {
+RcppExport SEXP DepthProc_sampleDepthContForMuCPP(SEXP dSEXP, SEXP muSEXP, SEXP rYSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -135,7 +135,7 @@ END_RCPP
 }
 // sampleMaxDepthForMuCPP
 SEXP sampleMaxDepthForMuCPP(double mu, const SEXP rY, int d_min, int max_iter, double eps);
-RcppExport SEXP depthproc_sampleMaxDepthForMuCPP(SEXP muSEXP, SEXP rYSEXP, SEXP d_minSEXP, SEXP max_iterSEXP, SEXP epsSEXP) {
+RcppExport SEXP DepthProc_sampleMaxDepthForMuCPP(SEXP muSEXP, SEXP rYSEXP, SEXP d_minSEXP, SEXP max_iterSEXP, SEXP epsSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -154,7 +154,7 @@ END_RCPP
 }
 // sampleMaxLocScaleDepthCPP
 SEXP sampleMaxLocScaleDepthCPP(SEXP ry, double iter, double eps, double p_length);
-RcppExport SEXP depthproc_sampleMaxLocScaleDepthCPP(SEXP rySEXP, SEXP iterSEXP, SEXP epsSEXP, SEXP p_lengthSEXP) {
+RcppExport SEXP DepthProc_sampleMaxLocScaleDepthCPP(SEXP rySEXP, SEXP iterSEXP, SEXP epsSEXP, SEXP p_lengthSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -172,7 +172,7 @@ END_RCPP
 }
 // runifsphereCPP
 SEXP runifsphereCPP(double n, double p, int seed);
-RcppExport SEXP depthproc_runifsphereCPP(SEXP nSEXP, SEXP pSEXP, SEXP seedSEXP) {
+RcppExport SEXP DepthProc_runifsphereCPP(SEXP nSEXP, SEXP pSEXP, SEXP seedSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -189,7 +189,7 @@ END_RCPP
 }
 // covCPP
 SEXP covCPP(SEXP rX, int threads);
-RcppExport SEXP depthproc_covCPP(SEXP rXSEXP, SEXP threadsSEXP) {
+RcppExport SEXP DepthProc_covCPP(SEXP rXSEXP, SEXP threadsSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -205,7 +205,7 @@ END_RCPP
 }
 // meanCPP
 SEXP meanCPP(SEXP rX, int threads);
-RcppExport SEXP depthproc_meanCPP(SEXP rXSEXP, SEXP threadsSEXP) {
+RcppExport SEXP DepthProc_meanCPP(SEXP rXSEXP, SEXP threadsSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
