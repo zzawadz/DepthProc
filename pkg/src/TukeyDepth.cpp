@@ -76,10 +76,10 @@ arma::vec getALPHA(const arma::vec& X, const arma::vec& Y,const double& U,const 
       }
       if (ALPHA[i-NT] >= P2-EPS) ALPHA[i-NT] = 0.0;
     }
-    //std::cout << " " << ALPHA[i-NT];
+
   }
   
-  //std::cout << std::endl;
+
   ALPHA.resize(N-NT);
   ALPHA = arma::sort(ALPHA);
   return ALPHA;
@@ -107,14 +107,7 @@ double depthTukey2dExact(double U, double V,const arma::mat& m)
   size_t NN = ALPHA.n_rows;
   size_t NT = N - NN;
   
-  /*
-  * First checks
-  */
-  //std::cout << "First check:" << std::endl;
-  //std::cout << "NN: " << NN << "NT: " << NT << std::endl;
-  //std::cout << "ALPHA:" << std::endl << ALPHA << std::endl;
-  
-  /*If NN end */
+
   if(NN<=1) return getHDEP(NT, N, NUMH);
   
   double ANGLE = ALPHA[0]-ALPHA[NN-1]+P2;
@@ -136,15 +129,7 @@ double depthTukey2dExact(double U, double V,const arma::mat& m)
   /*If NN end */
   if(NU >= NN) return getHDEP(NT, N, NUMH);
   
-  //std::cout << "Second check:" << std::endl;
-  //std::cout << "ALPHA:" << std::endl << ALPHA << std::endl;
-  
-  /*
-  #
-  #  Mergesort the alpha with their antipodal angles beta,
-  #  and at the same time update I, F(I), and NBAD.
-  #
-  */
+ 
   size_t JA = 1;
   size_t JB = 1;
   double ALPHK = ALPHA[0];
@@ -160,12 +145,12 @@ double depthTukey2dExact(double U, double V,const arma::mat& m)
   for(size_t J = 0; J < NN2; J++)
   {
     ADD = ALPHK+EPS;
-    //std::cout << "ADD: " << ADD << std::endl;
+  
     
     if (ADD < BETAK)
     {
       NF++;
-      //std::cout << "NF: " << NF << std::endl;
+
       
       if(JA < NN)
       {
@@ -174,7 +159,7 @@ double depthTukey2dExact(double U, double V,const arma::mat& m)
       }
       else ALPHK = P2+1.0;
       
-      //std::cout << "JA: " << JA << " ALPHAK: " << ALPHK << std::endl;  
+  
     }
     else
     {
@@ -185,8 +170,7 @@ double depthTukey2dExact(double U, double V,const arma::mat& m)
         NF = NF-NN;
       }
       FV[I-1] = NF;
-      //std::cout << "Update FV " << FV[I] << " I " << I << std::endl;
-      //NBAD = NBAD + getDepths1(NF - I,2);
+
       if(JB < NN)
       {
         JB++;
@@ -199,17 +183,7 @@ double depthTukey2dExact(double U, double V,const arma::mat& m)
         BETAK = P2+1.0;
     }
   }
-  
-  //std::cout << "Third check" << std::endl;
-  //std::cout << FV << std::endl;
-  //std::cout << ALPHA << std::endl;
-  
-  //double NUMS = depths1(NN,3)-NBAD;
-  /*
-  #
-  #  Computation of NUMH for halfspace depth.
-  #
-  */
+
   size_t GI = 0;
   size_t KI = 0;
   double AEPS;

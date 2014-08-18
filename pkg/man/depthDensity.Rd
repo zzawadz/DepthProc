@@ -17,6 +17,8 @@ depthDensity(x, y, nx = 5, ny = 32, xg = NULL, yg = NULL, ...)
 \item{xg}{vector of point at which the density is to be estimated.}
 
 \item{yg}{vector of point at which the density is to be estimated.}
+
+\item{...}{arguments passed to depthLocal.}
 }
 \description{
 Depth weighted density estimator

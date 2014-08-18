@@ -3,7 +3,7 @@
 #' @rdname depthMedian-methods
 #' 
 #' @param x object of class Depth or matrix.
-#' @param \dots arguments passed to \code{\link{depth}} function (e.g method).
+#' @param ... arguments passed to \code{\link{depth}} function (e.g method).
 #' 
 #' @description
 #' 

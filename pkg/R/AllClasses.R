@@ -288,6 +288,15 @@ setMethod("show", "Depth", function(object)
 
 
 ################################### Depth Density ############################
+#' DepthDensity
+#' 
+#' Class for depth based density estimator.
+#'
+#' @details
+#' 
+#' \code{\link{depthDensity}}
+#'  
+#' @export
 setClass("DepthDensity", representation=list(
   xgrid = "numeric",
   ygrid = "numeric",

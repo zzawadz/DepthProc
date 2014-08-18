@@ -17,8 +17,6 @@ depthMedian(x, ...)
 \arguments{
 \item{x}{object of class Depth or matrix.}
 
-\item{\dots}{arguments passed to \code{\link{depth}} function (e.g method).}
-
 \item{...}{arguments passed to \code{\link{depth}} function (e.g method).}
 }
 \description{

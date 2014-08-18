@@ -158,7 +158,7 @@ binningDepth2D = function(x, binmethod = "LocDepth", nbins = 8, k = 1, remove_bo
 #'@title 2d Binning plot
 #'
 #'  @param x object of class BinnDepth2d
-#'  @param \dots graphical parameters passed to plot
+#'  @param ... graphical parameters passed to plot
 #'  @param alpha alpha value for rgb function
 #'  @param bg_col backgroud color
 #'  @param add_mid logical. If TRUE centers of binns will be marked.

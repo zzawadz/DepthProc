@@ -6,6 +6,7 @@
 #' @param ny the number of equally spaced points at which the density is to be estimated in x-dimension.
 #' @param xg vector of point at which the density is to be estimated.
 #' @param yg vector of point at which the density is to be estimated.
+#' @param ... arguments passed to depthLocal.
 #' 
 #' @references
 #' 
