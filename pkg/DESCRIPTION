@@ -1,6 +1,6 @@
-Package: depthproc
+Package: DepthProc
 Version: 1.0
-Title: depthproc
+Title: DepthProc
 Author: Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt
     Zawadzki from Cracow University of Economics.
 Maintainer: Zygmunt Zawadzki <zawadzkizygmunt@gmail.com>
