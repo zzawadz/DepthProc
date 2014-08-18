@@ -35,7 +35,11 @@
 #'  #EXAMPLE 2
 #'  data(inf.mort,maesles.imm)
 #'  data1990=na.omit(cbind(inf.mort[,1],maesles.imm[,1]))
-#'  depthContour(data1990, n = 50, pmean = TRUE, mcol = "blue", pdmedian = TRUE, mecol = "brown", legend = TRUE, points = TRUE,xlab="infant mortality rate per 1000 live birth", ylab="against masles immunized percentage", main='L2 depth, UN Fourth Goal 2011 year',method = "LP")
+#'  depthContour(data1990, n = 50, pmean = TRUE, mcol = "blue", 
+#'  pdmedian = TRUE, mecol = "brown", legend = TRUE, points = TRUE,
+#'  xlab="infant mortality rate per 1000 live birth", 
+#'  ylab="against masles immunized percentage", main='L2 depth, 
+#'  UN Fourth Goal 2011 year',method = "LP")
 #'  
 #'  
 #'  @keywords
