@@ -56,7 +56,7 @@
 #'  x = mvrnorm(100, c(0,0), diag(2))
 #'  y = mvrnorm(80, c(0,0), diag(2))
 #'  z = mvrnorm(20, c(5,5), diag(2))
-#'  scaleCurve(x, rbind(y,z), method = "Projection", plot = TRUE, nameX = "N", nameY = "Mixture of N")
+#'  scaleCurve(x, rbind(y,z), method = "Projection", name = "N", name_y = "Mixture of N")
 #'  
 #'  @keywords
 #'  multivariate
