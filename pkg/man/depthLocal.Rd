@@ -30,6 +30,7 @@ A successful concept of {local depth } was proposed by Paidaveine and Van Bever 
  Formally, let  \eqn{ D(\cdot,P) }  be a depth function. Then the {local depth }with the locality parameter  \eqn{ \beta  }  and w.r.t. a point  \eqn{ x }  is defined as  \deqn{ L{{D}^{\beta }}(z,P):z\to D(z,P_{x}^{\beta }), }  where  \eqn{ P_{x}^{\beta }(\cdot )=P\left( \cdot |R_{x}^{\beta }(P) \right) }  is cond. distr. of  \eqn{ P }  conditioned on  \eqn{ R_{x}^{\beta }(P) } .
 }
 \examples{
+\dontrun{
 # EXAMPLE 1
 require(MASS)
 data = mvrnorm(100, c(0,5), diag(2)*5)
@@ -54,6 +55,7 @@ BALLOT=rbind(X1,X2)
 train <- sample(1:10000, 100)
 data<-BALLOT[train,]
 depthContour(data, method = "Local", depth1 = "Projection",beta=0.3)
+}
 }
 \references{
 Paindaveine, D., Van Bever, G. (2013) From depth to local depth : a focus on centrality. Journal of the American Statistical Association 105, 1105-1119 (2013).

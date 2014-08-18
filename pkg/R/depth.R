@@ -261,13 +261,14 @@ depthProjection = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1
 #'  
 #'  
 #'  @examples
+#'  \dontrun{
 #'  x <- matrix(rnorm(3000), nc = 3)
 #'  
 #'  #Same results
 #'  depthTukey(x, x, ndir = 2000, seed = 1) == depthTukey(x, x, ndir = 2000, seed = 1)
 #'  #Different
 #'  depthTukey(x, x, ndir = 2000, seed = -1) == depthTukey(x, x, ndir = 2000, seed = -1)
-#'  
+#'  }
 #'  
 #'  @keywords
 #'  multivariate

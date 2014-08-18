@@ -43,7 +43,7 @@
 #'  Paindaveine, D., Van Bever, G. (2013) From depth to local depth : a focus on centrality. Journal of the American Statistical Association 105, 1105-1119 (2013).
 #'  
 #'  @examples
-#'  
+#' \dontrun{
 #' # EXAMPLE 1
 #' require(MASS)
 #' data = mvrnorm(100, c(0,5), diag(2)*5)
@@ -68,6 +68,8 @@
 #' train <- sample(1:10000, 100)
 #' data<-BALLOT[train,]
 #' depthContour(data, method = "Local", depth1 = "Projection",beta=0.3)
+#' }
+#' 
 depthLocal = function(u, X, beta=0.5,
                       depth1="Projection", depth2=depth1, name = "X", ...) 
 {

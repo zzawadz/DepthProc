@@ -13,7 +13,8 @@
 #' 
 #' @export
 #' @examples
-#'
+#' 
+#' \dontrun{
 #' # .sampleData is special function for creating
 #' # data  for testing conditional denisty estimators
 #' data = DepthProc:::.sampleData(1:5, 100)
@@ -22,6 +23,8 @@
 #' dep = depthDensity(x,y)
 #' plot(dep, type = "raw")
 #' plot(dep, type = "depth")
+#' }
+#' 
 depthDensity = function(x, y, nx = 5, ny = 32, xg = NULL, yg = NULL, ...)
 {
   if(is.null(xg)) xy_grid = .createGrid(x,y,nx,ny)
