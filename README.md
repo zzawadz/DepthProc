@@ -13,7 +13,7 @@ Currently *depthproc* is not avaiable on CRAN (but soon it will be!). You can in
 
 ```r
 require(devtools)
-install_github("depthproc", "zzawadz", subdir = "pkg")
+install_github("DepthProc", "zzawadz", subdir = "pkg")
 ```
 
 
