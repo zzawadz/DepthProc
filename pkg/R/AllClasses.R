@@ -19,23 +19,17 @@ setGeneric("%+%", function(e1,e2) standardGeneric("%+%"))
 #####################################
 
 #' Depth
-#' 
+#'
 #' Virtual class with structure for every depth class from depthproc package.
 #'
-#'  @section Slots:
-#' \describe{
-#'    \item{u}{Matrix with number of elements in certain bin.}
-#'    \item{X}{Middle values on x-axis.}
-#'    \item{method}{Middle values on y-axis.}
-#'    \item{name}{Boundaries of bins.}
-#'  }
+#'    @slot X Middle values on x-axis.
+#'    @slot method Middle values on y-axis.
+#'    @slot name Boundaries of bins.
 #'  
-#'  
-#'
-#' @name Depth
 #' @aliases DepthEuclid DepthProjection DepthMahalanobis DepthTukey DepthLP DepthLocal
 #' @rdname Depth-class
-#' @export 
+#' @exportClass Depth
+#' 
 setClass("Depth", representation(u = "matrix", X = "matrix", method = "character", name = "character", "VIRTUAL"))
 setClass("DepthEuclid", representation(), contains = c("Depth","numeric"))
 setClass("DepthProjection", representation(), contains = c("Depth","numeric"))
@@ -52,16 +46,9 @@ setClass("DepthLocal", representation("depth1" = "character","depth2" = "charact
 #' 
 #' Class fro DDPlot
 #'
-#'  @section Slots:
-#' \describe{
-#'    \item{X}{Object of class \link{Depth}.}
-#'    \item{Y}{Object of class \link{Depth}.}
-#'  }
+#'    @slot X Object of class \link{Depth}.
+#'    @slot Object of class \link{Depth}.
 #'  
-#'  
-#'
-#' @name DDPlot
-#' @rdname DDPlot-class
 #' @export 
 setClass("DDPlot", representation(X = c("Depth"), Y = "Depth", title = "character"))
 
@@ -69,9 +56,13 @@ setClass("DDPlot", representation(X = c("Depth"), Y = "Depth", title = "characte
 ######### DepthCurve ################
 #####################################
 
-#' DepthCurve and DepthCurveList
+#' DepthCurve 
 #' 
 #' This page describes mechanism behavior of ScaleCurve and AsymmetryCurve
+#' 
+#' @slot depth
+#' @slot title
+#' @slot alpha
 #'
 #' @section DepthCurve and DepthCurveList:
 #' 
@@ -95,9 +86,6 @@ setClass("DDPlot", representation(X = c("Depth"), Y = "Depth", title = "characte
 #' plot(sc_list%+%s3) # Add third curve and draw a plot
 #' 
 #'
-#' @name DepthCurve
-#' @aliases DepthCurve DepthCurveList
-#' @rdname DepthCurve-class 
 #' @export  
 setClass("DepthCurve", representation(depth = "Depth", title = "character", alpha = "numeric","VIRTUAL"))
 setClass("DepthCurveList", representation("VIRTUAL"))
@@ -108,12 +96,9 @@ setClass("DepthCurveList", representation("VIRTUAL"))
 #' 
 #' ScaleCurve is a class that stores results of \link{scaleCurve} function.
 #' 
-#' @section Slots:
-#' \describe{
 #' 
 #'    ScaleCurve intherits behviour from numeric vector, so raw values of ScaleCurve can be accessed via as.numeric(...).
 #'    
-#'    \item{alpha}{central regions}.}
 #'  
 #' 
 #' The mechanism of creating plots with multiple curves is shown in \link{DepthCurve} (same mechanism is applied for AsymmetryCurve).
@@ -138,7 +123,7 @@ setClass("DepthCurveList", representation("VIRTUAL"))
 #'
 #' @name ScaleCurve
 #' @aliases ScaleCurve ScaleCurveList
-#' @rdname ScaleCurve-class 
+#' @rdname ScaleCurve
 #' @export  
 setClass("ScaleCurve", contains=c("numeric","DepthCurve"))
 setClass("ScaleCurveList", contains=c("DepthCurveList", "list"))
@@ -162,7 +147,6 @@ setClass("ScaleCurveList", contains=c("DepthCurveList", "list"))
 #'
 #' @name AsymmetryCurve
 #' @aliases AsymmetryCurve AsymmetryCurveList
-#' @rdname AsymmetryCurve-class 
 #' @export 
 setClass("AsymmetryCurve", contains=c("numeric","DepthCurve"))
 setClass("AsymmetryCurveList", contains=c("DepthCurveList", "list"))
@@ -270,6 +254,7 @@ setClass("TrimReg2d", contains="RobReg")
 #' @title Add line to plot
 #'
 #'  @param a an object of class RobReg
+#'  @param b not used.
 #'  @param ... Arguments to be passed to methods, such as graphical parameters (see par).
 #'  
 #'  @description Add fitted line to a plot. This is overloaded function for robust regression methods from package depthproc.

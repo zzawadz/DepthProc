@@ -11,17 +11,13 @@ Depends:
     R (>= 3.0.0),
     ggplot2,
     Rcpp (>= 0.11.2),
-    RcppArmadillo,
     rrcov,
-    np
+    np,
+    methods
 Imports:
     lattice,
     sm,
-    geometry,
-    robustbase,
-    boot,
-    sn,
-    hdrcde
-Suggests: MASS, mvtnorm, rgl
+    geometry
+Suggests: MASS, mvtnorm, rgl, sn, robustbase, 
 LinkingTo: Rcpp, RcppArmadillo
 Roxygen: list(wrap = FALSE)

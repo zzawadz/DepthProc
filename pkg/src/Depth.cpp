@@ -1,6 +1,5 @@
 #include "Depth.h"
-#include <stdio.h>
-#include <iostream>
+
 
 namespace Depth{
 

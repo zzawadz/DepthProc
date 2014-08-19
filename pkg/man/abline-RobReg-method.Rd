@@ -10,6 +10,8 @@
 \arguments{
 \item{a}{an object of class RobReg}
 
+\item{b}{not used.}
+
 \item{...}{Arguments to be passed to methods, such as graphical parameters (see par).}
 
 \item{h}{the y-value(s) for horizontal line(s).}

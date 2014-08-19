@@ -211,7 +211,7 @@ double depthTukey2dExact(double U, double V,const arma::mat& m)
     
     NUMH = (NUMH < FV[I] - GI)? NUMH : FV[I] - GI; 
     NUMH = (NUMH < NN-KI)? NUMH : NN-KI;
-    //printf("NUMH: %i, FV: %i GI: %i NN: %i\n",NUMH,FV[I],GI,NN);
+   
   }
   
   return getHDEP(NT, N, NUMH);

@@ -77,10 +77,10 @@ arma::vec sampleMaxDepthForMu(double mu,const arma::vec& y, size_t d_min, size_t
     iter++;
     size_t d_up = d;
     size_t d_low = d_min;
-    //std::printf("Ubound value %i %i %i \n", d_up, d_low, d_up-d_low);
+
     while(iter < max_iter && fabs(difbound) > eps && d_up-1>d_low)
     {
-      //std::printf("Ubound value %f \n", iter);
+    
       iter++;
       (difbound < -eps ? d_up : d_low) = d; 
       d = rint(static_cast<double>(d_up+d_low)/2);

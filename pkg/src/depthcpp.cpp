@@ -29,9 +29,7 @@ int computeRegDepth(double *x, double *y, double* coef, int n){
   }
   depth = (lmin+rmax<=lmax+rmin)?lmin+rmax:lmax+rmin;
  
- // printf("lmin %i \n",lmin+rmax);
- // printf("lmax %i \n",lmax+rmin);
- // printf("depth %i \n", depth);
+
   
   for(i = 0; i < n; i++){
     if(res[i] == 0){
@@ -49,9 +47,7 @@ int computeRegDepth(double *x, double *y, double* coef, int n){
       tmp_depth = lmin + rmax;
     }
     depth = (depth<=tmp_depth)?depth:tmp_depth;
-  //    printf("lmin %i \n",lmin+rmax);
-//  printf("lmax %i \n",lmax+rmin);
-//  printf("depth %i \n", depth);
+
   }
   delete [] res;
   return depth;
@@ -89,7 +85,7 @@ NumericVector depth2dcpp(SEXP R_x, SEXP R_y) {
         
          coef = getCoefficient(x[i],y[i],x[j],y[j]);
          tmp_depth = computeRegDepth(px,py,coef,n);
-        // printf(" %f  %f \n",coef[1],coef[0]);
+       
          
          if(tmp_depth > depth){
            delete [] deep_coef;
