@@ -5,7 +5,7 @@ namespace Utils
 {
 	arma::mat runifsphere(size_t n, size_t p, int seed = -1)
 	{
-		//if(seed >= 0) std::srand(seed);
+		if(seed >= 0) std::srand(seed);
 
 		arma::mat X(n, p);
 		X.randn();
