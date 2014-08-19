@@ -9,9 +9,9 @@
 #define ARMA_USE_BLAS
 #endif
 
-#if !defined(ARMA_NO_DEBUG)
+/*#if !defined(ARMA_NO_DEBUG)
 #define ARMA_NO_DEBUG
-#endif
+#endif*/
 
 
 #endif

@@ -15,12 +15,12 @@ Virtual class with structure for every depth class from depthproc package.
 \section{Slots}{
 
 \describe{
-\item{\code{Matrix}}{with number of elements in certain bin.}
+\item{\code{u}}{data set.}
 
-\item{\code{X}}{Middle values on x-axis.}
+\item{\code{X}}{reference set.}
 
-\item{\code{method}}{Middle values on y-axis.}
+\item{\code{method}}{depth type.}
 
-\item{\code{name}}{Boundaries of bins.}
+\item{\code{name}}{name that will be used on plots.}
 }}
 

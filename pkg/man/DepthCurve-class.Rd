@@ -2,15 +2,22 @@
 \docType{class}
 \name{DepthCurve-class}
 \alias{DepthCurve-class}
-\title{DepthCurve and DepthCurveList}
+\title{DepthCurve}
 \description{
 This page describes mechanism behavior of ScaleCurve and AsymmetryCurve
 }
-\section{DepthCurve and DepthCurveList}{
-
-
+\details{
 DepthCurve is a virtual class that contains methods (getPlot(...) and plot(...)) for rendering single curve such as ScaleCurve or AsymmetryCurve. Such object can be added by overloaded operator '%+%'. This 'addition' create DepthCurveList that can be used for rendering plot with multiple curves. Sample session (using ScaleCurve) is shown in Examples section.
 }
+\section{Slots}{
+
+\describe{
+\item{\code{depth}}{object of \link{Depth-class}}
+
+\item{\code{title}}{title of a plot}
+
+\item{\code{alpha}}{central area values}
+}}
 \examples{
 require(MASS)
 require(mvtnorm)

@@ -1,6 +1,13 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 
+*.c text eol=lf
+*.cpp text eol=lf
+*.R text eol=lf
+*.h text eol=lf
+Makevars text eol=lf
+Makevars.win eol=lf
+
 # Custom for Visual Studio
 *.cs     diff=csharp
 *.sln    merge=union

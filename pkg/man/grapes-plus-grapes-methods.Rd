@@ -27,6 +27,6 @@ e1 \%+\% e2
 Adds plots
 }
 \details{
-See \code{\link{DepthCurve}} for description.
+See \code{\link{DepthCurve-class}} for description.
 }
 
