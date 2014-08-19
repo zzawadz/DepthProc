@@ -20,4 +20,3 @@ Imports:
     geometry
 Suggests: MASS, mvtnorm, rgl, sn, robustbase, 
 LinkingTo: Rcpp, RcppArmadillo
-Roxygen: list(wrap = FALSE)
