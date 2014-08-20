@@ -5,7 +5,6 @@
 #include "Utils.h"
 #include "TukeyDepth.h"
 #include "armadillo"
-#include <omp.h>
 
 namespace Depth
 {

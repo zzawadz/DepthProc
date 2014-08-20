@@ -1,4 +1,5 @@
 #include <RcppArmadillo.h>
+#include <Rconfig.h>
 
 #ifndef ROBCOVLIBCONFIG_INCLUDES
 #define ROBCOVLIBCONFIG_INCLUDES
@@ -19,5 +20,10 @@
 #define ARMA_NO_DEBUG
 #endif*/
 
+#ifdef SUPPORT_OPENMP
+   #include <omp.h>
+#else
+   #define omp_get_max_threads() 0
+#endif
 
 #endif

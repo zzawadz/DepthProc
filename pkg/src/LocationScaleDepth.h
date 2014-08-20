@@ -3,7 +3,6 @@
 
 #include "RobCovLibConfig.h"
 #include "armadillo"
-#include <omp.h>
 #include <limits>
 #include <math.h>
 #include <algorithm>

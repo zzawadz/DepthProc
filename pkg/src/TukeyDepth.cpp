@@ -94,7 +94,7 @@ double depthTukey2dExact(double U, double V,const arma::mat& m)
   //arma::mat m(cm.begin(), cm.nrow(), cm.ncol(), false);
   // CONST
   const size_t N   = m.n_rows;
-  const double P   = acos(-1);
+  const double P   = M_PI;
   const double P2  = P*2.0;
   const double EPS = 0.000001;
   
