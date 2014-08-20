@@ -46,7 +46,6 @@ Let us recall, that binning is a popular method of decreasing a sample size. To 
 }
 \examples{
 #EXAMPLE 1
-require(MASS)
 Sigma1 = matrix(c(10,3,3,2),2,2)
 X1 = mvrnorm(n= 8500, mu= c(0,0),Sigma1)
 Sigma2 = matrix(c(10,0,0,2),2,2)

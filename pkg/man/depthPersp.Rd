@@ -33,8 +33,7 @@ Draws a perspective plot of depth function over x-y plane.
 plot_method - rgl package is not in depends list beacuse it may cause problems when OpenGL is not supported.  To use plot_method = "rgl" you must load this package on your own.
 }
 \examples{
-require(MASS)
- x = mvrnorm(100,c(0,0),diag(2))
+x = mvrnorm(100,c(0,0),diag(2))
  depthPersp(x, method = "Euclidean")
 
 # EXAMPLE 2

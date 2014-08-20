@@ -44,7 +44,6 @@ ggplot2  package is used to draw a plot.
 }
 \examples{
 require(mvtnorm)
- require(MASS)
  x = mvrnorm(n = 100, mu = c(0,0), Sigma = 3*diag(2))
  y = rmvt(n = 100, sigma = diag(2), df = 2)
  scaleCurve(x, y, method = "Projection", plot = TRUE)

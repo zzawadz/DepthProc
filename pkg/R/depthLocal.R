@@ -45,7 +45,6 @@
 #'  @examples
 #' \dontrun{
 #' # EXAMPLE 1
-#' require(MASS)
 #' data = mvrnorm(100, c(0,5), diag(2)*5)
 #' #by default depth2 = depth1
 #' depthLocal(data, data, depth1 = "LP")
@@ -58,7 +57,6 @@
 #' depthContour(data1990, method = "Local", depth1 = "LP",beta=0.3)
 #' 
 #' #EXAMPLE 3
-#' require(MASS)
 #' Sigma1 = matrix(c(10,3,3,2),2,2)
 #' X1 = mvrnorm(n= 8500, mu= c(0,0),Sigma1)
 #' Sigma2 = matrix(c(10,0,0,2),2,2)

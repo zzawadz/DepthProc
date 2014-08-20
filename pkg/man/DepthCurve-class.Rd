@@ -19,7 +19,6 @@ DepthCurve is a virtual class that contains methods (getPlot(...) and plot(...))
 \item{\code{alpha}}{central area values}
 }}
 \examples{
-require(MASS)
 require(mvtnorm)
 x = mvrnorm(n = 100, mu = c(0,0), Sigma = 2*diag(2))
 y = rmvt(n = 100, sigma = diag(2), df = 4)

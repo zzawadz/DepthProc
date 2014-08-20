@@ -14,7 +14,6 @@ ScaleCurve intherits behviour from numeric vector, so raw values of ScaleCurve c
 The mechanism of creating plots with multiple curves is shown in \link{DepthCurve-class} (same mechanism is applied for AsymmetryCurve).
 }
 \examples{
-require(MASS)
 require(mvtnorm)
 x = mvrnorm(n = 100, mu = c(0,0), Sigma = 2*diag(2))
 y = rmvt(n = 100, sigma = diag(2), df = 4)

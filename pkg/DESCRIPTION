@@ -13,10 +13,15 @@ Depends:
     Rcpp (>= 0.11.2),
     rrcov,
     np,
-    methods
+    methods,
+    MASS
 Imports:
     lattice,
     sm,
     geometry
-Suggests: MASS, mvtnorm, rgl, sn, robustbase, 
+Suggests:
+    mvtnorm,
+    rgl,
+    sn,
+    robustbase,
 LinkingTo: Rcpp, RcppArmadillo

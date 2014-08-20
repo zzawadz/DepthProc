@@ -35,7 +35,6 @@
 #' @examples
 #' 
 #' 
-#' require(MASS)
 #' x = mvrnorm(100, c(0,0), diag(2))
 #' y = mvrnorm(100, c(0,0), diag(2)*1.4)
 #' mWilcoxonTest(x,y)

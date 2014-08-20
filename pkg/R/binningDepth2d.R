@@ -43,7 +43,6 @@
 #'  @examples
 #'  
 #' #EXAMPLE 1
-#' require(MASS)   
 #' Sigma1 = matrix(c(10,3,3,2),2,2)
 #' X1 = mvrnorm(n= 8500, mu= c(0,0),Sigma1)
 #' Sigma2 = matrix(c(10,0,0,2),2,2)
@@ -169,7 +168,6 @@ binningDepth2D = function(x, binmethod = "LocDepth", nbins = 8, k = 1, remove_bo
 #'  
 #'  @examples
 #'  
-#'  require(MASS)
 #'  tmp = binningDepth2D(x = mvrnorm(100,rep(0,2),diag(2)))
 #'  plot(tmp)
 #'  @keywords

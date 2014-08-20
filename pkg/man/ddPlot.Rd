@@ -32,7 +32,6 @@ Its sample counterpart calculated for two samples  \eqn{ {{{X}}^{n}}=\{{{X}_{1}}
 \deqn{ DD({{F}_{n}},{{G}_{m}})=\left\{ \left( D({z},{{F}_{n}}),D({z},{{G}_{m}}) \right),{z}\in \{{{{X}}^{n}}\cup {{{Y}}^{m}}\} \right\}}
 }
 \examples{
-require(MASS)
 require(sn)
 require(mvtnorm)
 

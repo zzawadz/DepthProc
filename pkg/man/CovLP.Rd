@@ -30,8 +30,7 @@ Using depth function one can define a depth-weighted location and scatter estima
  The \pkg{DepthProc} package offers these estimators for weighted  \eqn{ {L}^{p} } depth. Note that \eqn{ L(\cdot ) }  and  \eqn{ S(\cdot ) }  include multivariate versions of trimmed means and covariance matrices. Their sample counterparts take the form                                                                                                                                                                                                                                                                                      \deqn{ {{T}_{WD}}({{{X}}^{n}})={\sum\limits_{i=1}^{n}{{{d}_{i}}{{X}_{i}}}}/{\sum\limits_{i=1}^{n}{{{d}_{i}}}} , }                                                                                                                                                                                                                                                                                         \deqn{ DIS({{{X}}^{n}})=\frac{\sum\limits_{i=1}^{n}{{{d}_{i}}\left( {{{X}}_{i}}-{{T}_{WD}}({{{X}}^{n}}) \right){{\left( {{{X}}_{i}}-{{T}_{WD}}({{{X}}^{n}})                                                     \right)}^{T}}}}{\sum\limits_{i=1}^{n}{{{d}_{i}}}}, }    where  \eqn{ {{d}_{i}} }  are sample depth weights,   \eqn{ {{w}_{1}}(x)={{w}_{2}}(x)=x } .
 }
 \examples{
-require(MASS)
- x = mvrnorm(n = 100, mu = c(0,0), Sigma = 3*diag(2))
+x = mvrnorm(n = 100, mu = c(0,0), Sigma = 3*diag(2))
  cov_x = CovLP(x,1,1,1)
 
  # EXAMPLE 2

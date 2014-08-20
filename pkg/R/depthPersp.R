@@ -21,7 +21,6 @@
 #' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #' 
 #' @examples
-#'  require(MASS)
 #'  x = mvrnorm(100,c(0,0),diag(2))
 #'  depthPersp(x, method = "Euclidean")
 #' 
@@ -62,7 +61,7 @@ depthPersp<-function(x,plot_method = "lattice",xlim = extendrange(x[,1],f=0.1),y
 			
 			if(plot_method == "rgl") 
         {
-          persp3d(axis_x,axis_y,z_surface,color=col,back = "lines",
+          rgl::persp3d(axis_x,axis_y,z_surface,color=col,back = "lines",
 				xlab = xlab, ylab = ylab,zlab=plot_title)
 			  }
 			

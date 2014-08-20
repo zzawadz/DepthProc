@@ -39,7 +39,6 @@
 #'  @examples
 #'  
 #' #EXAMPLE 1
-#' require(MASS)
 #' require(sn)
 #' xi = c(0,0)
 #' alpha <- c(2,-5)

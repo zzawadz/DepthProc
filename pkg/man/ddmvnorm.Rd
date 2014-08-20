@@ -31,7 +31,6 @@ In the first step the location and scale of x are estimated and theoretical samp
 }
 \examples{
 # EXAMPLE 1
-require(MASS)
 norm = mvrnorm(1000, c(0,0,0), diag(3))
 con = mvrnorm(100, c(1,2,5), 3*diag(3))
 sample = rbind(norm, con)

@@ -29,7 +29,6 @@ Properties of the DD plot based statistics in the i.i.d setting were studied by 
 The distribution of  \eqn{ S }  is symmetric about   \eqn{ E(S)=1/2m(m{+}n{+1)} } , its variance is   \eqn{ {{D}^{2}}(S)={1}/{12}\;mn(m+n+1)}.
 }
 \examples{
-require(MASS)
 x = mvrnorm(100, c(0,0), diag(2))
 y = mvrnorm(100, c(0,0), diag(2)*1.4)
 mWilcoxonTest(x,y)
