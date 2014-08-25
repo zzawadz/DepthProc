@@ -3,7 +3,7 @@
 
 #include "RobCovLibConfig.h"
 #include "armadillo"
-
+#include <Rcpp.h>
 
 namespace Utils
 {
