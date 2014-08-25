@@ -1,4 +1,4 @@
-
+/*
 #include <R.h> 
 #include <Rdefines.h> 
 #include <Rinternals.h> 
@@ -7,13 +7,13 @@
 
 
 double qs(double *t,long int k,long int n, long int x,long int l);// deklaracja wlasciwej funkcji quickselect 
-/* 
+
 t-tablica na ktorej wszystko sie dzieje 
 k-poczatek od ktorego interesuja nas liczby 
 n-koniec fragmentu tablicy ktory nas teraz interesuje 
 x-ilosc liczb mniejszych od mediany 
 l-ile aktualnie mamy liczb mniejszych od piv'a 
-*/ 
+ 
  
 //funkcja do losowania piva 
 long int pivr(long int k,long int n); 
@@ -85,12 +85,12 @@ double medianqs(double *tab, long int n) ;
 	return(results);
  }
  
-/*Wlasciwa funkcja - do wyznaczania mediany
-ona jest wywo?ywana z poziomu R*/
+Wlasciwa funkcja - do wyznaczania mediany
+ona jest wywo?ywana z poziomu R
 double medianqs(double *tab, long int n) 
 { 
  
-srand(time(NULL));
+//srand(time(NULL));
 
 double median;
 long int x=n/2; 
@@ -145,7 +145,7 @@ else return(qs(t,l,n,x,l));//mamy za malo za mala liczbe akualnie mniejszych od 
 } 
  
  
-/************************************************************************/ 
+**********************************************************************
 //funkcja losujaca liczbe z przedzialu <k,n) 
 long int pivr(long int k,long int n) 
 { 
@@ -233,5 +233,5 @@ return(r);
 	UNPROTECT(1);
 	return Rdepth;
 }
- 
+*/
  
