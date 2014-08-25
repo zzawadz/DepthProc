@@ -55,7 +55,7 @@ SEXP depthMahCPP(SEXP ru, SEXP rX, SEXP rcov, SEXP rmean, int threads)
 }
 
 // [[Rcpp::export]]
-SEXP depthProjCPP(SEXP ru, SEXP rX, double nproj, double seed, int threads) 
+SEXP depthProjCPP(SEXP ru, SEXP rX, double nproj, int threads) 
 {
   Rcpp::NumericMatrix cu(ru);
   arma::mat u(cu.begin(), cu.nrow(), cu.ncol(), false);
@@ -64,7 +64,7 @@ SEXP depthProjCPP(SEXP ru, SEXP rX, double nproj, double seed, int threads)
   arma::mat X(cX.begin(), cX.nrow(), cX.ncol(), false);
   
   
-  arma::vec depth = Depth::ProjectionDepth(u, X, nproj, seed, threads);
+  arma::vec depth = Depth::ProjectionDepth(u, X, nproj, threads);
   return wrap(depth);
 }
 

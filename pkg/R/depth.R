@@ -200,7 +200,6 @@ depthMah = function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1, ...
 #'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
 #'  @param ndir number of directions used in computations
-#'  @param seed this seed is used in random number generator in C++ code. Value -1 means that seed is not set.
 #'  @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
 #'  @param name name for this data set - it will be used on plots from depthproc.
 #'  @param \dots currently not supported.
@@ -218,19 +217,23 @@ depthMah = function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1, ...
 #'  x <- matrix(rnorm(3000), nc = 3)
 #'  
 #'  #Same results
-#'  depthProjection(x, x, ndir = 2000, seed = 1) == depthProjection(x, x, ndir = 2000, seed = 1)
+#'  set.seed(1)
+#'  a = depthProjection(x, x, ndir = 2000)
+#'  set.seed(1)
+#'  b = depthProjection(x, x, ndir = 2000)
+#'  all(a == b)
 #'  #Different
-#'  depthProjection(x, x, ndir = 2000, seed = -1) == depthProjection(x, x, ndir = 2000, seed = -1)
+#'  depthProjection(x, x, ndir = 2000) == depthProjection(x, x, ndir = 2000)
 #'  
 #'  
 #'  @keywords
 #'  multivariate
 #'  nonparametric
 #'  depth function
-depthProjection = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1,...)
+depthProjection = function(u, X, ndir = 1000, name = "X", threads = -1,...)
 {
   if(missing(X)) X = u
-  depth = depthProjCPP(u, X, ndir, seed, threads)
+  depth = depthProjCPP(u, X, ndir, threads)
   new("DepthProjection", depth, u = u, X = X, method = "Projection", name = name)
 }
 
@@ -245,7 +248,6 @@ depthProjection = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1
 #'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
 #'  @param ndir number of directions used in computations
-#'  @param seed this seed is used in random number generator in C++ code. Value -1 means that seed is not set.
 #'  @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
 #'  @param name name for this data set - it will be used on plots from depthproc.
 #'  @param exact if TRUE exact alhorithm will be used . Currently it works only for 2 dimensional data set.
@@ -265,16 +267,13 @@ depthProjection = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1
 #'  x <- matrix(rnorm(3000), nc = 3)
 #'  
 #'  #Same results
-#'  depthTukey(x, x, ndir = 2000, seed = 1) == depthTukey(x, x, ndir = 2000, seed = 1)
-#'  #Different
-#'  depthTukey(x, x, ndir = 2000, seed = -1) == depthTukey(x, x, ndir = 2000, seed = -1)
+#'  depthTukey(x, x, ndir = 2000)
 #'  }
-#'  
 #'  @keywords
 #'  multivariate
 #'  nonparametric
 #'  depth function
-depthTukey = function(u, X, ndir = 1000, seed = 1, name = "X", threads = -1, exact = FALSE,...)
+depthTukey = function(u, X, ndir = 1000, name = "X", threads = -1, exact = FALSE,...)
 {
   if(missing(X)) X = u
   tukey1d = function(u,X)

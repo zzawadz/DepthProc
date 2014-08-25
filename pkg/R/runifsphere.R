@@ -4,14 +4,7 @@
 #'
 #'  @param n number of random samples.
 #'  @param p dimension of the unit sphere.
-#'  @param seed seed for C++ random number generator.
 #'
-#'  @details 
-#'  
-#'  seed is passed to function std::srand(seed); Value -1 means that seed is not set in c++ code.
-#'  
-#'  This function uses function randn() from Armadillo C++ Library. 
-#'  
 #'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #'
 #'  @examples
@@ -20,7 +13,7 @@
 #'  plot(x)
 
 
-runifsphere = function(n, p = 2, seed = -1)
+runifsphere = function(n, p = 2)
 {
-  runifsphereCPP(n,p,seed)
+  runifsphereCPP(n,p)
 }

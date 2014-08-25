@@ -60,8 +60,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // depthProjCPP
-SEXP depthProjCPP(SEXP ru, SEXP rX, double nproj, double seed, int threads);
-RcppExport SEXP DepthProc_depthProjCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP nprojSEXP, SEXP seedSEXP, SEXP threadsSEXP) {
+SEXP depthProjCPP(SEXP ru, SEXP rX, double nproj, int threads);
+RcppExport SEXP DepthProc_depthProjCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP nprojSEXP, SEXP threadsSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -69,9 +69,8 @@ BEGIN_RCPP
         Rcpp::traits::input_parameter< SEXP >::type ru(ruSEXP );
         Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP );
         Rcpp::traits::input_parameter< double >::type nproj(nprojSEXP );
-        Rcpp::traits::input_parameter< double >::type seed(seedSEXP );
         Rcpp::traits::input_parameter< int >::type threads(threadsSEXP );
-        SEXP __result = depthProjCPP(ru, rX, nproj, seed, threads);
+        SEXP __result = depthProjCPP(ru, rX, nproj, threads);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
@@ -171,16 +170,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // runifsphereCPP
-SEXP runifsphereCPP(double n, double p, int seed);
-RcppExport SEXP DepthProc_runifsphereCPP(SEXP nSEXP, SEXP pSEXP, SEXP seedSEXP) {
+SEXP runifsphereCPP(double n, double p);
+RcppExport SEXP DepthProc_runifsphereCPP(SEXP nSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< double >::type n(nSEXP );
         Rcpp::traits::input_parameter< double >::type p(pSEXP );
-        Rcpp::traits::input_parameter< int >::type seed(seedSEXP );
-        SEXP __result = runifsphereCPP(n, p, seed);
+        SEXP __result = runifsphereCPP(n, p);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

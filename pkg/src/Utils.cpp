@@ -4,7 +4,7 @@ using namespace Rcpp ;
 
 namespace Utils
 {
-	arma::mat runifsphere(size_t n, size_t p, int seed = -1)
+	arma::mat runifsphere(size_t n, size_t p)
 	{
 		//arma::mat X(n, p);
 		NumericVector rx = rnorm(n*p);

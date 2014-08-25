@@ -123,12 +123,12 @@ namespace Depth{
 
 
 	// Projection Depth
-	arma::vec ProjectionDepth(const arma::mat& X, size_t nproj, double seed, int threads)
+	arma::vec ProjectionDepth(const arma::mat& X, size_t nproj, int threads)
 	{
-		return ProjectionDepth(X, X, nproj, seed, threads);
+		return ProjectionDepth(X, X, nproj, threads);
 	}
 
-	arma::vec ProjectionDepth(const arma::mat& X, const arma::mat& Y, size_t nproj, double seed, int threads)
+	arma::vec ProjectionDepth(const arma::mat& X, const arma::mat& Y, size_t nproj, int threads)
 	{
     if(threads < 1) threads = omp_get_max_threads();
     
@@ -136,7 +136,7 @@ namespace Depth{
 		size_t ny = Y.n_rows;
 		size_t d  = Y.n_cols;
 
-		arma::mat directions = Utils::runifsphere(nproj, d, seed);
+		arma::mat directions = Utils::runifsphere(nproj, d);
 		directions = directions.t();
 
 		arma::vec depth(nx);

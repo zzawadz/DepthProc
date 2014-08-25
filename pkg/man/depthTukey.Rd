@@ -3,8 +3,8 @@
 \alias{depthTukey}
 \title{Tukey Depth}
 \usage{
-depthTukey(u, X, ndir = 1000, seed = 1, name = "X", threads = -1,
-  exact = FALSE, ...)
+depthTukey(u, X, ndir = 1000, name = "X", threads = -1, exact = FALSE,
+  ...)
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}
@@ -12,8 +12,6 @@ depthTukey(u, X, ndir = 1000, seed = 1, name = "X", threads = -1,
 \item{X}{The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).}
 
 \item{ndir}{number of directions used in computations}
-
-\item{seed}{this seed is used in random number generator in C++ code. Value -1 means that seed is not set.}
 
 \item{threads}{number of threads used in parallel computations. Default value -1 means that all possible cores will be used.}
 
@@ -36,9 +34,7 @@ Irrespective of dimension, Projection and Tukey's depth is obtained by approxima
  x <- matrix(rnorm(3000), nc = 3)
 
  #Same results
- depthTukey(x, x, ndir = 2000, seed = 1) == depthTukey(x, x, ndir = 2000, seed = 1)
- #Different
- depthTukey(x, x, ndir = 2000, seed = -1) == depthTukey(x, x, ndir = 2000, seed = -1)
+ depthTukey(x, x, ndir = 2000)
  }
 }
 \author{
