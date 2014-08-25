@@ -4,7 +4,7 @@ namespace RobCovLib
 {
 	arma::mat WeightedCovarianceEstimator(const arma::mat& X, arma::rowvec locX, const arma::vec& w)
 	{
-		size_t n = X.n_rows;
+		//size_t n = X.n_rows;
 		double sumW = arma::sum(w);
 		arma::mat total_sum = arma::zeros(X.n_cols);
 
