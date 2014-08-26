@@ -31,11 +31,13 @@ Irrespective of dimension, Projection and Tukey's depth is obtained by approxima
 }
 \examples{
 \dontrun{
- x <- matrix(rnorm(3000), nc = 3)
-
- #Same results
- depthTukey(x, x, ndir = 2000)
+ x = matrix(rnorm(3000), nc = 3)
+ depthTukey(x, ndir = 2000)
  }
+
+ # Exact algorithm in 2d
+ x = matrix(rnorm(2000), nc = 2)
+ depthTukey(x, exact = TRUE)
 }
 \author{
 Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.

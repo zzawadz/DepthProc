@@ -22,4 +22,13 @@ depthMedian(x, ...)
 \description{
 Return point with maximum depth function value. If multiple points have the same value, mean average of them will be returned.
 }
+\examples{
+# depthMedian for matrix
+x = matrix(rnorm(600), nc = 3)
+depthMedian(x)
+
+# depthMedian works with object of class Depth
+dp = depth(x)
+depthMedian(dp)
+}
 

@@ -214,16 +214,8 @@ depthMah = function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1, ...
 #'  
 #'  
 #'  @examples
-#'  x <- matrix(rnorm(3000), nc = 3)
-#'  
-#'  #Same results
-#'  set.seed(1)
+#'  x = matrix(rnorm(3000), nc = 3)
 #'  a = depthProjection(x, x, ndir = 2000)
-#'  set.seed(1)
-#'  b = depthProjection(x, x, ndir = 2000)
-#'  all(a == b)
-#'  #Different
-#'  depthProjection(x, x, ndir = 2000) == depthProjection(x, x, ndir = 2000)
 #'  
 #'  
 #'  @keywords
@@ -264,11 +256,14 @@ depthProjection = function(u, X, ndir = 1000, name = "X", threads = -1,...)
 #'  
 #'  @examples
 #'  \dontrun{
-#'  x <- matrix(rnorm(3000), nc = 3)
-#'  
-#'  #Same results
-#'  depthTukey(x, x, ndir = 2000)
+#'  x = matrix(rnorm(3000), nc = 3)
+#'  depthTukey(x, ndir = 2000)
 #'  }
+#'  
+#'  # Exact algorithm in 2d
+#'  x = matrix(rnorm(2000), nc = 2)
+#'  depthTukey(x, exact = TRUE)
+#'  
 #'  @keywords
 #'  multivariate
 #'  nonparametric

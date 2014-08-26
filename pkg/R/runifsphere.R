@@ -11,6 +11,7 @@
 #'  
 #'  x = runifsphere(n=100)
 #'  plot(x)
+#'  
 
 
 runifsphere = function(n, p = 2)

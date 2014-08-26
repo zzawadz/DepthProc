@@ -27,16 +27,8 @@ Irrespective of dimension, Projection and Tukey's depth is obtained by approxima
  Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
 }
 \examples{
-x <- matrix(rnorm(3000), nc = 3)
-
- #Same results
- set.seed(1)
+x = matrix(rnorm(3000), nc = 3)
  a = depthProjection(x, x, ndir = 2000)
- set.seed(1)
- b = depthProjection(x, x, ndir = 2000)
- all(a == b)
- #Different
- depthProjection(x, x, ndir = 2000) == depthProjection(x, x, ndir = 2000)
 }
 \author{
 Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.

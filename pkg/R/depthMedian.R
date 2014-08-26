@@ -11,6 +11,16 @@
 #' 
 #' @export
 #' 
+#' @examples
+#' 
+#' # depthMedian for matrix
+#' x = matrix(rnorm(600), nc = 3)
+#' depthMedian(x)
+#' 
+#' # depthMedian works with object of class Depth
+#' dp = depth(x)
+#' depthMedian(dp) 
+#' 
 setGeneric("depthMedian", function(x,...) standardGeneric("depthMedian"))
 
 #' @rdname depthMedian-methods
