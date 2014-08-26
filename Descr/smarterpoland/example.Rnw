@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+
+\usepackage{geometry}
+\newgeometry{tmargin=2.5cm, bmargin=2.5cm, lmargin=2cm, rmargin=2cm}
+\title{DepthProc - proste przykłady}
+\begin{document}
+\maketitle
+
+<<echo=FALSE>>=
+require(knitr)
+opts_chunk$set(fig.width = 3.2, fig.height = 3)
+@
+
+
+
+\section{Bardzo krótkie wprowadzenie.}
+
+Pakiet dostępny jest na CRAN.
+
+<<eval=FALSE>>=
+install.packages("DepthProc")
+@
+
+<<results='hide', message=FALSE,warning=FALSE>>=
+library(DepthProc)
+@
+
+\section{Wykres głębia-vs-głębia}
+
+Wykres głębia-vs-głębia (Depth-vs-depth, w skrócie ddPlot) jest opartym na funkcji głębi uogólnieniem wykresu kwantyl-kwantyl na przypadek wielowymiarowy. Poniżej prosty przykład, dla przypadków dwóch dwuwymiarowych zbiorów danych różniących się parametrem położenia:  
+
+<<fig.keep='all',fig.show='hold'>>=
+standard = mvrnorm(200, c(0,0), diag(2))
+shift    =  mvrnorm(200, c(0.5, -0.5), diag(2))
+dp = ddPlot(x = standard, y = shift, title = "Difference in position")
+
+getPlot(dp) + theme_bw(base_size = 12)
+
+dp2 = ddPlot(x = standard, y = shift, location = TRUE, title = "Location aligned")
+getPlot(dp2) + theme_bw(base_size = 12)
+@
+
+\section{Krzywa skali}
+
+Krzywa skali pozwala na prównywanie rozrzutu wielowymiarowych rozkładów. Określa ona objętość otoczki wypukłej punktów mających wartość głębi większą niż $1-\alpha$. Im ta wartość większa - tym rozproszenie większe. Poniższy przykład pokazuje porównanie wielowymiarowego rozkładu normalnego z wielowymiarowym rozkładem t-Studenta:
+<<fig.width = 6>>=
+require(mvtnorm)
+x = mvrnorm(n = 500, mu = c(0,0), Sigma = 3*diag(2))
+y = rmvt(n = 500, sigma = diag(2), df = 3)
+sc = scaleCurve(x, y, method = "Projection", plot = TRUE, name = "Norm",name_y = "Student")
+getPlot(sc) + theme_bw(base_size = 12)
+@
+
+Poniżej znajdują się wykresy konturowe dla danych z powyższego przykładu:
+<<fig.keep='all',fig.show='hold',fig.align='center',fig.width = 5,fig.height=4>>=
+par(mar = c(4, 3, 3, 1))
+depthContour(x, points = TRUE, main = "Norm")
+depthContour(y, points = TRUE, main = "Student")
+@
+
+\section{Test równości rozproszenia}
+
+Bazując na funkcjach głębi i teście Wilcoxona można wprowadzić bardzo prosty test na równość rozproszenia dla wielowymiarowych zbiorów danych. Poniżej krótki przykład z użyciem funckji z DepthProc: 
+
+<<>>=
+# Roznica w rozproszeniu:
+x = mvrnorm(200, c(0,0), diag(2))
+y = mvrnorm(200, c(0,0), diag(2)*1.4)
+mWilcoxonTest(x,y) # w istocie jest to obudowana funkcja wilcox.test
+
+# Brak roznicy:
+x = mvrnorm(200, c(0,0), diag(2))
+y = mvrnorm(200, c(0,0), diag(2))
+mWilcoxonTest(x,y) # w istocie jest to obudowana funkcja wilcox.test
+@
+
+
+
+\end{document}

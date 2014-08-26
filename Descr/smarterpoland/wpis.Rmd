@@ -1,0 +1,169 @@
+---
+title: "DepthProc"
+output: html_document
+---
+ 
+ 
+```{r, echo=FALSE, message=FALSE,warning=FALSE}
+library(knitr)
+ 
+opts_chunk$set(fig.width = 7, fig.height = 4)
+
+knit_hooks$set(chartPar = function(before, options, envir) {
+    if (before) par(mar = c(4, 4, .1, .1), pch = 19)  # smaller margin on top and right
+})
+
+
+library(DepthProc)
+```
+ 
+## Pakiet DepthProc - krótka historia
+ 
+Pakiet DepthProc zawiera narzędzia analizy danych oparte na statystycznych funckjach głębi. Powstał na Uniwersytecie Ekonomicznym w Krakowie w Katedrze Statystyki na Wydziale Zarządzania. Inicjatorem projektu był dr hab. Daniel Kosiorowski. 
+ 
+Same funckje głębi są dosyć mało rozpowszechnionym tematem, dlatego też ten wpis nie tyle będzie opisem możliwości pakietu, tylko przedstawieniem czym te funkcje głębi w ogóle są i pokazanie analogi do znanych i lubianych technik analizy danych.
+ 
+## Instalacja
+ 
+Jeszcze krótka notka na temat instalacji. Pakiet jest na CRAN-ie. By go zainstalować wystarczy wpisać:
+```{r, eval=FALSE}
+install.packages("DepthProc")
+```
+ 
+Gdyby ktoś był zainteresowany częścią rozwojową, dzieje się ona na Githubie pod adresem https://github.com/zzawadz/depthproc .
+   
+## Szukanie analogii
+ 
+Prezentując nową koncepcję warto pokazać jej związki z czymś powszechnie znanym i stostowanym - w tym przypadku takim bliskim funkcją głębi będzie wykres kwantyl-kwantyl- bazując na funkcjach głębi można wprowadzić pewne uogólnienie tego wykresu na przypadek wielowymiarowy, ale o tym za chwilę.
+   
+### Szukanie analogii - wykres kwantyl-kwantyl
+ 
+Wykres kwantyl-kwantyl (qqplot), jest dosyć znanym i lubianym narzędziem do porównywania rozkładów prawdopodobieństwa, mającym bardzo prostą interpretację. Jeżeli dwa zbiory danych generuje ten sam rozkład, wtedy punkty na wykresie kwantyl-kwantyl będą układać się wzdłuż przekątnej, na jednej linii. Poniżej bardzo prosty przykład:
+ 
+```{r, chartPar=TRUE}
+norm  = rnorm(100)
+norm2 = rnorm(100)
+student = rt(100,df = 3)
+ 
+par(mfrow = c(1,2))
+qqplot(norm, norm2, main = "Dane generowane \nprzez ten sam rozkład")
+abline(0,1)
+ 
+qqplot(norm, student, main = "Dane generowane \nprzez różne rozkłady")
+abline(0,1)
+```
+ 
+### Więcej wymiarów...
+ 
+Wykres kwantyl-kwantyl ma jedną poważną wadę - może być użyty jedynie do porównywania danych jednowymiarowych. Pewnym pomysłem na przezwyciężenie tego problemu mogłobyby być porównywanie rozkładów brzegowych (czyli każdego z wymiaru z osobna). Poniższy przykład prezentuje dlaczego to podejście może być bardzo mylące. 
+ 
+*Przypuśćmy, że mamy dwa zbiory danych x i y. Oba generowane są przez dwuwymiarowy rozkład normalny, jednak różnią się macierza kowariancji. W pierwszym przypadku korelacjacji pomiędzy jednym wymiarem a drugiem wynosi 0.8, w drugiem zaś -0.8. Poniżej rysunek:*
+ 
+```{r, chartPar=TRUE}
+par(pch = 19)
+ 
+N = 200
+sigma = cbind(c(1,0.8),c(0.8,1))
+sigma2 = cbind(c(1,-0.8),c(-0.8,1))
+x  = mvrnorm(N, mu = c(0,0), sigma)
+ 
+y  = mvrnorm(N, mu = c(0,0), sigma2)
+plot(x)
+points(y, col = "red")
+legend("topleft", c("x","y"), pch = 19, col = c("black","red"))
+```
+ 
+Jeżeli teraz porównamy rozkłady brzegowe okaże się, że są takie same (co nie jest zaskoczeniem - rozkład brzegowy wielomymiarowego rozkładu normalnego ma rozkład normalny). Rysunki tylko to potwierdzają:
+ 
+```{r, chartPar=TRUE}
+par(mfrow = c(1,2))
+qqplot(x[,1],y[,1])
+abline(0,1)
+qqplot(x[,2],y[,2])
+abline(0,1)
+```
+ 
+Dobrze byłoby więc wprowadzić wielowymiarowy wykres kwantyl-kwantyl, który całościowo obejmowałby dane. Niestety pojawia się bardzo poważny problem. W wielu wymiarach nie ma naturalnego porządku liczb który pozwalałby definiować odpowiedniki kwantyli na którch opiera się wykres kwantyl-kwantyl.
+ 
+W tym momencie na scenę wkracza funkcja głębi.
+ 
+### Funkcja głębi.
+ 
+Pierwszym pomysłem na wprowadzenie porządku w przypadku wielowymiarowym może być wykorzystanie odległości Euklidesa, od jakiegoś centrum (np. średniej po współrzędnych). Powiemy, że punkt $x_1$ jest jest bardziej centralny od punktu $x_2$ jeżeli $||x_1 - c|| < ||x_2 - c||$ (jest bliższy w sensie odległości Euklidesa). Taka miara *centralności* będzie określała ten porządek.
+ 
+Jak wiadomo kwantyle określa się dla wartości z przedziału $[0,1]$. W przypadku odległości Euklidesa problemem jest to, że przyjmuje ona wartości z przedziału $[0,+\inf)$. Można ją jednak łatwo przeskalować od przedziału $[0,1]$, przy pomocy następującego wzoru:
+ 
+$$d_e(x) = \frac{1}{1+||x_1 - c||}$$.
+ 
+Funkcja $d_e$ od teraz będzie nazywana funckją głębi Euklidesa. Przyjmuje ona tym większą wartość, im punkt znajduje się bliżej centrum ($d_e(c) = 1$), im dalej na peryferia rozkładu tym wartość bliższa zera. Poniżej zaprezentowany jest wykres konturowy wartości głębi Euklidesa dla zbioru $x$.
+ 
+```{r,fig.show='hold', chartPar=TRUE}
+depthContour(x, method = "Euclidean", points = TRUE,legend = FALSE)
+```
+ 
+Na powyższym rysunku widać, że głębia Euklidesa nie radzi sobie z elipsoidalnym kształtem rozkładu, dlatego lepiej zastąpić ją głębią Mahalanobisa. Cała różnica sprowadza się do zastąpienia odległości Euklidesa, ogległością Mahalanobisa. Poniżej rysunek:
+```{r, chartPar=TRUE}
+depthContour(x, method = "Mahalanobis", points = TRUE,legend = FALSE)
+```
+ 
+Mając już pewną intuicję dotyczącą głębi można wprowadzić wspominane wcześniej uogólnienie wykresu kwantyl-kwantyl.
+ 
+### Wykres głębia-vs-głębia.
+ 
+Wykres głębia-vs-głębia jest bardzo prostą konstrukcją. Dla każdego punktu ze zbioru X i Y obliczamy jego wartość głębi względem X i osobno względem Y. Na wykresie rysowana jest wartość głębi względem tych dwóch zbiorów. Intuicja podpowiada, że jeżeli dwa zbiory danych generowane są przez ten sam rozkład, to wartość funckji głębi dla każdej obserwacji względem jednego i drugiego zbioru danych będzie osiągała zbliżone wartości - co na wykresie przedstawi się poprzez ułożenie się punktów na przekątnej (interpretacja jest analogicznia jak w przypadku wykresu kwantyl-kwantyl!). Poniżej przykład dla zbiorów x i x2 (pochodzących z tego samego rozkłdu).
+ 
+```{r, chartPar=TRUE}
+x2 = mvrnorm(N, mu = c(0,0), sigma)
+ddPlot(x,x2, method = "Mahalanobis")
+```
+ 
+Natomiast dla danych pochodzących z różnych rozkładów wygląd wykresu znacząco odbiega od powyższego:
+```{r, chartPar=TRUE}
+ddPlot(x,y, method = "Mahalanobis")
+```
+ 
+ 
+## Głębia Tukey'a
+ 
+Problemem związanym z głębią Ekulidesa jest wyznaczenie centrum względem którego liczona jest wartość głębi. W przypadku głębi Mahalanobisa dodatkowo należy wyznaczyć macierz kowariancji. Na obie te miary mogą mieć wpływ obserwacje odstające. Dlatego dobrze byłoby wprowadzić funckję głębi opartą na względnym położeniu punktów, a nie ogległości.
+ 
+Taką funckją głębi jest głębia półprzestrzeni Tukey'a. Definiuje się ją jako najmniejszą frakcję punktów znajdującej się na dowolnej z półprzestrzeni, których granica przechodzi przez ten punkt.
+ 
+```{r, chartPar=TRUE}
+x = cbind(c(1,1.6,1.5,2),c(1,2,1.5,1))
+ 
+plot(x, xlim = c(0,3), ylim = c(0,3), col = c(1,1,2,1))
+ 
+```
+ 
+## Krzywa skali
+ 
+Oprócz wykresu głębia-vs-głębia można w oparciu o głębie danych wprowadzić krzywą skali. Pozwala ona na bardzo intuicyjny sposób przedstawienia wielowymiarowej miary rozproszenia.
+ 
+```{r, chartPar=TRUE}
+sigma = cbind(c(1,0.8),c(0.8,1))
+x = mvrnorm(N, mu = c(0,0), sigma)
+dp = (depth(x)>0.4)
+
+plot(x,col = dp +1)
+
+# rysowanie otoczki wypuklej
+hull = geometry:::convhulln(x[dp,])
+xx = x[dp, ]
+xx = cbind(xx[hull,1], xx[hull,2])
+points(xx, col = "blue", pch = 19)
+
+# zaznaczenie obwodki na otoczce
+points(x[dp,], col = "red", pch = 1)
+
+
+```
+ 
+ 
+```{r}
+norm = mvrnorm(n = 1000, mu = c(0,0), Sigma = 3*diag(2))
+mvt = rmvt(n = 1000, sigma = diag(2), df = 5)
+sc = scaleCurve(norm, mvt, method = "Tukey", 
+                plot = TRUE,name = "Norm",name_y =  "Mvt")
+getPlot(sc)
+```

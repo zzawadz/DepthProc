@@ -1,3 +1,4 @@
+*.html
 pkg/src-i386
 pkg/src-x64
 pkg.Rcheck
