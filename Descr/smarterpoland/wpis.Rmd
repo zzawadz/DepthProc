@@ -10,7 +10,7 @@ library(knitr)
 opts_chunk$set(fig.width = 7, fig.height = 4)
 
 knit_hooks$set(chartPar = function(before, options, envir) {
-    if (before) par(mar = c(4, 4, .1, .1), pch = 19)  # smaller margin on top and right
+    if (before) par(mar = c(4, 4, 3, 1), pch = 19)  # smaller margin on top and right
 })
 
 
@@ -21,7 +21,9 @@ library(DepthProc)
  
 Pakiet DepthProc zawiera narzędzia analizy danych oparte na statystycznych funckjach głębi. Powstał na Uniwersytecie Ekonomicznym w Krakowie w Katedrze Statystyki na Wydziale Zarządzania. Inicjatorem projektu był dr hab. Daniel Kosiorowski. 
  
-Same funckje głębi są dosyć mało rozpowszechnionym tematem, dlatego też ten wpis nie tyle będzie opisem możliwości pakietu, tylko przedstawieniem czym te funkcje głębi w ogóle są i pokazanie analogi do znanych i lubianych technik analizy danych.
+Same funckje głębi są dosyć mało rozpowszechnionym tematem, dlatego też ten wpis nie tyle będzie opisem możliwości pakietu, tylko przedstawieniem czym te funkcje głębi w ogóle są i pokazanie analogi do znanych i lubianych technik analizy danych. Wpis nie ma formalnego charakteru i nie trzyma ścisłego rygoru rozumowania, przedstawia raczej zbiór intuicji!
+
+Formalny opis koncpecji głębi danych można znaleźć w opisie pakietu opublikowanym na arXiv - http://arxiv.org/abs/1408.4542v1 lub w prezentacji https://e-uczelnia.uek.krakow.pl/mod/resource/view.php?id=60567.
  
 ## Instalacja
  
@@ -91,7 +93,7 @@ W tym momencie na scenę wkracza funkcja głębi.
  
 Pierwszym pomysłem na wprowadzenie porządku w przypadku wielowymiarowym może być wykorzystanie odległości Euklidesa, od jakiegoś centrum (np. średniej po współrzędnych). Powiemy, że punkt $x_1$ jest jest bardziej centralny od punktu $x_2$ jeżeli $||x_1 - c|| < ||x_2 - c||$ (jest bliższy w sensie odległości Euklidesa). Taka miara *centralności* będzie określała ten porządek.
  
-Jak wiadomo kwantyle określa się dla wartości z przedziału $[0,1]$. W przypadku odległości Euklidesa problemem jest to, że przyjmuje ona wartości z przedziału $[0,+\inf)$. Można ją jednak łatwo przeskalować od przedziału $[0,1]$, przy pomocy następującego wzoru:
+Jak wiadomo kwantyle określa się dla wartości z przedziału $[0,1]$. W przypadku odległości Euklidesa problemem jest to, że przyjmuje ona wartości z przedziału $[0,+\infty)$. Można ją jednak łatwo przeskalować od przedziału $[0,1]$, przy pomocy następującego wzoru:
  
 $$d_e(x) = \frac{1}{1+||x_1 - c||}$$.
  
@@ -138,8 +140,12 @@ plot(x, xlim = c(0,3), ylim = c(0,3), col = c(1,1,2,1))
  
 ## Krzywa skali
  
-Oprócz wykresu głębia-vs-głębia można w oparciu o głębie danych wprowadzić krzywą skali. Pozwala ona na bardzo intuicyjny sposób przedstawienia wielowymiarowej miary rozproszenia.
- 
+Oprócz wykresu głębia-vs-głębia można w oparciu o głębie danych wprowadzić krzywą skali. Pozwala ona na bardzo intuicyjny sposób przedstawienia wielowymiarowej miary rozproszenia. Wpierw należy jednak wprowadzić pojęcie obszaru centralnego.
+
+*$\alpha$-przyciętym obszarem nazywamy zbiór punktów których wartość głębi wynosi przynajmniej $\alpha$. *
+
+Na poniższym rysunku kolorem czerwonym zostały zaznaczony punktu należące do $\alpha$-przyciętego obszaru, gdzie $\alpha = 0.4$. Natomiast niebieskie punkty należą do otoczki wypukłej tego obszaru - ta otoczka przyda się już za moment.
+
 ```{r, chartPar=TRUE}
 sigma = cbind(c(1,0.8),c(0.8,1))
 x = mvrnorm(N, mu = c(0,0), sigma)
@@ -158,12 +164,30 @@ points(x[dp,], col = "red", pch = 1)
 
 
 ```
- 
- 
+
+W wielu wymiarach dosyć intuicyjną miarą wydaje się objętość zbioru danych. Im większą przestrzeń zajmują dane, tym bardziej są rozproszone - to dosyć intuicyjne. W przypadku dwóch poniższych zbiorów widać to gołym okiem.
+
 ```{r}
-norm = mvrnorm(n = 1000, mu = c(0,0), Sigma = 3*diag(2))
-mvt = rmvt(n = 1000, sigma = diag(2), df = 5)
+x = mvrnorm(N, mu = c(0,0), sigma)
+xlim = extendrange(x[,1])
+ylim = extendrange(x[,2])
+
+par(mfrow = c(1,2))
+plot(x,xlim = xlim, ylim = ylim)
+plot(x/2, xlim = xlim, ylim = ylim)
+```
+
+Krzywa skali to po prostu objętość otoczki wypukłej dla $\alpha$-przyciętego obszaru (w pakiecie DepthProc na osi X zaznaczona jest wartość $1-\alpha$). Zastosowanie krzywej skali pozwala na bardziej kompleksowe spojrzenie na rozproszenie danych, pozwalając zobaczyć wielowymiarowe spłaszczenie rozkładu. Zostało to pokazane na poniższym rysunku porównującym wielowymiarowy rozkład normalny z wielowymiarowym rozkładem  t-Studenta. Dla większości przyciętych obszarów rozproszenie objętość 
+
+```{r}
+norm = mvrnorm(n = 2000, mu = c(0,0), Sigma = 2*diag(2))
+mvt = rmvt(n = 2000, sigma = diag(2), df = 4)
 sc = scaleCurve(norm, mvt, method = "Tukey", 
                 plot = TRUE,name = "Norm",name_y =  "Mvt")
-getPlot(sc)
+getPlot(sc) + xlim(c(0.75,1))
+```
+
+```{r}
+curve(dnorm(x, sd = 1), xlim = c(-9,9))
+curve(dt(x, df = 3),add = TRUE, col = "red")
 ```
