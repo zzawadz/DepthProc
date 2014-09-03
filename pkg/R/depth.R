@@ -61,11 +61,14 @@
 #'
 depth = function(u, X, method="Projection", name = "X", threads = -1,...)
 {  
-  if(missing(X)) X = u
   if(is.data.frame(u)) u = as.matrix(u)
+  if(is.vector(u)) u = matrix(u,ncol = dim(X)[2])
+  if(missing(X) && method == "MBD") return(depthMBD(u,...))
+  
+  
+  if(missing(X)) X = u
   if(is.data.frame(X)) X = as.matrix(X)
   if(is.vector(X)) X = matrix(X,ncol = 1)
-  if(is.vector(u)) u = matrix(u,ncol = dim(X)[2])
 
   ###################################
   if (method=="Mahalanobis")
@@ -96,6 +99,8 @@ depth = function(u, X, method="Projection", name = "X", threads = -1,...)
   {
     return(depthLocal(u, X, name = name, ...))
   }
+  if(method == "MBD") return(depthMBD(u, X,...))
+  
 }
 
 ############################################
@@ -352,7 +357,12 @@ depthLP = function(u, X, pdim = 1, la = 1, lb = 1, name = "X", threads = -1, fun
 #'@export
 #'@description Computes the modified bannd depth.
 #'
-depthMBD = function(u, X)
+#'@examples
+#'
+#'  x = matrix(rnorm(3000), nc = 2)
+#'  
+#'  
+depthMBD = function(u, X, ...)
 {
   if(missing(X)) depth = modBandDepth(u) else
     depth = modBandDepthRef(u,X)
