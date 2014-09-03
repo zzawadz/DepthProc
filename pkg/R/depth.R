@@ -348,3 +348,15 @@ depthLP = function(u, X, pdim = 1, la = 1, lb = 1, name = "X", threads = -1, fun
 }
 
 
+#'@title Modified band depth
+#'@export
+#'@description Computes the modified bannd depth.
+#'
+depthMBD = function(u, X)
+{
+  if(missing(X)) depth = modBandDepth(u) else
+    depth = modBandDepthRef(u,X)
+  depth = as.numeric(depth)
+  
+  return(depth)
+}
