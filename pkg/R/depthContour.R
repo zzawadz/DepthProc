@@ -12,6 +12,7 @@
 #' @param mecol Determines the color of lines describing the depth median. 
 #' @param legend Logical. If TRUE legend for mean and depth median will be drawn.
 #' @param points Logical. If TRUE points from matrix x will be drawn.
+#' @param colors function for colors pallete (e.g. gray.colors). If NULL default scheme will be used
 #' @param \dots Any additional parameters for function depth (such as method) or graphical parameters (e.g. lwd, lty, main).
 #'  
 #'  
@@ -27,7 +28,7 @@
 #'  @examples
 #' # EXAMPLE 1
 #' x = mvrnorm(1000,c(0,0),diag(2))
-#' depthContour(x)
+#' depthContour(x, colors = gray.colors)
 #' #with points
 #' depthContour(x, points = TRUE)
 #'  
@@ -44,7 +45,7 @@
 #'  @keywords
 #'  contour
 #'  depth
-depthContour<-function(x, xlim = extendrange(x[,1],f=0.1), ylim = extendrange(x[,2],f=0.1),n=50,pmean = TRUE,mcol = "blue", pdmedian = TRUE, mecol = "brown",legend = TRUE,points = FALSE, ...)
+depthContour<-function(x, xlim = extendrange(x[,1],f=0.1), ylim = extendrange(x[,2],f=0.1),n=50,pmean = TRUE,mcol = "blue", pdmedian = TRUE, mecol = "brown",legend = TRUE,points = FALSE, colors = NULL, ...)
 { 
 			x_axis = seq(xlim[1],xlim[2],length.out = n)
  			y_axis = seq(ylim[1],ylim[2],length.out = n)
@@ -62,7 +63,12 @@ depthContour<-function(x, xlim = extendrange(x[,1],f=0.1), ylim = extendrange(x[
 			
 depth_surface = matrix(depth_surface,ncol = n)
 
-colors = rev(rainbow(100,start=0,end=1/4))
+if(is.null(colors))
+{
+  colors = rev(rainbow(100,start=0,end=1/4))
+  colors = colorRampPalette(colors,space = "Lab")
+}
+
 
 
 if(max(depth_surface)>0.5)
@@ -77,7 +83,7 @@ else
 graph_params = .removeDepthParams(...)
 
 do.call(filled.contour, c(list(x = x_axis, y = y_axis, z = depth_surface, 
-  color.palette = colorRampPalette(colors,space = "Lab"),levels = levels,									
+  color.palette = colors,levels = levels,									
 	plot.axes = quote({ 
     
         do.call(contour,c(list(x = x_axis,y = y_axis,z= depth_surface, add = TRUE,drawlabels=FALSE), graph_params))
