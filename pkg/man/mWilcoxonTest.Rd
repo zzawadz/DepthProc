@@ -3,7 +3,7 @@
 \alias{mWilcoxonTest}
 \title{Depth based multivariate Wilcoxon test for a scale difference.}
 \usage{
-mWilcoxonTest(x, y, alternative = "greater")
+mWilcoxonTest(x, y, alternative = "greater", ...)
 }
 \arguments{
 \item{x}{data matrix}
@@ -11,6 +11,8 @@ mWilcoxonTest(x, y, alternative = "greater")
 \item{y}{data matrix}
 
 \item{alternative}{a character string specifying the alternative hypothesis, must be one of "two.sided" (default), "greater" or "less".}
+
+\item{...}{arguments passed to depth function(e.g. method)}
 }
 \description{
 Depth based multivariate Wilcoxon test for a scale difference.
@@ -32,6 +34,7 @@ The distribution of  \eqn{ S }  is symmetric about   \eqn{ E(S)=1/2m(m{+}n{+1)} 
 x = mvrnorm(100, c(0,0), diag(2))
 y = mvrnorm(100, c(0,0), diag(2)*1.4)
 mWilcoxonTest(x,y)
+mWilcoxonTest(x,y, method = "LP")
 
 #EXAMPLE 2
 data(under5.mort)

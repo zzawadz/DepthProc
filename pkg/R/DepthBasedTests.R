@@ -10,6 +10,7 @@
 #' @param x data matrix
 #' @param y data matrix
 #' @param alternative a character string specifying the alternative hypothesis, must be one of "two.sided" (default), "greater" or "less".
+#' @param ... arguments passed to depth function(e.g. method)
 #' 
 #' @details
 #' 
@@ -38,6 +39,7 @@
 #' x = mvrnorm(100, c(0,0), diag(2))
 #' y = mvrnorm(100, c(0,0), diag(2)*1.4)
 #' mWilcoxonTest(x,y)
+#' mWilcoxonTest(x,y, method = "LP")
 #' 
 #' #EXAMPLE 2
 #' data(under5.mort)
@@ -48,11 +50,11 @@
 #' mWilcoxonTest(data2011,data1990)
 #' 
 #' 
-mWilcoxonTest = function(x, y, alternative = "greater")
+mWilcoxonTest = function(x, y, alternative = "greater", ...)
 {
   total = rbind(x, y)
-  dep_x  = depth(x,total)
-  dep_y  = depth(y,total)
+  dep_x  = depth(x,total, ...)
+  dep_y  = depth(y,total, ...)
   wilcox.test(dep_x,dep_y, alternative = alternative)
 }
 
