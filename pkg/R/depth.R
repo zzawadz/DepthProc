@@ -362,14 +362,21 @@ depthLP = function(u, X, pdim = 1, la = 1, lb = 1, name = "X", threads = -1, fun
 #'
 #'@examples
 #'
-#'  x = matrix(rnorm(3000), nc = 2)
+#'  x = matrix(rnorm(600), nc = 20)
+#'  depthMBD(x)
 #'  
-#'  
-depthMBD = function(u, X, ...)
+depthMBD = function(u, X, name = "X",...)
 {
-  if(missing(X)) depth = modBandDepth(u) else
-    depth = modBandDepthRef(u,X)
-  depth = as.numeric(depth)
+  if(missing(X)) 
+    {
+      X = u
+      depth = modBandDepth(u)
+    } else
+    {
+      depth = modBandDepthRef(u,X)  
+    }
+    
+  new("DepthMBD", as.numeric(depth), u = u, X = X, method = "MBD", name = name)
   
-  return(depth)
+
 }

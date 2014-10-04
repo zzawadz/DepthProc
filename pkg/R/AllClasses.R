@@ -37,7 +37,9 @@ setClass("DepthProjection", representation(), contains = c("Depth","numeric"))
 setClass("DepthMahalanobis", representation(), contains = c("Depth","numeric"))
 setClass("DepthTukey", representation(), contains = c("Depth","numeric"))
 setClass("DepthLP", representation(), contains = c("Depth","numeric"))
+setClass("DepthMBD", representation(), contains = c("Depth","numeric"))
 setClass("DepthLocal", representation("depth1" = "character","depth2" = "character"), contains = c("Depth","numeric"))
+
 
 #####################################
 ######### DDPlot ####################
