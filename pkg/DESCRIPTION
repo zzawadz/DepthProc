@@ -14,7 +14,8 @@ Depends:
     rrcov,
     np,
     methods,
-    MASS
+    MASS,
+    colorspace
 Imports:
     lattice,
     sm,
