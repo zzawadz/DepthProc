@@ -1,11 +1,19 @@
-
-#' x = matrix(rnorm(600), nc = 20)
-#' x = depthMBD(x)
-
+#' Functional boxplot based on Modified Band Depth
+#' 
+#' @param x object of class DepthMBD
+#' @param band_lim limits for bands
+#' @param colors color set
+#' @param add_lines Logical. If TRUE, all lines from data will be plotted.
+#' @param lwd lines width
+#' @param alpha transparency for band area.
+#'
+#' @examples
+#' x = depthMBD(matrix(rnorm(200), ncol = 10))
+#' plot(x)
+#'
 setMethod("plot", signature = c(x = "DepthMBD"), function(x, band_lim = c(0,0.5), colors = NULL, add_lines = TRUE, lwd = 1, alpha = 0.5, ...)
 {
   tu = t(x@u)
-  band_lim = c(0,0.5)
   
   matplot(tu, type = "n", col = "gray90", lty = 1, ...)
   
@@ -43,10 +51,11 @@ setMethod("plot", signature = c(x = "DepthMBD"), function(x, band_lim = c(0,0.5)
     }
     
     sapply(1:ncol(tu), function(i) lines(tu[,i], col = col_lines[col[i]]))
+    lines(tu[,which.max(x)], lwd = lwd*2)
   }
   
   
-  lines(tu[,which.max(x)], lwd = lwd*2)
+  
   
 
   
