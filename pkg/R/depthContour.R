@@ -12,7 +12,7 @@
 #' @param mecol Determines the color of lines describing the depth median. 
 #' @param legend Logical. If TRUE legend for mean and depth median will be drawn.
 #' @param points Logical. If TRUE points from matrix x will be drawn.
-#' @param colors function for colors pallete (e.g. gray.colors). If NULL default scheme will be used
+#' @param colors function for colors pallete (e.g. gray.colors).
 #' @param levels number of levels for color scale.
 #' @param \dots Any additional parameters for function depth (such as method) or graphical parameters (e.g. lwd, lty, main).
 #'  
@@ -47,6 +47,7 @@
 #'  @keywords
 #'  contour
 #'  depth
+#'  
 depthContour = function(x, xlim = extendrange(x[,1],f=0.1), ylim = extendrange(x[,2],f=0.1), n=50, pmean = TRUE, mcol = "blue", pdmedian = TRUE, mecol = "brown", legend = TRUE, points = FALSE, colors = heat_hcl, levels = 10, ...)
 { 
 	x_axis = seq(xlim[1],xlim[2],length.out = n)
