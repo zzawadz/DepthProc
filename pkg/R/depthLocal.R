@@ -10,10 +10,10 @@
   if(ncol(tmp) != ncol(X)) tmp = t(tmp)
   
   symDATA = rbind(X, tmp)
-  depths = as.numeric(depth(X, symDATA, method=depth1))
+  depths = as.numeric(depth(X, symDATA, method=depth1, ...))
   quan = quantile(depths, probs=1-beta)
   Rset = as.matrix(X[ signif(depths,digits=6) >= signif(quan,digits=6), ])
-  as.numeric(depth(u, Rset, method=depth2,...))
+  as.numeric(depth(u, Rset, method=depth2, ...))
 }
 
 
@@ -74,7 +74,7 @@ depthLocal = function(u, X, beta=0.5,
   if(missing(X)) X = u
   
   depths = 1:nrow(u)
-  for(i in 1:nrow(u)) depths[i] = .depthLocal(u[i,,drop = FALSE],X,beta,depth1,depth2)
+  for(i in 1:nrow(u)) depths[i] = .depthLocal(u[i,,drop = FALSE], X, beta, depth1, depth2, ...)
   
   new("DepthLocal", depths, u = u, X = X, method = "Local", name = name,depth1 = depth1, depth2 = depth2)
   
