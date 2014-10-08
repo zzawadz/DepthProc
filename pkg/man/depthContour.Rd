@@ -5,7 +5,8 @@
 \usage{
 depthContour(x, xlim = extendrange(x[, 1], f = 0.1), ylim = extendrange(x[,
   2], f = 0.1), n = 50, pmean = TRUE, mcol = "blue", pdmedian = TRUE,
-  mecol = "brown", legend = TRUE, points = FALSE, colors = NULL, ...)
+  mecol = "brown", legend = TRUE, points = FALSE, colors = heat_hcl,
+  levels = 10, ...)
 }
 \arguments{
 \item{x}{Bivariate data}
@@ -28,7 +29,9 @@ depthContour(x, xlim = extendrange(x[, 1], f = 0.1), ylim = extendrange(x[,
 
 \item{points}{Logical. If TRUE points from matrix x will be drawn.}
 
-\item{colors}{function for colors pallete (e.g. gray.colors). If NULL default scheme will be used}
+\item{colors}{function for colors pallete (e.g. gray.colors).}
+
+\item{levels}{number of levels for color scale.}
 
 \item{\dots}{Any additional parameters for function depth (such as method) or graphical parameters (e.g. lwd, lty, main).}
 }
@@ -45,6 +48,7 @@ x = mvrnorm(1000,c(0,0),diag(2))
 depthContour(x, colors = gray.colors)
 #with points
 depthContour(x, points = TRUE)
+depthContour(x, points = FALSE, levels = 50)
 
  #EXAMPLE 2
  data(inf.mort,maesles.imm)
