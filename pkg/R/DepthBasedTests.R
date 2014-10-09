@@ -50,12 +50,18 @@
 #' mWilcoxonTest(data2011,data1990)
 #' 
 #' 
-mWilcoxonTest = function(x, y, alternative = "greater", ...)
+mWilcoxonTest = function(x, y, alternative = "two.sided", ...)
 {
   total = rbind(x, y)
   dep_x  = depth(x,total, ...)
   dep_y  = depth(y,total, ...)
-  wilcox.test(dep_x,dep_y, alternative = alternative)
+  test_res = wilcox.test(dep_x,dep_y, alternative = alternative)
+  
+  
+  test_res$null.value = 1
+  test_res$method = "Multivariate Wilcoxon test for equality of dispersion"
+  force(names(test_res$null.value) <- "Dispersion ratio")
+  test_res
 }
 
 
