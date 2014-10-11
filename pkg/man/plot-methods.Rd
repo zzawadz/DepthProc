@@ -20,6 +20,10 @@ plot(x, y, ...)
 }
 \arguments{
 \item{x}{object that inherits from DepthCurve class (ScaleCurve or AsymmetryCurve), or DDPlot class.}
+
+\item{y}{not supported.}
+
+\item{\dots}{not supported.}
 }
 \description{
 Plot Depth curve

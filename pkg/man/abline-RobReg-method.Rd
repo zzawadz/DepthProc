@@ -12,6 +12,16 @@
 
 \item{b}{not used.}
 
+\item{h}{not supported.}
+
+\item{v}{not supported.}
+
+\item{reg}{not supported.}
+
+\item{coef}{not supported.}
+
+\item{untf}{not supported.}
+
 \item{...}{Arguments to be passed to methods, such as graphical parameters (see par).}
 }
 \description{

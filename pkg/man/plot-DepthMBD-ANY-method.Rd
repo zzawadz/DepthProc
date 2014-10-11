@@ -19,6 +19,8 @@
 \item{lwd}{lines width}
 
 \item{alpha}{transparency for band area.}
+
+\item{\dots}{other arguments passed to matplot}
 }
 \description{
 Functional boxplot based on Modified Band Depth

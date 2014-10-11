@@ -32,7 +32,7 @@
 #' depthContour(x, colors = gray.colors)
 #' #with points
 #' depthContour(x, points = TRUE)
-#' depthContour(x, points = FALSE, levels = 50)
+#' depthContour(x, points = FALSE, levels = 10)
 #'  
 #'  #EXAMPLE 2
 #'  data(inf.mort,maesles.imm)

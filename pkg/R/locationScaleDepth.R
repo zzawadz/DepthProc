@@ -7,11 +7,6 @@
 ## - sample.max.depth -> lsdSampleDepth (CPP)
 ## - sample.depth.contours -> lsdSampleDepthContours (R)
 
-## TO DO: 
-## Write interface to all C++ functions
-## Wirte documentation
-## Tests!!!
-## Refactor code for lsdSampleDepthContours? Proper object function itp.
 
 #' @title Location-Scale depth class
 #' @export

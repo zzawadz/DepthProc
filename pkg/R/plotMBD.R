@@ -6,6 +6,7 @@
 #' @param add_lines Logical. If TRUE, all lines from data will be plotted.
 #' @param lwd lines width
 #' @param alpha transparency for band area.
+#' @param \dots other arguments passed to matplot
 #'
 #' @examples
 #' x = depthMBD(matrix(rnorm(200), ncol = 10))
