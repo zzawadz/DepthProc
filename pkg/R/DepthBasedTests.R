@@ -60,7 +60,7 @@ mWilcoxonTest = function(x, y, alternative = "two.sided", ...)
   
   test_res$null.value = 1
   test_res$method = "Multivariate Wilcoxon test for equality of dispersion"
-  force(names(test_res$null.value) <- "Dispersion ratio")
+  force(names(test_res$null.value) <- "dispersion ratio")
   test_res
 }
 
