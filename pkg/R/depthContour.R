@@ -67,14 +67,15 @@ depthContour = function(x, xlim = extendrange(x[,1],f=0.1), ylim = extendrange(x
   {
     # levels must include 0
     levels = levels + 1 
-    if(max(depth_surface)>0.5)
-    {
-    	levels=seq(0,1, length.out = levels)
-    }
-    else
-    {
-    	levels = seq(0,0.5, length.out = levels)
-    }
+#    if(max(depth_surface)>0.5)
+#    {
+    	levels=seq(min(depth_surface),max(depth_surface), length.out = levels)
+#     }
+#     else
+#     {
+#     	levels = seq(0,0.5, length.out = levels)
+#     }
+    
   } else {
     stop("levels must be numeric vector of length 1")
   }
