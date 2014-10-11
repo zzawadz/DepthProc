@@ -48,6 +48,7 @@ setClass("CovDepthWeighted", representation(depth = "character"), contains="CovR
 #'  
 CovLP = function(x, pdim=2, la=1, lb=1)
 {
+  if(is.data.frame(x)) x = as.matrix(x)
   cov = CovLPCPP(x, pdim, la, lb)
   center = depthMedian(x, method = "LP", pdim = pdim, la = la, lb = lb)
   
