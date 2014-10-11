@@ -2,6 +2,7 @@
 #' @title Perspective plot for depth functions
 #' @export
 #' @importFrom lattice wireframe
+#' @importFrom colorspace heat_hcl
 #' @description Draws a perspective plot of depth function over x-y plane.
 #' 
 #' @param x bivariate data

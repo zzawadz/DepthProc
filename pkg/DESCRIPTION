@@ -12,17 +12,19 @@ Depends:
     ggplot2,
     Rcpp (>= 0.11.2),
     rrcov,
-    np,
     methods,
-    MASS,
-    colorspace
+    MASS
 Imports:
     lattice,
     sm,
-    geometry
+    geometry,
+    colorspace,
+    np
 Suggests:
     mvtnorm,
     rgl,
     sn,
     robustbase,
+    dplyr,
+    RcppArmadillo
 LinkingTo: Rcpp, RcppArmadillo

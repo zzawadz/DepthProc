@@ -1,5 +1,7 @@
 #' @title Depth weighted density estimator
 #' 
+#' @importFrom np npudens
+#' 
 #' @param x numeric vector
 #' @param y numeric vector
 #' @param nx the number of equally spaced points at which the density is to be estimated in x-dimension.
