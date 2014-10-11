@@ -4,6 +4,8 @@
 \alias{depthMedian}
 \alias{depthMedian,Depth}
 \alias{depthMedian,Depth-method}
+\alias{depthMedian,data.frame}
+\alias{depthMedian,data.frame-method}
 \alias{depthMedian,matrix}
 \alias{depthMedian,matrix-method}
 \title{Depth median}
@@ -11,6 +13,8 @@
 depthMedian(x, ...)
 
 \S4method{depthMedian}{matrix}(x, ...)
+
+\S4method{depthMedian}{data.frame}(x, ...)
 
 \S4method{depthMedian}{Depth}(x)
 }
