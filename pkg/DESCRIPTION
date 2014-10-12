@@ -13,13 +13,13 @@ Depends:
     Rcpp (>= 0.11.2),
     rrcov,
     methods,
-    MASS
+    MASS,
+    np
 Imports:
     lattice,
     sm,
     geometry,
     colorspace,
-    np
 Suggests:
     mvtnorm,
     rgl,

@@ -1,6 +1,5 @@
 #' @title Depth weighted density estimator
 #' 
-#' @importFrom np npudens
 #' 
 #' @param x numeric vector
 #' @param y numeric vector
