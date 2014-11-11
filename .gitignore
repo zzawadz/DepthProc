@@ -24,6 +24,7 @@ LSD
 cache
 *.vcxproj*
 depthproc.Rcheck
+DepthProc.Rcheck
 
 *.pdf
 *.tex

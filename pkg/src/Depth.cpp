@@ -1,6 +1,5 @@
 #include "Depth.h"
 
-
 namespace Depth
 {
 
@@ -245,6 +244,8 @@ namespace MBD
     arma::uvec equal(n); equal.ones();
     arma::uvec lowidx(n);
     
+    
+    
     size_t pos;
     size_t ti;
     size_t eq;
@@ -252,17 +253,18 @@ namespace MBD
     
     for(size_t i = 0; i < n; i++)
     {
-      pos = idx[i];
-      lowidx[pos] = i;
+      
+      pos = idx(i);
+      lowidx(pos) = i;
         eq = 0;
       
         if(i > 0) 
         {
           ti = i - 1;
                 
-          while((sorted[i] == sorted[ti]))
+          while(sorted(i) == sorted(ti))
           {
-            lowidx[pos] = lowidx[pos] - 1;
+            lowidx(pos) -= 1;
             eq++;
             if(ti == 0) break;
             ti--;
@@ -270,23 +272,24 @@ namespace MBD
         }
         
         ti = i + 1;
-        while((sorted[i] == sorted[ti]) && ti < n)
+        while((ti < n) && (sorted(i) == sorted(ti)))
         {
-            equal[pos] = equal[pos] + 1;
+            equal(pos) +=  1;
             ti++;
         }
-        equal[pos] = equal[pos] + eq;
+        equal(pos) = equal(pos) + eq;
         
     }
+    
     
     equal = equal + lowidx;
     arma::vec depth(n);
     
     for(size_t i = 0; i < n; i++) 
     {
-      double multiplicity = equal[i] - lowidx[i];
-      depth[i] = lowidx[i] * (n - (equal[i])) + multiplicity * (n - equal[i] + lowidx[i]);
-      depth[i] = depth[i] + Rf_choose(multiplicity, 2);
+      double multiplicity = equal(i) - lowidx(i);
+      depth(i) = lowidx(i) * (n - (equal(i))) + multiplicity * (n - equal(i) + lowidx(i));
+      depth(i) += Rf_choose(multiplicity, 2);
     }
     
     return depth;
