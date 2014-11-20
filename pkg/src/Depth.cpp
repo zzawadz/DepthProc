@@ -19,19 +19,18 @@ namespace Depth
 		//const double pr = 1/p;
 
 		arma::vec depth(n_x);
-
-		arma::rowvec tmp = arma::zeros<arma::rowvec>(d);
-		double sum_res = 0;
-		double tmp_sum;
     size_t k,i;
     
     if(threads < 1) threads = omp_get_max_threads();
     
-    #pragma omp parallel for shared(X, n_x, n_y, p, b, a) private(k, i, sum_res, tmp, tmp_sum) num_threads(threads)
+    //#pragma omp parallel for shared(depth, X, Y, n_x, n_y, d, p, b, a) private(k) num_threads(threads)
 		for(k = 0; k< n_x; k++)
 		{
-			sum_res = 0;
-			for(i = 0; i < n_y; i++)
+      arma::rowvec tmp = arma::zeros<arma::rowvec>(d);
+  	  double sum_res = 0;
+		  double tmp_sum;
+      
+			for(size_t i = 0; i < n_y; i++)
 			{
 				tmp = X.row(k) - Y.row(i);
 				tmp = arma::abs(tmp);
