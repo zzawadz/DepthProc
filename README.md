@@ -1,25 +1,26 @@
-depthproc
+DepthProc
 ========================
 
-depthproc project consist of a set of statistical procedures based on so called statistical depth functions. The project involves free available R package and its description.
-
-
+*DepthProc* project consist of a set of statistical procedures based on so called statistical depth functions. The project involves free available R package and its description.
 
 
 ## Installation
 
-Currently *depthproc* is not avaiable on CRAN (but soon it will be!). You can install it with *devtools* package:
+*DepthProc* is avaiable on CRAN:
 
+```r
+install.packages("DepthProc")
+```
+
+You can also install it from GitHub with *devtools* package:
 
 ```r
 require(devtools)
 install_github("DepthProc", "zzawadz", subdir = "pkg")
 ```
 
-
-
 ```r
-require(depthproc)
+require(DepthProc)
 ```
 
 
@@ -84,8 +85,6 @@ depth(x, x, method = "Local", depth1 = "LP")
 ## Get median
 depthMedian(x, method = "Local")
 ```
-
-
 
 
 ## Basic plots
