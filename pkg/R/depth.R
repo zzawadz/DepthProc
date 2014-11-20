@@ -62,14 +62,20 @@
 depth = function(u, X, method="Projection", name = "X", threads = -1,...)
 {  
   if(is.data.frame(u)) u = as.matrix(u)
-  if(is.vector(u)) u = matrix(u,ncol = dim(X)[2])
-  if(missing(X) && method == "MBD") return(depthMBD(u,...))
-  
-  
   if(missing(X)) X = u
   if(is.data.frame(X)) X = as.matrix(X)
-  if(is.vector(X)) X = matrix(X,ncol = 1)
-
+  
+  if(is.vector(X)) 
+  {
+    X = matrix(X,ncol = 1)
+  } 
+  if(is.vector(u)) 
+  {
+    u = matrix(u, ncol = ncol(X))
+  } 
+  
+  
+  
   ###################################
   if (method=="Mahalanobis")
   {	
@@ -99,7 +105,7 @@ depth = function(u, X, method="Projection", name = "X", threads = -1,...)
   {
     return(depthLocal(u, X, name = name, ...))
   }
-  if(method == "MBD") return(depthMBD(u, X,...))
+  
   
 }
 
@@ -354,32 +360,3 @@ depthLP = function(u, X, pdim = 2, la = 1, lb = 1, name = "X", threads = -1, fun
 }
 
 
-#'@title Modified band depth
-#'@export
-#'@description Computes the modified band depth.
-#'
-#' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
-#' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#' @param name for this data set - it will be used on plots from depthproc.
-#' @param \dots currently not supported.
-#'
-#'@examples
-#'
-#'  x = matrix(rnorm(600), nc = 20)
-#'  depthMBD(x)
-#'  
-depthMBD = function(u, X, name = "X",...)
-{
-  if(missing(X)) 
-    {
-      X = u
-      depth = modBandDepth(u)
-    } else
-    {
-      depth = modBandDepthRef(u,X)  
-    }
-    
-  new("DepthMBD", as.numeric(depth), u = u, X = X, method = "MBD", name = name)
-  
-
-}
