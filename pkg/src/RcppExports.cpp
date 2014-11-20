@@ -115,6 +115,37 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// modBandDepthRef
+SEXP modBandDepthRef(SEXP rX, SEXP rxRef);
+RcppExport SEXP DepthProc_modBandDepthRef(SEXP rXSEXP, SEXP rxRefSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP );
+        Rcpp::traits::input_parameter< SEXP >::type rxRef(rxRefSEXP );
+        SEXP __result = modBandDepthRef(rX, rxRef);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// modBandDepth
+SEXP modBandDepth(SEXP rX);
+RcppExport SEXP DepthProc_modBandDepth(SEXP rXSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP );
+        SEXP __result = modBandDepth(rX);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // sampleDepthContForMuCPP
 SEXP sampleDepthContForMuCPP(double d, double mu, SEXP rY);
 RcppExport SEXP DepthProc_sampleDepthContForMuCPP(SEXP dSEXP, SEXP muSEXP, SEXP rYSEXP) {

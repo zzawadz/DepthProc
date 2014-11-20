@@ -1,3 +1,4 @@
+JSSFigures
 *.html
 pkg/src-i386
 pkg/src-x64
@@ -23,6 +24,7 @@ LSD
 cache
 *.vcxproj*
 depthproc.Rcheck
+DepthProc.Rcheck
 
 *.pdf
 *.tex

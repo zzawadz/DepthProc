@@ -37,7 +37,9 @@ setClass("DepthProjection", representation(), contains = c("Depth","numeric"))
 setClass("DepthMahalanobis", representation(), contains = c("Depth","numeric"))
 setClass("DepthTukey", representation(), contains = c("Depth","numeric"))
 setClass("DepthLP", representation(), contains = c("Depth","numeric"))
+setClass("DepthMBD", representation(), contains = c("Depth","numeric"))
 setClass("DepthLocal", representation("depth1" = "character","depth2" = "character"), contains = c("Depth","numeric"))
+
 
 #####################################
 ######### DDPlot ####################
@@ -232,6 +234,11 @@ setClass("TrimReg2d", contains="RobReg")
 #'  @param a an object of class RobReg
 #'  @param b not used.
 #'  @param ... Arguments to be passed to methods, such as graphical parameters (see par).
+#'  @param h not supported.
+#'  @param v not supported.
+#'  @param reg not supported.
+#'  @param coef not supported.
+#'  @param untf not supported.
 #'  
 #'  @description Add fitted line to a plot. This is overloaded function for robust regression methods from package depthproc.
 #' @export
@@ -275,6 +282,8 @@ setClass("DepthDensity", representation=list(
 #' @rdname plot-methods
 #'  
 #' @param x object that inherits from DepthCurve class (ScaleCurve or AsymmetryCurve), or DDPlot class.
+#' @param y not supported.
+#' @param \dots not supported.
 #'  
 #'  @description Plot Depth curve
 #' @export

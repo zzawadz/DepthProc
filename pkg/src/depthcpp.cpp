@@ -1,11 +1,12 @@
 
 #include <Rcpp.h>
+#include <vector>
 using namespace Rcpp;
 
 
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
-int computeRegDepth(double *x, double *y, double* coef, int n){
+int computeRegDepth(double *x, double *y, std::vector<double> coef, int n){
   
   int i = 0;
   int lmin = 0;
@@ -15,7 +16,7 @@ int computeRegDepth(double *x, double *y, double* coef, int n){
   int tmp_depth = 0;
   int depth = 0;
   
-  double *res = new double[n];
+  std::vector<double> res(n); 
   
   
   for(i = 0; i < n; i++){
@@ -46,15 +47,14 @@ int computeRegDepth(double *x, double *y, double* coef, int n){
     } else {
       tmp_depth = lmin + rmax;
     }
-    depth = (depth<=tmp_depth)?depth:tmp_depth;
+    depth = (depth<=tmp_depth)? depth : tmp_depth;
 
   }
-  delete [] res;
   return depth;
 }
 
-double *getCoefficient(double x1, double y1, double x2, double y2){
-  double *coeff = new double[2];
+std::vector<double> getCoefficient(double x1, double y1, double x2, double y2){
+  std::vector<double> coeff(2);
   
   if(x1 == x2){
     coeff[0] = 0;
@@ -76,8 +76,8 @@ NumericVector depth2dcpp(SEXP R_x, SEXP R_y) {
     double *py = REAL(R_y);
     int tmp_depth = 0;
     int depth = 0;
-    double *coef;
-    double *deep_coef = 0;
+    std::vector<double> coef;
+    std::vector<double> deep_coef;
   
     
     for(int i=0; i<n-1; i++){
@@ -88,12 +88,9 @@ NumericVector depth2dcpp(SEXP R_x, SEXP R_y) {
        
          
          if(tmp_depth > depth){
-           delete [] deep_coef;
            depth = tmp_depth;
            deep_coef = coef;
-         } else{
-           delete [] coef;
-         }
+         } 
       }
     }
     

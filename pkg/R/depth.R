@@ -61,11 +61,14 @@
 #'
 depth = function(u, X, method="Projection", name = "X", threads = -1,...)
 {  
-  if(missing(X)) X = u
   if(is.data.frame(u)) u = as.matrix(u)
+  if(is.vector(u)) u = matrix(u,ncol = dim(X)[2])
+  if(missing(X) && method == "MBD") return(depthMBD(u,...))
+  
+  
+  if(missing(X)) X = u
   if(is.data.frame(X)) X = as.matrix(X)
   if(is.vector(X)) X = matrix(X,ncol = 1)
-  if(is.vector(u)) u = matrix(u,ncol = dim(X)[2])
 
   ###################################
   if (method=="Mahalanobis")
@@ -96,6 +99,8 @@ depth = function(u, X, method="Projection", name = "X", threads = -1,...)
   {
     return(depthLocal(u, X, name = name, ...))
   }
+  if(method == "MBD") return(depthMBD(u, X,...))
+  
 }
 
 ############################################
@@ -313,9 +318,9 @@ depthTukey = function(u, X, ndir = 1000, name = "X", threads = -1, exact = FALSE
 #'
 #'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#'  @param pdim 1
-#'  @param la 1
-#'  @param lb 1
+#'  @param pdim dimension used in calculating depth function.
+#'  @param la slope the weighing function.
+#'  @param lb intercept in the weighing function.
 #'  @param name name for this data set - it will be used on plots from depthproc.
 #'  @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
 #'  @param func the weighing function. Currently it is not supported.
@@ -329,16 +334,17 @@ depthTukey = function(u, X, ndir = 1000, name = "X", threads = -1, exact = FALSE
 #'  
 #'  
 #'  @examples
-#'  x <- matrix(rnorm(3000), nc = 3)
+#'  x = matrix(rnorm(3000), ncol = 3)
 #'  
 #'  #Same results
-#'  depthLP(x, x, ndir = 2000, p = 2) 
+#'  depthLP(x, x, ndir = 2000, pdim = 2) 
 #'  
 #'  @keywords
 #'  multivariate
 #'  nonparametric
 #'  depth function
-depthLP = function(u, X, pdim = 1, la = 1, lb = 1, name = "X", threads = -1, func = NULL,...)
+#'  
+depthLP = function(u, X, pdim = 2, la = 1, lb = 1, name = "X", threads = -1, func = NULL,...)
 {
   if(missing(X)) X = u
   if(is.null(func)) depth = depthLPCPP(u, X, pdim, la, lb, threads = threads)
@@ -348,3 +354,32 @@ depthLP = function(u, X, pdim = 1, la = 1, lb = 1, name = "X", threads = -1, fun
 }
 
 
+#'@title Modified band depth
+#'@export
+#'@description Computes the modified band depth.
+#'
+#' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
+#' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
+#' @param name for this data set - it will be used on plots from depthproc.
+#' @param \dots currently not supported.
+#'
+#'@examples
+#'
+#'  x = matrix(rnorm(600), nc = 20)
+#'  depthMBD(x)
+#'  
+depthMBD = function(u, X, name = "X",...)
+{
+  if(missing(X)) 
+    {
+      X = u
+      depth = modBandDepth(u)
+    } else
+    {
+      depth = modBandDepthRef(u,X)  
+    }
+    
+  new("DepthMBD", as.numeric(depth), u = u, X = X, method = "MBD", name = name)
+  
+
+}

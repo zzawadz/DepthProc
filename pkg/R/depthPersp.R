@@ -2,6 +2,7 @@
 #' @title Perspective plot for depth functions
 #' @export
 #' @importFrom lattice wireframe
+#' @importFrom colorspace heat_hcl
 #' @description Draws a perspective plot of depth function over x-y plane.
 #' 
 #' @param x bivariate data
@@ -12,6 +13,7 @@
 #' @param xlab description of x-axis
 #' @param ylab description of y-axis
 #' @param plot_title plot title (default NULL means paste(method, "depth"))
+#' @param colors function for colors pallete (e.g. gray.colors).
 #' @param ... arguments passed to depth function
 #' 
 #' @details
@@ -32,8 +34,9 @@
 #' require(rgl)
 #' depthPersp(data1990, method = "Projection",plot_method= "rgl")
 #' }
-depthPersp<-function(x,plot_method = "lattice",xlim = extendrange(x[,1],f=0.1),ylim = extendrange(x[,2],f=0.1),n=50,
-	xlab = "x", ylab = "y",plot_title=NULL,...)
+#' 
+depthPersp<-function(x, plot_method = "lattice", xlim = extendrange(x[,1],f=0.1), ylim = extendrange(x[,2],f=0.1),n=50,
+	xlab = "x", ylab = "y", plot_title=NULL, colors = heat_hcl, ...)
 {
 	if(dim(x)[2]==2)
 	{
@@ -56,8 +59,9 @@ depthPersp<-function(x,plot_method = "lattice",xlim = extendrange(x[,1],f=0.1),y
 
 			ztmp = z_surface * 100/max(z_surface)  
     
-			colors = rev(rainbow(100,start=0,end=1/4))
-			col = colors[ztmp]
+			#colors = rev(rainbow(100,start=0,end=1/4))
+			colors = colors(100)
+      col = colors[ztmp]
 			
 			if(plot_method == "rgl") 
         {

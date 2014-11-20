@@ -9,9 +9,9 @@ setClass("CovDepthWeighted", representation(depth = "character"), contains="CovR
 #'@description Weighted by \eqn{L^p} depth (outlyingness) multivariate location and scatter estimators.
 #'
 #'  @param x The data as a matrix or data frame. If it is a matrix or data frame, then each row is viewed as one multivariate observation.
-#'  @param p The parameter of the weighted \eqn{L^p} depth
-#'  @param a parameter of a simple weight function w=a*x+b
-#'  @param b parameter of a simple weight function w=a*x+b
+#'  @param pdim The parameter of the weighted \eqn{L^pdim} depth
+#'  @param la parameter of a simple weight function w=a*x+b
+#'  @param lb parameter of a simple weight function w=a*x+b
 #'
 #'  
 #'  @return loc: Robust Estimate of Location:
@@ -32,7 +32,7 @@ setClass("CovDepthWeighted", representation(depth = "character"), contains="CovR
 #'  
 #'  @examples
 #'  x = mvrnorm(n = 100, mu = c(0,0), Sigma = 3*diag(2))
-#'  cov_x = CovLP(x,1,1,1)
+#'  cov_x = CovLP(x, 2, 1, 1)
 #'  
 #'  # EXAMPLE 2
 #'  data(under5.mort,inf.mort,maesles.imm)
@@ -46,17 +46,20 @@ setClass("CovDepthWeighted", representation(depth = "character"), contains="CovR
 #'  robust
 #'  depth function
 #'  
-CovLP = function(x, p=1, a=1, b=1)
+CovLP = function(x, pdim=2, la=1, lb=1)
 {
-  cov = CovLPCPP(x, p, a, b)
+  if(is.data.frame(x)) x = as.matrix(x)
+  cov = CovLPCPP(x, pdim, la, lb)
+  center = depthMedian(x, method = "LP", pdim = pdim, la = la, lb = lb)
   
   method = "Depth Weighted Estimator"
   new("CovDepthWeighted", cov = cov,
-      center = colMeans(x),
+      center = center,
       det = det(cov),
       n.obs = nrow(x),
       X = x,
-      method = method)
+      method = method,
+      call = match.call())
 }
 
 

@@ -35,6 +35,15 @@ setMethod("depthMedian", "matrix", function(x,...)
 })
 
 #' @rdname depthMedian-methods
+#' @aliases depthMedian,data.frame
+#' @export
+setMethod("depthMedian", "data.frame", function(x,...)
+{
+  x = as.matrix(x)
+  depthMedian(x, ...)
+})
+
+#' @rdname depthMedian-methods
 #' @aliases depthMedian,Depth
 #' @export
 setMethod("depthMedian", "Depth", function(x)

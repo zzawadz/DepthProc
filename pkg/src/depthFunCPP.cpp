@@ -96,4 +96,28 @@ SEXP depthTukeyCPP(SEXP ru, SEXP rX, bool exact, int threads)
   return wrap(depth);
 }
 
+// [[Rcpp::export]]
+SEXP modBandDepthRef(SEXP rX, SEXP rxRef) 
+{
+  Rcpp::NumericMatrix cxRef(rxRef);
+  arma::mat xRef(cxRef.begin(), cxRef.nrow(), cxRef.ncol(), false);
+  Rcpp::NumericMatrix cX(rX);
+  arma::mat X(cX.begin(), cX.nrow(), cX.ncol(), false);
+  arma::vec depth(X.n_rows); 
+  
+  depth = Depth::MBDepth(X,xRef);
+  
+  return wrap(depth);
+}
 
+// [[Rcpp::export]]
+SEXP modBandDepth(SEXP rX) 
+{
+  Rcpp::NumericMatrix cX(rX);
+  arma::mat X(cX.begin(), cX.nrow(), cX.ncol(), false);
+  arma::vec depth(X.n_rows);
+  
+  depth = Depth::MBDepth(X);
+  
+  return wrap(depth);
+}

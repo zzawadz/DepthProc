@@ -24,8 +24,23 @@ namespace Depth
 	// Projection Depth
 	arma::vec ProjectionDepth(const arma::mat& X, size_t nproj, int threads);
 	arma::vec ProjectionDepth(const arma::mat& X, const arma::mat& Y, size_t nproj, int threads);
-
+  
+  
+  // Tukey depth
   arma::vec TukeyDepth(const arma::mat& X, const arma::mat& Y,bool exact, int threads);
+  
+  
+  //Modified band depth
+  arma::vec MBDepth(const arma::mat& X);
+  arma::vec MBDepth(const arma::mat& X, const arma::mat& Y);
+  
+}
+
+namespace MBD
+{
+  arma::vec depthForCol(arma::vec x);
+  arma::vec depthFuncForRef(arma::vec X,arma::vec Y);
 }
 
 #endif
+

@@ -25,6 +25,14 @@ depthTukeyCPP <- function(ru, rX, exact, threads) {
     .Call('DepthProc_depthTukeyCPP', PACKAGE = 'DepthProc', ru, rX, exact, threads)
 }
 
+modBandDepthRef <- function(rX, rxRef) {
+    .Call('DepthProc_modBandDepthRef', PACKAGE = 'DepthProc', rX, rxRef)
+}
+
+modBandDepth <- function(rX) {
+    .Call('DepthProc_modBandDepth', PACKAGE = 'DepthProc', rX)
+}
+
 sampleDepthContForMuCPP <- function(d, mu, rY) {
     .Call('DepthProc_sampleDepthContForMuCPP', PACKAGE = 'DepthProc', d, mu, rY)
 }
