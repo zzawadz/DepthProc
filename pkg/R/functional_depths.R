@@ -1,10 +1,11 @@
+#' @export
 fncDepth = function(u, X, method = "MBD", name = "X", threads = -1,...)
 {
-  if(missing(X) && method == "MBD") return(depthMBD(u,...))
+  if(missing(X) && method == "MBD") return(fncDepthMBD(u,...))
   if(missing(X)) X = u
   
   if(method == "FM") return(fncDepthFM(u, X, ...))
-  if(method == "MBD") return(depthMBD(u, X,...))
+  if(method == "MBD") return(fncDepthMBD(u, X,...))
 }
 
 
