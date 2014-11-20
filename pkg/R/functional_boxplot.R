@@ -1,6 +1,7 @@
 #' Functional boxplot based on Modified Band Depth
+#' @export
 #' 
-#' @param x object of class DepthMBD
+#' @param x data matrix
 #' @param band_lim limits for bands
 #' @param colors color set
 #' @param add_lines Logical. If TRUE, all lines from data will be plotted.
@@ -9,16 +10,20 @@
 #' @param \dots other arguments passed to matplot
 #'
 #' @examples
-#' x = depthMBD(matrix(rnorm(200), ncol = 10))
-#' plot(x)
+#' x  = matrix(rnorm(200), ncol = 10)
+#' fncBoxPlot(x)
 #'
-setMethod("plot", signature = c(x = "DepthMBD"), function(x, band_lim = c(0,0.5), colors = NULL, add_lines = TRUE, lwd = 1, alpha = 0.5, ...)
+fncBoxPlot = function(x, band_lim = c(0,0.5), colors = NULL, add_lines = TRUE, lwd = 1, alpha = 0.5, ...)
 {
-  tu = t(x@u)
+  depths = fncDepth(x)
   
-  matplot(tu, type = "n", col = "gray90", lty = 1, ...)
+  x = t(x)
   
-  band_lim = quantile(x, band_lim)
+  matplot(x, type = "n", col = "gray90", lty = 1)
+  
+  
+  
+  band_lim = quantile(depths, band_lim)
   if(is.null(colors))
   {
     colors = rev(gray.colors(length(band_lim), start = 0.4))
@@ -33,8 +38,8 @@ setMethod("plot", signature = c(x = "DepthMBD"), function(x, band_lim = c(0,0.5)
   for(i in seq_along(band_lim))
   {
     
-    tmp_tu = tu[,x >= band_lim[i]]
-    range = t(apply(tmp_tu, 1, range))
+    tmp_x = x[,depths >= band_lim[i]]
+    range = t(apply(tmp_x, 1, range))
     range[,2] = rev(range[,2])
     xx = c(1:nrow(range), nrow(range):1)
     polygon(xx, range, border = NA, col = colors[i])
@@ -44,28 +49,17 @@ setMethod("plot", signature = c(x = "DepthMBD"), function(x, band_lim = c(0,0.5)
   if(add_lines)
   {
     col_lines
-    col = rep(0,ncol(tu))
+    col = rep(0,ncol(x))
     
     for(i in seq_along(band_lim))
     {
-      col = col + as.numeric(x >= band_lim[i])
+      col = col + as.numeric(depths >= band_lim[i])
     }
     
-    sapply(1:ncol(tu), function(i) lines(tu[,i], col = col_lines[col[i]]))
-    lines(tu[,which.max(x)], lwd = lwd*2)
+    sapply(1:ncol(x), function(i) lines(x[,i], col = col_lines[col[i]]))
+    lines(x[,which.max(depths)], lwd = lwd*2)
   }
   
-  
-  
-  
-
-  
-})
-
-
-.addAlpha <- function(col, alpha=1){
-  apply(sapply(col, col2rgb)/255, 2, function(x) 
-    rgb(x[1], x[2], x[3], alpha=alpha))  
 }
 
 
