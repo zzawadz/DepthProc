@@ -1,25 +1,106 @@
+#' Basic function for functional depths
+#' 
+#' Calculates depth functions.
 #' @export
-fncDepth = function(u, X, method = "MBD", name = "X", threads = -1,...)
+#' 
+#' @rdname fncDepth
+#' @examples
+#' 
+#' x = matrix(rnorm(60), nc = 20)
+#' fncDepth(x, method = "FM", dep1d = "Mahalanobis")
+#' fncDepth(x)
+#' 
+#' # zoo and xts
+#' library(xts)
+#' data(sample_matrix)
+#' sample.xts <- as.xts(sample_matrix, descr='my new xts object')
+#' fncDepth(sample.xts) 
+#' 
+fncDepth = function(u, X = NULL, method = "MBD", name = deparse(substitute(u)), ...)
 {
-  if(missing(X) && method == "MBD") return(fncDepthMBD(u,...))
-  if(missing(X)) X = u
+  if(!is.null(X))
+  {
+    if(class(u) != class(X)) stop("u and X must be the the same class!")
+  }
+  UseMethod("fncDepth")
+}
+#' @export
+#' @rdname fncDepth
+fncDepth.matrix = function(u, X = NULL, method = "MBD", name = deparse(substitute(u)), ...)
+{
   
-  if(method == "FM") return(fncDepthFM(u, X, ...))
-  if(method == "MBD") return(fncDepthMBD(u, X,...))
+  fast_mbd = FALSE
+  if(is.null(X) && method == "MBD") fast_mbd = TRUE
+  if(is.null(X)) X = u
+  
+  if(method == "FM")  
+  {
+    dept = (fncDepthFM(u, X, ...))
+    depth = new("FncDepthFM", dept)
+  }
+  if(method == "MBD") 
+  {
+    if(fast_mbd) 
+    {
+      dept = fncDepthMBD(u) 
+    } else
+    {
+      dept = (fncDepthMBD(u, X))
+    }
+    depth = new("FncDepthMBD", dept)
+  }
+  
+  depth@u = u
+  depth@X = X
+  depth@name = name
+  depth@method = method
+  depth@index = 1:ncol(u)
+  return(depth)
 }
 
+#' @export
+#' @rdname fncDepth
+fncDepth.zoo = function(u, X = NULL, method = "MBD", name = deparse(substitute(u)), ...)
+{
+  if(is.null(X)) X = u
+  
+  um = t(as.matrix(u))
+  Xm = t(as.matrix(X))
+  
+  depth = fncDepth(um,Xm, method, name, ...)
+  depth@name = name
+  depth@index = index(u)
+  
+  depth
+}
 
-fncDepthFM = function(u, X, ...)
+###################################################################
+###################################################################
+
+
+#' @title FM Depth
+#' @export
+#' @description Computes Frainman-Muniz depth for functional data.
+#' 
+#' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
+#' @param X The data as a matrix. If it is a matrix or data frame, then each row is viewed as one multivariate observation.
+#' @param dep1d method for depth used in 1d.
+#' 
+#' @examples
+#' x = matrix(rnorm(60), nc = 20)
+#' fncDepthFM(x)
+#' 
+fncDepthFM = function(u, X, dep1d = "Projection", ...)
 {
   if(missing(X)) X = u
   
   depths = rep(0, nrow(X))
   for(i in 1:ncol(X))
   {
-    depths = depths + depth(u[,i], X[,i], ...)
+    depths = depths + depth(u[,i], X[,i], method = dep1d, ...)
   }
   
-  depths = depths/ncol(X)
+  depths = as.numeric(depths/ncol(X))
   return(depths)  
 }
 
@@ -29,16 +110,15 @@ fncDepthFM = function(u, X, ...)
 #'@description Computes the modified band depth.
 #'
 #' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
-#' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#' @param name for this data set - it will be used on plots from depthproc.
-#' @param \dots currently not supported.
+#' @param X The data as a matrix. If it is a matrix or data frame, then each row is viewed as one multivariate observation.
 #'
 #'@examples
 #'
-#'  x = matrix(rnorm(600), nc = 20)
+#'  x = matrix(rnorm(60), nc = 20)
 #'  fncDepthMBD(x)
+#'  fncDepthMBD(x, x)
 #'  
-fncDepthMBD = function(u, X, name = "X",...)
+fncDepthMBD = function(u, X)
 {
   if(missing(X)) 
   {
@@ -49,5 +129,5 @@ fncDepthMBD = function(u, X, name = "X",...)
     depth = modBandDepthRef(u,X)  
   }
   
-  new("DepthMBD", as.numeric(depth), u = u, X = X, method = "MBD", name = name)
+  as.numeric(depth)
 }

@@ -26,5 +26,7 @@ Suggests:
     sn,
     robustbase,
     dplyr,
-    RcppArmadillo
+    RcppArmadillo,
+    zoo,
+    xts
 LinkingTo: Rcpp, RcppArmadillo
