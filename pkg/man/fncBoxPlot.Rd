@@ -3,29 +3,32 @@
 \alias{fncBoxPlot}
 \title{Functional boxplot based on Modified Band Depth}
 \usage{
-fncBoxPlot(x, band_lim = c(0, 0.5), colors = NULL, add_lines = TRUE,
-  lwd = 1, alpha = 0.5, ...)
+fncBoxPlot(x, bands = c(0, 0.5), method = "MBD", type = "ggplot2", ...)
 }
 \arguments{
 \item{x}{data matrix}
 
-\item{band_lim}{limits for bands}
+\item{bands}{limits for bands}
 
-\item{colors}{color set}
+\item{method}{depth method}
 
-\item{add_lines}{Logical. If TRUE, all lines from data will be plotted.}
+\item{type}{method used for create plot ("ggplot2" or "base")}
 
-\item{lwd}{lines width}
-
-\item{alpha}{transparency for band area.}
-
-\item{\dots}{other arguments passed to matplot}
+\item{\dots}{other arguments passed to fncDepth}
 }
 \description{
 Functional boxplot based on Modified Band Depth
 }
 \examples{
 x  = matrix(rnorm(200), ncol = 10)
-fncBoxPlot(x)
+fncBoxPlot(x, bands = c(0, 0.5, 1), method = "FM")
+fncBoxPlot(x, bands = c(0, 0.5, 1), method = "MBD")
+
+# fncBoxPlot handles zoo and xts objects
+library(xts)
+x  = matrix(rnorm(200), ncol = 10)
+time = as.POSIXct(1:nrow(x) * 86400, origin = "1970-01-01")
+x = xts(x, order.by = time)
+fncBoxPlot(x, bands = c(0, 0.5, 1), method = "FM")
 }
 

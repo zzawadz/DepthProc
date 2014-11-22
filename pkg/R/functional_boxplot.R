@@ -2,12 +2,10 @@
 #' @export
 #' 
 #' @param x data matrix
-#' @param band_lim limits for bands
-#' @param colors color set
-#' @param add_lines Logical. If TRUE, all lines from data will be plotted.
-#' @param lwd lines width
-#' @param alpha transparency for band area.
-#' @param \dots other arguments passed to matplot
+#' @param bands limits for bands
+#' @param method depth method
+#' @param type method used for create plot ("ggplot2" or "base")
+#' @param \dots other arguments passed to fncDepth
 #'
 #' @examples
 #' x  = matrix(rnorm(200), ncol = 10)
@@ -32,9 +30,8 @@ fncBoxPlot = function(x, bands = c(0,0.5), method = "MBD", type = "ggplot2", ...
 .fncBoxPlotGGPlot = function(obj, bands)
 {
   bands = fncGetBandsDataFrame(obj, bands)
-  p = ggplot(bands, aes(x = index, fill = level, color = level)) 
-  p = p + geom_ribbon(aes(ymin = lower, ymax = upper))
-  #p + geom_line(aes(x = index, y = lower))
+  p = ggplot(bands, aes_string(x = "index", fill = "level", color = "level")) 
+  p = p + geom_ribbon(aes_string(ymin = "lower", ymax = "upper"))
   p = p + theme_bw()
   p + scale_fill_brewer(palette = "Blues") + scale_color_brewer(palette = "Blues") 
 }
