@@ -1,27 +1,29 @@
 #' Functional boxplot based on Modified Band Depth
 #' @export
 #' 
-#' @param x data matrix
+#' @param u data matrix
+#' @param X reference set. If null u will be used as reference.
 #' @param bands limits for bands
 #' @param method depth method
 #' @param type method used for create plot ("ggplot2" or "base")
 #' @param \dots other arguments passed to fncDepth
 #'
 #' @examples
+#' 
+#' # some data:
 #' x  = matrix(rnorm(200), ncol = 10)
+#' 
 #' fncBoxPlot(x, bands = c(0, 0.5, 1), method = "FM")
-#' fncBoxPlot(x, bands = c(0, 0.5, 1), method = "MBD")
 #' 
 #' # fncBoxPlot handles zoo and xts objects
 #' library(xts)
-#' x  = matrix(rnorm(200), ncol = 10)
-#' time = as.POSIXct(1:nrow(x) * 86400, origin = "1970-01-01")
-#' x = xts(x, order.by = time)
-#' fncBoxPlot(x, bands = c(0, 0.5, 1), method = "FM")
+#' time = as.POSIXct(1:ncol(x) * 86400, origin = "1970-01-01")
+#' x_xts = xts(t(x), order.by = time)
+#' fncBoxPlot(x_xts, bands = c(0, 0.5, 1), method = "FM")
 #' 
-fncBoxPlot = function(x, bands = c(0,0.5), method = "MBD", type = "ggplot2", ...)
+fncBoxPlot = function(u, X = NULL, bands = c(0,0.5), method = "MBD", type = "ggplot2", ...)
 {
-  depths = fncDepth(x, X = NULL, method = method, ...)
+  depths = fncDepth(u, X, method = method, ...)
   if(type == "ggplot2") return(.fncBoxPlotGGPlot(depths, bands))
 }
 
