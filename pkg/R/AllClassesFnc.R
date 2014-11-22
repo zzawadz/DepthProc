@@ -25,5 +25,5 @@ setClass("FunctionalDepth", representation =
 setClass("FncDepthMBD", representation(), contains = c("FunctionalDepth","numeric"))
 setClass("FncDepthFM", representation(), contains = c("FunctionalDepth","numeric"))
 
-
+setClass("FncBand", representation = c(index = "ANY", level = "numeric"),contains = "matrix")
 
