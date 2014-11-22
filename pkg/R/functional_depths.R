@@ -1,7 +1,13 @@
-#' Basic function for functional depths
+#' @title Basic function for functional depths
 #' 
-#' Calculates depth functions.
+#' @description Calculates depth functions.
 #' @export
+#' 
+#' @param u data 
+#' @param X reference set. If null u will be used as reference.
+#' @param method depth method - "MBD" (default), or "FM" (Frainman-Muniz depth)
+#' @param name name for data set
+#' @param \dots additional arguments passed to fncDepthFM.
 #' 
 #' @rdname fncDepth
 #' @examples
@@ -85,6 +91,7 @@ fncDepth.zoo = function(u, X = NULL, method = "MBD", name = deparse(substitute(u
 #' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #' @param X The data as a matrix. If it is a matrix or data frame, then each row is viewed as one multivariate observation.
 #' @param dep1d method for depth used in 1d.
+#' @param \dots other arguments passed to depth function.
 #' 
 #' @examples
 #' x = matrix(rnorm(60), nc = 20)

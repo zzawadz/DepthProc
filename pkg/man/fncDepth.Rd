@@ -10,8 +10,19 @@ fncDepth(u, X = NULL, method = "MBD", name = deparse(substitute(u)), ...)
 \method{fncDepth}{matrix}(u, X = NULL, method = "MBD",
   name = deparse(substitute(u)), ...)
 
-\method{fncDepth}{zoo}(u, X, method = "MBD", name = deparse(substitute(u)),
-  ...)
+\method{fncDepth}{zoo}(u, X = NULL, method = "MBD",
+  name = deparse(substitute(u)), ...)
+}
+\arguments{
+\item{u}{data}
+
+\item{X}{reference set. If null u will be used as reference.}
+
+\item{method}{depth method - "MBD" (default), or "FM" (Frainman-Muniz depth)}
+
+\item{name}{name for data set}
+
+\item{\dots}{additional arguments passed to fncDepthFM.}
 }
 \description{
 Calculates depth functions.
@@ -21,9 +32,10 @@ x = matrix(rnorm(60), nc = 20)
 fncDepth(x, method = "FM", dep1d = "Mahalanobis")
 fncDepth(x)
 
+# zoo and xts
 library(xts)
 data(sample_matrix)
 sample.xts <- as.xts(sample_matrix, descr='my new xts object')
-sample.xts
+fncDepth(sample.xts)
 }
 

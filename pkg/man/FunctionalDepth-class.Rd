@@ -17,5 +17,7 @@ Virtual class with structure for every functional depth class from depthproc pac
 \item{\code{method}}{functional depth type.}
 
 \item{\code{name}}{name that will be used on plots. By default it is a name of variable passed to fncDepth.}
+
+\item{\code{index}}{numeric, or time-based object.}
 }}
 
