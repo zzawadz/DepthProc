@@ -77,7 +77,7 @@ fncDepth.matrix = function(u, X = NULL, method = "MBD", byrow = NULL, name = dep
 
 #' @export
 #' @rdname fncDepth
-fncDepth.zoo = function(u, X = NULL, method = "MBD", name = deparse(substitute(u)), ...)
+fncDepth.zoo = function(u, X = NULL, method = "MBD", byrow = NULL, name = deparse(substitute(u)), ...)
 {
   if(is.null(byrow)) byrow = FALSE
   
@@ -86,12 +86,19 @@ fncDepth.zoo = function(u, X = NULL, method = "MBD", name = deparse(substitute(u
   um = as.matrix(u)
   Xm = as.matrix(X)
   
-  if(!byrow)
   
-  depth = fncDepth(um,Xm, method, name, ...)
+  if(!byrow)
+  {
+    um = t(um)
+    Xm = t(Xm)
+  }
+  
+  depth = fncDepth(um,Xm, method, byrow = TRUE, name, ...)
+  
   depth@name = name
-  depth@index = index(u)
-  depth@val_name
+  
+  if(!byrow) depth@index = index(u)
+  
   
   depth
 }
