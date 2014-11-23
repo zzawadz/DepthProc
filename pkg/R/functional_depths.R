@@ -6,15 +6,16 @@
 #' @param u data 
 #' @param X reference set. If null u will be used as reference.
 #' @param method depth method - "MBD" (default), or "FM" (Frainman-Muniz depth)
+#' @param byrow logical or character.
 #' @param name name for data set
 #' @param \dots additional arguments passed to fncDepthFM.
 #' 
 #' @rdname fncDepth
 #' @examples
 #' 
-#' x = matrix(rnorm(60), nc = 20)
+#' x = matrix(rnorm(60), ncol = 20)
 #' fncDepth(x, method = "FM", dep1d = "Mahalanobis")
-#' fncDepth(x)
+#' fncDepth(x, byrow = FALSE)
 #' 
 #' # zoo and xts
 #' library(xts)
@@ -22,7 +23,7 @@
 #' sample.xts <- as.xts(sample_matrix, descr='my new xts object')
 #' fncDepth(sample.xts) 
 #' 
-fncDepth = function(u, X = NULL, method = "MBD", name = deparse(substitute(u)), ...)
+fncDepth = function(u, X = NULL, method = "MBD", byrow = NULL, name = deparse(substitute(u)), ...)
 {
   if(!is.null(X))
   {
@@ -32,12 +33,21 @@ fncDepth = function(u, X = NULL, method = "MBD", name = deparse(substitute(u)), 
 }
 #' @export
 #' @rdname fncDepth
-fncDepth.matrix = function(u, X = NULL, method = "MBD", name = deparse(substitute(u)), ...)
+fncDepth.matrix = function(u, X = NULL, method = "MBD", byrow = NULL, name = deparse(substitute(u)), ...)
 {
+  force(name) # Fix for name problem, after transposition
   
   fast_mbd = FALSE
   if(is.null(X) && method == "MBD") fast_mbd = TRUE
   if(is.null(X)) X = u
+  
+  # For matrix - by default row is an observation
+  if(is.null(byrow)) byrow = TRUE
+  if( !byrow )
+  {
+    u = t(u)
+    X = t(X)
+  }
   
   if(method == "FM")  
   {
@@ -60,7 +70,8 @@ fncDepth.matrix = function(u, X = NULL, method = "MBD", name = deparse(substitut
   depth@X = X
   depth@name = name
   depth@method = method
-  depth@index = 1:ncol(u)
+  depth@index = .extractIndexFromMatrix(u)
+  depth@val_name = if(!is.null(rownames(u))) rownames(u) else 1:nrow(u)
   return(depth)
 }
 
@@ -68,14 +79,19 @@ fncDepth.matrix = function(u, X = NULL, method = "MBD", name = deparse(substitut
 #' @rdname fncDepth
 fncDepth.zoo = function(u, X = NULL, method = "MBD", name = deparse(substitute(u)), ...)
 {
+  if(is.null(byrow)) byrow = FALSE
+  
   if(is.null(X)) X = u
   
-  um = t(as.matrix(u))
-  Xm = t(as.matrix(X))
+  um = as.matrix(u)
+  Xm = as.matrix(X)
+  
+  if(!byrow)
   
   depth = fncDepth(um,Xm, method, name, ...)
   depth@name = name
   depth@index = index(u)
+  depth@val_name
   
   depth
 }

@@ -20,6 +20,7 @@ setClass("FunctionalDepth", representation =
                 method = "character",
                 name = "character",
                 index = "ANY",
+                val_name = "ANY",
                 "VIRTUAL"))
 
 setClass("FncDepthMBD", representation(), contains = c("FunctionalDepth","numeric"))
