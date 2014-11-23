@@ -60,28 +60,6 @@ fncBoxPlot = function(u, X = NULL, bands = c(0,0.5), method = "MBD", byrow = NUL
 ############## Other functions ############
 
 
-#' @title Functional bands
-#' @description Extract bands from functional depth object.
-#' @export
-#' 
-#' @param obj object that inherits from FunctionalDepth.
-#' @param band single numeric value.
-#' 
-#' @examples
-#' 
-#' x = matrix(rnorm(600), nc = 20)
-#' obj = fncDepth(x, method = "FM", dep1d = "Mahalanobis")
-fncGetBand = function(obj, band = 0.5)
-{
-  u = obj@u
-  depths = as.numeric(obj)
-  bands_q = quantile(obj, 1 - band)
-  tmp_u = u[depths >= bands_q, , drop = FALSE]
-  bands = t(apply(tmp_u, 2, range))
-  new("FncBand", bands, index = obj@index, level = band)
-}
-
-
 fncBand2DataFrame = function(band)
 {
   data.frame(index = band@index,lower = band[,1], upper = band[,2], level = band@level)
