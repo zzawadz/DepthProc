@@ -235,17 +235,17 @@ setClass("TrimReg2d", contains="RobReg")
 
 
 #' @title Add line to plot
-#'
-#'  @param a an object of class RobReg
-#'  @param b not used.
-#'  @param ... Arguments to be passed to methods, such as graphical parameters (see par).
-#'  @param h not supported.
-#'  @param v not supported.
-#'  @param reg not supported.
-#'  @param coef not supported.
-#'  @param untf not supported.
+#' @description Add fitted line to a plot. This is overloaded function for robust regression methods from package depthproc.
+#' 
+#' @param a an object of class RobReg
+#' @param b not used.
+#' @param ... Arguments to be passed to methods, such as graphical parameters (see par).
+#' @param h not supported.
+#' @param v not supported.
+#' @param reg not supported.
+#' @param coef not supported.
+#' @param untf not supported.
 #'  
-#'  @description Add fitted line to a plot. This is overloaded function for robust regression methods from package depthproc.
 #' @export
 #' 
 setMethod("abline", "RobReg",function(a, ...) { abline(a@coef, ...)})

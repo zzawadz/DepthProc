@@ -1,8 +1,8 @@
 
 
-findPattern = function(pattern)
+findPattern = function(pattern, path)
 {
-x = dir("../depthproc/pkg/R/",full.names=TRUE)
+x = dir(path,full.names=TRUE)
 res = NULL
 for(i in 1:length(x))
 {
