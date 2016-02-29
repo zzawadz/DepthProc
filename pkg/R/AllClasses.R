@@ -50,9 +50,9 @@ setClass("DepthLocal", representation("depth1" = "character","depth2" = "charact
 #' 
 #' Class fro DDPlot
 #'
-#'    @slot X Object of class \link{Depth-class}.
-#'    @slot Y Object of class \link{Depth-class}.
-#'    @slot title title of a plot.
+#' @slot X Object of class \link{Depth-class}.
+#' @slot Y Object of class \link{Depth-class}.
+#' @slot title title of a plot.
 #'  
 #' @export 
 setClass("DDPlot", representation(X = c("Depth"), Y = "Depth", title = "character"))
@@ -175,7 +175,9 @@ setClass("BinnDepth2d", representation=list(freq = "matrix", mid_x = "numeric", 
 #' 
 #' @param object a DDPlot ScaleCurve or AsymmetryCurve object class.
 #'  
-#' @description Create an object of class ggplot from DepthCurve and DepthCurveList.
+#' @description 
+#' 
+#' Create an object of class ggplot from DepthCurve and DepthCurveList.
 #' 
 #' @export
 #' @rdname getPlot-methods
@@ -215,8 +217,8 @@ setClass("RobReg", representation(coef = "numeric", "VIRTUAL"))
 #' 
 #' Class for robust regression methods from depthproc package
 #'
-#'    @slot coef coefficients of fitted model
-#'    @slot depth regression depth of the fitted values
+#' @slot coef coefficients of fitted model
+#' @slot depth regression depth of the fitted values
 #'
 #' @export
 #' 
@@ -291,7 +293,7 @@ setClass("DepthDensity", representation=list(
 #' @param y not supported.
 #' @param \dots not supported.
 #'  
-#'  @description Plot Depth curve
+#' @description Plot Depth curve
 #' @export
 #' 
 #' @examples
