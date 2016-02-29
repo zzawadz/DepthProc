@@ -167,28 +167,32 @@ setClass("AsymmetryCurveList", contains=c("DepthCurveList", "list"))
 #' 
 setClass("BinnDepth2d", representation=list(freq = "matrix", mid_x = "numeric", mid_y = "numeric", breaks_x = "numeric", breaks_y = "numeric", input_data = "matrix", max_depth_x = "numeric", max_depth_y = "numeric"))
 
-#' @export
+
+#' @name getPlot
 #' @title Create ggplot object from DepthCurve, DepthCurveList and DDPlot classes.
-#' @rdname getPlot-methods
+#' 
 #' @docType methods
 #' 
-#'  @param object a DDPlot ScaleCurve or AsymmetryCurve object class.
+#' @param object a DDPlot ScaleCurve or AsymmetryCurve object class.
 #'  
-#'  @description Create an object of class ggplot from DepthCurve and DepthCurveList.
-#' @name getPlot
+#' @description Create an object of class ggplot from DepthCurve and DepthCurveList.
+#' 
+#' @export
+#' @rdname getPlot-methods
 #' 
 setGeneric("getPlot", function(object) standardGeneric("getPlot"))
 setGeneric(".getPlot", function(object) standardGeneric(".getPlot"))
 
-#' @export
+
 #' @title as.matrix method for DepthCurveList.
-#' @rdname as.matrix-methods
-#' @docType methods
 #'
 #'  @param x an object of class that inherits from DepthCurveList (ScaleCurveList or AsymmetryCurveList).
 #'  @param ... other arguments passed to standard as.matrix function.
 #'  
 #'  @description Create a matrix from DepthCurve and DepthCurveList.
+#'  @docType methods
+#'  @export
+#' @rdname as.matrix-methods
 setGeneric("as.matrix", function(x,...) standardGeneric("as.matrix"))
 
 #####################################################

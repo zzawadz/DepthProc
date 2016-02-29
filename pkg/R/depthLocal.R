@@ -21,7 +21,6 @@
 #'
 #'@description Computes local version of depth according to proposals of Paindaveine and Van Bever - see referencess.
 #'
-#'@export
 #'
 #'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #'  @param X The data as a matrix, data frame. If it is a matrix or data frame, then each row is viewed as one multivariate observation.
@@ -67,6 +66,8 @@
 #' data<-BALLOT[train,]
 #' depthContour(data, method = "Local", depth1 = "Projection",beta=0.3)
 #' }
+#' 
+#' @export
 #' 
 depthLocal = function(u, X, beta=0.5,
                       depth1="Projection", depth2=depth1, name = "X", ...) 

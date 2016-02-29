@@ -6,6 +6,7 @@
 #' @usage data(USLABOUR)
 #' @format A data frame with 654 rows and 4 variables
 #' @source U.S.Department of Labor - Bureau of Labour Statistics FRED
+#' 
 NULL
 
 
@@ -16,6 +17,7 @@ NULL
 #' @usage data(under5.mort)
 #' @format A data frame with 654 rows and 4 variables
 #' @source http://mdgs.un.org/unsd/mdg/Data.aspx
+#' 
 NULL
 
 #' Infant mortality rate (0-1 year) per 1,000 live births
@@ -25,6 +27,7 @@ NULL
 #' @usage data(inf.mort)
 #' @format A data frame with 654 rows and 4 variables
 #' @source http://mdgs.un.org/unsd/mdg/Data.aspx
+#' 
 NULL
 
 #' Children 1 year old immunized against measles, percentage
@@ -34,5 +37,6 @@ NULL
 #' @usage data(maesles.imm)
 #' @format A data frame with 654 rows and 4 variables
 #' @source http://mdgs.un.org/unsd/mdg/Data.aspx
+#' 
 NULL
 

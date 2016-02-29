@@ -1,5 +1,4 @@
-#'@title Simple deepest regression method.
-#'@export
+#'  @title Simple deepest regression method.
 #'  @description This function calculates deepest regression estimator for simple regression.
 #'
 #'  @param x Independent variable.
@@ -18,7 +17,7 @@
 #'  
 #'  @examples
 #'  
-#EXAMPLE 1
+#'  EXAMPLE 1
 #'  data(pension)
 #'  plot(pension)
 #'  abline(lm(Reserves~Income,data = pension), lty = 3, lwd = 2) #lm
@@ -36,6 +35,9 @@
 #'  abline(lm(x~y,data = pension), lwd = 2, col='black') #lm
 #'  abline(deepReg2d (x,y), lwd = 2,col='red') #trimmed reg
 #'  legend("bottomleft",c("LS","DeepReg"),fill=c("black","red"),cex=1.4,bty="n")
+#'  
+#'  @export
+#'  
 deepReg2d<-function(x,y)
 {
   y <- y[order(x)]

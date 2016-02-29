@@ -53,3 +53,4 @@ fncGetBand = function(obj, band = 0.5)
   bands = t(apply(tmp_u, 2, range))
   new("FncBand", bands, index = obj@index, level = band)
 }
+

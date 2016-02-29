@@ -1,6 +1,6 @@
 #' @title Approximate depth contours
-#' @export
-#'  @description Draws an approximate contours of depth for bivariate data.
+#' 
+#' @description Draws an approximate contours of depth for bivariate data.
 #'  
 #' @param x Bivariate data
 #' @param xlim Determines the width of x-axis.
@@ -47,6 +47,7 @@
 #'  @keywords
 #'  contour
 #'  depth
+#'  @export
 #'  
 depthContour = function(x, xlim = extendrange(x[,1],f=0.1), ylim = extendrange(x[,2],f=0.1), n=50, pmean = TRUE, mcol = "blue", pdmedian = TRUE, mecol = "brown", legend = TRUE, points = FALSE, colors = heat_hcl, levels = 10, ...)
 { 
