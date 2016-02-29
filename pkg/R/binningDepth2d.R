@@ -1,27 +1,27 @@
-#'@title 2d Binning
-#'@importFrom sm binning
-#'@description A robust method of decreasing a sample size and therefore a complexity of a statistical procedure. The method may be used within a kernel density or a predictive distribution estimation.
+#' @title 2d Binning
+#' @importFrom sm binning
+#' @description A robust method of decreasing a sample size and therefore a complexity of a statistical procedure. The method may be used within a kernel density or a predictive distribution estimation.
 #'
-#'  @param x bivariate matrix containing data. Each row is viewed as one two-dimensional observation.
-#'  @param binmethod A method for calculation center and dispersion measures. "LocDepth" uses location-scale depth, MAD uses median and MAD in each dimension.
-#'  @param nbins number of bins in each dimension
-#'  @param k responsible for tightness of bins.
-#'  @param remove_borders Logical, include or not marginal bins
-#'  @param ... other arguments passed to depthMedian
+#' @param x bivariate matrix containing data. Each row is viewed as one two-dimensional observation.
+#' @param binmethod A method for calculation center and dispersion measures. "LocDepth" uses location-scale depth, MAD uses median and MAD in each dimension.
+#' @param nbins number of bins in each dimension
+#' @param k responsible for tightness of bins.
+#' @param remove_borders Logical, include or not marginal bins
+#' @param ... other arguments passed to depthMedian
 #'  
-#'  @return freq: a matrix containing the binned frequencies
-#'  @return mid_x: mid points for x
-#'  @return mid_y: mid points for y
-#'  @return breaks_x: breaks for x
-#'  @return breaks_y: breaks for y
-#'  @return input_data: max_depth_x and  max_depth_y:
+#' @return freq: a matrix containing the binned frequencies
+#' @return mid_x: mid points for x
+#' @return mid_y: mid points for y
+#' @return breaks_x: breaks for x
+#' @return breaks_y: breaks for y
+#' @return input_data: max_depth_x and  max_depth_y:
 #'    
 #'  
 #'  
 #' 
-#'  @seealso \code{\link{depth}}
+#' @seealso \code{\link{depth}}
 #'  
-#'  @details
+#' @details
 #'  
 #'  Let us recall, that binning is a popular method of decreasing a sample size. To bin a window of  \eqn{ n }  points  \eqn{ {W}_{i,n}=\left\{{X}_{i-n+1},...,{X}_{i} \right\} }  to a grid  \eqn{ {{{X}'}_{1}},...,{{{X}'}_{m}} }  we simply assign each sample point  \eqn{ {{X}_{i}} }  to the nearest grid point  \eqn{ {{{X}'}_{j}} } . When binning is completed, each grid point  \eqn{ {{X}'}_{j} }  has an associated number  \eqn{ {c}_{i} } , which is the sum of all the points that have been assigned to  \eqn{ {{X}'}_{j} } . This procedure replaces the data  \eqn{ {W}_{i,n}=\left\{ {X}_{i-n+1},...,{X}_{i} \right\} }  with the smaller set  \eqn{ {{W}'}_{j,m}=\left\{ {{X}'}_{j-m+1},...,{{X}'}_{j} \right\} } . Although simple binning can speed up the computation, it is criticized for a lack of a precise approximate control over the accuracy of the approximation. Robust binning however stresses properties of the majority of the data and decreases the computational complexity of the DSA at the same time.                                                                                                                                                                                                                                                                                     
 #'  
@@ -31,15 +31,15 @@
 #'  
 #'  For robust binning we reject "border" classes and further use only midpoints and binned frequencies for classes  \eqn{ ({l}_{1},{l}_{2}) } ,  \eqn{ ({l}_{2},{l}_{3}) } ,...,   \eqn{ ({l}_{m-1},{l}_{m}) } .
 #'  
-#'  @author Daniel Kosiorowski and Zygmunt Zawadzki from Cracow University of Economics.
+#' @author Daniel Kosiorowski and Zygmunt Zawadzki from Cracow University of Economics.
 #'  
-#'  @references
+#' @references
 #'  
 #'  Hall, P., Wand, M. P. (1996) On the Accuracy of Binned Kernel Density Estimators, Journal of Multivariate Analysis archive, Volume 56 Issue 2, 165 - 184
 #'  
 #' Holmstrom, L. (2000) The Accuracy and the Computational Complexity of a Multivariate Binned Kernel Density Estimator, Journal of Multivariate Analysis, Volume 72, Issue 2, 264-309, http://dx.doi.org/10.1006/jmva.1999.1863. (http://www.sciencedirect.com/science/article/pii/S0047259X99918638)
 #'  
-#'  @examples
+#' @examples
 #'  
 #' #EXAMPLE 1
 #' Sigma1 = matrix(c(10,3,3,2),2,2)
@@ -62,13 +62,13 @@
 #' data2011=cbind(under5.mort[,22],maesles.imm[,22])
 #' plot(binningDepth2D(data2011, nbins = 8, k = 0.5,remove_borders = TRUE ))
 #'  
-#'  @keywords
-#'  multivariate
-#'  nonparametric
-#'  robust
-#'  depth function
+#' @keywords
+#' multivariate
+#' nonparametric
+#' robust
+#' depth function
 #'  
-#'  @export
+#' @export
 #'  
 binningDepth2D = function(x, binmethod = "LocDepth", nbins = 8, k = 1, remove_borders = FALSE,  ...)
 {

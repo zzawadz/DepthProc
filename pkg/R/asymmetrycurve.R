@@ -1,11 +1,11 @@
-#'@title Asymmetry curve based on depths
+#' @title Asymmetry curve based on depths
 #'
-#'@description Produces an asymmetry curve estimated from given data.
+#' @description Produces an asymmetry curve estimated from given data.
 #'
-#'  @param x  The data as a matrix or data frame. If it is a matrix or data frame, then each row is viewed as one multivariate observation. 
-#'  @param y  Additional matrix of multivariate data.
-#'  @param alpha  An ordered vector containing indices of central regins used for asymmetry curve calculation.
-#'  @param method Character string which determines the depth function used. The method can be "Projection" (the default), "Mahalanobis", "Euclidean", "Tukey" or 'LP'.  For details see \code{\link{depth}.}
+#' @param x  The data as a matrix or data frame. If it is a matrix or data frame, then each row is viewed as one multivariate observation. 
+#' @param y  Additional matrix of multivariate data.
+#' @param alpha  An ordered vector containing indices of central regins used for asymmetry curve calculation.
+#' @param method Character string which determines the depth function used. The method can be "Projection" (the default), "Mahalanobis", "Euclidean", "Tukey" or 'LP'.  For details see \code{\link{depth}.}
 #' @param movingmedian  Logical. For default FALSE only one depth median is used to compute asymmetry norm. If TRUE - for every central area, a new depth median will be used - this approach needs much more time.
 #' @param name Name of set X - used in plot legend
 #' @param name_y Name of set Y - used in plot legend
@@ -18,10 +18,10 @@
 #'  Asymmetrycurve takes uses function convhulln from package geometry for computing a volume of convex hull containing central region.
 #'  
 #'  
-#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #'  
 #'  
-#'  @references 
+#' @references 
 #'  
 #' Serfling  R. J.  Multivariate Symmetry and Asymmetry, \emph{Encyclopedia of Statistical Science}, S Kotz, C.B. Read, N. Balakrishnan, B. Vidakovic (eds), 2nd, ed., John Wiley.
 #'
@@ -32,11 +32,10 @@
 #'Dyckerhoff, R. (2004), Data Depths Satisfying the Projection Property, \emph{Allgemeines Statistisches Archiv.},  \bold{88}, 163--190.
 #'
 #'  
-#'  @seealso \code{\link{scaleCurve}}, \code{\link{depth}}
+#' @seealso \code{\link{scaleCurve}}, \code{\link{depth}}
 #'  
-#'  @export
 #'  
-#'  @examples
+#' @examples
 #'  
 #' #EXAMPLE 1
 #' require(sn)
@@ -61,12 +60,14 @@
 #' figure=getPlot(as1990 %+% as2011)+ggtitle('Scale curves')
 #' figure
 #'  
-#'  @keywords
-#'  multivariate
-#'  nonparametric
-#'  robust
-#'  depth function
-#'  asymmetry
+#' @keywords
+#' multivariate
+#' nonparametric
+#' robust
+#' depth function
+#' asymmetry
+#' 
+#' @export
 #'
 asymmetryCurve<-function(x, y = NULL, alpha = seq(0,1,0.01), method = "Projection",
 	movingmedian = FALSE, name = "X", name_y = "Y",...)

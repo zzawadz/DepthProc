@@ -153,14 +153,14 @@ setClass("AsymmetryCurveList", contains=c("DepthCurveList", "list"))
 #' 
 #' Class that stores result of function binningDepth2D(...)
 #'
-#'    @slot freq Matrix with number of elements in certain bin.
-#'    @slot mid_x Middle values on x-axis.
-#'    @slot mid_y Middle values on y-axis.
-#'    @slot breaks_x Boundaries of bins.
-#'    @slot breaks_y Boundaries of bins.
-#'    @slot input_data Binned data.
-#'    @slot max_depth_x Point with maximum depth on x-axis.
-#'    @slot max_depth_y Point with maximum depth on y-axis.
+#' @slot freq Matrix with number of elements in certain bin.
+#' @slot mid_x Middle values on x-axis.
+#' @slot mid_y Middle values on y-axis.
+#' @slot breaks_x Boundaries of bins.
+#' @slot breaks_y Boundaries of bins.
+#' @slot input_data Binned data.
+#' @slot max_depth_x Point with maximum depth on x-axis.
+#' @slot max_depth_y Point with maximum depth on y-axis.
 #'  
 #'  
 #' @export
@@ -186,13 +186,14 @@ setGeneric(".getPlot", function(object) standardGeneric(".getPlot"))
 
 #' @title as.matrix method for DepthCurveList.
 #'
-#'  @param x an object of class that inherits from DepthCurveList (ScaleCurveList or AsymmetryCurveList).
-#'  @param ... other arguments passed to standard as.matrix function.
+#' @param x an object of class that inherits from DepthCurveList (ScaleCurveList or AsymmetryCurveList).
+#' @param ... other arguments passed to standard as.matrix function.
 #'  
-#'  @description Create a matrix from DepthCurve and DepthCurveList.
-#'  @docType methods
-#'  @export
+#' @description Create a matrix from DepthCurve and DepthCurveList.
+#' @docType methods
 #' @rdname as.matrix-methods
+#' @export
+
 setGeneric("as.matrix", function(x,...) standardGeneric("as.matrix"))
 
 #####################################################
