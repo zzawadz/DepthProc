@@ -1,11 +1,17 @@
 Package: DepthProc
-Version: 1.0.4
-Date: 2014-08-18
+Version: 1.1.0
+Date: 2016-03-01
 Title: DepthProc
 Author: Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt
     Zawadzki from Cracow University of Economics.
 Maintainer: Zygmunt Zawadzki <zawadzkizygmunt@gmail.com>
-Description: Data depth concept offers a variety of powerful and user friendly tools for robust exploration and inference for multivariate data. The offered techniques may be successfully used in cases of lack of our knowledge on parametric models generating data due to their nonparametric nature. The package consist of among others implementations of several data depth techniques involving multivariate quantile-quantile plots, multivariate scatter estimators, multivariate Wilcoxon tests and robust regressions.
+Description: Data depth concept offers a variety of powerful and user friendly
+    tools for robust exploration and inference for multivariate data. The offered
+    techniques may be successfully used in cases of lack of our knowledge on
+    parametric models generating data due to their nonparametric nature. The
+    package consist of among others implementations of several data depth techniques
+    involving multivariate quantile-quantile plots, multivariate scatter estimators,
+    multivariate Wilcoxon tests and robust regressions.
 License: GPL-2
 Depends:
     R (>= 3.0.0),
@@ -19,7 +25,7 @@ Imports:
     lattice,
     sm,
     geometry,
-    colorspace,
+    colorspace
 Suggests:
     mvtnorm,
     rgl,
@@ -30,3 +36,4 @@ Suggests:
     zoo,
     xts
 LinkingTo: Rcpp, RcppArmadillo
+RoxygenNote: 5.0.1
