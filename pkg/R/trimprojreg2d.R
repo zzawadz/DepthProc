@@ -8,7 +8,7 @@
 #' @param y Dependent variable
 #' @param alpha Percentage of trimmed observations
 #'
-#'  @author Zygmunt Zawadzki from Cracow University of Economics.
+#' @author Zygmunt Zawadzki from Cracow University of Economics.
 #'
 #'
 #' @examples
