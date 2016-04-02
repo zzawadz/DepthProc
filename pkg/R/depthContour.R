@@ -17,16 +17,16 @@
 #' @param \dots Any additional parameters for function depth (such as method) or graphical parameters (e.g. lwd, lty, main).
 #'  
 #'  
-#'  @details
+#' @details
 #'  
 #'  The set of all points that have depth at least  \eqn{ \alpha  }  is called { \eqn{ \alpha - }  trimmed region}. The  \eqn{ \alpha - }  trimmed region w.r.t.  \eqn{ F }  is denoted by  \eqn{ {D}_{\alpha }(F) }  , i.e.,  
 #'  \deqn{ {D}_{\alpha }(F)=\left\{ z\in {{{R}}^{d}}:D(z,F)\ge \alpha  \right\}}.
 #'  
-#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #'  
-#'  @seealso \code{\link{depthPersp}}
+#' @seealso \code{\link{depthPersp}}
 #'  
-#'  @examples
+#' @examples
 #' # EXAMPLE 1
 #' x = mvrnorm(1000,c(0,0),diag(2))
 #' depthContour(x, colors = gray.colors)
@@ -44,10 +44,10 @@
 #'  UN Fourth Goal 2011 year',method = "LP")
 #'  
 #'  
-#'  @keywords
+#' @keywords
 #'  contour
 #'  depth
-#'  @export
+#' @export
 #'  
 depthContour = function(x, xlim = extendrange(x[,1],f=0.1), ylim = extendrange(x[,2],f=0.1), n=50, pmean = TRUE, mcol = "blue", pdmedian = TRUE, mecol = "brown", legend = TRUE, points = FALSE, colors = heat_hcl, levels = 10, ...)
 { 
