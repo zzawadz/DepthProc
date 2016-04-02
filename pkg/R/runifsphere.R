@@ -1,19 +1,18 @@
 #'@title Random number generation from unit sphere.
-#'@export
-#'  @description This function generates random numbers from p-dimensional unit sphere.
+#' @description This function generates random numbers from p-dimensional unit sphere.
 #'
-#'  @param n number of random samples.
-#'  @param p dimension of the unit sphere.
+#' @param n number of random samples.
+#' @param p dimension of the unit sphere.
 #'
-#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #'
-#'  @examples
+#' @examples
 #'  
-#'  x = runifsphere(n=100)
-#'  plot(x)
+#' x = runifsphere(n=100)
+#' plot(x)
 #'  
-
-
+#' @export
+#'  
 runifsphere = function(n, p = 2)
 {
   runifsphereCPP(n,p)

@@ -22,14 +22,23 @@ setGeneric("%+%", function(e1,e2) standardGeneric("%+%"))
 #'
 #' Virtual class with structure for every depth class from depthproc package.
 #'
-#'    @slot u data set.
-#'    @slot X reference set.
-#'    @slot method depth type.
-#'    @slot name name that will be used on plots.
+#' @slot u data set.
+#' @slot X reference set.
+#' @slot method depth type.
+#' @slot name name that will be used on plots.
 #'  
 #' @aliases DepthEuclid DepthProjection DepthMahalanobis DepthTukey DepthLP DepthLocal
 #' @rdname Depth-class
 #' @exportClass Depth
+#' 
+#' @importFrom colorspace heat_hcl
+#' @importFrom geometry convhulln
+#' @importFrom lattice wireframe
+#' @importFrom sm binning
+#' @importFrom grDevices col2rgb extendrange gray.colors rgb
+#' @importFrom graphics filled.contour lines matplot points polygon rect segments
+#' @importFrom stats cov ecdf lm mad median na.omit quantile rnorm wilcox.test
+#' @importFrom utils tail
 #' 
 setClass("Depth", representation(u = "matrix", X = "matrix", method = "character", name = "character", "VIRTUAL"))
 setClass("DepthEuclid", representation(), contains = c("Depth","numeric"))
@@ -37,8 +46,9 @@ setClass("DepthProjection", representation(), contains = c("Depth","numeric"))
 setClass("DepthMahalanobis", representation(), contains = c("Depth","numeric"))
 setClass("DepthTukey", representation(), contains = c("Depth","numeric"))
 setClass("DepthLP", representation(), contains = c("Depth","numeric"))
-setClass("DepthMBD", representation(), contains = c("Depth","numeric"))
+
 setClass("DepthLocal", representation("depth1" = "character","depth2" = "character"), contains = c("Depth","numeric"))
+
 
 
 #####################################
@@ -49,9 +59,9 @@ setClass("DepthLocal", representation("depth1" = "character","depth2" = "charact
 #' 
 #' Class fro DDPlot
 #'
-#'    @slot X Object of class \link{Depth-class}.
-#'    @slot Y Object of class \link{Depth-class}.
-#'    @slot title title of a plot.
+#' @slot X Object of class \link{Depth-class}.
+#' @slot Y Object of class \link{Depth-class}.
+#' @slot title title of a plot.
 #'  
 #' @export 
 setClass("DDPlot", representation(X = c("Depth"), Y = "Depth", title = "character"))
@@ -152,42 +162,49 @@ setClass("AsymmetryCurveList", contains=c("DepthCurveList", "list"))
 #' 
 #' Class that stores result of function binningDepth2D(...)
 #'
-#'    @slot freq Matrix with number of elements in certain bin.
-#'    @slot mid_x Middle values on x-axis.
-#'    @slot mid_y Middle values on y-axis.
-#'    @slot breaks_x Boundaries of bins.
-#'    @slot breaks_y Boundaries of bins.
-#'    @slot input_data Binned data.
-#'    @slot max_depth_x Point with maximum depth on x-axis.
-#'    @slot max_depth_y Point with maximum depth on y-axis.
+#' @slot freq Matrix with number of elements in certain bin.
+#' @slot mid_x Middle values on x-axis.
+#' @slot mid_y Middle values on y-axis.
+#' @slot breaks_x Boundaries of bins.
+#' @slot breaks_y Boundaries of bins.
+#' @slot input_data Binned data.
+#' @slot max_depth_x Point with maximum depth on x-axis.
+#' @slot max_depth_y Point with maximum depth on y-axis.
 #'  
 #'  
 #' @export
 #' 
 setClass("BinnDepth2d", representation=list(freq = "matrix", mid_x = "numeric", mid_y = "numeric", breaks_x = "numeric", breaks_y = "numeric", input_data = "matrix", max_depth_x = "numeric", max_depth_y = "numeric"))
 
-#' @export
+
+#' @name getPlot
 #' @title Create ggplot object from DepthCurve, DepthCurveList and DDPlot classes.
-#' @rdname getPlot-methods
+#' 
 #' @docType methods
 #' 
-#'  @param object a DDPlot ScaleCurve or AsymmetryCurve object class.
+#' @param object a DDPlot ScaleCurve or AsymmetryCurve object class.
 #'  
-#'  @description Create an object of class ggplot from DepthCurve and DepthCurveList.
-#' @name getPlot
+#' @description 
+#' 
+#' Create an object of class ggplot from DepthCurve and DepthCurveList.
+#' 
+#' @export
+#' @rdname getPlot-methods
 #' 
 setGeneric("getPlot", function(object) standardGeneric("getPlot"))
 setGeneric(".getPlot", function(object) standardGeneric(".getPlot"))
 
-#' @export
+
 #' @title as.matrix method for DepthCurveList.
-#' @rdname as.matrix-methods
-#' @docType methods
 #'
-#'  @param x an object of class that inherits from DepthCurveList (ScaleCurveList or AsymmetryCurveList).
-#'  @param ... other arguments passed to standard as.matrix function.
+#' @param x an object of class that inherits from DepthCurveList (ScaleCurveList or AsymmetryCurveList).
+#' @param ... other arguments passed to standard as.matrix function.
 #'  
-#'  @description Create a matrix from DepthCurve and DepthCurveList.
+#' @description Create a matrix from DepthCurve and DepthCurveList.
+#' @docType methods
+#' @rdname as.matrix-methods
+#' @export
+
 setGeneric("as.matrix", function(x,...) standardGeneric("as.matrix"))
 
 #####################################################
@@ -198,7 +215,7 @@ setGeneric("as.matrix", function(x,...) standardGeneric("as.matrix"))
 #' 
 #' Virtual class for robust regression methods from depthproc package
 #' 
-#'    @slot coef coefficients of fitted model
+#' @slot coef coefficients of fitted model
 #'  
 #'  
 #' @export
@@ -209,8 +226,8 @@ setClass("RobReg", representation(coef = "numeric", "VIRTUAL"))
 #' 
 #' Class for robust regression methods from depthproc package
 #'
-#'    @slot coef coefficients of fitted model
-#'    @slot depth regression depth of the fitted values
+#' @slot coef coefficients of fitted model
+#' @slot depth regression depth of the fitted values
 #'
 #' @export
 #' 
@@ -220,8 +237,6 @@ setClass("DeepReg2d", representation=list(depth = "numeric"), contains="RobReg")
 #' 
 #' Class for robust regression methods from depthproc package
 #'
-#'  
-#'  
 #' @export
 #' 
 setClass("TrimReg2d", contains="RobReg")
@@ -230,17 +245,17 @@ setClass("TrimReg2d", contains="RobReg")
 
 
 #' @title Add line to plot
-#'
-#'  @param a an object of class RobReg
-#'  @param b not used.
-#'  @param ... Arguments to be passed to methods, such as graphical parameters (see par).
-#'  @param h not supported.
-#'  @param v not supported.
-#'  @param reg not supported.
-#'  @param coef not supported.
-#'  @param untf not supported.
+#' @description Add fitted line to a plot. This is overloaded function for robust regression methods from package depthproc.
+#' 
+#' @param a an object of class RobReg
+#' @param b not used.
+#' @param ... Arguments to be passed to methods, such as graphical parameters (see par).
+#' @param h not supported.
+#' @param v not supported.
+#' @param reg not supported.
+#' @param coef not supported.
+#' @param untf not supported.
 #'  
-#'  @description Add fitted line to a plot. This is overloaded function for robust regression methods from package depthproc.
 #' @export
 #' 
 setMethod("abline", "RobReg",function(a, ...) { abline(a@coef, ...)})
@@ -285,7 +300,7 @@ setClass("DepthDensity", representation=list(
 #' @param y not supported.
 #' @param \dots not supported.
 #'  
-#'  @description Plot Depth curve
+#' @description Plot Depth curve
 #' @export
 #' 
 #' @examples

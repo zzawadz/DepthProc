@@ -1,0 +1,4 @@
+Changes in 1.1
+  - depthMBD - deprecated
+  - "method MBD" - deprecated
+  - new interface for functional depth

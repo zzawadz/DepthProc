@@ -100,8 +100,8 @@ setMethod(".getPlot", "DepthCurveList", function(object)
 #' @export
 setMethod("as.matrix", signature(x = "DepthCurveList"), function(x)
 {
-  names = sapply(object,function(x) x@depth@name)
-  tmp = matrix(unlist(object), ncol = length(object))
+  names = sapply(x,function(x) x@depth@name)
+  tmp = matrix(unlist(x), ncol = length(x))
   colnames(tmp) = names
   tmp
 })
