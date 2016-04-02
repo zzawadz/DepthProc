@@ -3,6 +3,13 @@ DepthProc
 
 *DepthProc* project consist of a set of statistical procedures based on so called statistical depth functions. The project involves free available R package and its description.
 
+### Versions
+
+#### CRAN release version
+
+[![CRAN version](http://www.r-pkg.org/badges/version/DepthProc)](http://cran.rstudio.com/web/packages/DepthProc/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/DepthProc)](http://cran.rstudio.com/web/packages/DepthProc/index.html)
+
+
 ## Installation
 
 
