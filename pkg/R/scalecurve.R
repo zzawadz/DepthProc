@@ -1,21 +1,21 @@
-#'@title Scale curve
-#'@export
+#' @title Scale curve
+#' @export
 #'
-#'@importFrom geometry convhulln
+#' @importFrom geometry convhulln
 #'
-#'@description Draws a scale curve: measure of dispersion.
+#' @description Draws a scale curve: measure of dispersion.
 #'
-#'  @param x Multivariate data as a matrix.
-#'  @param y Additional matrix with multivariate data.
-#'  @param alpha Vector with values of central area to be used in computation.
-#'  @param method Character string which determines the depth function used. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}
-#'  @param name Name of matrix X used in legend.
-#'  @param name_y Name of matrix Y used in legend.
-#'  @param title title of the plot.
-#'  @param ... Any additional parameters for function \code{depth}.
+#' @param x Multivariate data as a matrix.
+#' @param y Additional matrix with multivariate data.
+#' @param alpha Vector with values of central area to be used in computation.
+#' @param method Character string which determines the depth function used. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}
+#' @param name Name of matrix X used in legend.
+#' @param name_y Name of matrix Y used in legend.
+#' @param title title of the plot.
+#' @param ... Any additional parameters for function \code{depth}.
 #'
 #'
-#'@details 
+#' @details 
 #'  
 #' For sample depth function  \eqn{ D({x},{{{Z}}^{n}}) } ,  \eqn{ {x}\in {{{R}}^{d}} } ,  \eqn{ d\ge 2 } ,  \eqn{ {Z}^{n}=\{{{{z}}_{1}},...,{{{z}}_{n}}\}\subset {{{R}}^{d}} } ,   \eqn{ {{D}_{\alpha }}({{{Z}}^{n}}) }  denoting  \eqn{ \alpha- }  central region, we can define {the scale curve} 
 #' 
@@ -29,11 +29,11 @@
 #' 
 #' ggplot2  package is used to draw a plot.
 #'  
-#'@return
+#' @return
 #'
 #'  Returns the volume of the convex hull containing subsequent central points of \code{X}.
 #'
-#'@references 
+#' @references 
 #'  
 #'  Liu, R.Y., Parelius, J.M. and Singh, K. (1999), Multivariate analysis by data depth: Descriptive statistics, graphics and inference (with discussion), \emph{Ann. Statist.}, \bold{27}, 783--858.
 #'
@@ -42,11 +42,11 @@
 #'  Dyckerhoff, R. (2004), Data Depths Satisfying the Projection Property, \emph{Allgemeines Statistisches Archiv.},  \bold{88}, 163--190.
 #'  
 #'  
-#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #'  
-#'  @seealso \code{\link{depthContour}} and \code{\link{depthPersp}} for depth graphics.
+#' @seealso \code{\link{depthContour}} and \code{\link{depthPersp}} for depth graphics.
 #'  
-#'  @examples
+#' @examples
 #'  require(mvtnorm)
 #'  x = mvrnorm(n = 100, mu = c(0,0), Sigma = 3*diag(2))
 #'  y = rmvt(n = 100, sigma = diag(2), df = 2)
@@ -57,7 +57,7 @@
 #'  z = mvrnorm(20, c(5,5), diag(2))
 #'  scaleCurve(x, rbind(y,z), method = "Projection", name = "N", name_y = "Mixture of N")
 #'  
-#'  @keywords
+#' @keywords
 #'  multivariate
 #'  nonparametric
 #'  robust
