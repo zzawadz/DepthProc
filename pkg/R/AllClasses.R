@@ -22,10 +22,10 @@ setGeneric("%+%", function(e1,e2) standardGeneric("%+%"))
 #'
 #' Virtual class with structure for every depth class from depthproc package.
 #'
-#'    @slot u data set.
-#'    @slot X reference set.
-#'    @slot method depth type.
-#'    @slot name name that will be used on plots.
+#' @slot u data set.
+#' @slot X reference set.
+#' @slot method depth type.
+#' @slot name name that will be used on plots.
 #'  
 #' @aliases DepthEuclid DepthProjection DepthMahalanobis DepthTukey DepthLP DepthLocal
 #' @rdname Depth-class
@@ -206,7 +206,7 @@ setGeneric("as.matrix", function(x,...) standardGeneric("as.matrix"))
 #' 
 #' Virtual class for robust regression methods from depthproc package
 #' 
-#'    @slot coef coefficients of fitted model
+#' @slot coef coefficients of fitted model
 #'  
 #'  
 #' @export
@@ -228,8 +228,6 @@ setClass("DeepReg2d", representation=list(depth = "numeric"), contains="RobReg")
 #' 
 #' Class for robust regression methods from depthproc package
 #'
-#'  
-#'  
 #' @export
 #' 
 setClass("TrimReg2d", contains="RobReg")

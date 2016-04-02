@@ -1,14 +1,14 @@
-#'@title Depth calculation
+#' @title Depth calculation
 #'
 #' @details Calculate depth functions.
 #'
 #'
-#'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
-#'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#'  @param method Character string which determines the depth function. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}
-#'  @param name name for this data set - it will be used on plots.
-#'  @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used. 
-#'  @param ... parameters specific to method - see \code{\link{depthEuclid}}
+#' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
+#' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
+#' @param method Character string which determines the depth function. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}
+#' @param name name for this data set - it will be used on plots.
+#' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used. 
+#' @param ... parameters specific to method - see \code{\link{depthEuclid}}
 #'
 #' @details
 #'
@@ -22,7 +22,7 @@
 #' The Projection and Tukey's depths are calculated using an approximate algorithm. Calculations of Mahalanobis, Euclidean and  \eqn{ L^p }  depths are exact. Returns the depth of multivariate point  u  with respect to data set  X.
 #'
 #' 
-#'  @references 
+#' @references 
 #'  
 #' Liu, R.Y., Parelius, J.M. and Singh, K. (1999), Multivariate analysis by data depth: Descriptive statistics, graphics and inference (with discussion),  Ann. Statist.,  27, 783-858.
 #' 
@@ -32,11 +32,11 @@
 #' 
 #' Zuo, Y. and Serfling, R. (2000), General Notions of Statistical Depth Functions,  Ann. Statist.,  28, no. 2, 461-482.
 #'  
-#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #'  
-#'  @seealso \code{\link{depthContour}} and \code{\link{depthPersp}} for depth graphics.
+#' @seealso \code{\link{depthContour}} and \code{\link{depthPersp}} for depth graphics.
 #'  
-#'  @examples
+#' @examples
 #'  require(robustbase)
 #'  
 #'  ## Calculation of Projection depth
@@ -50,13 +50,14 @@
 #'  x = matrix(rnorm(9999), nc = 3)
 #'  depth(x, x)
 #'    
-#'  @keywords
+#' @keywords
 #'  multivariate
 #'  nonparametric
 #'  robust
 #'  depth function
 #'  
 #' @export
+#' 
 depth = function(u, X, method="Projection", name = "X", threads = -1,...)
 {  
   if(is.data.frame(u)) u = as.matrix(u)
@@ -111,36 +112,37 @@ depth = function(u, X, method="Projection", name = "X", threads = -1,...)
 ############################################
 ############################################
 
-#'@title Euclidean Depth
-#'@export
+#' @title Euclidean Depth
+#' @export
 #'
-#'@description Computes the euclidean depth of a point or vectors of points with respect to a multivariate data set.
+#' @description Computes the euclidean depth of a point or vectors of points with respect to a multivariate data set.
 #'
-#'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
-#'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#'  @param name name for this data set - it will be used on plots from depthproc.
-#'  @param \dots currently not supported.
+#' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
+#' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
+#' @param name name for this data set - it will be used on plots from depthproc.
+#' @param \dots currently not supported.
 #'
 #'
-#'@details 
+#' @details 
 #'
 #'  Calculation of Euclidean depth is exact.
 #'  
 #'  Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
 #'  
-#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #'  
 #'  
-#'  @examples
+#' @examples
 #'  x <- matrix(rnorm(9999), nc = 3)
 #'  depthEuclid(x, x)
 #'  
 #'  
 #'  
-#'  @keywords
+#' @keywords
 #'  multivariate
 #'  nonparametric
 #'  depth function
+#'  
 depthEuclid = function(u, X, name = "X",...)
 {
   if(missing(X)) X = u
@@ -157,37 +159,38 @@ depthEuclid = function(u, X, name = "X",...)
 ############################################
 ############################################
 
-#'@title Mahalanobis Depth
-#'@export
-#'@description Computes the mahalanobis depth of a point or vectors of points with respect to a multivariate data set.
+#' @title Mahalanobis Depth
+#' @export
+#' @description Computes the mahalanobis depth of a point or vectors of points with respect to a multivariate data set.
 #'
-#'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
-#'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#'  @param name name for this data set - it will be used on plots.
-#'  @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
-#'  @param cov custom covariance matrix passed. If NULL standard calculations will be based on standard covariance estimator.
-#'  @param mean custom mean vector. If null mean average will be used.
-#'  @param \dots currently not supported.
+#' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
+#' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
+#' @param name name for this data set - it will be used on plots.
+#' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
+#' @param cov custom covariance matrix passed. If NULL standard calculations will be based on standard covariance estimator.
+#' @param mean custom mean vector. If null mean average will be used.
+#' @param \dots currently not supported.
 #'
-#'@details 
+#' @details 
 #'
 #'  Calculation of Mahalanobis depth is exact.
 #'  
 #'  Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
 #'  
-#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #'  
 #'  
-#'  @examples
+#' @examples
 #'  x <- matrix(rnorm(9999), nc = 3)
 #'  depthMah(x, x)
 #'  
 #'  
 #'  
-#'  @keywords
+#' @keywords
 #'  multivariate
 #'  nonparametric
 #'  depth function
+#'  
 depthMah = function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1, ...)
 {
   if(missing(X)) X = u
@@ -202,35 +205,36 @@ depthMah = function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1, ...
 ############################################
 ############################################
 
-#'@title Projection Depth
-#'@export
-#'@description Computes the Projection depth of a point or vectors of points with respect to a multivariate data set.
+#' @title Projection Depth
+#' @export
+#' @description Computes the Projection depth of a point or vectors of points with respect to a multivariate data set.
 #'
-#'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
-#'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#'  @param ndir number of directions used in computations
-#'  @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
-#'  @param name name for this data set - it will be used on plots from depthproc.
-#'  @param \dots currently not supported.
+#' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
+#' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
+#' @param ndir number of directions used in computations
+#' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
+#' @param name name for this data set - it will be used on plots from depthproc.
+#' @param \dots currently not supported.
 #'
-#'@details 
+#' @details 
 #'
 #'  Irrespective of dimension, Projection and Tukey's depth is obtained by approximate calculation.
 #'  
 #'  Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
 #'  
-#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #'  
 #'  
-#'  @examples
+#' @examples
 #'  x = matrix(rnorm(3000), nc = 3)
 #'  a = depthProjection(x, x, ndir = 2000)
 #'  
 #'  
-#'  @keywords
+#' @keywords
 #'  multivariate
 #'  nonparametric
 #'  depth function
+#'  
 depthProjection = function(u, X, ndir = 1000, name = "X", threads = -1,...)
 {
   if(missing(X)) X = u
@@ -242,28 +246,28 @@ depthProjection = function(u, X, ndir = 1000, name = "X", threads = -1,...)
 ############################################
 ############################################
 
-#'@title Tukey Depth
-#'@export
-#'@description Computes the Tukey depth of a point or vectors of points with respect to a multivariate data set.
+#' @title Tukey Depth
+#' @export
+#' @description Computes the Tukey depth of a point or vectors of points with respect to a multivariate data set.
 #'
-#'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
-#'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#'  @param ndir number of directions used in computations
-#'  @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
-#'  @param name name for this data set - it will be used on plots from depthproc.
-#'  @param exact if TRUE exact alhorithm will be used . Currently it works only for 2 dimensional data set.
-#'  @param \dots currently not supported.
+#' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
+#' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
+#' @param ndir number of directions used in computations
+#' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
+#' @param name name for this data set - it will be used on plots from depthproc.
+#' @param exact if TRUE exact alhorithm will be used . Currently it works only for 2 dimensional data set.
+#' @param \dots currently not supported.
 #'
-#'@details 
+#' @details 
 #'
 #'  Irrespective of dimension, Projection and Tukey's depth is obtained by approximate calculation.
 #'  
 #'  Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
 #'  
-#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #'  
 #'  
-#'  @examples
+#' @examples
 #'  \dontrun{
 #'  x = matrix(rnorm(3000), nc = 3)
 #'  depthTukey(x, ndir = 2000)
@@ -273,10 +277,11 @@ depthProjection = function(u, X, ndir = 1000, name = "X", threads = -1,...)
 #'  x = matrix(rnorm(2000), nc = 2)
 #'  depthTukey(x, exact = TRUE)
 #'  
-#'  @keywords
+#' @keywords
 #'  multivariate
 #'  nonparametric
 #'  depth function
+#'  
 depthTukey = function(u, X, ndir = 1000, name = "X", threads = -1, exact = FALSE,...)
 {
   if(missing(X)) X = u
@@ -316,34 +321,34 @@ depthTukey = function(u, X, ndir = 1000, name = "X", threads = -1, exact = FALSE
   new("DepthTukey", depth, u = u, X = X, method = "Tukey", name = name)
 }
 
-#'@title LP Depth
-#'@export
-#'@description Computes the LP depth of a point or vectors of points with respect to a multivariate data set.
+#' @title LP Depth
+#' @export
+#' @description Computes the LP depth of a point or vectors of points with respect to a multivariate data set.
 #'
-#'  @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
-#'  @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#'  @param pdim dimension used in calculating depth function.
-#'  @param la slope the weighing function.
-#'  @param lb intercept in the weighing function.
-#'  @param name name for this data set - it will be used on plots from depthproc.
-#'  @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
-#'  @param func the weighing function. Currently it is not supported.
-#'  @param \dots currently not supported.
+#' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
+#' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
+#' @param pdim dimension used in calculating depth function.
+#' @param la slope the weighing function.
+#' @param lb intercept in the weighing function.
+#' @param name name for this data set - it will be used on plots from depthproc.
+#' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
+#' @param func the weighing function. Currently it is not supported.
+#' @param \dots currently not supported.
 #'
-#'@details 
+#' @details 
 #'  
 #'  Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
 #'  
-#'  @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+#' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #'  
 #'  
-#'  @examples
+#' @examples
 #'  x = matrix(rnorm(3000), ncol = 3)
 #'  
 #'  #Same results
 #'  depthLP(x, x, ndir = 2000, pdim = 2) 
 #'  
-#'  @keywords
+#' @keywords
 #'  multivariate
 #'  nonparametric
 #'  depth function
