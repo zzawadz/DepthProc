@@ -31,6 +31,15 @@ setGeneric("%+%", function(e1,e2) standardGeneric("%+%"))
 #' @rdname Depth-class
 #' @exportClass Depth
 #' 
+#' @importFrom colorspace heat_hcl
+#' @importFrom geometry convhulln
+#' @importFrom lattice wireframe
+#' @importFrom sm binning
+#' @importFrom grDevices col2rgb extendrange gray.colors rgb
+#' @importFrom graphics filled.contour lines matplot points polygon rect segments
+#' @importFrom stats cov ecdf lm mad median na.omit quantile rnorm wilcox.test
+#' @importFrom utils tail
+#' 
 setClass("Depth", representation(u = "matrix", X = "matrix", method = "character", name = "character", "VIRTUAL"))
 setClass("DepthEuclid", representation(), contains = c("Depth","numeric"))
 setClass("DepthProjection", representation(), contains = c("Depth","numeric"))
