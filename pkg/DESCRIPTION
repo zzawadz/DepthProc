@@ -1,7 +1,7 @@
 Package: DepthProc
 Version: 1.1.0
 Date: 2016-03-01
-Title: DepthProc
+Title: Statistical Depth Functions for Multivariate Analysis
 Author: Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt
     Zawadzki from Cracow University of Economics.
 Maintainer: Zygmunt Zawadzki <zawadzkizygmunt@gmail.com>
