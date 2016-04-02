@@ -155,23 +155,24 @@ binningDepth2D = function(x, binmethod = "LocDepth", nbins = 8, k = 1, remove_bo
   #return(result)
 }
 
-#'@docType methods
-#'@title 2d Binning plot
+#' @docType methods
+#' @title 2d Binning plot
 #'
-#'  @param x object of class BinnDepth2d
-#'  @param ... graphical parameters passed to plot
-#'  @param alpha alpha value for rgb function
-#'  @param bg_col backgroud color
-#'  @param add_mid logical. If TRUE centers of binns will be marked.
+#' @param x object of class BinnDepth2d
+#' @param ... graphical parameters passed to plot
+#' @param alpha alpha value for rgb function
+#' @param bg_col backgroud color
+#' @param add_mid logical. If TRUE centers of binns will be marked.
 #'
-#'  @description Binning 2d
-#'  @seealso \code{\link{depth}}
+#' @description Binning 2d
+#' @seealso \code{\link{depth}}
 #'  
-#'  @examples
+#' @examples
 #'  
 #'  tmp = binningDepth2D(x = mvrnorm(100,rep(0,2),diag(2)))
 #'  plot(tmp)
-#'  @keywords
+#'  
+#' @keywords
 #'  multivariate
 #'  nonparametric
 #'  robust
