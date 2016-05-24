@@ -8,7 +8,7 @@ DepthProc
 #### CRAN release version
 
 [![CRAN version](http://www.r-pkg.org/badges/version/DepthProc)](http://cran.rstudio.com/web/packages/DepthProc/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/DepthProc)](http://cran.rstudio.com/web/packages/DepthProc/index.html)
-
+[![Build Status](https://travis-ci.org/zzawadz/DepthProc.svg?branch=master)](https://travis-ci.org/zzawadz/DepthProc)
 
 ## Installation
 
