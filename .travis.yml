@@ -1,0 +1,25 @@
+language: r
+before_install:
+  - cd pkg
+assert: false
+r_packages:
+ - ggplot2
+ - Rcpp 
+ - rrcov
+ - methods
+ - MASS
+ - np
+ - lattice
+ - sm
+ - geometry
+ - colorspace
+ - mvtnorm
+ - rgl
+ - sn
+ - robustbase
+ - dplyr
+ - RcppArmadillo
+ - zoo
+ - xts
+sudo: required
+warnings_are_errors: false
