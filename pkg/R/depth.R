@@ -104,6 +104,9 @@ depth = function(u, X, method="Projection", name = "X", threads = -1,...)
   {
     return(depthLocal(u, X, name = name, ...))
   }
+  if(method %in% c("MBD", "FM")) {
+    fncDepth(u, X, name = name, method = method, ...)
+  }
   
   
 }
