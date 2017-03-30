@@ -28,33 +28,33 @@ ddPlot(x, y, scale = FALSE, location = FALSE, name_x = "X",
 Produces a DD plot which allows to compare two multivirate datasets or to compare a subject dataset with theoretical distribution.
 }
 \details{
-For two probability distributions  \eqn{ F }  and  \eqn{ G } , both in  \eqn{ {{{R}}^{d}} } , we can define {depth vs. depth} plot being very useful generalization of the one dimensional quantile-quantile plot:    \deqn{ DD(F,G)=\left\{ \left( D({z},F),D({z},G) \right),{z}\in {{{R}}^{d}} \right\} }    
-Its sample counterpart calculated for two samples  \eqn{ {{{X}}^{n}}=\{{{X}_{1}},.,{{X}_{n}}\} }  from  \eqn{ F } , and  \eqn{ {{Y}^{m}}=\{{{Y}_{1}},...,{{Y}_{m}}\} }  from  \eqn{ G }  is defined as
-\deqn{ DD({{F}_{n}},{{G}_{m}})=\left\{ \left( D({z},{{F}_{n}}),D({z},{{G}_{m}}) \right),{z}\in \{{{{X}}^{n}}\cup {{{Y}}^{m}}\} \right\}}
+For two probability distributions \eqn{ F } and \eqn{ G }, both in \eqn{ {{{R}}^{d}} }, we can define {depth vs. depth} plot being very useful generalization of the one dimensional quantile-quantile plot: \deqn{ DD(F, G)=\left\{ \left( D({z}, F), D({z}, G) \right), {z}\in {{{R}}^{d}} \right\} } 
+Its sample counterpart calculated for two samples \eqn{ {{{X}}^{n}}=\{{{X}_{1}}, ..., {{X}_{n}}\} } from \eqn{ F }, and \eqn{ {{Y}^{m}}=\{{{Y}_{1}}, ..., {{Y}_{m}}\} } from \eqn{ G } is defined as
+\deqn{ DD({{F}_{n}}, {{G}_{m}})=\left\{ \left( D({z}, {{F}_{n}}), D({z}, {{G}_{m}}) \right), {z}\in \{{{{X}}^{n}}\cup {{{Y}}^{m}}\} \right\}}
 }
 \examples{
 require(sn)
 require(mvtnorm)
 
 # EXAMPLE 1: Location difference
-standard = mvrnorm(1000, c(0,0), diag(2))
-shift    =  mvrnorm(1000, c(0.5, 0), diag(2))
+standard <- mvrnorm(1000, c(0, 0), diag(2))
+shift <- mvrnorm(1000, c(0.5, 0), diag(2))
 ddPlot(x = standard, y = shift, title = "Difference in position")
 ddPlot(x = standard, y = shift, location = TRUE, title = "Location aligned")
 
-## EXAMPLE 2: Scale difference
-standard <- mvrnorm(1000, c(0,0), diag(2))
-scale <- mvrnorm(1000, c(0,0), 4*diag(2))
-ddPlot(x=standard, y=scale)
-ddPlot(x=standard, y=scale, scale=TRUE)
-  
+# EXAMPLE 2: Scale difference
+standard <- mvrnorm(1000, c(0, 0), diag(2))
+scale <- mvrnorm(1000, c(0, 0), 4 * diag(2))
+ddPlot(x = standard, y = scale)
+ddPlot(x = standard, y = scale, scale = TRUE)
+
 }
 \author{
 Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 }
 \references{
 Liu, R.Y., Parelius, J.M. and Singh, K. (1999), Multivariate analysis by data depth: Descriptive statistics, graphics and inference (with discussion), \emph{Ann. Statist.}, \bold{27}, 822--831.
-          
-           Liu, R.Y., Singh K. (1993), A Quality Index Based on Data Depth and Multivariate Rank Test, \emph{Journal of the American Statistical Association} vol. 88.
+
+Liu, R.Y., Singh K. (1993), A Quality Index Based on Data Depth and Multivariate Rank Test, \emph{Journal of the American Statistical Association} vol. 88.
 }
 
