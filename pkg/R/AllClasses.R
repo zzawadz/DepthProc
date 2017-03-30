@@ -184,7 +184,6 @@ setClass("BinnDepth2d",
 setGeneric("getPlot", function(object) standardGeneric("getPlot"))
 setGeneric(".getPlot", function(object) standardGeneric(".getPlot"))
 
-
 #' @title as.matrix method for DepthCurveList.
 #'
 #' @param x an object of class that inherits from DepthCurveList (ScaleCurveList or AsymmetryCurveList).
@@ -247,7 +246,6 @@ setClass("TrimReg2d", contains = "RobReg")
 setMethod("abline", "RobReg", function(a, ...) {
   abline(a@coef, ...)
 })
-
 setMethod("show", "Depth", function(object) {
   cat("Depth method: ", object@method, "\n")
   cat("Set name:", object@name, "\n")
