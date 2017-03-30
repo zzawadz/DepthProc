@@ -15,7 +15,7 @@ asymmetryCurve(x, y = NULL, alpha = seq(0, 1, 0.01),
 
 \item{alpha}{An ordered vector containing indices of central regins used for asymmetry curve calculation.}
 
-\item{method}{Character string which determines the depth function used. The method can be "Projection" (the default), "Mahalanobis", "Euclidean", "Tukey" or 'LP'.  For details see \code{\link{depth}.}}
+\item{method}{Character string which determines the depth function used. The method can be "Projection" (the default), "Mahalanobis", "Euclidean", "Tukey" or "LP".  For details see \code{\link{depth}.}}
 
 \item{movingmedian}{Logical. For default FALSE only one depth median is used to compute asymmetry norm. If TRUE - for every central area, a new depth median will be used - this approach needs much more time.}
 
@@ -29,33 +29,32 @@ asymmetryCurve(x, y = NULL, alpha = seq(0, 1, 0.01),
 Produces an asymmetry curve estimated from given data.
 }
 \details{
-For sample depth function  \eqn{ D({x},{{{Z}}^{n}}) } ,  \eqn{ {x}\in {{{R}}^{d}} } ,  \eqn{ d\ge 2 } ,  \eqn{ {Z}^{n}=\{{{{z}}_{1}},...,{{{z}}_{n}}\}\subset {{{R}}^{d}} } ,   \eqn{ {{D}_{\alpha }}({{{Z}}^{n}}) }  denoting  \eqn{ \alpha- }  central region, we can define {the asymmetry curve}  \eqn{ AC(\alpha )=\left( \alpha ,\left\| {{c}^{-1}}(\{{\bar{z}}-med|{{D}_{\alpha }}({{{Z}}^{n}})\}) \right\| \right)\subset {{{R}}^{2}} } , for   \eqn{ \alpha \in [0,1]  }  being nonparametric scale and asymmetry functional correspondingly, where  \eqn{ c- } denotes constant,  \eqn{ {\bar{z}}- }  denotes mean vector, denotes multivariate median induced by depth function and  \eqn{ vol- }  denotes a volume.
+For sample depth function  \eqn{ D({x},{{{Z}}^{n}}) },  \eqn{ {x}\in {{{R}}^{d}} },  \eqn{ d\ge 2 },  \eqn{ {Z}^{n}=\{{{{z}}_{1}},...,{{{z}}_{n}}\}\subset {{{R}}^{d}} },   \eqn{ {{D}_{\alpha }}({{{Z}}^{n}}) }  denoting  \eqn{ \alpha- }  central region, we can define {the asymmetry curve}  \eqn{ AC(\alpha )=\left( \alpha,\left\| {{c}^{-1}}(\{{\bar{z}}-med|{{D}_{\alpha }}({{{Z}}^{n}})\}) \right\| \right)\subset {{{R}}^{2}} }, for   \eqn{ \alpha \in [0,1]  }  being nonparametric scale and asymmetry functional correspondingly, where  \eqn{ c- } denotes constant,  \eqn{ {\bar{z}}- }  denotes mean vector, denotes multivariate median induced by depth function and  \eqn{ vol- }  denotes a volume.
  
- Asymmetrycurve takes uses function convhulln from package geometry for computing a volume of convex hull containing central region.
+Asymmetrycurve takes uses function convhulln from package geometry for computing a volume of convex hull containing central region.
 }
 \examples{
  
-#EXAMPLE 1
+# EXAMPLE 1
 require(sn)
-xi = c(0,0)
-alpha <- c(2,-5)
-Omega <- diag(2)*5
+xi <- c(0, 0)
+alpha <- c(2, -5)
+Omega <- diag(2) * 5
 
-n = 500
-X = mvrnorm(n, xi, Omega)  # normal distribution
-Y = rmst(n, xi, Omega, alpha, nu=1)
-asymmetryCurve(X,Y,name = "NORM",name_y = "S_T(2,-5,10)")
- 
- 
-#EXAMPLE 2
+n <- 500
+X <- mvrnorm(n, xi, Omega)  # normal distribution
+Y <- rmst(n, xi, Omega, alpha, nu = 1)
+asymmetryCurve(X, Y, name = "NORM", name_y = "S_T(2, -5, 10)")
+
+# EXAMPLE 2
 data(under5.mort)
 data(inf.mort)
 data(maesles.imm)
-data1990=cbind(under5.mort[,1],inf.mort[,1],maesles.imm[,1])
-data2011=cbind(under5.mort[,22],inf.mort[,22],maesles.imm[,22])
-as1990=asymmetryCurve(data1990,name='scale curve 1990')
-as2011=asymmetryCurve(data2011,name='scale curve 2011')
-figure=getPlot(as1990 \%+\% as2011)+ggtitle('Scale curves')
+data1990 <- cbind(under5.mort[, 1], inf.mort[, 1], maesles.imm[, 1])
+data2011 <- cbind(under5.mort[, 22], inf.mort[, 22], maesles.imm[, 22])
+as1990 <- asymmetryCurve(data1990, name = "scale curve 1990")
+as2011 <- asymmetryCurve(data2011, name = "scale curve 2011")
+figure <- getPlot(as1990 \%+\% as2011) + ggtitle("Scale curves")
 figure
  
 }
