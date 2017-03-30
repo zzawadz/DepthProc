@@ -2,8 +2,8 @@
 % Please edit documentation in R/AllClasses.R, R/AsymmetryCurveClass.R, R/DDPlotClass.R, R/ScaleCurveClass.R
 \docType{methods}
 \name{getPlot}
+\alias{AsymmetryCurveList}
 \alias{getPlot}
-\alias{getPlot,AsymmetryCurveList}
 \alias{getPlot,AsymmetryCurveList-method}
 \alias{getPlot,DDPlot}
 \alias{getPlot,DDPlot-method}
