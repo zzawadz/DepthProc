@@ -10,7 +10,7 @@ binningDepth2D(x, binmethod = "LocDepth", nbins = 8, k = 1,
 \arguments{
 \item{x}{bivariate matrix containing data. Each row is viewed as one two-dimensional observation.}
 
-\item{binmethod}{A method for calculation center and dispersion measures. 'LocDepth' uses location-scale depth, MAD uses median and MAD in each dimension.}
+\item{binmethod}{A method for calculation center and dispersion measures. "LocDepth" uses location-scale depth, MAD uses median and MAD in each dimension.}
 
 \item{nbins}{number of bins in each dimension}
 
