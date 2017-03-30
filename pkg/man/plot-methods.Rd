@@ -2,8 +2,8 @@
 % Please edit documentation in R/AllClasses.R, R/DDPlotClass.R, R/DepthCurveClass.R
 \docType{methods}
 \name{plot}
+\alias{DDPlot}
 \alias{plot}
-\alias{plot,DDPlot}
 \alias{plot,DDPlot,ANY-method}
 \alias{plot,DepthCurve}
 \alias{plot,DepthCurve,ANY-method}

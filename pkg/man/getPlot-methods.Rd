@@ -3,9 +3,9 @@
 \docType{methods}
 \name{getPlot}
 \alias{AsymmetryCurveList}
+\alias{DDPlot}
 \alias{getPlot}
 \alias{getPlot,AsymmetryCurveList-method}
-\alias{getPlot,DDPlot}
 \alias{getPlot,DDPlot-method}
 \alias{getPlot,ScaleCurveList}
 \alias{getPlot,ScaleCurveList-method}
