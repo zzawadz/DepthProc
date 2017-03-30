@@ -127,6 +127,7 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
   }
   
   means <- c(0, 0)
+  
   if (binmethod == "LP") {
     means <- depthMedian(x, method = "LP", ...)
   }
