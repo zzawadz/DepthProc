@@ -10,7 +10,7 @@
 \arguments{
 \item{x}{object of class DepthDensity}
 
-\item{type}{type of density that will be plotted. 'depth' is a depth scaled density, and 'raw' is denisty without scaling.}
+\item{type}{type of density that will be plotted. "depth" is a depth scaled density, and "raw" is denisty without scaling.}
 
 \item{...}{graphical arguments.}
 }
