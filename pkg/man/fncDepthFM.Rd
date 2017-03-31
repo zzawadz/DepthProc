@@ -19,7 +19,7 @@ fncDepthFM(u, X, dep1d = "Projection", ...)
 Computes Frainman-Muniz depth for functional data.
 }
 \examples{
-x = matrix(rnorm(60), nc = 20)
+x <- matrix(rnorm(60), nc = 20)
 fncDepthFM(x)
 
 }
