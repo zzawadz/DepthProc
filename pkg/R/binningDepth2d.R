@@ -72,7 +72,7 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
   createBin <- function(x, nbins, mean = NULL) {
     
     if (binmethod == "LocDepth") {
-      # if(!devel) {
+      # if (!devel) {
       #   dep_stat = sample.max.depth(as.numeric(x))
       # } else {
       dep_stat <- lsdSampleMaxDepth(x)
@@ -92,8 +92,9 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
       n_lower <- -(ceiling(abs(range[1] - mean) / sigma):1) * sigma + mean
       breaks <- c(n_lower, mean, n_upper)
     } else {
-      # if(!remove_borders)
+      # if (!remove_borders) {
       nbins <- nbins - 2
+      # }
       
       if (nbins > 0) {
         s_bound <- 1:(nbins / 2) * sigma
