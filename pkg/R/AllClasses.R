@@ -11,7 +11,9 @@
 #' See \code{\link{DepthCurve-class}} for description.
 #' 
 #' @export
-setGeneric("%+%", function(e1, e2) standardGeneric("%+%"))
+setGeneric("%+%", function(e1, e2) {
+  standardGeneric("%+%")
+})
 
 #####################################
 ######### Depth definitions #########
@@ -181,8 +183,12 @@ setClass("BinnDepth2d",
 #' @export
 #' @rdname getPlot-methods
 #' 
-setGeneric("getPlot", function(object) standardGeneric("getPlot"))
-setGeneric(".getPlot", function(object) standardGeneric(".getPlot"))
+setGeneric("getPlot", function(object) {
+  standardGeneric("getPlot")
+})
+setGeneric(".getPlot", function(object) {
+  standardGeneric(".getPlot")
+})
 
 #' @title as.matrix method for DepthCurveList.
 #'
@@ -194,7 +200,9 @@ setGeneric(".getPlot", function(object) standardGeneric(".getPlot"))
 #' @rdname as.matrix-methods
 #' @export
 
-setGeneric("as.matrix", function(x, ...) standardGeneric("as.matrix"))
+setGeneric("as.matrix", function(x, ...) {
+  standardGeneric("as.matrix")
+})
 
 #####################################################
 ########### Classes for robust regression ###########
