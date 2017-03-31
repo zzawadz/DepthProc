@@ -31,29 +31,31 @@ Returns the volume of the convex hull containing subsequent central points of \c
 Draws a scale curve: measure of dispersion.
 }
 \details{
-For sample depth function  \eqn{ D({x},{{{Z}}^{n}}) } ,  \eqn{ {x}\in {{{R}}^{d}} } ,  \eqn{ d\ge 2 } ,  \eqn{ {Z}^{n}=\{{{{z}}_{1}},...,{{{z}}_{n}}\}\subset {{{R}}^{d}} } ,   \eqn{ {{D}_{\alpha }}({{{Z}}^{n}}) }  denoting  \eqn{ \alpha- }  central region, we can define {the scale curve} 
+For sample depth function \eqn{ D({x},{{{Z}}^{n}}) }, \eqn{ {x}\in {{{R}}^{d}} }, \eqn{ d\ge 2 }, \eqn{ {Z}^{n}=\{{{{z}}_{1}},...,{{{z}}_{n}}\}\subset {{{R}}^{d}} },  \eqn{ {{D}_{\alpha }}({{{Z}}^{n}}) } denoting \eqn{ \alpha- } central region, we can define {the scale curve} 
 
- \eqn{ SC(\alpha )=\left( \alpha ,vol({{D}_{\alpha }}({{{Z}}^{n}}) \right)\subset {{{R}}^{2}},   for  \alpha \in [0,1] }
- 
-   The scale curve is a two-dimensional method of describing the dispersion of random vector around the depth induced median. 
+\eqn{ SC(\alpha )=\left( \alpha,vol({{D}_{\alpha }}({{{Z}}^{n}}) \right)\subset {{{R}}^{2}},  for \alpha \in [0,1] }
+
+The scale curve is a two-dimensional method of describing the dispersion of random vector around the depth induced median. 
 
 Function scalecurve for determining the volumes of the convex hull containing points from alpha central regions, uses function convhulln from geometry package. 
 
 The minimal dimension of data in X or Y is 2. 
 
-ggplot2  package is used to draw a plot.
+ggplot2 package is used to draw a plot.
 }
 \examples{
- require(mvtnorm)
- x = mvrnorm(n = 100, mu = c(0,0), Sigma = 3*diag(2))
- y = rmvt(n = 100, sigma = diag(2), df = 2)
- scaleCurve(x, y, method = "Projection", plot = TRUE)
- ## comparing of two scale curves - normal distribution and mixture of normal distributions
- x = mvrnorm(100, c(0,0), diag(2))
- y = mvrnorm(80, c(0,0), diag(2))
- z = mvrnorm(20, c(5,5), diag(2))
- scaleCurve(x, rbind(y,z), method = "Projection", name = "N", name_y = "Mixture of N")
- 
+require(mvtnorm)
+x <- mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
+y <- rmvt(n = 100, sigma = diag(2), df = 2)
+scaleCurve(x, y, method = "Projection", plot = TRUE)
+# comparing two scale curves
+# normal distribution and mixture of normal distributions
+x <- mvrnorm(100, c(0, 0), diag(2))
+y <- mvrnorm(80, c(0, 0), diag(2))
+z <- mvrnorm(20, c(5, 5), diag(2))
+scaleCurve(x, rbind(y, z), method = "Projection", name = "N",
+           name_y = "Mixture of N")
+
 }
 \author{
 Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
@@ -61,9 +63,9 @@ Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki fro
 \references{
 Liu, R.Y., Parelius, J.M. and Singh, K. (1999), Multivariate analysis by data depth: Descriptive statistics, graphics and inference (with discussion), \emph{Ann. Statist.}, \bold{27}, 783--858.
 
- Chaudhuri, P. (1996), On a Geometric Notion of Quantiles for Multivariate Data, \emph{Journal of the American Statistical Association}, 862--872.
+Chaudhuri, P. (1996), On a Geometric Notion of Quantiles for Multivariate Data, \emph{Journal of the American Statistical Association}, 862--872.
 
- Dyckerhoff, R. (2004), Data Depths Satisfying the Projection Property, \emph{Allgemeines Statistisches Archiv.},  \bold{88}, 163--190.
+Dyckerhoff, R. (2004), Data Depths Satisfying the Projection Property, \emph{Allgemeines Statistisches Archiv.}, \bold{88}, 163--190.
 }
 \seealso{
 \code{\link{depthContour}} and \code{\link{depthPersp}} for depth graphics.
