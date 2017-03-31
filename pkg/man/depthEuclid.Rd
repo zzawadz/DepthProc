@@ -20,15 +20,13 @@ Computes the euclidean depth of a point or vectors of points with respect to a m
 }
 \details{
 Calculation of Euclidean depth is exact.
- 
- Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
+
+Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
 }
 \examples{
- x <- matrix(rnorm(9999), nc = 3)
- depthEuclid(x, x)
- 
- 
- 
+x <- matrix(rnorm(9999), nc = 3)
+depthEuclid(x, x)
+
 }
 \author{
 Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.

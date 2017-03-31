@@ -33,11 +33,11 @@ Computes the LP depth of a point or vectors of points with respect to a multivar
 Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
 }
 \examples{
- x = matrix(rnorm(3000), ncol = 3)
- 
- #Same results
- depthLP(x, x, ndir = 2000, pdim = 2) 
- 
+x <- matrix(rnorm(3000), ncol = 3)
+
+# Same results
+depthLP(x, x, ndir = 2000, pdim = 2) 
+
 }
 \author{
 Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.

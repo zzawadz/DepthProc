@@ -27,19 +27,19 @@ Computes the Tukey depth of a point or vectors of points with respect to a multi
 }
 \details{
 Irrespective of dimension, Projection and Tukey's depth is obtained by approximate calculation.
- 
- Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
+
+Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
 }
 \examples{
- \dontrun{
- x = matrix(rnorm(3000), nc = 3)
- depthTukey(x, ndir = 2000)
- }
- 
- # Exact algorithm in 2d
- x = matrix(rnorm(2000), nc = 2)
- depthTukey(x, exact = TRUE)
- 
+\dontrun{
+x <- matrix(rnorm(3000), nc = 3)
+depthTukey(x, ndir = 2000)
+}
+
+# Exact algorithm in 2d
+x <- matrix(rnorm(2000), nc = 2)
+depthTukey(x, exact = TRUE)
+
 }
 \author{
 Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
