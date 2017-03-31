@@ -2,13 +2,13 @@
 % Please edit documentation in R/depthMedian.R
 \docType{methods}
 \name{depthMedian}
+\alias{Depth}
+\alias{data.frame}
 \alias{depthMedian}
-\alias{depthMedian,Depth}
 \alias{depthMedian,Depth-method}
-\alias{depthMedian,data.frame}
 \alias{depthMedian,data.frame-method}
-\alias{depthMedian,matrix}
 \alias{depthMedian,matrix-method}
+\alias{matrix}
 \title{Depth median}
 \usage{
 depthMedian(x, ...)
@@ -30,11 +30,11 @@ Return point with maximum depth function value. If multiple points have the same
 \examples{
 
 # depthMedian for matrix
-x = matrix(rnorm(600), nc = 3)
+x <- matrix(rnorm(600), nc = 3)
 depthMedian(x)
 
 # depthMedian works with object of class Depth
-dp = depth(x)
+dp <- depth(x)
 depthMedian(dp) 
 
 }
