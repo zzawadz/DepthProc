@@ -3,7 +3,7 @@
 \docType{data}
 \name{internet.users}
 \alias{internet.users}
-\title{Internet view data.}
+\title{Internet view data}
 \format{data frame containing 17518 rows and 6 columns - 17518 working days of the 
 Internet service considered with respect to variables:
 service, month, day, hour, unique users and page views.}
@@ -11,7 +11,7 @@ service, month, day, hour, unique users and page views.}
 data(internet.users)
 }
 \description{
-Internet view data.
+Internet view data
 }
 \references{
 Kosiorowski, Rydlewski, Snarska (2016), Detecting a Structural Change in Functional Time Series Using Local Wilcoxon Statistic, arXiv: 1604.03776v2
