@@ -2,13 +2,13 @@
 % Please edit documentation in R/AllClasses.R, R/DepthCurveClass.R
 \docType{methods}
 \name{\%+\%}
+\alias{DepthCurve}
+\alias{DepthCurveList}
 \alias{\%+\%}
 \alias{\%+\%,DepthCurve,DepthCurve-method}
 \alias{\%+\%,DepthCurve,DepthCurveList-method}
 \alias{\%+\%,DepthCurveList,DepthCurve-method}
-\alias{grapes-plus-grapes-methods,DepthCurve,DepthCurve}
-\alias{grapes-plus-grapes-methods,DepthCurve,DepthCurveList}
-\alias{grapes-plus-grapes-methods,DepthCurveList,DepthCurve}
+\alias{grapes-plus-grapes-methods}
 \title{Adds plots}
 \usage{
 e1 \%+\% e2

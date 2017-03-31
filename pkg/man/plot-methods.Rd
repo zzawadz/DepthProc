@@ -3,11 +3,11 @@
 \docType{methods}
 \name{plot}
 \alias{DDPlot}
+\alias{DepthCurve}
+\alias{DepthCurveList}
 \alias{plot}
 \alias{plot,DDPlot,ANY-method}
-\alias{plot,DepthCurve}
 \alias{plot,DepthCurve,ANY-method}
-\alias{plot,DepthCurveList}
 \alias{plot,DepthCurveList,ANY-method}
 \title{Method for plotting DepthCurve and DDPlot object.}
 \usage{

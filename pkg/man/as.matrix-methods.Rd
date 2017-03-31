@@ -2,8 +2,8 @@
 % Please edit documentation in R/AllClasses.R, R/DepthCurveClass.R
 \docType{methods}
 \name{as.matrix}
+\alias{DepthCurveList}
 \alias{as.matrix}
-\alias{as.matrix,DepthCurveList}
 \alias{as.matrix,DepthCurveList-method}
 \title{as.matrix method for DepthCurveList.}
 \usage{
