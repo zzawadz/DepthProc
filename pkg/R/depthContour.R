@@ -67,7 +67,7 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
   if (length(levels) == 1 && is.numeric(levels)) {
     # levels must include 0
     levels <- levels + 1
-    # if(max(depth_surface) > 0.5) {
+    # if (max(depth_surface) > 0.5) {
     levels <- seq(min(depth_surface), max(depth_surface), length.out = levels)
     # } else {
     #   levels = seq(0, 0.5, length.out = levels)
