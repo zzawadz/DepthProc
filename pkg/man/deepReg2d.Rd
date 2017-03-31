@@ -34,7 +34,7 @@ data2011 <- na.omit(cbind(under5.mort[, 22], inf.mort[, 22],
 x <- data2011[, 3]
 y <- data2011[, 2]
 plot(x, y, cex = 1.2, ylab = "infant mortality rate per 1000 live birth", 
-xlab = "against masles immunized #' percentage", 
+xlab = "against masles immunized percentage", 
 main = "Projection Depth Trimmed vs. LS regressions")
 abline(lm(x ~ y, data = pension), lwd = 2, col = "black") # lm
 abline(deepReg2d (x, y), lwd = 2, col = "red") # trimmed reg
