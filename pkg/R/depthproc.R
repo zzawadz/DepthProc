@@ -1,5 +1,4 @@
-#' US Labour dataset 
-#'
+#' US Labour dataset
 #' @docType data
 #' @keywords datasets
 #' @name USLABOUR
@@ -8,7 +7,6 @@
 #' @source U.S.Department of Labor - Bureau of Labour Statistics FRED
 #' 
 NULL
-
 
 #' Children under 5 months mortality rate per 1,000 live births
 #' @docType data
@@ -40,7 +38,7 @@ NULL
 #' 
 NULL
 
-#' Internet view data.
+#' Internet view data
 #' @docType data
 #' @keywords datasets
 #' @name internet.users
@@ -51,6 +49,3 @@ NULL
 #' @references Kosiorowski, Rydlewski, Snarska (2016), Detecting a Structural Change in Functional Time Series Using Local Wilcoxon Statistic, arXiv: 1604.03776v2
 #' 
 NULL
-
-
-
