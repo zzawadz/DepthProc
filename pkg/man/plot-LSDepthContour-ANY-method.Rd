@@ -3,7 +3,7 @@
 \docType{methods}
 \name{plot,LSDepthContour,ANY-method}
 \alias{plot,LSDepthContour,ANY-method}
-\title{Plot Location-Scale depth contours.}
+\title{Plot Location-Scale depth contours}
 \usage{
 \S4method{plot}{LSDepthContour,ANY}(x, cont = NULL, ratio = 1,
   mu_min = NULL, mu_max = NULL, col = NULL, border = NULL, ...)
@@ -27,9 +27,9 @@
 }
 \examples{
 
-smp = rf(100,5,10)
-x = lsdSampleDepthContours(smp)
-plot(x, col = paste0("grey", col = rev(seq(10,40,10))))
+smp <- rf(100, 5, 10)
+x <- lsdSampleDepthContours(smp)
+plot(x, col = paste0("grey", col = rev(seq(10, 40, 10))))
 
 }
 

@@ -22,9 +22,9 @@ Calculates the maximum Student depth estimator of location and scale for one dim
 Calculations are based on lsdepth algorithm written by Ch. Muller.
 }
 \examples{
-x = rnorm(100)
+x <- rnorm(100)
 lsdSampleMaxDepth(x)
-y = rf(100, 4,10)
+y <- rf(100, 4, 10)
 lsdSampleMaxDepth(y)
 }
 \references{

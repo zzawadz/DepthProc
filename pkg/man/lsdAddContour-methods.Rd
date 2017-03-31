@@ -2,10 +2,10 @@
 % Please edit documentation in R/locationScaleDepth.R
 \docType{methods}
 \name{lsdAddContour}
+\alias{LSDepthContour}
 \alias{lsdAddContour}
-\alias{lsdAddContour,LSDepthContour}
 \alias{lsdAddContour,LSDepthContour-method}
-\title{Adds location scale depth contour to a plot.}
+\title{Adds location scale depth contour to a plot}
 \usage{
 lsdAddContour(x, cont = NULL, ...)
 
@@ -19,10 +19,10 @@ lsdAddContour(x, cont = NULL, ...)
 \item{...}{other arguments passed to polygon function}
 }
 \examples{
-smp = rf(100,5,10)
-x = lsdSampleDepthContours(smp)
+smp <- rf(100, 5, 10)
+x <- lsdSampleDepthContours(smp)
 plot(x)
-lsdAddContour(x,0.1, col = "grey50")
-lsdAddContour(x,0.3, col = "grey10", border = "red", lwd = 4)
+lsdAddContour(x, 0.1, col = "grey50")
+lsdAddContour(x, 0.3, col = "grey10", border = "red", lwd = 4)
 }
 

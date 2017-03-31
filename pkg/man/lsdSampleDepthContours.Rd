@@ -17,16 +17,17 @@ lsdSampleDepthContours(x, depth = c(0.1, 0.2, 0.3, 0.4), lengthmu = 1000)
 Calculations are based on lsdepth algorithm written by Ch. Muller.
 }
 \examples{
-## EXAMPLE 1 for F-distribution
-dcont = lsdSampleDepthContours(rf(200,4,7))
+# EXAMPLE 1
+# F-distribution
+dcont <- lsdSampleDepthContours(rf(200, 4, 7))
 plot(dcont)
 
-## EXAMPLE 2 for normal distribution
-## - more contours calculated 
-dcont_norm = lsdSampleDepthContours(rnorm(100),seq(0.05,0.4,0.05))
+# EXAMPLE 2
+# normal distribution - more contours calculated
+dcont_norm <- lsdSampleDepthContours(rnorm(100), seq(0.05, 0.4, 0.05))
 plot(dcont_norm)
 }
 \references{
-Mizera, I., Muller, C. H., 2004. Location-scale depth (with discussion).  Journal of the American Statistical Association 99, 949-966.
+Mizera, I., Muller, C. H., 2004. Location-scale depth (with discussion). Journal of the American Statistical Association 99, 949-966.
 }
 

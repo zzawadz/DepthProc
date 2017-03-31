@@ -2,8 +2,8 @@
 % Please edit documentation in R/locationScaleDepth.R
 \docType{methods}
 \name{lsdGetContour}
+\alias{LSDepthContour}
 \alias{lsdGetContour}
-\alias{lsdGetContour,LSDepthContour}
 \alias{lsdGetContour,LSDepthContour-method}
 \title{Get location-scale contour from LSDepthContour object}
 \usage{
@@ -20,13 +20,13 @@ lsdGetContour(x, cont)
 Calculations are based on lsdepth algorithm written by Ch. Muller.
 }
 \examples{
-dcont = lsdSampleDepthContours(rf(200,4,7), depth = c(0.1,0.2))
+dcont <- lsdSampleDepthContours(rf(200, 4, 7), depth = c(0.1, 0.2))
 
-#get contour that is present in dcont object
-lsdGetContour(dcont,0.1)
+# get contour that is present in dcont object
+lsdGetContour(dcont, 0.1)
 
 # get contour that is not present in dcont
 # it will be automatically calculated
-lsdGetContour(dcont,0.3)
+lsdGetContour(dcont, 0.3)
 }
 
