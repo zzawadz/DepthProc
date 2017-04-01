@@ -31,8 +31,8 @@ Plot Depth curve
 }
 \examples{
 
-x = mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
-sc = scaleCurve(x)
+x <- mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
+sc <- scaleCurve(x)
 plot(sc)
 
 }

@@ -83,7 +83,8 @@ setMethod(".getPlot", "DepthCurveList", function(object) {
   data <- data.frame(value, alpha, names)
   
   p <- ggplot()
-  p <- p + geom_line(data = data, aes(x = alpha, y = value, col = names), size = 1.5)
+  p <- p + geom_line(data = data, aes(x = alpha, y = value, col = names),
+                     size = 1.5)
   p <- p + theme_bw() + .depTheme()
   p <- p + ylim(c(0, max(data$value, na.rm = TRUE)))
   p <- p + xlim(c(0, max(data$alpha, na.rm = TRUE)))
