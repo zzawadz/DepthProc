@@ -48,7 +48,7 @@
 #' plot(data)
 #' 
 #' b1 <- binningDepth2D(data, remove_borders = FALSE, nbins = 12, k = 1)
-#' b2=binningDepth2D(data, nbins = 12, k = 1, remove_borders = TRUE)
+#' b2 <- binningDepth2D(data, nbins = 12, k = 1, remove_borders = TRUE)
 #' plot(b1)
 #' plot(b2)
 #' 
