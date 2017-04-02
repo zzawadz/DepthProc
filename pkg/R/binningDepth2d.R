@@ -20,20 +20,19 @@
 #' 
 #' @details
 #' 
-#' Let us recall, that binning is a popular method of decreasing a sample size. To bin a window of \eqn{ n } points \eqn{ {W}_{i,n}=\left\{{X}_{i-n+1},...,{X}_{i} \right\} } to a grid \eqn{ {{{X}'}_{1}},...,{{{X}'}_{m}} } we simply assign each sample point \eqn{ {{X}_{i}} } to the nearest grid point \eqn{ {{{X}'}_{j}} } . When binning is completed, each grid point \eqn{ {{X}'}_{j} } has an associated number \eqn{ {c}_{i} }, which is the sum of all the points that have been assigned to \eqn{ {{X}'}_{j} } . This procedure replaces the data \eqn{ {W}_{i,n}=\left\{ {X}_{i-n+1},...,{X}_{i} \right\} } with the smaller set \eqn{ {{W}'}_{j,m}=\left\{ {{X}'}_{j-m+1},...,{{X}'}_{j} \right\} } . Although simple binning can speed up the computation, it is criticized for a lack of a precise approximate control over the accuracy of the approximation. Robust binning however stresses properties of the majority of the data and decreases the computational complexity of the DSA at the same time.
+#' Let us recall, that binning is a popular method of decreasing a sample size. To bin a window of \eqn{ n } points \eqn{ {W}_{i, n} = \left\{ {X}_{i - n + 1}, ..., {X}_{i} \right\} } to a grid \eqn{ {{{X}'}_{1}}, ..., {{{X}'}_{m}} } we simply assign each sample point \eqn{ {{X}_{i}} } to the nearest grid point \eqn{ {{{X}'}_{j}} }. When binning is completed, each grid point \eqn{ {{X}'}_{j} } has an associated number \eqn{ {c}_{i} }, which is the sum of all the points that have been assigned to \eqn{ {{X}'}_{j} }. This procedure replaces the data \eqn{ {W}_{i, n} = \left\{ {X}_{i - n + 1}, ..., {X}_{i} \right\} } with the smaller set \eqn{ {{W}'}_{j, m} = \left\{ {{X}'}_{j - m + 1}, ..., {{X}'}_{j} \right\} }. Although simple binning can speed up the computation, it is criticized for a lack of precise approximate control over the accuracy of the approximation. Robust binning however stresses properties of the majority of the data and decreases the computational complexity of the DSA at the same time.
 #' 
-#' For a 1D window \eqn{ {W}_{i, n} }, let \eqn{ {Z}_{i, n-k} } denote a 2D window created basing on \eqn{ {W}_{i, n} } and consisted of \eqn{ n-k } pairs of observations and the \eqn{ k } lagged observations \eqn{ {Z}_{i, n-k} } = \eqn{ \left\{ ({X}_{i-n-k}, {X}_{i-n+1})\right\} }, \eqn{ 1\le i\le n-k }. Robust 2D binning of the \eqn{ {Z}_{i, n-p} } is a very useful technique in a context of robust estimation of the predictive distribution of a time series (see \cite{Kosiorowski:2013b}).
+#' For a 1D window \eqn{ {W}_{i, n} }, let \eqn{ {Z}_{i, n - k} } denote a 2D window created basing on \eqn{ {W}_{i, n} } and consisted of \eqn{ n - k } pairs of observations and the \eqn{ k } lagged observations \eqn{ {Z}_{i, n - k} = \left\{\left( {X}_{i - n - k}, {X}_{i - n + 1} \right)\right\}, 1\le i\le n - k }. Robust 2D binning of the \eqn{ {Z}_{i, n - p} } is a very useful technique in a context of robust estimation of the predictive distribution of a time series (see \cite{Kosiorowski:2013b}).
 #' 
-#' Assume we analyze a data stream \eqn{ \{{X}_{t}\} } using a moving window of a fixed length \eqn{ n }, i.e., \eqn{ {W}_{i,n} } and the derivative window \eqn{ {Z}_{i,n-1} }. In a first step we calculate the weighted sample \eqn{ L^p } depth for \eqn{ {W}_{i,n} }. Next we choose equally spaced grid of points \eqn{ {l}_{1},...,{l}_{m} } in this way that \eqn{ [{{l}_{1}}, {{l}_{m}}]\times [{{l}_{1}}, {{l}_{m}}] } covers fraction of the \eqn{ \beta } central points of \eqn{ {Z}_{i,n-1} } w.r.t. the calculated \eqn{ L^p } depth, i.e., it covers \eqn{ {R}^{\beta }({Z}_{i, n-1}) } for certain prefixed threshold \eqn{ \beta \in (0,1) }. For both \eqn{ {X}_{t} } and \eqn{ {X}_{t-1} } we perform a simple binning using following bins: \eqn{ (-\infty, {l}_{1}) }, \eqn{ ({l}_{1},{l}_{2}) },..., \eqn{ ({l}_{m},\infty ) }.
-#' For robust binning we reject 'border' classes and further use only midpoints and binned frequencies for classes \eqn{ ({l}_{1}, {l}_{2}) }, \eqn{ ({l}_{2}, {l}_{3}) },...,\eqn{ ({l}_{m-1},{l}_{m}) }.
+#' Assume we analyze a data stream \eqn{ \{{X}_{t}\} } using a moving window of a fixed length \eqn{ n }, i.e., \eqn{ {W}_{i, n} } and the derivative window \eqn{ {Z}_{i, n - 1} }. In a first step we calculate the weighted sample \eqn{ L ^ p } depth for \eqn{ {W}_{i, n} }. Next we choose equally spaced grid of points \eqn{ {l}_{1}, ..., {l}_{m} } in this way that \eqn{ [{{l}_{1}}, {{l}_{m}}] \times [{{l}_{1}}, {{l}_{m}}] } covers fraction of the \eqn{ \beta } central points of \eqn{ {Z}_{i, n - 1} } w.r.t. the calculated \eqn{ L ^ p } depth, i.e., it covers \eqn{ {R} ^ {\beta}({Z}_{i, n - 1}) } for certain prefixed threshold \eqn{ \beta \in (0, 1) }. For both \eqn{ {X}_{t} } and \eqn{ {X}_{t - 1} } we perform a simple binning using following bins: \eqn{ (-\infty, {l}_{1}) }, \eqn{ ({l}_{1}, {l}_{2}) }, ..., \eqn{ ({l}_{m}, \infty) }. For robust binning we reject "border" classes and further use only midpoints and binned frequencies for classes \eqn{ ({l}_{1}, {l}_{2}) }, \eqn{ ({l}_{2}, {l}_{3}) }, ..., \eqn{ ({l}_{m - 1}, {l}_{m}) }.
 #' 
 #' @author Daniel Kosiorowski and Zygmunt Zawadzki from Cracow University of Economics.
 #' 
 #' @references
 #' 
-#' Hall, P., Wand, M. P. (1996) On the Accuracy of Binned Kernel Density Estimators, Journal of Multivariate Analysis archive, Volume 56 Issue 2, 165 - 184
+#' Hall, P., Wand, M. P. (1996) On the Accuracy of Binned Kernel Density Estimators, Journal of Multivariate Analysis archive, Volume 56 Issue 2, 165--184
 #' 
-#' Holmstrom, L. (2000) The Accuracy and the Computational Complexity of a Multivariate Binned Kernel Density Estimator, Journal of Multivariate Analysis, Volume 72, Issue 2, 264-309, http://dx.doi.org/10.1006/jmva.1999.1863. (http://www.sciencedirect.com/science/article/pii/S0047259X99918638)
+#' Holmstrom, L. (2000) The Accuracy and the Computational Complexity of a Multivariate Binned Kernel Density Estimator, Journal of Multivariate Analysis, Volume 72, Issue 2, 264--309, \url{http://dx.doi.org/10.1006/jmva.1999.1863}. (\url{http://www.sciencedirect.com/science/article/pii/S0047259X99918638})
 #' 
 #' @examples
 #' 
@@ -168,17 +167,17 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
 #'
 #' @description Binning 2d
 #' @seealso \code{\link{depth}}
-#'  
+#'
 #' @examples
-#'  
-#'  tmp = binningDepth2D(x = mvrnorm(100, rep(0, 2), diag(2)))
-#'  plot(tmp)
-#'  
+#'
+#' tmp <- binningDepth2D(x = mvrnorm(100, rep(0, 2), diag(2)))
+#' plot(tmp)
+#'
 #' @keywords
-#'  multivariate
-#'  nonparametric
-#'  robust
-#'  depth function
+#' multivariate
+#' nonparametric
+#' robust
+#' depth function
 #' 
 setMethod("plot", signature = c(x = "BinnDepth2d"), function(x, ...,
                                                              alpha = 0.1,
