@@ -2,7 +2,7 @@
 #' @title Depth versus depth plot
 #' @export
 #' @description
-#' Produces a DD plot which allows to compare two multivirate datasets or to compare a subject dataset with theoretical distribution.
+#' Produces a DD plot which allows to compare two multivariate datasets or to compare a subject dataset with theoretical distribution.
 #'
 #' @param x The first or only data sample for ddPlot.
 #' @param y The second data sample. \code{x} and \code{y} must be of the same space.
@@ -15,9 +15,8 @@
 #'
 #' @details
 #' 
-#' For two probability distributions \eqn{ F } and \eqn{ G }, both in \eqn{ {{{R}}^{d}} }, we can define {depth vs. depth} plot being very useful generalization of the one dimensional quantile-quantile plot: \deqn{ DD(F, G)=\left\{ \left( D({z}, F), D({z}, G) \right), {z}\in {{{R}}^{d}} \right\} } 
-#' Its sample counterpart calculated for two samples \eqn{ {{{X}}^{n}}=\{{{X}_{1}}, ..., {{X}_{n}}\} } from \eqn{ F }, and \eqn{ {{Y}^{m}}=\{{{Y}_{1}}, ..., {{Y}_{m}}\} } from \eqn{ G } is defined as
-#' \deqn{ DD({{F}_{n}}, {{G}_{m}})=\left\{ \left( D({z}, {{F}_{n}}), D({z}, {{G}_{m}}) \right), {z}\in \{{{{X}}^{n}}\cup {{{Y}}^{m}}\} \right\}}
+#' For two probability distributions \eqn{ F } and \eqn{ G }, both in \eqn{ {{{R}} ^ {d}} }, we can define \code{depth vs. depth} plot being very useful generalization of the one dimensional quantile-quantile plot: \deqn{ DD(F, G) = \left\{\left( D({z}, F), D({z}, G) \right), {z} \in {{{R}} ^ {d}} \right\} } 
+#' Its sample counterpart calculated for two samples \eqn{ {{{X}} ^ {n}} = \{{{X}_{1}}, ..., {{X}_{n}}\} } from \eqn{ F }, and \eqn{ {{Y} ^ {m}} = \{{{Y}_{1}}, ..., {{Y}_{m}}\} } from \eqn{ G } is defined as \deqn{ DD({{F}_{n}}, {{G}_{m}}) = \left\{\left( D({z}, {{F}_{n}}), D({z}, {{G}_{m}}) \right), {z} \in \{{{{X}} ^ {n}} \cup {{{Y}} ^ {m}}\} \right\} }
 #'
 #' @references
 #' Liu, R.Y., Parelius, J.M. and Singh, K. (1999), Multivariate analysis by data depth: Descriptive statistics, graphics and inference (with discussion), \emph{Ann. Statist.}, \bold{27}, 822--831.
@@ -27,8 +26,8 @@
 #' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #' 
 #' @examples
-#' require(sn)
-#' require(mvtnorm)
+#' library(sn)
+#' library(mvtnorm)
 #' 
 #' # EXAMPLE 1: Location difference
 #' standard <- mvrnorm(1000, c(0, 0), diag(2))
