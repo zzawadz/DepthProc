@@ -8,12 +8,12 @@ setClass("CovDepthWeighted",
 
 #' @title CovLp
 #'
-#' @description Weighted by \eqn{L^p} depth (outlyingness) multivariate location and scatter estimators.
+#' @description Weighted by \eqn{ L ^ p } depth (outlyingness) multivariate location and scatter estimators.
 #'
 #' @param x The data as a matrix or data frame. If it is a matrix or data frame, then each row is viewed as one multivariate observation.
-#' @param pdim The parameter of the weighted \eqn{L^pdim} depth
-#' @param la parameter of a simple weight function w = a * x + b
-#' @param lb parameter of a simple weight function w = a * x + b
+#' @param pdim The parameter of the weighted \eqn{ {L} ^ {p} dim } depth
+#' @param la parameter of a simple weight function \eqn{ w = ax + b }
+#' @param lb parameter of a simple weight function \eqn{ w = ax + b }
 #'
 #' @return loc: Robust Estimate of Location:
 #' @return cov: Robust Estimate of Covariance:
@@ -21,9 +21,9 @@ setClass("CovDepthWeighted",
 #'
 #' @details
 #'
-#' Using depth function one can define a depth-weighted location and scatter estimators. In case of location estimator we have \deqn{ L(F)={\int{{x}{{w}_{1}}(D({x}, F))dF({x})}}/{{{w}_{1}}(D({x}, F))dF({x})} } Subsequently, a depth-weighted scatter estimator is defined as \deqn{ S(F)=\frac{\int{({x}-L(F)){{({x}-L(F))}^{T}}{{w}_{2}}(D({x}, F))dF({x})}}{\int{{{w}_{2}}(D({x}, F))dF({x})}}, } where \eqn{ {{w}_{2}}(\cdot ) } is a suitable weight function that can be different from \eqn{ {{w}_{1}}(\cdot ) }.
+#' Using depth function one can define a depth-weighted location and scatter estimators. In case of location estimator we have \deqn{ L(F) = {\int {{x}{{w}_{1}}(D({x}, F))dF({x})}} / {{{w}_{1}}(D({x}, F))dF({x})} } Subsequently, a depth-weighted scatter estimator is defined as \deqn{ S(F) = \frac{ \int {({x} - L(F)){{({x} - L(F))} ^ {T}}{{w}_{2}}(D({x}, F))dF({x})} }{ \int {{{w}_{2}}(D({x}, F))dF({x})}}, } where \eqn{ {{w}_{2}}(\cdot) } is a suitable weight function that can be different from \eqn{ {{w}_{1}}(\cdot) }.
 #'
-#' The \pkg{DepthProc} package offers these estimators for weighted \eqn{ {L}^{p} } depth. Note that \eqn{ L(\cdot ) } and \eqn{ S(\cdot ) } include multivariate versions of trimmed means and covariance matrices. Their sample counterparts take the form \deqn{ {{T}_{WD}}({{{X}}^{n}})={\sum\limits_{i=1}^{n}{{{d}_{i}}{{X}_{i}}}}/{\sum\limits_{i=1}^{n}{{{d}_{i}}}}, } \deqn{ DIS({{{X}}^{n}})=\frac{\sum\limits_{i=1}^{n}{{{d}_{i}}\left( {{{X}}_{i}}-{{T}_{WD}}({{{X}}^{n}}) \right){{\left( {{{X}}_{i}}-{{T}_{WD}}({{{X}}^{n}}) \right)}^{T}}}}{\sum\limits_{i=1}^{n}{{{d}_{i}}}}, } where \eqn{ {{d}_{i}} } are sample depth weights, \eqn{ {{w}_{1}}(x)={{w}_{2}}(x)=x }.
+#' The \pkg{DepthProc} package offers these estimators for weighted \eqn{ {L} ^ {p} } depth. Note that \eqn{ L(\cdot) } and \eqn{ S(\cdot) } include multivariate versions of trimmed means and covariance matrices. Their sample counterparts take the form \deqn{ {{T}_{WD}}({{{X}} ^ {n}}) = {\sum\limits_{i = 1} ^ {n} {{{d}_{i}}{{X}_{i}}}} / {\sum\limits_{i = 1} ^ {n} {{{d}_{i}}}}, } \deqn{ DIS({{{X}}^{n}}) = \frac{ \sum\limits_{i = 1} ^ {n} {{{d}_{i}}\left( {{{X}}_{i}} - {{T}_{WD}}({{{X}} ^ {n}}) \right){{\left( {{{X}}_{i}} - {{T}_{WD}}({{{X}} ^ {n}}) \right)} ^ {T}}} }{ \sum\limits_{i = 1} ^ {n} {{{d}_{i}}}}, } where \eqn{ {{d}_{i}} } are sample depth weights, \eqn{ {{w}_{1}}(x) = {{w}_{2}}(x) = x }.
 #'
 #' @author Daniel Kosiorowski and Zygmunt Zawadzki from Cracow University of Economics.
 #'
