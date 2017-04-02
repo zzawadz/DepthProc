@@ -4,13 +4,13 @@
 #' 
 #' @param x The data sample for DD plot.
 #' @param size size of theoretical set
-#' @param robust Logical. Dafault \code{FALSE}. If \code{TRUE}, robust measures are used to specify the parameters of theoretical distribution.
+#' @param robust Logical. Default \code{FALSE}. If \code{TRUE}, robust measures are used to specify the parameters of theoretical distribution.
 #' @param alpha cutoff point for robust measure of covariance.
 #' @param title title of a plot.
 #' @param ... Parameters passed to \code{depth}
 #' 
 #' @description
-#' Produces a normal DD plot of a multivirate dataset.
+#' Produces a normal DD plot of a multivariate dataset.
 #'
 #' @details
 #' 
@@ -21,7 +21,7 @@
 #'
 #' @references
 #' 
-#' Liu, R.Y., Parelius, J.M. and Singh, K. (1999), Multivariate analysis by data depth: Descriptive statistics, graphics and inference (with discussion), Ann. Statist., 27, 783-858.
+#' Liu, R.Y., Parelius, J.M. and Singh, K. (1999), Multivariate analysis by data depth: Descriptive statistics, graphics and inference (with discussion), Ann. Statist., 27, 783--858.
 #' 
 #' Liu, R.Y., Singh K. (1993), A Quality Index Based on Data Depth and Multivariate Rank Test, \emph{Journal of the American Statistical Association} vol. 88.
 #'
