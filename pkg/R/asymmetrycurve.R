@@ -2,37 +2,37 @@
 #'
 #' @description Produces an asymmetry curve estimated from given data.
 #'
-#' @param x  The data as a matrix or data frame. If it is a matrix or data frame, then each row is viewed as one multivariate observation. 
-#' @param y  Additional matrix of multivariate data.
-#' @param alpha  An ordered vector containing indices of central regins used for asymmetry curve calculation.
-#' @param method Character string which determines the depth function used. The method can be "Projection" (the default), "Mahalanobis", "Euclidean", "Tukey" or "LP".  For details see \code{\link{depth}.}
-#' @param movingmedian  Logical. For default FALSE only one depth median is used to compute asymmetry norm. If TRUE - for every central area, a new depth median will be used - this approach needs much more time.
-#' @param name Name of set X - used in plot legend
-#' @param name_y Name of set Y - used in plot legend
+#' @param x The data as a matrix or data frame. If it is a matrix or data frame, then each row is viewed as one multivariate observation. 
+#' @param y Additional matrix of multivariate data.
+#' @param alpha An ordered vector containing indices of central regins used for asymmetry curve calculation.
+#' @param method Character string which determines the depth function used. The method can be "Projection" (the default), "Mahalanobis", "Euclidean", "Tukey" or "LP". For details see \code{\link{depth}}.
+#' @param movingmedian Logical. For default FALSE only one depth median is used to compute asymmetry norm. If TRUE --- for every central area, a new depth median will be used --- this approach needs much more time.
+#' @param name Name of set X --- used in plot legend
+#' @param name_y Name of set Y --- used in plot legend
 #' @param ... Any additional parameters for function depth
 #'
 #' @details
-#'  
-#' For sample depth function  \eqn{ D({x},{{{Z}}^{n}}) },  \eqn{ {x}\in {{{R}}^{d}} },  \eqn{ d\ge 2 },  \eqn{ {Z}^{n}=\{{{{z}}_{1}},...,{{{z}}_{n}}\}\subset {{{R}}^{d}} },   \eqn{ {{D}_{\alpha }}({{{Z}}^{n}}) }  denoting  \eqn{ \alpha- }  central region, we can define {the asymmetry curve}  \eqn{ AC(\alpha )=\left( \alpha,\left\| {{c}^{-1}}(\{{\bar{z}}-med|{{D}_{\alpha }}({{{Z}}^{n}})\}) \right\| \right)\subset {{{R}}^{2}} }, for   \eqn{ \alpha \in [0,1]  }  being nonparametric scale and asymmetry functional correspondingly, where  \eqn{ c- } denotes constant,  \eqn{ {\bar{z}}- }  denotes mean vector, denotes multivariate median induced by depth function and  \eqn{ vol- }  denotes a volume.
-#'  
+#' 
+#' For sample depth function \eqn{ D({x}, {{{Z}} ^ {n}}) }, \eqn{ {x} \in {{{R}} ^ {d}} }, \eqn{ d \ge 2 }, \eqn{ {Z} ^ {n} = \{{{{z}}_{1}}, ..., {{{z}}_{n}}\} \subset {{{R}} ^ {d}} }, \eqn{ {{D}_{\alpha}}({{{Z}} ^ {n}}) } denoting \eqn{ \alpha } --- central region, we can define {the asymmetry curve} \eqn{ AC(\alpha) = \left(\alpha, \left\| {{c} ^ {-1}}(\{{\bar{z}} - med|{{D}_{\alpha}}({{{Z}} ^ {n}})\}) \right\|\right) \subset {{{R}} ^ {2}} }, for \eqn{ \alpha \in [0, 1] } being nonparametric scale and asymmetry functional correspondingly, where \eqn{ c } --- denotes constant, \eqn{ {\bar{z}} } --- denotes mean vector, denotes multivariate median induced by depth function and \eqn{ vol } --- denotes a volume.
+#' 
 #' Asymmetrycurve takes uses function convhulln from package geometry for computing a volume of convex hull containing central region.
-#'  
+#' 
 #' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
-#'  
+#' 
 #' @references 
-#'  
-#' Serfling  R. J.  Multivariate Symmetry and Asymmetry, \emph{Encyclopedia of Statistical Science}, S Kotz, C.B. Read, N. Balakrishnan, B. Vidakovic (eds), 2nd, ed., John Wiley.
+#' 
+#' Serfling R. J. Multivariate Symmetry and Asymmetry, \emph{Encyclopedia of Statistical Science}, S Kotz, C.B. Read, N. Balakrishnan, B. Vidakovic (eds), 2nd, ed., John Wiley.
 #'
 #' Liu, R.Y., Parelius, J.M. and Singh, K. (1999), Multivariate analysis by data depth: Descriptive statistics, graphics and inference (with discussion), \emph{Ann. Statist.}, \bold{27}, 783--858.
 #'
 #' Chaudhuri, P. (1996), On a Geometric Notion of Quantiles for Multivariate Data, \emph{Journal of the American Statistical Association}, 862--872.
 #'
-#' Dyckerhoff, R. (2004), Data Depths Satisfying the Projection Property, \emph{Allgemeines Statistisches Archiv.},  \bold{88}, 163--190.
+#' Dyckerhoff, R. (2004), Data Depths Satisfying the Projection Property, \emph{Allgemeines Statistisches Archiv.}, \bold{88}, 163--190.
 #'
 #' @seealso \code{\link{scaleCurve}}, \code{\link{depth}}
-#'  
+#' 
 #' @examples
-#'  
+#' 
 #' # EXAMPLE 1
 #' require(sn)
 #' xi <- c(0, 0)
@@ -40,7 +40,7 @@
 #' Omega <- diag(2) * 5
 #' 
 #' n <- 500
-#' X <- mvrnorm(n, xi, Omega)  # normal distribution
+#' X <- mvrnorm(n, xi, Omega) # normal distribution
 #' Y <- rmst(n, xi, Omega, alpha, nu = 1)
 #' asymmetryCurve(X, Y, name = "NORM", name_y = "S_T(2, -5, 10)")
 #' 
@@ -54,7 +54,7 @@
 #' as2011 <- asymmetryCurve(data2011, name = "scale curve 2011")
 #' figure <- getPlot(as1990 %+% as2011) + ggtitle("Scale curves")
 #' figure
-#'  
+#' 
 #' @keywords
 #' multivariate
 #' nonparametric
