@@ -15,7 +15,7 @@
 #' 
 setClass("FunctionalDepth",
          slots = c(u = "matrix", X = "matrix", method = "character",
-                   name = "character", index = "ANY", val_name = "ANY"),
+                   name = "character", index = "ANY"),
          contains = "VIRTUAL")
 setClass("FncDepthMBD", contains = c("FunctionalDepth", "numeric"))
 setClass("FncDepthFM", contains = c("FunctionalDepth", "numeric"))
