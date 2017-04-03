@@ -1,12 +1,10 @@
 #' @rdname plot-methods
-#' @aliases plot DepthCurve
 #' @export
 setMethod("plot", signature = c(x = "DepthCurve"), function(x) {
   plot(new(paste0(class(x), "List"), x))
 })
 
 #' @rdname plot-methods
-#' @aliases plot DepthCurveList
 #' @export
 setMethod("plot", signature = c(x = "DepthCurveList"), function(x) {
   p <- getPlot(x)
@@ -27,7 +25,6 @@ setMethod("initialize", "DepthCurveList", function(.Object, ...) {
 })
 
 #' @rdname grapes-plus-grapes-methods
-#' @aliases grapes-plus-grapes-methods DepthCurveList DepthCurve
 #' @export
 setMethod("%+%", signature(e1 = "DepthCurveList", e2 = "DepthCurve"),
           function(e1, e2) {
@@ -57,7 +54,6 @@ setMethod("%+%", signature(e1 = "DepthCurveList", e2 = "DepthCurve"),
 )
 
 #' @rdname grapes-plus-grapes-methods
-#' @aliases grapes-plus-grapes-methods DepthCurve DepthCurveList
 #' @export
 setMethod("%+%", signature(e1 = "DepthCurve", e2 = "DepthCurveList"),
           function(e1, e2) {
@@ -66,7 +62,6 @@ setMethod("%+%", signature(e1 = "DepthCurve", e2 = "DepthCurveList"),
 )
 
 #' @rdname grapes-plus-grapes-methods
-#' @aliases grapes-plus-grapes-methods DepthCurve DepthCurve
 #' @export
 setMethod("%+%", signature(e1 = "DepthCurve", e2 = "DepthCurve"),
           function(e1, e2) {
@@ -93,7 +88,6 @@ setMethod(".getPlot", "DepthCurveList", function(object) {
 })
 
 #' @rdname as.matrix-methods
-#' @aliases as.matrix DepthCurveList
 #' @export
 setMethod("as.matrix", signature(x = "DepthCurveList"), function(x) {
   names <- sapply(x, function(x) x@depth@name)

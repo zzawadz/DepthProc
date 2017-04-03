@@ -1,5 +1,4 @@
 #' @rdname getPlot-methods
-#' @aliases getPlot AsymmetryCurveList
 #' @export
 setMethod("getPlot", "AsymmetryCurveList", function(object) {
   p <- .getPlot(object)

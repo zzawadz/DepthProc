@@ -28,7 +28,6 @@ setGeneric("%+%", function(e1, e2) {
 #' @slot method depth type.
 #' @slot name name that will be used on plots.
 #'  
-#' @aliases DepthEuclid DepthProjection DepthMahalanobis DepthTukey DepthLP DepthLocal
 #' @rdname Depth-class
 #' @exportClass Depth
 #' 

@@ -150,7 +150,6 @@ setGeneric("lsdGetContour", function(x, cont) {
 })
 
 #' @rdname lsdGetContour-methods
-#' @aliases lsdGetContour LSDepthContour
 #' @export
 setMethod("lsdGetContour", signature = "LSDepthContour", function(x, cont) {
   i <- which(x@cont_depth == cont)
@@ -182,7 +181,6 @@ setGeneric("lsdAddContour", function(x, cont = NULL, ...) {
 })
 
 #' @rdname lsdAddContour-methods
-#' @aliases lsdAddContour LSDepthContour
 #' @export
 setMethod("lsdAddContour", signature = c(x = "LSDepthContour"),
           function(x, cont = NULL, ...) {

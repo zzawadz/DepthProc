@@ -1,5 +1,4 @@
 #' @rdname getPlot-methods
-#' @aliases getPlot,ScaleCurveList
 #' @export
 setMethod("getPlot", "ScaleCurveList", function(object) {
   p <- .getPlot(object)
