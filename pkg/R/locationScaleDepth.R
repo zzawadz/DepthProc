@@ -34,7 +34,7 @@ setClass("LSDepthContour",
 #' 
 #' @references
 #' 
-#' Mizera, I., Muller, C. H., 2004. Location-scale depth (with discussion). Journal of the American Statistical Association 99, 949 - 966.
+#' Mizera, I., Muller, C. H., 2004. Location-scale depth (with discussion). Journal of the American Statistical Association 99, 949--966.
 #' 
 #' @examples
 #' x <- rnorm(100)
@@ -64,7 +64,7 @@ lsdSampleMaxDepth <- function(x, iter = 100, eps = 1e-04, p_length = 10) {
 #' 
 #' @references
 #' 
-#' Mizera, I., Muller, C. H., 2004. Location-scale depth (with discussion). Journal of the American Statistical Association 99, 949-966.
+#' Mizera, I., Muller, C. H., 2004. Location-scale depth (with discussion). Journal of the American Statistical Association 99, 949--966.
 #' 
 #' @examples
 #' # EXAMPLE 1
@@ -114,6 +114,7 @@ lsdSampleDepthContours <- function(x, depth = c(0.1, 0.2, 0.3, 0.4),
 }
 
 ######################## Utils functions - not exported #####################
+
 getMuLS <- function(x, n, d, lengthmu) {
   
   if (d > 1) {
@@ -131,7 +132,7 @@ getMuLS <- function(x, n, d, lengthmu) {
 #' @export
 #' 
 #' @param x object of class LSDepthContour
-#' @param cont single numeric - depth of contour to return
+#' @param cont single numeric --- depth of contour to return
 #' 
 #' @details
 #' Calculations are based on lsdepth algorithm written by Ch. Muller.

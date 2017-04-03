@@ -13,7 +13,7 @@ lsdGetContour(x, cont)
 \arguments{
 \item{x}{object of class LSDepthContour}
 
-\item{cont}{single numeric - depth of contour to return}
+\item{cont}{single numeric --- depth of contour to return}
 }
 \details{
 Calculations are based on lsdepth algorithm written by Ch. Muller.

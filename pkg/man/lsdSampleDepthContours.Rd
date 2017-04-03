@@ -28,5 +28,5 @@ dcont_norm <- lsdSampleDepthContours(rnorm(100), seq(0.05, 0.4, 0.05))
 plot(dcont_norm)
 }
 \references{
-Mizera, I., Muller, C. H., 2004. Location-scale depth (with discussion). Journal of the American Statistical Association 99, 949-966.
+Mizera, I., Muller, C. H., 2004. Location-scale depth (with discussion). Journal of the American Statistical Association 99, 949--966.
 }
