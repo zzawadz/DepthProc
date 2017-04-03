@@ -4,4 +4,3 @@
 \name{LSDepthContour-class}
 \alias{LSDepthContour-class}
 \title{Location-Scale depth contour class}
-

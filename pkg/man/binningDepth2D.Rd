@@ -67,9 +67,6 @@ data2011 <- cbind(under5.mort[, 22], maesles.imm[, 22])
 plot(binningDepth2D(data2011, nbins = 8, k = 0.5, remove_borders = TRUE))
 
 }
-\author{
-Daniel Kosiorowski and Zygmunt Zawadzki from Cracow University of Economics.
-}
 \references{
 Hall, P., Wand, M. P. (1996) On the Accuracy of Binned Kernel Density Estimators, Journal of Multivariate Analysis archive, Volume 56 Issue 2, 165--184
 
@@ -78,9 +75,11 @@ Holmstrom, L. (2000) The Accuracy and the Computational Complexity of a Multivar
 \seealso{
 \code{\link{depth}}
 }
+\author{
+Daniel Kosiorowski and Zygmunt Zawadzki from Cracow University of Economics.
+}
 \keyword{depth}
 \keyword{function}
 \keyword{multivariate}
 \keyword{nonparametric}
 \keyword{robust}
-

@@ -21,4 +21,3 @@ obj <- fncDepth(x, method = "FM", dep1d = "Mahalanobis")
 fncGetBand(obj)
 
 }
-

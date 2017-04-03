@@ -15,4 +15,3 @@ data(maesles.imm)
 Children 1 year old immunized against measles, percentage
 }
 \keyword{datasets}
-

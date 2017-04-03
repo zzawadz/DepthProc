@@ -15,4 +15,3 @@ data(under5.mort)
 Children under 5 months mortality rate per 1,000 live births
 }
 \keyword{datasets}
-

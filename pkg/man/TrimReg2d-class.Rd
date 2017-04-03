@@ -7,4 +7,3 @@
 \description{
 Class for robust regression methods from depthproc package
 }
-

@@ -17,4 +17,3 @@ Internet view data
 Kosiorowski, Rydlewski, Snarska (2016), Detecting a Structural Change in Functional Time Series Using Local Wilcoxon Statistic, arXiv: 1604.03776v2
 }
 \keyword{datasets}
-

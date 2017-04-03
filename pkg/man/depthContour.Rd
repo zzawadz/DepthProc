@@ -61,12 +61,11 @@ depthContour(data1990, n = 50, pmean = TRUE, mcol = "blue",
              main = "L2 depth, UN Fourth Goal 2011 year", method = "LP")
 
 }
-\author{
-Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
-}
 \seealso{
 \code{\link{depthPersp}}
 }
+\author{
+Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+}
 \keyword{contour}
 \keyword{depth}
-

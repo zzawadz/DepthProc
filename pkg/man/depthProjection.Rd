@@ -39,4 +39,3 @@ Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki fro
 \keyword{function}
 \keyword{multivariate}
 \keyword{nonparametric}
-

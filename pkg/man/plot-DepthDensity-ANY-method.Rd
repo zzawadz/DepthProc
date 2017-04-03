@@ -14,4 +14,3 @@
 
 \item{...}{graphical arguments.}
 }
-

@@ -36,4 +36,3 @@ plot(tmp)
 \keyword{multivariate}
 \keyword{nonparametric}
 \keyword{robust}
-

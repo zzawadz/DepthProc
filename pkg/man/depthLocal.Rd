@@ -62,4 +62,3 @@ depthContour(data, method = "Local", depth1 = "Projection", beta = 0.3)
 \references{
 Paindaveine, D., Van Bever, G. (2013) From depth to local depth : a focus on centrality. Journal of the American Statistical Association 105, 1105-1119 (2013).
 }
-

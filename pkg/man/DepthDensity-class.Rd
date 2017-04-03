@@ -10,4 +10,3 @@ Class for depth based density estimator.
 \details{
 \code{\link{depthDensity}}
 }
-

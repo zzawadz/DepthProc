@@ -45,9 +45,6 @@ x <- matrix(rnorm(9999), nc = 3)
 depth(x, x)
 
 }
-\author{
-Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
-}
 \references{
 Liu, R.Y., Parelius, J.M. and Singh, K. (1999), Multivariate analysis by data depth: Descriptive statistics, graphics and inference (with discussion), Ann. Statist., 27, 783-858.
 
@@ -60,9 +57,11 @@ Zuo, Y. and Serfling, R. (2000), General Notions of Statistical Depth Functions,
 \seealso{
 \code{\link{depthContour}} and \code{\link{depthPersp}} for depth graphics.
 }
+\author{
+Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+}
 \keyword{depth}
 \keyword{function}
 \keyword{multivariate}
 \keyword{nonparametric}
 \keyword{robust}
-

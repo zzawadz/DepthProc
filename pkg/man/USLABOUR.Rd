@@ -15,4 +15,3 @@ data(USLABOUR)
 US Labour dataset
 }
 \keyword{datasets}
-

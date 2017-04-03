@@ -44,4 +44,3 @@ sample.xts <- as.xts(sample_matrix, descr = "my new xts object")
 fncDepth(sample.xts) 
 
 }
-

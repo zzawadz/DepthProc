@@ -7,4 +7,3 @@
 \description{
 DepthCurveList is a special container for DepthCurve objects. See \link{DepthCurve-class}
 }
-

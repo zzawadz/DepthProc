@@ -32,4 +32,3 @@ x <- lsdSampleDepthContours(smp)
 plot(x, col = paste0("grey", col = rev(seq(10, 40, 10))))
 
 }
-

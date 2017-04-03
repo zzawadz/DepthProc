@@ -2,13 +2,10 @@
 % Please edit documentation in R/depthMedian.R
 \docType{methods}
 \name{depthMedian}
-\alias{Depth}
-\alias{data.frame}
 \alias{depthMedian}
-\alias{depthMedian,Depth-method}
-\alias{depthMedian,data.frame-method}
 \alias{depthMedian,matrix-method}
-\alias{matrix}
+\alias{depthMedian,data.frame-method}
+\alias{depthMedian,Depth-method}
 \title{Depth median}
 \usage{
 depthMedian(x, ...)
@@ -38,4 +35,3 @@ dp <- depth(x)
 depthMedian(dp) 
 
 }
-

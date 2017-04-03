@@ -3,12 +3,6 @@
 \docType{class}
 \name{Depth-class}
 \alias{Depth-class}
-\alias{DepthEuclid}
-\alias{DepthLP}
-\alias{DepthLocal}
-\alias{DepthMahalanobis}
-\alias{DepthProjection}
-\alias{DepthTukey}
 \title{Depth}
 \description{
 Virtual class with structure for every depth class from depthproc package.

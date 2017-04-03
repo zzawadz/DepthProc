@@ -44,4 +44,3 @@ x_xts <- xts(t(x), order.by = time)
 fncBoxPlot(x_xts, bands = c(0, 0.5, 1), method = "FM")
 
 }
-

@@ -54,12 +54,9 @@ data1990 <- cbind(under5.mort[, 1], inf.mort[, 1], maesles.imm[, 1])
 data2011 <- cbind(under5.mort[, 22], inf.mort[, 22], maesles.imm[, 22])
 as1990 <- asymmetryCurve(data1990, name = "scale curve 1990")
 as2011 <- asymmetryCurve(data2011, name = "scale curve 2011")
-figure <- getPlot(as1990 \%+\% as2011) + ggtitle("Scale curves")
+figure <- getPlot(combineDepthCurves(as1990, as2011)) + ggtitle("Scale curves")
 figure
 
-}
-\author{
-Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 }
 \references{
 Serfling R. J. Multivariate Symmetry and Asymmetry, \emph{Encyclopedia of Statistical Science}, S Kotz, C.B. Read, N. Balakrishnan, B. Vidakovic (eds), 2nd, ed., John Wiley.
@@ -73,10 +70,12 @@ Dyckerhoff, R. (2004), Data Depths Satisfying the Projection Property, \emph{All
 \seealso{
 \code{\link{scaleCurve}}, \code{\link{depth}}
 }
+\author{
+Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+}
 \keyword{asymmetry}
 \keyword{depth}
 \keyword{function}
 \keyword{multivariate}
 \keyword{nonparametric}
 \keyword{robust}
-

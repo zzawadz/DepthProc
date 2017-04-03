@@ -30,4 +30,3 @@ plot(dcont_norm)
 \references{
 Mizera, I., Muller, C. H., 2004. Location-scale depth (with discussion). Journal of the American Statistical Association 99, 949-966.
 }
-

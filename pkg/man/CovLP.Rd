@@ -41,15 +41,14 @@ data1990 <- na.omit(cbind(under5.mort[, 1], inf.mort[, 1], maesles.imm[, 1]))
 CovLP(data1990)
 
 }
-\author{
-Daniel Kosiorowski and Zygmunt Zawadzki from Cracow University of Economics.
-}
 \seealso{
 \code{\link{depthContour}} and \code{\link{depthPersp}} for depth graphics.
+}
+\author{
+Daniel Kosiorowski and Zygmunt Zawadzki from Cracow University of Economics.
 }
 \keyword{depth}
 \keyword{function}
 \keyword{multivariate}
 \keyword{nonparametric}
 \keyword{robust}
-

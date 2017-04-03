@@ -47,7 +47,7 @@ ggplot2 package is used to draw a plot.
 require(mvtnorm)
 x <- mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
 y <- rmvt(n = 100, sigma = diag(2), df = 2)
-scaleCurve(x, y, method = "Projection", plot = TRUE)
+scaleCurve(x, y, method = "Projection")
 # comparing two scale curves
 # normal distribution and mixture of normal distributions
 x <- mvrnorm(100, c(0, 0), diag(2))
@@ -56,9 +56,6 @@ z <- mvrnorm(20, c(5, 5), diag(2))
 scaleCurve(x, rbind(y, z), method = "Projection", name = "N",
            name_y = "Mixture of N")
 
-}
-\author{
-Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 }
 \references{
 Liu, R.Y., Parelius, J.M. and Singh, K. (1999), Multivariate analysis by data depth: Descriptive statistics, graphics and inference (with discussion), \emph{Ann. Statist.}, \bold{27}, 783--858.
@@ -70,6 +67,9 @@ Dyckerhoff, R. (2004), Data Depths Satisfying the Projection Property, \emph{All
 \seealso{
 \code{\link{depthContour}} and \code{\link{depthPersp}} for depth graphics.
 }
+\author{
+Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+}
 \keyword{curve}
 \keyword{depth}
 \keyword{function}
@@ -77,4 +77,3 @@ Dyckerhoff, R. (2004), Data Depths Satisfying the Projection Property, \emph{All
 \keyword{nonparametric}
 \keyword{robust}
 \keyword{scale}
-

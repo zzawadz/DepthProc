@@ -53,4 +53,3 @@ depthPersp(data1990, method = "Projection", plot_method = "rgl")
 \author{
 Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 }
-

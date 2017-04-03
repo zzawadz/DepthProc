@@ -15,4 +15,3 @@ data(inf.mort)
 Infant mortality rate (0-1 year) per 1,000 live births
 }
 \keyword{datasets}
-

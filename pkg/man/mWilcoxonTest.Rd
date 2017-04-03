@@ -52,4 +52,3 @@ Li J, Liu RY (2004). New nonparametric tests of multivariate locations and scale
 Liu RY, Singh K (1995). A quality index based on data depth and multivariate rank tests. Journal of American Statistical Association, 88, 252-260.
 Zuo Y, He X (2006). On the limiting distributions of multivariate depth-based rank sum statistics and related tests. The Annals of Statistics, 34, 2879-2896.
 }
-

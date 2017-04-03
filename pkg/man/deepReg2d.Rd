@@ -42,10 +42,9 @@ legend("bottomleft", c("LS", "DeepReg"), fill = c("black", "red"), cex = 1.4,
        bty = "n")
 
 }
-\author{
-Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
-}
 \references{
 Rousseeuw J.P., Hubert M. (1998), Regression Depth, \emph{Journal of The American Statistical Association}, vol.94.
 }
-
+\author{
+Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
+}

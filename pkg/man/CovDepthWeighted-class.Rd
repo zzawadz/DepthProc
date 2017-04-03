@@ -4,4 +4,3 @@
 \name{CovDepthWeighted-class}
 \alias{CovDepthWeighted-class}
 \title{CovLP}
-

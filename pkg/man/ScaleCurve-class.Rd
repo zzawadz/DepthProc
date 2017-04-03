@@ -19,13 +19,12 @@ y <- rmvt(n = 100, sigma = diag(2), df = 4)
 s1 <- scaleCurve(x, method = "Projection", plot = FALSE)
 s2 <- scaleCurve(y, method = "Projection", plot = FALSE, name = "Set2")
 
-sc_list <- s1 \%+\% s2 # Add one curve to another
+sc_list <- combineDepthCurves(s1, s2) # Add one curve to another
 
 plot(sc_list) # Draw plot with two curves
 
 z <- mvrnorm(n = 100, mu = c(0, 0), Sigma = 1 * diag(2))
 s3 <- scaleCurve(z, method = "Projection", plot = FALSE)
-plot(sc_list \%+\% s3) # Add third curve and draw a plot
+plot(combineDepthCurves(sc_list, s3)) # Add third curve and draw a plot
 
 }
-

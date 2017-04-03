@@ -2,7 +2,6 @@
 % Please edit documentation in R/locationScaleDepth.R
 \docType{methods}
 \name{lsdGetContour}
-\alias{LSDepthContour}
 \alias{lsdGetContour}
 \alias{lsdGetContour,LSDepthContour-method}
 \title{Get location-scale contour from LSDepthContour object}
@@ -29,4 +28,3 @@ lsdGetContour(dcont, 0.1)
 # it will be automatically calculated
 lsdGetContour(dcont, 0.3)
 }
-

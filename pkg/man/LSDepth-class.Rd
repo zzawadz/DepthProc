@@ -4,4 +4,3 @@
 \name{LSDepth-class}
 \alias{LSDepth-class}
 \title{Location-Scale depth class}
-

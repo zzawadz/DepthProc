@@ -28,4 +28,3 @@
 \description{
 Add fitted line to a plot. This is overloaded function for robust regression methods from package depthproc.
 }
-

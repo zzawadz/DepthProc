@@ -46,4 +46,3 @@ legend("bottomleft", c("LS", "TrimReg"), fill = c("black", "red"), cex = 1.4,
 \author{
 Zygmunt Zawadzki from Cracow University of Economics.
 }
-
