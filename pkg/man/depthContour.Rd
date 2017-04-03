@@ -40,8 +40,7 @@ depthContour(x, xlim = extendrange(x[, 1], f = 0.1), ylim = extendrange(x[,
 Draws an approximate contours of depth for bivariate data.
 }
 \details{
-The set of all points that have depth at least \eqn{ \alpha } is called { \eqn{ \alpha - } trimmed region}. The \eqn{ \alpha - } trimmed region w.r.t. \eqn{ F } is denoted by \eqn{ {D}_{\alpha }(F) }, i.e., 
-\deqn{ {D}_{\alpha }(F)=\left\{ z\in {{{R}}^{d}}:D(z,F)\ge \alpha \right\}}.
+The set of all points that have depth at least \eqn{ \alpha } is called \eqn{ \alpha }-trimmed region. The \eqn{ \alpha }-trimmed region w.r.t. \eqn{ F } is denoted by \eqn{ {D}_{\alpha}(F) }, i.e., \deqn{ {D}_{\alpha}(F) = \left\{ z \in {{{R}} ^ {d}}:D(z, F) \ge \alpha\right\}. }
 }
 \examples{
 # EXAMPLE 1

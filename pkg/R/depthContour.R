@@ -18,8 +18,7 @@
 #' 
 #' @details
 #' 
-#' The set of all points that have depth at least \eqn{ \alpha } is called { \eqn{ \alpha - } trimmed region}. The \eqn{ \alpha - } trimmed region w.r.t. \eqn{ F } is denoted by \eqn{ {D}_{\alpha }(F) }, i.e., 
-#' \deqn{ {D}_{\alpha }(F)=\left\{ z\in {{{R}}^{d}}:D(z,F)\ge \alpha \right\}}.
+#' The set of all points that have depth at least \eqn{ \alpha } is called \eqn{ \alpha }-trimmed region. The \eqn{ \alpha }-trimmed region w.r.t. \eqn{ F } is denoted by \eqn{ {D}_{\alpha}(F) }, i.e., \deqn{ {D}_{\alpha}(F) = \left\{ z \in {{{R}} ^ {d}}:D(z, F) \ge \alpha\right\}. }
 #' 
 #' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #' 
