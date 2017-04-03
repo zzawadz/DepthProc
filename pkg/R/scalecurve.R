@@ -48,7 +48,7 @@
 #' require(mvtnorm)
 #' x <- mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
 #' y <- rmvt(n = 100, sigma = diag(2), df = 2)
-#' scaleCurve(x, y, method = "Projection", plot = TRUE)
+#' scaleCurve(x, y, method = "Projection")
 #' # comparing two scale curves
 #' # normal distribution and mixture of normal distributions
 #' x <- mvrnorm(100, c(0, 0), diag(2))
@@ -109,12 +109,8 @@ scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
   if (!is.null(y)) {
     sc_tmp <- scaleCurve(x = y, y = NULL, alpha = alpha, method = method,
                          name = name_y, name_y = "Y", ...)
-    scale_curve <- scale_curve %+% sc_tmp
+    scale_curve <- combineDepthCurves(scale_curve, sc_tmp)
   }
-  
-  # if (plot) {
-  #   plot(scale_curve)
-  # }
   
   return(scale_curve)
 }

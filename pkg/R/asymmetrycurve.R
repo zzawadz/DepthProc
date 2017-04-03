@@ -52,7 +52,7 @@
 #' data2011 <- cbind(under5.mort[, 22], inf.mort[, 22], maesles.imm[, 22])
 #' as1990 <- asymmetryCurve(data1990, name = "scale curve 1990")
 #' as2011 <- asymmetryCurve(data2011, name = "scale curve 2011")
-#' figure <- getPlot(as1990 %+% as2011) + ggtitle("Scale curves")
+#' figure <- getPlot(combineDepthCurves(as1990, as2011)) + ggtitle("Scale curves")
 #' figure
 #' 
 #' @keywords
@@ -91,8 +91,7 @@ asymmetryCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
              alpha = x_est[, 1])
   
   if (!is.null(y)) {
-    asc <- asc %+% asymmetryCurve(y, y = NULL, alpha, method, movingmedian,
-                                  name = name_y, name_y = "Y", ...)
+    asc <- combineDepthCurves(asc, asymmetryCurve(y, y = NULL, alpha, method, movingmedian, name = name_y, name_y = "Y", ...))
   }
   
   return(asc)

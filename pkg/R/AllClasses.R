@@ -3,16 +3,17 @@
 #' @docType methods
 #' @rdname grapes-plus-grapes-methods
 #' 
-#' @param e1 object
-#' @param e2 object
+#' @param x object
+#' @param y object
+#' @param .list list of plots to combine. 
 #' 
 #' @details 
 #' 
 #' See \code{\link{DepthCurve-class}} for description.
 #' 
 #' @export
-setGeneric("%+%", function(e1, e2) {
-  standardGeneric("%+%")
+setGeneric("combineDepthCurves", function(x, y, .list = NULL) {
+  standardGeneric("combineDepthCurves")
 })
 
 #####################################
@@ -82,7 +83,7 @@ setClass("DDPlot", slots = c(X = "Depth", Y = "Depth", title = "character"))
 #'
 #' @details
 #' 
-#' DepthCurve is a virtual class that contains methods (getPlot(...) and plot(...)) for rendering single curve such as ScaleCurve or AsymmetryCurve. Such object can be added by overloaded operator '%+%'. This 'addition' create DepthCurveList that can be used for rendering plot with multiple curves. Sample session (using ScaleCurve) is shown in Examples section.
+#' DepthCurve is a virtual class that contains methods (getPlot(...) and plot(...)) for rendering single curve such as ScaleCurve or AsymmetryCurve. Such object can be combin by overloaded operator '%+%'. This 'addition' create DepthCurveList that can be used for rendering plot with multiple curves. Sample session (using ScaleCurve) is shown in Examples section.
 #' 
 #' @examples
 #' require(mvtnorm)
@@ -91,13 +92,13 @@ setClass("DDPlot", slots = c(X = "Depth", Y = "Depth", title = "character"))
 #' s1 <- scaleCurve(x, method = "Projection", plot = FALSE)
 #' s2 <- scaleCurve(y, method = "Projection", plot = FALSE, name = "Set2")
 #' 
-#' sc_list <- s1 %+% s2 # Add one curve to another
+#' sc_list <- combineDepthCurves(s1, s2) # Add one curve to another
 #' 
 #' plot(sc_list) # Draw plot with two curves
 #' 
 #' z <- mvrnorm(n = 100, mu = c(0, 0), Sigma = 1 * diag(2))
 #' s3 <- scaleCurve(z, method = "Projection", plot = FALSE)
-#' plot(sc_list %+% s3) # Add third curve and draw a plot
+#' plot(combineDepthCurves(sc_list, s3)) # Add third curve and draw a plot
 #'
 #' @export  
 setClass("DepthCurve",
@@ -125,13 +126,13 @@ setClass("DepthCurveList", contains = "VIRTUAL")
 #' s1 <- scaleCurve(x, method = "Projection", plot = FALSE)
 #' s2 <- scaleCurve(y, method = "Projection", plot = FALSE, name = "Set2")
 #' 
-#' sc_list <- s1 %+% s2 # Add one curve to another
+#' sc_list <- combineDepthCurves(s1, s2) # Add one curve to another
 #' 
 #' plot(sc_list) # Draw plot with two curves
 #' 
 #' z <- mvrnorm(n = 100, mu = c(0, 0), Sigma = 1 * diag(2))
 #' s3 <- scaleCurve(z, method = "Projection", plot = FALSE)
-#' plot(sc_list %+% s3) # Add third curve and draw a plot
+#' plot(combineDepthCurves(sc_list, s3)) # Add third curve and draw a plot
 #' 
 #' @export  
 setClass("ScaleCurve", contains = c("numeric", "DepthCurve"))

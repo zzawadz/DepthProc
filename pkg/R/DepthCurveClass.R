@@ -17,21 +17,29 @@ setMethod("initialize", "DepthCurveList", function(.Object, ...) {
   if (n > 0) {
     .Object[[1]] <- tmp[[1]]
     if (n > 1) {
-      for (i in 2:length(tmp)) .Object <- .Object %+% tmp[[i]]
+      for (i in 2:length(tmp)) .Object <- combineDepthCurves(.Object, tmp[[i]])
     }
   }
   
   return(.Object)
 })
 
-#' @rdname grapes-plus-grapes-methods
+#' @rdname combineDepthCurves-methods
 #' @export
-setMethod("%+%", signature(e1 = "DepthCurveList", e2 = "DepthCurve"),
-          function(e1, e2) {
-            names <- sapply(e1, function(x) {
-              x@depth@name
+setMethod("combineDepthCurves", signature(.list = "list"),
+  function(x, y, .list) {
+    Reduce(combineDepthCurves, .list)
+  }  
+)
+    
+#' @rdname combineDepthCurves-methods
+#' @export
+setMethod("combineDepthCurves", signature(x = "DepthCurveList", y = "DepthCurve"),
+          function(x, y, .list) {
+            names <- sapply(x, function(xx) {
+              xx@depth@name
             })
-            new_name <- e2@depth@name
+            new_name <- y@depth@name
             
             if (any(new_name == names)) {
               warning("Names in DepthCurveList are not unique!")
@@ -43,29 +51,29 @@ setMethod("%+%", signature(e1 = "DepthCurveList", e2 = "DepthCurve"),
                 k <- k + 1
               }
               
-              e2@depth@name <- new_name_tmp
+              y@depth@name <- new_name_tmp
             }
             
-            n <- length(e1)
-            e1[[n + 1]] <- e2
+            n <- length(x)
+            x[[n + 1]] <- y
             
-            return(e1)
+            return(x)
           }
 )
 
-#' @rdname grapes-plus-grapes-methods
+#' @rdname combineDepthCurves-methods
 #' @export
-setMethod("%+%", signature(e1 = "DepthCurve", e2 = "DepthCurveList"),
-          function(e1, e2) {
-            return(e2 %+% e1)
+setMethod("combineDepthCurves", signature(x = "DepthCurve", y = "DepthCurveList"),
+          function(x, y, .list) {
+            combineDepthCurves(y, x)
           }
 )
 
-#' @rdname grapes-plus-grapes-methods
+#' @rdname combineDepthCurves-methods
 #' @export
-setMethod("%+%", signature(e1 = "DepthCurve", e2 = "DepthCurve"),
-          function(e1, e2) {
-            return(new(paste0(class(e1), "List"), e1, e2))
+setMethod("combineDepthCurves", signature(x = "DepthCurve", y = "DepthCurve"),
+          function(x, y, .list) {
+            return(new(paste0(class(x), "List"), x, y))
           }
 )
 setMethod(".getPlot", "DepthCurveList", function(object) {
