@@ -3,7 +3,7 @@
 #' @rdname depthMedian-methods
 #' 
 #' @param x object of class Depth or matrix.
-#' @param ... arguments passed to \code{\link{depth}} function (e.g method).
+#' @param ... arguments passed to \code{\link{depth}} function (e.g. method).
 #' 
 #' @description
 #' 
@@ -19,7 +19,7 @@
 #' 
 #' # depthMedian works with object of class Depth
 #' dp <- depth(x)
-#' depthMedian(dp) 
+#' depthMedian(dp)
 #' 
 setGeneric("depthMedian", function(x, ...) {
   standardGeneric("depthMedian")

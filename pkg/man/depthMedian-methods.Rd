@@ -19,7 +19,7 @@ depthMedian(x, ...)
 \arguments{
 \item{x}{object of class Depth or matrix.}
 
-\item{...}{arguments passed to \code{\link{depth}} function (e.g method).}
+\item{...}{arguments passed to \code{\link{depth}} function (e.g. method).}
 }
 \description{
 Return point with maximum depth function value. If multiple points have the same value, mean average of them will be returned.
@@ -32,6 +32,6 @@ depthMedian(x)
 
 # depthMedian works with object of class Depth
 dp <- depth(x)
-depthMedian(dp) 
+depthMedian(dp)
 
 }
