@@ -18,8 +18,8 @@ sample.max.depth <- function(y, iter = 100, eps = 0.0001, p.length = 10) {
     
     if (d < N / 2) {
       i <- 1
-      n.up <- ceiling( N * 2 / 3)
-      n.low <- floor( N / 3)
+      n.up <- ceiling(N * 2 / 3)
+      n.low <- floor(N / 3)
       # cat("i: ", i, "depth: ", d, "n.mid: ", n.mid, "s: ", s, "\n")
       # cat("n.up: ", n.up, "n.low: ", n.low, "i.mu: ", res["i"], "difb: ",
       #     difb, "\n")
