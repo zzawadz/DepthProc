@@ -80,12 +80,6 @@ fncDepth.matrix <- function(u, X = NULL, method = "MBD", byrow = NULL,
   depth@method <- method
   depth@index <- .extractIndexFromMatrix(u)
   
-  if (!is.null(rownames(u))) {
-    depth@val_name <- rownames(u)
-  } else {
-    depth@val_name <- 1:nrow(u)
-  }
-  
   return(depth)
 }
 
