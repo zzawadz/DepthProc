@@ -11,7 +11,7 @@ depthEuclid(u, X, name = "X", ...)
 
 \item{X}{The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).}
 
-\item{name}{name for this data set - it will be used on plots from depthproc.}
+\item{name}{name for this data set --- it will be used on plots from depthproc.}
 
 \item{\dots}{currently not supported.}
 }
