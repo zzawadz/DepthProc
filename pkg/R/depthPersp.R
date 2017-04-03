@@ -6,10 +6,10 @@
 #' @description Draws a perspective plot of depth function over x-y plane.
 #' 
 #' @param x bivariate data
-#' @param plot_method there are two options "lattice", and "rgl" - see details
+#' @param plot_method there are two options "lattice", and "rgl" --- see details
 #' @param xlim limits for x-axis
 #' @param ylim limits for y-axis
-#' @param n number of points that will be used to create plot (n^2)
+#' @param n number of points that will be used to create plot (\eqn{ n ^ 2 })
 #' @param xlab description of x-axis
 #' @param ylab description of y-axis
 #' @param plot_title plot title (default NULL means paste(method, "depth"))
@@ -18,7 +18,7 @@
 #' 
 #' @details
 #' 
-#' plot_method - rgl package is not in depends list beacuse it may cause problems when OpenGL is not supported. To use plot_method = "rgl" you must load this package on your own. 
+#' plot_method --- rgl package is not in depends list beacuse it may cause problems when OpenGL is not supported. To use plot_method = "rgl" you must load this package on your own.
 #' 
 #' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #' 
@@ -32,7 +32,7 @@
 #' data1990 <- na.omit(cbind(inf.mort[, 1], maesles.imm[, 1]))
 #' 
 #' \dontrun{
-#' require(rgl)
+#' library(rgl)
 #' depthPersp(data1990, method = "Projection", plot_method = "rgl")
 #' }
 #' 

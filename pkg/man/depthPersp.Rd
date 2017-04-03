@@ -11,13 +11,13 @@ depthPersp(x, plot_method = "lattice", xlim = extendrange(x[, 1], f = 0.1),
 \arguments{
 \item{x}{bivariate data}
 
-\item{plot_method}{there are two options "lattice", and "rgl" - see details}
+\item{plot_method}{there are two options "lattice", and "rgl" --- see details}
 
 \item{xlim}{limits for x-axis}
 
 \item{ylim}{limits for y-axis}
 
-\item{n}{number of points that will be used to create plot (n^2)}
+\item{n}{number of points that will be used to create plot (\eqn{ n ^ 2 })}
 
 \item{xlab}{description of x-axis}
 
@@ -33,7 +33,7 @@ depthPersp(x, plot_method = "lattice", xlim = extendrange(x[, 1], f = 0.1),
 Draws a perspective plot of depth function over x-y plane.
 }
 \details{
-plot_method - rgl package is not in depends list beacuse it may cause problems when OpenGL is not supported. To use plot_method = "rgl" you must load this package on your own.
+plot_method --- rgl package is not in depends list beacuse it may cause problems when OpenGL is not supported. To use plot_method = "rgl" you must load this package on your own.
 }
 \examples{
 # EXAMPLE 1
@@ -45,7 +45,7 @@ data(inf.mort, maesles.imm)
 data1990 <- na.omit(cbind(inf.mort[, 1], maesles.imm[, 1]))
 
 \dontrun{
-require(rgl)
+library(rgl)
 depthPersp(data1990, method = "Projection", plot_method = "rgl")
 }
 
