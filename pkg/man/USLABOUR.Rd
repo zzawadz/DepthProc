@@ -6,7 +6,7 @@
 \title{US Labour dataset}
 \format{A data frame with 654 rows and 4 variables}
 \source{
-U.S.Department of Labor - Bureau of Labour Statistics FRED
+U.S.Department of Labor --- Bureau of Labour Statistics FRED
 }
 \usage{
 data(USLABOUR)

@@ -4,7 +4,7 @@
 #' @name USLABOUR
 #' @usage data(USLABOUR)
 #' @format A data frame with 654 rows and 4 variables
-#' @source U.S.Department of Labor - Bureau of Labour Statistics FRED
+#' @source U.S.Department of Labor --- Bureau of Labour Statistics FRED
 #' 
 NULL
 
@@ -18,7 +18,7 @@ NULL
 #' 
 NULL
 
-#' Infant mortality rate (0-1 year) per 1,000 live births
+#' Infant mortality rate (0--1 year) per 1,000 live births
 #' @docType data
 #' @keywords datasets
 #' @name inf.mort
@@ -43,7 +43,7 @@ NULL
 #' @keywords datasets
 #' @name internet.users
 #' @usage data(internet.users)
-#' @format data frame containing 17518 rows and 6 columns - 17518 working days of the 
+#' @format data frame containing 17518 rows and 6 columns --- 17518 working days of the 
 #' Internet service considered with respect to variables:
 #' service, month, day, hour, unique users and page views.
 #' @references Kosiorowski, Rydlewski, Snarska (2016), Detecting a Structural Change in Functional Time Series Using Local Wilcoxon Statistic, arXiv: 1604.03776v2
