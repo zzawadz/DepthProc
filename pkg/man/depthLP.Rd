@@ -18,7 +18,7 @@ depthLP(u, X, pdim = 2, la = 1, lb = 1, name = "X", threads = -1,
 
 \item{lb}{intercept in the weighing function.}
 
-\item{name}{name for this data set - it will be used on plots from depthproc.}
+\item{name}{name for this data set --- it will be used on plots from depthproc.}
 
 \item{threads}{number of threads used in parallel computations. Default value -1 means that all possible cores will be used.}
 

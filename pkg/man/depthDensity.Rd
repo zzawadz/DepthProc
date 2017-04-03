@@ -21,6 +21,9 @@ depthDensity(x, y, nx = 5, ny = 32, xg = NULL, yg = NULL, ...)
 
 \item{...}{arguments passed to depthLocal.}
 }
+\description{
+Experimental function used to fit depth weighted density estimator.
+}
 \examples{
 
 \dontrun{

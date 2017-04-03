@@ -11,11 +11,11 @@ depthMah(u, X, name = "X", cov = NULL, mean = NULL, threads = -1, ...)
 
 \item{X}{The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).}
 
-\item{name}{name for this data set - it will be used on plots.}
+\item{name}{name for this data set --- it will be used on plots.}
 
 \item{cov}{custom covariance matrix passed. If NULL standard calculations will be based on standard covariance estimator.}
 
-\item{mean}{custom mean vector. If null mean average will be used.}
+\item{mean}{custom mean vector. If null --- mean average will be used.}
 
 \item{threads}{number of threads used in parallel computations. Default value -1 means that all possible cores will be used.}
 
