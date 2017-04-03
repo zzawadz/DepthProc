@@ -20,7 +20,7 @@
 
 #' @title Local depth
 #'
-#' @description Computes local version of depth according to proposals of Paindaveine and Van Bever - see referencess.
+#' @description Computes local version of depth according to proposals of Paindaveine and Van Bever --- see referencess.
 #'
 #' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #' @param X The data as a matrix, data frame. If it is a matrix or data frame, then each row is viewed as one multivariate observation.
@@ -32,13 +32,13 @@
 #' 
 #' @details
 #' 
-#' A successful concept of {local depth } was proposed by Paidaveine and Van Bever (2012) . For defining {a neighbourhood} of a point authors proposed using idea of {symmetrisation} of a distribution (a sample) with respect to a point in which depth is calculated. In their approach instead of a distribution \eqn{ {P}^{X} }, a distribution \eqn{ {{P}_{x}}=1/2{{P}^{X}}+1/2{{P}^{2x-X}} } is used. For any \eqn{ \beta \in [0,1] }, let us introduce the smallest depth region bigger or equal to \eqn{ \beta }, \deqn{ {R}^{\beta }(F)=\bigcap\limits_{\alpha \in A(\beta )}{{{D}_{\alpha }}}(F), } where \eqn{ A(\beta )=\left\{ \alpha \ge 0:P\left[ {{D}_{\alpha }}(F) \right]\ge \beta \right\} } . Then for a locality parameter \eqn{ \beta } we can take a neighbourhood of a point \eqn{ x } as \eqn{ R_{x}^{\beta }(P) } .
+#' A successful concept of local depth was proposed by Paindaveine and Van Bever (2012). For defining a neighbourhood of a point authors proposed using idea of symmetrisation of a distribution (a sample) with respect to a point in which depth is calculated. In their approach instead of a distribution \eqn{ {P} ^ {X} }, a distribution \eqn{ {{P}_{x}} = \frac{ 1 }{ 2 }{{P} ^ {X}} + \frac{ 1 }{ 2 }{{P} ^ {2x - X}} } is used. For any \eqn{ \beta \in [0, 1] }, let us introduce the smallest depth region bigger or equal to \eqn{ \beta }, \deqn{ {R} ^ {\beta}(F) = \bigcap\limits_{\alpha \in A(\beta)} {{{D}_{\alpha}}}(F), } where \eqn{ A(\beta) = \left\{ \alpha \ge 0:P\left[ {{D}_{\alpha}}(F)\right] \ge \beta\right\} }. Then for a locality parameter \eqn{ \beta } we can take a neighbourhood of a point \eqn{ x } as \eqn{ R_{x} ^ {\beta}(P) }.
 #' 
-#' Formally, let \eqn{ D(\cdot,P) } be a depth function. Then the {local depth }with the locality parameter \eqn{ \beta } and w.r.t. a point \eqn{ x } is defined as \deqn{ L{{D}^{\beta }}(z,P):z\to D(z,P_{x}^{\beta }), } where \eqn{ P_{x}^{\beta }(\cdot )=P\left( \cdot |R_{x}^{\beta }(P) \right) } is cond. distr. of \eqn{ P } conditioned on \eqn{ R_{x}^{\beta }(P) } .
+#' Formally, let \eqn{ D(\cdot, P) } be a depth function. Then the local depth with the locality parameter \eqn{ \beta } and w.r.t. a point \eqn{ x } is defined as \deqn{ L{{D} ^ {\beta}}(z, P):z \to D(z, P_{x} ^ {\beta}), } where \eqn{ P_{x} ^ {\beta}(\cdot) = P\left( \cdot |R_{x} ^ {\beta}(P)\right) } is cond. distr. of \eqn{ P } conditioned on \eqn{ R_{x} ^ {\beta}(P) }.
 #' 
 #' @references 
 #' 
-#' Paindaveine, D., Van Bever, G. (2013) From depth to local depth : a focus on centrality. Journal of the American Statistical Association 105, 1105-1119 (2013).
+#' Paindaveine, D., Van Bever, G. (2013) From depth to local depth : a focus on centrality. Journal of the American Statistical Association 105, 1105--1119.
 #' 
 #' @examples
 #' 
