@@ -14,7 +14,7 @@ scaleCurve(x, y = NULL, alpha = seq(0, 1, 0.01), method = "Projection",
 
 \item{alpha}{Vector with values of central area to be used in computation.}
 
-\item{method}{Character string which determines the depth function used. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}}
+\item{method}{Character string which determines the depth function used. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}}.}
 
 \item{name}{Name of matrix X used in legend.}
 
@@ -31,9 +31,7 @@ Returns the volume of the convex hull containing subsequent central points of \c
 Draws a scale curve: measure of dispersion.
 }
 \details{
-For sample depth function \eqn{ D({x},{{{Z}}^{n}}) }, \eqn{ {x}\in {{{R}}^{d}} }, \eqn{ d\ge 2 }, \eqn{ {Z}^{n}=\{{{{z}}_{1}},...,{{{z}}_{n}}\}\subset {{{R}}^{d}} },  \eqn{ {{D}_{\alpha }}({{{Z}}^{n}}) } denoting \eqn{ \alpha- } central region, we can define {the scale curve} 
-
-\eqn{ SC(\alpha )=\left( \alpha,vol({{D}_{\alpha }}({{{Z}}^{n}}) \right)\subset {{{R}}^{2}},  for \alpha \in [0,1] }
+For sample depth function \eqn{ D({x}, {{{Z}} ^ {n}}) }, \eqn{ {x} \in {{{R}} ^ {d}} }, \eqn{ d \ge 2 }, \eqn{ {Z} ^ {n} = \{{{{z}}_{1}}, ..., {{{z}}_{n}}\} \subset {{{R}} ^ {d}} }, \eqn{ {{D}_{\alpha}}({{{Z}} ^ {n}}) } denoting \eqn{\alpha} --- central region, we can define the scale curve \eqn{ SC(\alpha) = \left(\alpha, vol({{D}_{\alpha}}({{{Z}} ^ {n}})\right) \subset {{{R}} ^ {2}} }, for \eqn{ \alpha \in [0, 1] }
 
 The scale curve is a two-dimensional method of describing the dispersion of random vector around the depth induced median. 
 
@@ -44,7 +42,7 @@ The minimal dimension of data in X or Y is 2.
 ggplot2 package is used to draw a plot.
 }
 \examples{
-require(mvtnorm)
+library(mvtnorm)
 x <- mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
 y <- rmvt(n = 100, sigma = diag(2), df = 2)
 scaleCurve(x, y, method = "Projection")

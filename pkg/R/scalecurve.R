@@ -8,7 +8,7 @@
 #' @param x Multivariate data as a matrix.
 #' @param y Additional matrix with multivariate data.
 #' @param alpha Vector with values of central area to be used in computation.
-#' @param method Character string which determines the depth function used. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}.}
+#' @param method Character string which determines the depth function used. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}}.
 #' @param name Name of matrix X used in legend.
 #' @param name_y Name of matrix Y used in legend.
 #' @param title title of the plot.
@@ -16,9 +16,7 @@
 #'
 #' @details 
 #' 
-#' For sample depth function \eqn{ D({x},{{{Z}}^{n}}) }, \eqn{ {x}\in {{{R}}^{d}} }, \eqn{ d\ge 2 }, \eqn{ {Z}^{n}=\{{{{z}}_{1}},...,{{{z}}_{n}}\}\subset {{{R}}^{d}} },  \eqn{ {{D}_{\alpha }}({{{Z}}^{n}}) } denoting \eqn{ \alpha- } central region, we can define {the scale curve} 
-#' 
-#' \eqn{ SC(\alpha )=\left( \alpha,vol({{D}_{\alpha }}({{{Z}}^{n}}) \right)\subset {{{R}}^{2}},  for \alpha \in [0,1] }
+#' For sample depth function \eqn{ D({x}, {{{Z}} ^ {n}}) }, \eqn{ {x} \in {{{R}} ^ {d}} }, \eqn{ d \ge 2 }, \eqn{ {Z} ^ {n} = \{{{{z}}_{1}}, ..., {{{z}}_{n}}\} \subset {{{R}} ^ {d}} }, \eqn{ {{D}_{\alpha}}({{{Z}} ^ {n}}) } denoting \eqn{\alpha} --- central region, we can define the scale curve \eqn{ SC(\alpha) = \left(\alpha, vol({{D}_{\alpha}}({{{Z}} ^ {n}})\right) \subset {{{R}} ^ {2}} }, for \eqn{ \alpha \in [0, 1] }
 #' 
 #' The scale curve is a two-dimensional method of describing the dispersion of random vector around the depth induced median. 
 #' 
@@ -45,7 +43,7 @@
 #' @seealso \code{\link{depthContour}} and \code{\link{depthPersp}} for depth graphics.
 #' 
 #' @examples
-#' require(mvtnorm)
+#' library(mvtnorm)
 #' x <- mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
 #' y <- rmvt(n = 100, sigma = diag(2), df = 2)
 #' scaleCurve(x, y, method = "Projection")
