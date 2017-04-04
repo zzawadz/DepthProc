@@ -8,11 +8,25 @@
 # - sample.depth.contours -> lsdSampleDepthContours (R)
 
 #' @title Location-Scale depth class
+#' 
+#' @description Class used to store maximum location-scale depth results.
+#' 
+#' @slot max_depth maximum Student depth value.
+#' @slot mu location estimate in the deepest point.
+#' @slot sigma scale estimate in the deepest point.
+#' 
 #' @export
 setClass("LSDepth",
          slots = c(max_depth = "numeric", mu = "numeric", sigma = "numeric"))
 
 #' @title Location-Scale depth contour class
+#' 
+#' @description Class used to store result of location-scale depth contours.
+#' 
+#' @slot cont_depth depth values used to calculate contours.
+#' @slot sample original sample used to calculate depth contours.
+#' @slot .Data list with estimated values of scale-depth contours.
+#' 
 #' @export
 setClass("LSDepthContour",
          slots = c(cont_depth = "numeric", sample = "numeric"), 
@@ -41,6 +55,7 @@ setClass("LSDepthContour",
 #' lsdSampleMaxDepth(x)
 #' y <- rf(100, 4, 10)
 #' lsdSampleMaxDepth(y)
+#' 
 lsdSampleMaxDepth <- function(x, iter = 100, eps = 1e-04, p_length = 10) {
   res <- sampleMaxLocScaleDepthCPP(ry = as.numeric(x), iter = iter, eps = eps,
                                    p_length)
@@ -210,11 +225,14 @@ setMethod("lsdAddContour", signature = c(x = "LSDepthContour"),
           }
 )
 
-#' @title Plot Location-Scale depth contours
+#' @title Plot Location-Scale depth contours.
+#' 
+#' @description Create location-scale depth plot. See \code{\link{lsdSampleDepthContours}} for more information.
+#' 
 #' @export
 #' 
 #' @param x object of class LSDepthContour
-#' @param cont plotted contours. Default NULL means that all contours stored in x will be plotted
+#' @param cont plotted contours. Default NULL means that all contours stored in x will be plotted.
 #' @param ratio ratio
 #' @param mu_min mu_min
 #' @param mu_max mu_max

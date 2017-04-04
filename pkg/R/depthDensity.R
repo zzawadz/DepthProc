@@ -61,13 +61,16 @@ depthDensity <- function(x, y, nx = 5, ny = 32, xg = NULL, yg = NULL, ...) {
       density = dens_mat / dep_scale_mat, xgrid = xg, ygrid = yg)
 }
 
-#' @title Plot function for DepthDensity
+#' @title Plot function for DepthDensity.
+#' 
+#' @description Create plot for DepthDensity. See \code{\link{depthDensity}} for more information.
 #' 
 #' @param x object of class DepthDensity
 #' @param type type of density that will be plotted. "depth" is a depth scaled density, and "raw" is denisty without scaling.
 #' @param ... graphical arguments. 
 #' 
 #' @export
+#' 
 setMethod("plot", "DepthDensity", function(x, type = "depth", ...) {
   den <- x
   

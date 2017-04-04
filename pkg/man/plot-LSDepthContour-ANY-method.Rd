@@ -3,7 +3,7 @@
 \docType{methods}
 \name{plot,LSDepthContour,ANY-method}
 \alias{plot,LSDepthContour,ANY-method}
-\title{Plot Location-Scale depth contours}
+\title{Plot Location-Scale depth contours.}
 \usage{
 \S4method{plot}{LSDepthContour,ANY}(x, cont = NULL, ratio = 1,
   mu_min = NULL, mu_max = NULL, col = NULL, border = NULL, ...)
@@ -11,7 +11,7 @@
 \arguments{
 \item{x}{object of class LSDepthContour}
 
-\item{cont}{plotted contours. Default NULL means that all contours stored in x will be plotted}
+\item{cont}{plotted contours. Default NULL means that all contours stored in x will be plotted.}
 
 \item{ratio}{ratio}
 
@@ -24,6 +24,9 @@
 \item{border}{vector with colors for borders}
 
 \item{...}{other parameters passed to polygon}
+}
+\description{
+Create location-scale depth plot. See \code{\link{lsdSampleDepthContours}} for more information.
 }
 \examples{
 

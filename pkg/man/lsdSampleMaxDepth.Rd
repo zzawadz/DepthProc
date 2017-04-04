@@ -26,6 +26,7 @@ x <- rnorm(100)
 lsdSampleMaxDepth(x)
 y <- rf(100, 4, 10)
 lsdSampleMaxDepth(y)
+
 }
 \references{
 Mizera, I., Muller, C. H., 2004. Location-scale depth (with discussion). Journal of the American Statistical Association 99, 949--966.
