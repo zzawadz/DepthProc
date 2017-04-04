@@ -42,6 +42,34 @@ abline(trimProjReg2d(x, y), lwd = 2, col = "red") # trimmed reg
 legend("bottomleft", c("LS", "TrimReg"), fill = c("black", "red"), cex = 1.4,
        bty = "n")
 
+##### Comparsion of a few regression methods ##### 
+library(DepthProc)
+library(MASS)
+
+data("france")
+plot(UR ~ MW, pch = 19, data = france)
+
+# linear regression
+lm.fit <- lm(UR ~ MW, data = france)
+abline(lm.fit, lwd=2, cex=3, col='red')
+
+# M-estimator
+rlm.fit <- rlm(UR ~ MW, data = france) 
+abline(rlm.fit, lwd = 2,col = "blue")
+
+# LMS
+lqs.lms <- lqs(UR ~ MW, method = "lms", data = france) #least median of squares#
+lqs.lts <- lqs(UR ~ MW, method = "lts", data = france) #least trimmed squares#
+abline(lqs.lms, lwd = 2, col="green")
+abline(lqs.lts, lwd = 2, col="pink")
+
+# Lowess
+lines(lowess(france$MW, france$UR, f = 0.5, iter = 0), lwd = 2) # loess
+
+# Depth trimmed regression
+trim.reg <- trimProjReg2d(france$MW, france$UR) #trimprojreg2d
+abline(trim.reg, lwd = 4, col = 'orange')
+
 }
 \author{
 Zygmunt Zawadzki from Cracow University of Economics.

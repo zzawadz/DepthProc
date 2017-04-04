@@ -8,11 +8,25 @@
 # - sample.depth.contours -> lsdSampleDepthContours (R)
 
 #' @title Location-Scale depth class
+#' 
+#' @description Class used to store maximum location-scale depth results.
+#' 
+#' @slot max_depth maximum Student depth value.
+#' @slot mu location estimate in the deepest point.
+#' @slot sigma scale estimate in the deepest point.
+#' 
 #' @export
 setClass("LSDepth",
          slots = c(max_depth = "numeric", mu = "numeric", sigma = "numeric"))
 
 #' @title Location-Scale depth contour class
+#' 
+#' @description Class used to store result of location-scale depth contours.
+#' 
+#' @slot cont_depth depth values used to calculate contours.
+#' @slot sample original sample used to calculate depth contours.
+#' @slot .Data list with estimated values of scale-depth contours.
+#' 
 #' @export
 setClass("LSDepthContour",
          slots = c(cont_depth = "numeric", sample = "numeric"), 
@@ -41,6 +55,7 @@ setClass("LSDepthContour",
 #' lsdSampleMaxDepth(x)
 #' y <- rf(100, 4, 10)
 #' lsdSampleMaxDepth(y)
+#' 
 lsdSampleMaxDepth <- function(x, iter = 100, eps = 1e-04, p_length = 10) {
   res <- sampleMaxLocScaleDepthCPP(ry = as.numeric(x), iter = iter, eps = eps,
                                    p_length)
@@ -52,6 +67,8 @@ lsdSampleMaxDepth <- function(x, iter = 100, eps = 1e-04, p_length = 10) {
 }
 
 #' @title Calculate sample Mizera and Muller Student depth contours
+#' 
+#' @description Calculate sample one-dimensional Mizera and Muller Student depth contours.
 #' 
 #' @param x one dimensional vector with sample
 #' @param depth depth level for contours
@@ -76,6 +93,7 @@ lsdSampleMaxDepth <- function(x, iter = 100, eps = 1e-04, p_length = 10) {
 #' # normal distribution - more contours calculated
 #' dcont_norm <- lsdSampleDepthContours(rnorm(100), seq(0.05, 0.4, 0.05))
 #' plot(dcont_norm)
+#' 
 lsdSampleDepthContours <- function(x, depth = c(0.1, 0.2, 0.3, 0.4),
                                    lengthmu = 1000) {
   depth <- round(depth * length(x))
@@ -126,7 +144,10 @@ getMuLS <- function(x, n, d, lengthmu) {
   mu
 }
 
-#' @title Get location-scale contour from LSDepthContour object
+#' @title Get location-scale contour from LSDepthContour object.
+#' 
+#' @description Get numeric values of the location-scale depth contour from existing object of LSDepthContour class. 
+#' 
 #' @docType methods
 #' @rdname lsdGetContour-methods
 #' @export
@@ -162,7 +183,10 @@ setMethod("lsdGetContour", signature = "LSDepthContour", function(x, cont) {
   lsdSampleDepthContours(x@sample, depth = cont)[[1]]
 })
 
-#' @title Adds location scale depth contour to a plot
+#' @title Adds location scale depth contour to the existing plot.
+#' 
+#' @description This function add one location-scale contour to the existing plot.
+#' 
 #' @docType methods
 #' @rdname lsdAddContour-methods
 #' @export
@@ -201,11 +225,14 @@ setMethod("lsdAddContour", signature = c(x = "LSDepthContour"),
           }
 )
 
-#' @title Plot Location-Scale depth contours
+#' @title Plot Location-Scale depth contours.
+#' 
+#' @description Create location-scale depth plot. See \code{\link{lsdSampleDepthContours}} for more information.
+#' 
 #' @export
 #' 
 #' @param x object of class LSDepthContour
-#' @param cont plotted contours. Default NULL means that all contours stored in x will be plotted
+#' @param cont plotted contours. Default NULL means that all contours stored in x will be plotted.
 #' @param ratio ratio
 #' @param mu_min mu_min
 #' @param mu_max mu_max

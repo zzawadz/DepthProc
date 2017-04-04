@@ -3,7 +3,10 @@
 ## - new object (S3 for compability with other tests)
 ## - more examples
 
-#' @title Depth based multivariate Wilcoxon test for a scale difference.
+#' @title Multivariate Wilcoxon test for equality of dispersion.
+#' 
+#' @description Depth based multivariate Wilcoxon test for a scale difference.
+#' 
 #' @export
 #' 
 #' @param x data matrix

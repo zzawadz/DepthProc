@@ -10,6 +10,7 @@
 #' @param name name for data set
 #' @param \dots additional arguments passed to fncDepthFM.
 #' 
+#' @importFrom zoo index
 #' @rdname fncDepth
 #' @examples
 #' 
