@@ -53,6 +53,8 @@ lsdSampleMaxDepth <- function(x, iter = 100, eps = 1e-04, p_length = 10) {
 
 #' @title Calculate sample Mizera and Muller Student depth contours
 #' 
+#' @description Calculate sample one-dimensional Mizera and Muller Student depth contours.
+#' 
 #' @param x one dimensional vector with sample
 #' @param depth depth level for contours
 #' @param lengthmu number of points to evalute depth
@@ -76,6 +78,7 @@ lsdSampleMaxDepth <- function(x, iter = 100, eps = 1e-04, p_length = 10) {
 #' # normal distribution - more contours calculated
 #' dcont_norm <- lsdSampleDepthContours(rnorm(100), seq(0.05, 0.4, 0.05))
 #' plot(dcont_norm)
+#' 
 lsdSampleDepthContours <- function(x, depth = c(0.1, 0.2, 0.3, 0.4),
                                    lengthmu = 1000) {
   depth <- round(depth * length(x))
@@ -126,7 +129,10 @@ getMuLS <- function(x, n, d, lengthmu) {
   mu
 }
 
-#' @title Get location-scale contour from LSDepthContour object
+#' @title Get location-scale contour from LSDepthContour object.
+#' 
+#' @description Get numeric values of the location-scale depth contour from existing object of LSDepthContour class. 
+#' 
 #' @docType methods
 #' @rdname lsdGetContour-methods
 #' @export
@@ -162,7 +168,10 @@ setMethod("lsdGetContour", signature = "LSDepthContour", function(x, cont) {
   lsdSampleDepthContours(x@sample, depth = cont)[[1]]
 })
 
-#' @title Adds location scale depth contour to a plot
+#' @title Adds location scale depth contour to the existing plot.
+#' 
+#' @description This function add one location-scale contour to the existing plot.
+#' 
 #' @docType methods
 #' @rdname lsdAddContour-methods
 #' @export

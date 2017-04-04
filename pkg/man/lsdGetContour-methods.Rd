@@ -4,7 +4,7 @@
 \name{lsdGetContour}
 \alias{lsdGetContour}
 \alias{lsdGetContour,LSDepthContour-method}
-\title{Get location-scale contour from LSDepthContour object}
+\title{Get location-scale contour from LSDepthContour object.}
 \usage{
 lsdGetContour(x, cont)
 
@@ -14,6 +14,9 @@ lsdGetContour(x, cont)
 \item{x}{object of class LSDepthContour}
 
 \item{cont}{single numeric --- depth of contour to return}
+}
+\description{
+Get numeric values of the location-scale depth contour from existing object of LSDepthContour class.
 }
 \details{
 Calculations are based on lsdepth algorithm written by Ch. Muller.

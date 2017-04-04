@@ -2,7 +2,7 @@
 % Please edit documentation in R/DepthBasedTests.R
 \name{mWilcoxonTest}
 \alias{mWilcoxonTest}
-\title{Depth based multivariate Wilcoxon test for a scale difference.}
+\title{Multivariate Wilcoxon test for equality of dispersion.}
 \usage{
 mWilcoxonTest(x, y, alternative = "two.sided", ...)
 }
@@ -14,6 +14,9 @@ mWilcoxonTest(x, y, alternative = "two.sided", ...)
 \item{alternative}{a character string specifying the alternative hypothesis, must be one of "two.sided" (default), "greater" or "less".}
 
 \item{...}{arguments passed to depth function(e.g. method)}
+}
+\description{
+Depth based multivariate Wilcoxon test for a scale difference.
 }
 \details{
 Having two samples \eqn{ {X} ^ {n} } and \eqn{ {Y} ^ {m} } using any depth function, we can compute depth values in a combined sample \eqn{ {Z} ^ {n + m} = {X} ^ {n} \cup {Y} ^ {m} }, assuming the empirical distribution calculated basing on all observations, or only on observations belonging to one of the samples \eqn{ {X} ^ {n} } or \eqn{ {Y} ^ {m} }.

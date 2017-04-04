@@ -25,7 +25,8 @@ Imports:
     lattice,
     sm,
     geometry,
-    colorspace
+    colorspace,
+    zoo
 Suggests:
     mvtnorm,
     rgl,
@@ -33,7 +34,6 @@ Suggests:
     robustbase,
     dplyr,
     RcppArmadillo,
-    zoo,
     xts
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 6.0.1

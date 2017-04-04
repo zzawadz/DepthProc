@@ -13,6 +13,9 @@ lsdSampleDepthContours(x, depth = c(0.1, 0.2, 0.3, 0.4), lengthmu = 1000)
 
 \item{lengthmu}{number of points to evalute depth}
 }
+\description{
+Calculate sample one-dimensional Mizera and Muller Student depth contours.
+}
 \details{
 Calculations are based on lsdepth algorithm written by Ch. Muller.
 }
@@ -26,6 +29,7 @@ plot(dcont)
 # normal distribution - more contours calculated
 dcont_norm <- lsdSampleDepthContours(rnorm(100), seq(0.05, 0.4, 0.05))
 plot(dcont_norm)
+
 }
 \references{
 Mizera, I., Muller, C. H., 2004. Location-scale depth (with discussion). Journal of the American Statistical Association 99, 949--966.

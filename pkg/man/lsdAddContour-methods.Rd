@@ -4,7 +4,7 @@
 \name{lsdAddContour}
 \alias{lsdAddContour}
 \alias{lsdAddContour,LSDepthContour-method}
-\title{Adds location scale depth contour to a plot}
+\title{Adds location scale depth contour to the existing plot.}
 \usage{
 lsdAddContour(x, cont = NULL, ...)
 
@@ -16,6 +16,9 @@ lsdAddContour(x, cont = NULL, ...)
 \item{cont}{depth of contour to plot}
 
 \item{...}{other arguments passed to polygon function}
+}
+\description{
+This function add one location-scale contour to the existing plot.
 }
 \examples{
 smp <- rf(100, 5, 10)
