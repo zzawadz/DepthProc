@@ -4,7 +4,7 @@
 \name{internet.users}
 \alias{internet.users}
 \title{Internet view data}
-\format{data frame containing 17518 rows and 6 columns --- 17518 working days of the 
+\format{data frame containing 17518 rows and 6 columns --- 17518 working days of the
 Internet service considered with respect to variables:
 service, month, day, hour, unique users and page views.}
 \usage{

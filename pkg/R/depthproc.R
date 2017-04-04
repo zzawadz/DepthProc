@@ -43,9 +43,20 @@ NULL
 #' @keywords datasets
 #' @name internet.users
 #' @usage data(internet.users)
-#' @format data frame containing 17518 rows and 6 columns --- 17518 working days of the 
+#' @format data frame containing 17518 rows and 6 columns --- 17518 working days of the
 #' Internet service considered with respect to variables:
 #' service, month, day, hour, unique users and page views.
 #' @references Kosiorowski, Rydlewski, Snarska (2016), Detecting a Structural Change in Functional Time Series Using Local Wilcoxon Statistic, arXiv: 1604.03776v2
 #' 
+NULL
+
+#' Relation between minimum wage (MW) and unemployment rate (UR) in France.
+#' 
+#' @docType data
+#' @keywords datasets
+#' @name france
+#' @usage data(france)
+#' @format data frame containing 17 rows and two column. MW is a minimum wage, and UR is an unemployment rate.
+#' 
+#'
 NULL
