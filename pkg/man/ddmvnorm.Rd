@@ -6,7 +6,7 @@
 \title{Normal depth versus depth plot}
 \usage{
 ddMvnorm(x, size = nrow(x), robust = FALSE, alpha = 0.05,
-  title = "ddMvnorm", ...)
+  title = "ddMvnorm", depth_params = list())
 }
 \arguments{
 \item{x}{The data sample for DD plot.}
@@ -19,7 +19,7 @@ ddMvnorm(x, size = nrow(x), robust = FALSE, alpha = 0.05,
 
 \item{title}{title of a plot.}
 
-\item{...}{Parameters passed to \code{depth}}
+\item{depth_params}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).}
 }
 \value{
 Returns the normal depth versus depth plot of multivariate dataset \code{x}.

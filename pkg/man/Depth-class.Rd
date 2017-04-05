@@ -15,7 +15,5 @@ Virtual class with structure for every depth class from depthproc package.
 \item{\code{X}}{reference set.}
 
 \item{\code{method}}{depth type.}
-
-\item{\code{name}}{name that will be used on plots.}
 }}
 

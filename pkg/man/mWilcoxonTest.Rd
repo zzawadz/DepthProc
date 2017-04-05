@@ -4,7 +4,7 @@
 \alias{mWilcoxonTest}
 \title{Multivariate Wilcoxon test for equality of dispersion.}
 \usage{
-mWilcoxonTest(x, y, alternative = "two.sided", ...)
+mWilcoxonTest(x, y, alternative = "two.sided", depth_params = list())
 }
 \arguments{
 \item{x}{data matrix}
@@ -13,7 +13,7 @@ mWilcoxonTest(x, y, alternative = "two.sided", ...)
 
 \item{alternative}{a character string specifying the alternative hypothesis, must be one of "two.sided" (default), "greater" or "less".}
 
-\item{...}{arguments passed to depth function(e.g. method)}
+\item{depth_params}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).}
 }
 \description{
 Depth based multivariate Wilcoxon test for a scale difference.
@@ -37,7 +37,7 @@ The distribution of \eqn{ S } is symmetric about \eqn{ E(S) = \frac{ 1 }{ 2 }m(m
 x <- mvrnorm(100, c(0, 0), diag(2))
 y <- mvrnorm(100, c(0, 0), diag(2) * 1.4)
 mWilcoxonTest(x, y)
-mWilcoxonTest(x, y, method = "LP")
+mWilcoxonTest(x, y, depth_params = list(method = "LP"))
 
 # EXAMPLE 2
 data(under5.mort)

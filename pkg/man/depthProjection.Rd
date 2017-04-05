@@ -4,7 +4,7 @@
 \alias{depthProjection}
 \title{Projection Depth}
 \usage{
-depthProjection(u, X, ndir = 1000, name = "X", threads = -1, ...)
+depthProjection(u, X, ndir = 1000, threads = -1, ...)
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}
@@ -12,8 +12,6 @@ depthProjection(u, X, ndir = 1000, name = "X", threads = -1, ...)
 \item{X}{The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).}
 
 \item{ndir}{number of directions used in computations}
-
-\item{name}{name for this data set --- it will be used on plots from depthproc.}
 
 \item{threads}{number of threads used in parallel computations. Default value -1 means that all possible cores will be used.}
 

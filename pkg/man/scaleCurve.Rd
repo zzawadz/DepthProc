@@ -4,8 +4,9 @@
 \alias{scaleCurve}
 \title{Scale curve}
 \usage{
-scaleCurve(x, y = NULL, alpha = seq(0, 1, 0.01), method = "Projection",
-  name = "X", name_y = "Y", title = "Scale Curve", ...)
+scaleCurve(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
+  name_y = "Y", title = "Scale Curve", depth_params = list(method =
+  "Projection"), ...)
 }
 \arguments{
 \item{x}{Multivariate data as a matrix.}
@@ -14,15 +15,15 @@ scaleCurve(x, y = NULL, alpha = seq(0, 1, 0.01), method = "Projection",
 
 \item{alpha}{Vector with values of central area to be used in computation.}
 
-\item{method}{Character string which determines the depth function used. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}}.}
-
 \item{name}{Name of matrix X used in legend.}
 
 \item{name_y}{Name of matrix Y used in legend.}
 
 \item{title}{title of the plot.}
 
-\item{...}{Any additional parameters for function \code{depth}.}
+\item{depth_params}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).}
+
+\item{...}{Any additional parameters for plotting.}
 }
 \value{
 Returns the volume of the convex hull containing subsequent central points of \code{X}.
@@ -45,14 +46,14 @@ ggplot2 package is used to draw a plot.
 library(mvtnorm)
 x <- mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
 y <- rmvt(n = 100, sigma = diag(2), df = 2)
-scaleCurve(x, y, method = "Projection")
-# comparing two scale curves
+scaleCurve(x, y, depth_params = list(method = "Projection"))
+# Comparing two scale curves
 # normal distribution and mixture of normal distributions
 x <- mvrnorm(100, c(0, 0), diag(2))
 y <- mvrnorm(80, c(0, 0), diag(2))
 z <- mvrnorm(20, c(5, 5), diag(2))
-scaleCurve(x, rbind(y, z), method = "Projection", name = "N",
-           name_y = "Mixture of N")
+scaleCurve(x, rbind(y, z), name = "N", name_y = "Mixture of N",
+           depth_params = list(method = "Projection"))
 
 }
 \references{

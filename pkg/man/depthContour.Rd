@@ -7,7 +7,7 @@
 depthContour(x, xlim = extendrange(x[, 1], f = 0.1), ylim = extendrange(x[,
   2], f = 0.1), n = 50, pmean = TRUE, mcol = "blue", pdmedian = TRUE,
   mecol = "brown", legend = TRUE, points = FALSE, colors = heat_hcl,
-  levels = 10, ...)
+  levels = 10, depth_params = list(), graph_params = list())
 }
 \arguments{
 \item{x}{Bivariate data}
@@ -34,7 +34,9 @@ depthContour(x, xlim = extendrange(x[, 1], f = 0.1), ylim = extendrange(x[,
 
 \item{levels}{number of levels for color scale.}
 
-\item{\dots}{Any additional parameters for function depth (such as method) or graphical parameters (e.g. lwd, lty, main).}
+\item{depth_params}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).}
+
+\item{graph_params}{list of graphical parameters for functions filled.contour and contour (e.g. lwd, lty, main).}
 }
 \description{
 Draws an approximate contours of depth for bivariate data.
@@ -55,9 +57,11 @@ data(inf.mort, maesles.imm)
 data1990 <- na.omit(cbind(inf.mort[, 1], maesles.imm[, 1]))
 depthContour(data1990, n = 50, pmean = TRUE, mcol = "blue",
              pdmedian = TRUE, mecol = "brown", legend = TRUE, points = TRUE,
-             xlab = "infant mortality rate per 1000 live birth",
-             ylab = "against masles immunized percentage",
-             main = "L2 depth, UN Fourth Goal 2011 year", method = "LP")
+             depth_params = list(method = "LP"),
+             graph_params = list(
+               xlab = "infant mortality rate per 1000 live birth",
+               ylab = "against masles immunized percentage",
+               main = "L2 depth, UN Fourth Goal 2011 year"))
 
 }
 \seealso{

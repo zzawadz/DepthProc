@@ -8,18 +8,18 @@
 \alias{depthMedian,Depth-method}
 \title{Depth median}
 \usage{
-depthMedian(x, ...)
+depthMedian(x, depth_params = list())
 
-\S4method{depthMedian}{matrix}(x, ...)
+\S4method{depthMedian}{matrix}(x, depth_params = list())
 
-\S4method{depthMedian}{data.frame}(x, ...)
+\S4method{depthMedian}{data.frame}(x, depth_params = list())
 
 \S4method{depthMedian}{Depth}(x)
 }
 \arguments{
 \item{x}{object of class Depth or matrix.}
 
-\item{...}{arguments passed to \code{\link{depth}} function (e.g. method).}
+\item{depth_params}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).}
 }
 \description{
 Return point with maximum depth function value. If multiple points have the same value, mean average of them will be returned.

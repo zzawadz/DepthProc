@@ -4,8 +4,8 @@
 \alias{ddPlot}
 \title{Depth versus depth plot}
 \usage{
-ddPlot(x, y, scale = FALSE, location = FALSE, name_x = "X",
-  name_y = "Y", title = "Depth vs. depth plot", ...)
+ddPlot(x, y, scale = FALSE, location = FALSE, name = "X", name_y = "Y",
+  title = "Depth vs. depth plot", depth_params = list())
 }
 \arguments{
 \item{x}{The first or only data sample for ddPlot.}
@@ -16,13 +16,13 @@ ddPlot(x, y, scale = FALSE, location = FALSE, name_x = "X",
 
 \item{location}{determines whether the location is to be aligned to 0 vector with depth median.}
 
-\item{name_x}{name for data set x. It will be passed to drawing function.}
+\item{name}{name for data set x. It will be passed to drawing function.}
 
-\item{name_y}{name for data set y.}
+\item{name_y}{as above for y}
 
 \item{title}{title of the plot.}
 
-\item{...}{Parameters passed to depth function}
+\item{depth_params}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).}
 }
 \description{
 Produces a DD plot which allows to compare two multivariate datasets or to compare a subject dataset with theoretical distribution.

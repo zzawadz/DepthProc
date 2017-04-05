@@ -5,7 +5,7 @@
 \title{2d Binning}
 \usage{
 binningDepth2D(x, binmethod = "LocDepth", nbins = 8, k = 1,
-  remove_borders = FALSE, ...)
+  remove_borders = FALSE, depth_params = list(method = "LP"))
 }
 \arguments{
 \item{x}{bivariate matrix containing data. Each row is viewed as one two-dimensional observation.}
@@ -18,7 +18,7 @@ binningDepth2D(x, binmethod = "LocDepth", nbins = 8, k = 1,
 
 \item{remove_borders}{Logical, include or not marginal bins}
 
-\item{...}{other arguments passed to depthMedian}
+\item{depth_params}{other arguments passed to depthMedian}
 }
 \value{
 freq: a matrix containing the binned frequencies

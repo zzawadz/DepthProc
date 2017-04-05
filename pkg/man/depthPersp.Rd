@@ -6,7 +6,8 @@
 \usage{
 depthPersp(x, plot_method = "lattice", xlim = extendrange(x[, 1], f = 0.1),
   ylim = extendrange(x[, 2], f = 0.1), n = 50, xlab = "x", ylab = "y",
-  plot_title = NULL, colors = heat_hcl, ...)
+  plot_title = NULL, colors = heat_hcl, depth_params = list(),
+  graph_params = list())
 }
 \arguments{
 \item{x}{bivariate data}
@@ -23,11 +24,13 @@ depthPersp(x, plot_method = "lattice", xlim = extendrange(x[, 1], f = 0.1),
 
 \item{ylab}{description of y-axis}
 
-\item{plot_title}{plot title (default NULL means paste(method, "depth"))}
+\item{plot_title}{plot title (default NULL means paste(depth_params$method, "depth"))}
 
 \item{colors}{function for colors pallete (e.g. gray.colors).}
 
-\item{...}{arguments passed to depth function}
+\item{depth_params}{list of parameters for function depth ("method", "threads", "ndir", "la", "lb", "pdim", "mean", "cov", "exact").}
+
+\item{graph_params}{list of graphical parameters for functions rgl::persp3d and lattice::wireframe.}
 }
 \description{
 Draws a perspective plot of depth function over x-y plane.
@@ -38,7 +41,7 @@ plot_method --- rgl package is not in depends list beacuse it may cause problems
 \examples{
 # EXAMPLE 1
 x <- mvrnorm(100, c(0, 0), diag(2))
-depthPersp(x, method = "Euclidean")
+depthPersp(x, depth_params = list(method = "Euclidean"))
 
 # EXAMPLE 2
 data(inf.mort, maesles.imm)
@@ -46,7 +49,8 @@ data1990 <- na.omit(cbind(inf.mort[, 1], maesles.imm[, 1]))
 
 \dontrun{
 library(rgl)
-depthPersp(data1990, method = "Projection", plot_method = "rgl")
+depthPersp(data1990, plot_method = "rgl",
+           depth_params = list(method = "Projection"))
 }
 
 }

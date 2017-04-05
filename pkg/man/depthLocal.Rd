@@ -4,8 +4,8 @@
 \alias{depthLocal}
 \title{Local depth}
 \usage{
-depthLocal(u, X, beta = 0.5, depth1 = "Projection", depth2 = depth1,
-  name = "X", ...)
+depthLocal(u, X, beta = 0.5, depth_params1 = list(method = "Projection"),
+  depth_params2 = depth_params1)
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}
@@ -14,13 +14,9 @@ depthLocal(u, X, beta = 0.5, depth1 = "Projection", depth2 = depth1,
 
 \item{beta}{cutoff value for neighbourhood}
 
-\item{depth1}{depth method for symmetrised data}
+\item{depth_params1}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).}
 
-\item{depth2}{depth method for calculation depth of given point}
-
-\item{name}{name for this data set - it will be used on plots.}
-
-\item{...}{additional parameters passed to depth1 and depth2}
+\item{depth_params2}{as above --- default is depth_params1.}
 }
 \description{
 Computes local version of depth according to proposals of Paindaveine and Van Bever --- see referencess.
@@ -35,11 +31,12 @@ Formally, let \eqn{ D(\cdot, P) } be a depth function. Then the local depth with
 \dontrun{
 # EXAMPLE 1
 data <- mvrnorm(100, c(0, 5), diag(2) * 5)
-# by default depth2 = depth1
-depthLocal(data, data, depth1 = "LP")
-depthLocal(data, data, depth1 = "LP", depth2 = "Projection")
-# Depthcontour
-depthContour(data, method = "Local", depth1 = "LP")
+# By default depth_params2 = depth_params1
+depthLocal(data, data, depth_params1 = list(method = "LP"))
+depthLocal(data, data, depth_params1 = list(method = "LP"),
+           depth_params2 = list(method = "Projection"))
+# Depth contour
+depthContour(data, method = "Local", depth_params1 = list(method = "LP"))
 
 # EXAMPLE 2
 data(inf.mort, maesles.imm)
@@ -55,7 +52,6 @@ BALLOT <- rbind(X1, X2)
 
 train <- sample(1:10000, 100)
 data <- BALLOT[train, ]
-depthContour(data, method = "Local", depth1 = "Projection", beta = 0.3)
 }
 
 }

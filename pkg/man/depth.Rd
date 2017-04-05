@@ -4,7 +4,7 @@
 \alias{depth}
 \title{Depth calculation}
 \usage{
-depth(u, X, method = "Projection", name = "X", threads = -1, ...)
+depth(u, X, method = "Projection", threads = -1, ...)
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}
@@ -13,11 +13,9 @@ depth(u, X, method = "Projection", name = "X", threads = -1, ...)
 
 \item{method}{Character string which determines the depth function. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}}.}
 
-\item{name}{name for this data set --- it will be used on plots.}
-
 \item{threads}{number of threads used in parallel computations. Default value -1 means that all possible cores will be used.}
 
-\item{...}{parameters specific to method - see \code{\link{depthEuclid}}}
+\item{...}{parameters specific to method --- see \code{\link{depthEuclid}}}
 }
 \description{
 Calculate depth functions.
