@@ -9,13 +9,13 @@
 #' @param movingmedian Logical. For default FALSE only one depth median is used to compute asymmetry norm. If TRUE --- for every central area, a new depth median will be used --- this approach needs much more time.
 #' @param name Name of set X --- used in plot legend
 #' @param name_y Name of set Y --- used in plot legend
-#' @param ... Any additional parameters for function depth
+#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
 #'
 #' @details
 #' 
 #' For sample depth function \eqn{ D({x}, {{{Z}} ^ {n}}) }, \eqn{ {x} \in {{{R}} ^ {d}} }, \eqn{ d \ge 2 }, \eqn{ {Z} ^ {n} = \{{{{z}}_{1}}, ..., {{{z}}_{n}}\} \subset {{{R}} ^ {d}} }, \eqn{ {{D}_{\alpha}}({{{Z}} ^ {n}}) } denoting \eqn{ \alpha } --- central region, we can define {the asymmetry curve} \eqn{ AC(\alpha) = \left(\alpha, \left\| {{c} ^ {-1}}(\{{\bar{z}} - med|{{D}_{\alpha}}({{{Z}} ^ {n}})\}) \right\|\right) \subset {{{R}} ^ {2}} }, for \eqn{ \alpha \in [0, 1] } being nonparametric scale and asymmetry functional correspondingly, where \eqn{ c } --- denotes constant, \eqn{ {\bar{z}} } --- denotes mean vector, denotes multivariate median induced by depth function and \eqn{ vol } --- denotes a volume.
 #' 
-#' Asymmetrycurve takes uses function convhulln from package geometry for computing a volume of convex hull containing central region.
+#' Asymmetry curve takes uses function convhulln from package geometry for computing a volume of convex hull containing central region.
 #' 
 #' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #' 
@@ -34,7 +34,7 @@
 #' @examples
 #' 
 #' # EXAMPLE 1
-#' require(sn)
+#' library(sn)
 #' xi <- c(0, 0)
 #' alpha <- c(2, -5)
 #' Omega <- diag(2) * 5
@@ -52,7 +52,8 @@
 #' data2011 <- cbind(under5.mort[, 22], inf.mort[, 22], maesles.imm[, 22])
 #' as1990 <- asymmetryCurve(data1990, name = "scale curve 1990")
 #' as2011 <- asymmetryCurve(data2011, name = "scale curve 2011")
-#' figure <- getPlot(combineDepthCurves(as1990, as2011)) + ggtitle("Scale curves")
+#' figure <- getPlot(combineDepthCurves(as1990, as2011)) +
+#'   ggtitle("Scale curves")
 #' figure
 #' 
 #' @keywords
@@ -65,8 +66,8 @@
 #' @export
 #'
 asymmetryCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
-                           method = "Projection", movingmedian = FALSE,
-                           name = "X", name_y = "Y", ...) {
+                           movingmedian = FALSE, name = "X", name_y = "Y",
+                           depth_params = list(method = "Projection")) {
   x <- na.omit(x)
   
   if (nrow(x) < NCOL(x) * 10) {
@@ -79,33 +80,46 @@ asymmetryCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
     stop("Y must be a matrix!")
   }
   
-  depth_est <- depth(x, x, method = method, name = name)
+  uxname_list <- list(u = x, X = x, name = name)
+  
+  depth_est <- do.call(depth, c(uxname_list, depth_params))
   
   if (!movingmedian) {
-    x_est <- .asCurve(x, depth_est, alpha, method, ...) # function in as_curve.R
+    # function in as_curve.R
+    x_est <- .asCurve(x, depth_est = depth_est, alpha = alpha, name = name,
+                      depth_params = depth_params)
   } else {
-    x_est <- .asCurveMM(x, alpha, method, ...) # function in as_curve_mm.R
+    # function in as_curve_mm.R
+    x_est <- .asCurveMM(x, alpha = alpha, name = name,
+                        depth_params = depth_params)
   }
   
   asc <- new("AsymmetryCurve", x_est[, 2], depth = depth_est,
-             alpha = x_est[, 1])
+             alpha = x_est[, 1], name = name)
   
   if (!is.null(y)) {
-    asc <- combineDepthCurves(asc, asymmetryCurve(y, y = NULL, alpha, method, movingmedian, name = name_y, name_y = "Y", ...))
+    name <- name_y
+    asc <- combineDepthCurves(
+      asc,
+      asymmetryCurve(y, y = NULL, alpha = alpha, movingmedian = movingmedian,
+                     name = name, name_y = "Y",
+                     depth_params = list(method = "Projection"))
+    )
   }
   
   return(asc)
 }
 
-.asCurve <- function(X, depth_est = NULL, alpha = NULL, method = "Projection",
-                     ...) {
+.asCurve <- function(X, depth_est = NULL, alpha = NULL, name = "X",
+                     depth_params = list(method = "Projection")) {
   dim_X <- dim(X)[2]
   
   if (is.null(depth_est)) {
-    depth_est <- depth(X, X, method = method, ...)
+    uxname_list <- list(u = X, X = X, name = name)
+    depth_est <- do.call(depth, c(uxname_list, depth_params))
   }
   
-  median <- depthMedian(X, method = method, ...)
+  median <- depthMedian(X, depth_params)
   
   if ((length(median) / dim(X)[2]) != 1) {
     median <- colMeans(median)
@@ -144,11 +158,13 @@ asymmetryCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
   matrix(c(rev(1 - alpha_est), rev(nn)), ncol = 2)
 }
 
-.asCurveMM <- function(X, depth_est = NULL, alpha = NULL, method, ...) {
+.asCurveMM <- function(X, depth_est = NULL, alpha = NULL, name = "X",
+                       depth_params = list(method = "Projection")) {
   dim_X <- dim(X)[2]
   
   if (is.null(depth_est)) {
-    depth_est <- depth(X, X, method = method, ...)
+    uxname_list <- list(u = X, X = X, name = name)
+    depth_est <- do.call(depth, c(uxname_list, depth_params))
   }
   if (is.null(alpha)) {
     alpha <- seq(0, 1, 0.01)
@@ -169,7 +185,8 @@ asymmetryCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
       alpha_est[i] <- alpha[i]
       means[i, ] <- colMeans(tmp_X)
       
-      tmp_depth_est <- depth(tmp_X, tmp_X, method, ...)
+      uxname_list_temp <- list(u = tmp_X, X = tmp_X, name = name)
+      tmp_depth_est <- do.call(depth, c(uxname_list_temp, depth_params))
       
       med <- tmp_X[tmp_depth_est == max(tmp_depth_est), ]
       

@@ -12,7 +12,7 @@
 #' @param x data matrix
 #' @param y data matrix
 #' @param alternative a character string specifying the alternative hypothesis, must be one of "two.sided" (default), "greater" or "less".
-#' @param ... arguments passed to depth function(e.g. method)
+#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
 #' 
 #' @details
 #' 
@@ -41,7 +41,7 @@
 #' x <- mvrnorm(100, c(0, 0), diag(2))
 #' y <- mvrnorm(100, c(0, 0), diag(2) * 1.4)
 #' mWilcoxonTest(x, y)
-#' mWilcoxonTest(x, y, method = "LP")
+#' mWilcoxonTest(x, y, depth_params = list(method = "LP"))
 #' 
 #' # EXAMPLE 2
 #' data(under5.mort)
@@ -52,10 +52,13 @@
 #' data1990 <- na.omit(cbind(under5.mort[, 1], inf.mort[, 1], maesles.imm[, 1]))
 #' mWilcoxonTest(data2011, data1990)
 #' 
-mWilcoxonTest <- function(x, y, alternative = "two.sided", ...) {
+mWilcoxonTest <- function(x, y, alternative = "two.sided",
+                          depth_params = list()) {
   total <- rbind(x, y)
-  dep_x <- depth(x, total, ...)
-  dep_y <- depth(y, total, ...)
+  uxname_list_x <- list(u = x, X = total)
+  uxname_list_y <- list(u = y, X = total)
+  dep_x <- do.call(depth, c(uxname_list_x, depth_params))
+  dep_y <- do.call(depth, c(uxname_list_y, depth_params))
   test_res <- wilcox.test(dep_x, dep_y, alternative = alternative)
   
   test_res$null.value <- 1

@@ -8,10 +8,10 @@
 #' @param y The second data sample. \code{x} and \code{y} must be of the same space.
 #' @param scale logical. determines whether the dispersion is to be aligned.
 #' @param location determines whether the location is to be aligned to 0 vector with depth median.
-#' @param name_x name for data set x. It will be passed to drawing function.
-#' @param name_y name for data set y.
+#' @param name name for data set x. It will be passed to drawing function.
+#' @param name_y as above for y
 #' @param title title of the plot.
-#' @param ... Parameters passed to depth function
+#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
 #'
 #' @details
 #' 
@@ -41,15 +41,18 @@
 #' ddPlot(x = standard, y = scale)
 #' ddPlot(x = standard, y = scale, scale = TRUE)
 #' 
-ddPlot <- function(x, y, scale = FALSE, location = FALSE, name_x = "X",
-                   name_y = "Y", title = "Depth vs. depth plot", ...) {
+ddPlot <- function(x, y, scale = FALSE, location = FALSE, name = "X",
+                   name_y = "Y", title = "Depth vs. depth plot",
+                   depth_params = list()) {
   
   if (ncol(x) != ncol(y)) {
     stop("Wrong dimensions of the datasets! ncol(x) != ncol(y)")
   }
   if (scale) {
-    depth_sample_x <- depth(x, x, name = name_x, ...)
-    depth_sample_y <- depth(y, y, name = name_y, ...)
+    uxname_list_x <- list(u = x, X = x, name = name)
+    uxname_list_y <- list(u = y, X = y, name = name_y)
+    depth_sample_x <- do.call(depth, c(uxname_list_x, depth_params))
+    depth_sample_y <- do.call(depth, c(uxname_list_y, depth_params))
     varcovx <- cov(x[which(depth_sample_x >= median(depth_sample_x)), ])
     varcovy <- cov(y[which(depth_sample_y >= median(depth_sample_y)), ])
     x_new <- t(solve(chol(varcovx)) %*% t(x))
@@ -59,15 +62,17 @@ ddPlot <- function(x, y, scale = FALSE, location = FALSE, name_x = "X",
     y_new <- y
   }
   if (location) {
-    medx <- depthMedian(x_new, ...)
-    medy <- depthMedian(y_new, ...)
+    medx <- depthMedian(x_new, depth_params)
+    medy <- depthMedian(y_new, depth_params)
     x_new <- sweep(x_new, 2, medx, "-")
     y_new <- sweep(y_new, 2, medy, "-")
   }
   
   data <- rbind(x_new, y_new)
-  depth_x <- depth(data, x_new, name = name_x, ...)
-  depth_y <- depth(data, y_new, name = name_y, ...)
+  uxname_list_x_new <- list(u = data, X = x_new, name = name)
+  uxname_list_y_new <- list(u = data, X = y_new, name = name_y)
+  depth_x <- do.call(depth, c(uxname_list_x_new, depth_params))
+  depth_y <- do.call(depth, c(uxname_list_y_new, depth_params))
   
   ddplot <- new("DDPlot", X = depth_x, Y = depth_y, title = title)
   

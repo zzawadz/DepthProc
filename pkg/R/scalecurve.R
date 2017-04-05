@@ -8,11 +8,11 @@
 #' @param x Multivariate data as a matrix.
 #' @param y Additional matrix with multivariate data.
 #' @param alpha Vector with values of central area to be used in computation.
-#' @param method Character string which determines the depth function used. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}}.
 #' @param name Name of matrix X used in legend.
 #' @param name_y Name of matrix Y used in legend.
 #' @param title title of the plot.
-#' @param ... Any additional parameters for function \code{depth}.
+#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
+#' @param ... Any additional parameters for plotting.
 #'
 #' @details 
 #' 
@@ -46,14 +46,14 @@
 #' library(mvtnorm)
 #' x <- mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
 #' y <- rmvt(n = 100, sigma = diag(2), df = 2)
-#' scaleCurve(x, y, method = "Projection")
-#' # comparing two scale curves
+#' scaleCurve(x, y, depth_params = list(method = "Projection"))
+#' # Comparing two scale curves
 #' # normal distribution and mixture of normal distributions
 #' x <- mvrnorm(100, c(0, 0), diag(2))
 #' y <- mvrnorm(80, c(0, 0), diag(2))
 #' z <- mvrnorm(20, c(5, 5), diag(2))
-#' scaleCurve(x, rbind(y, z), method = "Projection", name = "N",
-#'            name_y = "Mixture of N")
+#' scaleCurve(x, rbind(y, z), name = "N", name_y = "Mixture of N",
+#'            depth_params = list(method = "Projection"))
 #' 
 #' @keywords
 #' multivariate
@@ -62,9 +62,9 @@
 #' depth function
 #' scale curve
 #' 
-scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
-                       method = "Projection", name = "X", name_y = "Y",
-                       title = "Scale Curve", ...) {
+scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
+                       name_y = "Y", title = "Scale Curve",
+                       depth_params = list(method = "Projection"), ...) {
   x <- na.omit(x)
   
   if (is.data.frame(x)) {
@@ -85,7 +85,9 @@ scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
   
   dim_x <- dim(x)[2]
   
-  depth_est <- depth(x, x, method, name = name)
+  uxname_list <- list(u = x, X = x, name = name)
+  
+  depth_est <- do.call(depth, c(uxname_list, depth_params))
   
   k <- length(alpha)
   vol <- 1:k
@@ -101,12 +103,13 @@ scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
     }
   }
   
-  scale_curve <- new("ScaleCurve", rev(vol), alpha = alpha, depth = depth_est, 
-                     title = title)
+  scale_curve <- new("ScaleCurve", rev(vol), alpha = alpha, depth = depth_est,
+                     name = name, title = title)
   
   if (!is.null(y)) {
-    sc_tmp <- scaleCurve(x = y, y = NULL, alpha = alpha, method = method,
-                         name = name_y, name_y = "Y", ...)
+    name <- name_y
+    sc_tmp <- scaleCurve(x = y, y = NULL, alpha = alpha, name = name,
+                         name_y = "Y", depth_params = depth_params)
     scale_curve <- combineDepthCurves(scale_curve, sc_tmp)
   }
   

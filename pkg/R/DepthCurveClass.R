@@ -37,9 +37,9 @@ setMethod("combineDepthCurves", signature(.list = "list"),
 setMethod("combineDepthCurves", signature(x = "DepthCurveList", y = "DepthCurve"),
           function(x, y, .list) {
             names <- sapply(x, function(xx) {
-              xx@depth@name
+              xx@name
             })
-            new_name <- y@depth@name
+            new_name <- y@name
             
             if (any(new_name == names)) {
               warning("Names in DepthCurveList are not unique!")
@@ -51,7 +51,7 @@ setMethod("combineDepthCurves", signature(x = "DepthCurveList", y = "DepthCurve"
                 k <- k + 1
               }
               
-              y@depth@name <- new_name_tmp
+              y@name <- new_name_tmp
             }
             
             n <- length(x)
@@ -80,7 +80,7 @@ setMethod(".getPlot", "DepthCurveList", function(object) {
   value <- unlist(object)
   alpha <- as.vector(sapply(object, function(x) x@alpha))
   len_alpha <- sapply(object, function(x) length(x@alpha))
-  names <- sapply(object, function(x) x@depth@name)
+  names <- sapply(object, function(x) x@name)
   names <- rep(names, len_alpha)
   
   data <- data.frame(value, alpha, names)
@@ -98,7 +98,7 @@ setMethod(".getPlot", "DepthCurveList", function(object) {
 #' @rdname as.matrix-methods
 #' @export
 setMethod("as.matrix", signature(x = "DepthCurveList"), function(x) {
-  names <- sapply(x, function(x) x@depth@name)
+  names <- sapply(x, function(x) x@name)
   tmp <- matrix(unlist(x), ncol = length(x))
   colnames(tmp) <- names
   tmp

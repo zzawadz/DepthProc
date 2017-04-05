@@ -7,7 +7,7 @@
 #' @param robust Logical. Default \code{FALSE}. If \code{TRUE}, robust measures are used to specify the parameters of theoretical distribution.
 #' @param alpha cutoff point for robust measure of covariance.
 #' @param title title of a plot.
-#' @param ... Parameters passed to \code{depth}
+#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
 #' 
 #' @description
 #' Produces a normal DD plot of a multivariate dataset.
@@ -42,19 +42,21 @@
 #' ddMvnorm(data1990, robust = FALSE)
 #' 
 ddMvnorm <- function(x, size = nrow(x), robust = FALSE, alpha = 0.05,
-                     title = "ddMvnorm", ...) {
-  depth_sample <- depth(x, x, ...)
+                     title = "ddMvnorm", depth_params = list()) {
+  ux_list <- list(u = x, X = x)
+  depth_sample <- do.call(depth, c(ux_list, depth_params))
   
   if (robust) {
     varcov <- cov(x[depth_sample >= quantile(depth_sample, alpha), ])
-    location <- depthMedian(x, ...)
+    location <- depthMedian(x, depth_params)
   } else {
     location <- apply(x, 2, mean)
     varcov <- cov(x)
   }
   
   theoretical <- mvrnorm(size, location, varcov)
-  depth_theoretical <- depth(x, theoretical, ...)
+  ux_list_theoretical <- list(u = x, X = theoretical)
+  depth_theoretical <- do.call(depth, c(ux_list_theoretical, depth_params))
   ddplot <- new("DDPlot", X = depth_sample, Y = depth_theoretical,
                 title = title)
   

@@ -1,4 +1,4 @@
-.depthLocal <- function(u, X, beta, depth1, depth2, ...) {
+.depthLocal <- function(u, X, beta, depth_params1, depth_params2) {
   ncol <- ncol(X)
   nrow <- nrow(X)
   
@@ -12,10 +12,16 @@
   }
   
   symDATA <- rbind(X, tmp)
-  depths <- as.numeric(depth(X, symDATA, method = depth1, ...))
+  
+  uxDepthList1 <- list(u = X, X = symDATA)
+  
+  depths <- as.numeric(do.call(depth, c(uxDepthList1, depth_params1)))
   quan <- quantile(depths, probs = 1 - beta)
   Rset <- as.matrix(X[signif(depths, digits = 6) >= signif(quan, digits = 6), ])
-  as.numeric(depth(u, Rset, method = depth2, ...))
+  
+  uxDepthList2 <- list(u = u, X = Rset)
+  
+  as.numeric(do.call(depth, c(uxDepthList2, depth_params2)))
 }
 
 #' @title Local depth
@@ -25,10 +31,8 @@
 #' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #' @param X The data as a matrix, data frame. If it is a matrix or data frame, then each row is viewed as one multivariate observation.
 #' @param beta cutoff value for neighbourhood
-#' @param depth1 depth method for symmetrised data
-#' @param depth2 depth method for calculation depth of given point
-#' @param name name for this data set - it will be used on plots.
-#' @param ... additional parameters passed to depth1 and depth2
+#' @param depth_params1 list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
+#' @param depth_params2 as above --- default is depth_params1.
 #' 
 #' @details
 #' 
@@ -45,11 +49,12 @@
 #' \dontrun{
 #' # EXAMPLE 1
 #' data <- mvrnorm(100, c(0, 5), diag(2) * 5)
-#' # by default depth2 = depth1
-#' depthLocal(data, data, depth1 = "LP")
-#' depthLocal(data, data, depth1 = "LP", depth2 = "Projection")
-#' # Depthcontour
-#' depthContour(data, method = "Local", depth1 = "LP")
+#' # By default depth_params2 = depth_params1
+#' depthLocal(data, data, depth_params1 = list(method = "LP"))
+#' depthLocal(data, data, depth_params1 = list(method = "LP"),
+#'            depth_params2 = list(method = "Projection"))
+#' # Depth contour
+#' depthContour(data, method = "Local", depth_params1 = list(method = "LP"))
 #' 
 #' # EXAMPLE 2
 #' data(inf.mort, maesles.imm)
@@ -65,13 +70,15 @@
 #' 
 #' train <- sample(1:10000, 100)
 #' data <- BALLOT[train, ]
-#' depthContour(data, method = "Local", depth1 = "Projection", beta = 0.3)
+# depthContour(data, method = "Local", beta = 0.3,
+#              depth_params1 = list(method = "Projection"))
 #' }
 #' 
 #' @export
 #' 
-depthLocal <- function(u, X, beta = 0.5, depth1 = "Projection", depth2 = depth1, 
-                       name = "X", ...) {
+depthLocal <- function(u, X, beta = 0.5,
+                       depth_params1 = list(method = "Projection"),
+                       depth_params2 = depth_params1) {
   
   if (missing(X)) {
     X <- u
@@ -80,9 +87,10 @@ depthLocal <- function(u, X, beta = 0.5, depth1 = "Projection", depth2 = depth1,
   depths <- 1:nrow(u)
   
   for (i in 1:nrow(u)) {
-    depths[i] <- .depthLocal(u[i, , drop = FALSE], X, beta, depth1, depth2, ...)
+    depths[i] <- .depthLocal(u[i, , drop = FALSE], X, beta, depth_params1,
+                             depth_params2)
   }
   
-  new("DepthLocal", depths, u = u, X = X, method = "Local", name = name,
-      depth1 = depth1, depth2 = depth2)
+  new("DepthLocal", depths, u = u, X = X, method = "Local",
+      depth_params1 = depth_params1, depth_params2 = depth_params2)
 }

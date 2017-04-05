@@ -7,7 +7,7 @@
 #' @param nbins number of bins in each dimension
 #' @param k responsible for tightness of bins.
 #' @param remove_borders Logical, include or not marginal bins
-#' @param ... other arguments passed to depthMedian
+#' @param depth_params other arguments passed to depthMedian
 #' 
 #' @return freq: a matrix containing the binned frequencies
 #' @return mid_x: mid points for x
@@ -66,7 +66,8 @@
 #' @export
 #' 
 binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
-                           remove_borders = FALSE, ...) {
+                           remove_borders = FALSE,
+                           depth_params = list(method = "LP")) {
   
   createBin <- function(x, nbins, mean = NULL) {
     
@@ -129,7 +130,7 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
   means <- c(0, 0)
   
   if (binmethod == "LP") {
-    means <- depthMedian(x, method = "LP", ...)
+    means <- depthMedian(x, depth_params)
   }
   
   tmp1 <- createBin(x[, 1], nbins, means[1])

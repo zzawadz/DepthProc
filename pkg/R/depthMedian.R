@@ -3,7 +3,7 @@
 #' @rdname depthMedian-methods
 #' 
 #' @param x object of class Depth or matrix.
-#' @param ... arguments passed to \code{\link{depth}} function (e.g. method).
+#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
 #' 
 #' @description
 #' 
@@ -21,14 +21,15 @@
 #' dp <- depth(x)
 #' depthMedian(dp)
 #' 
-setGeneric("depthMedian", function(x, ...) {
+setGeneric("depthMedian", function(x, depth_params = list()) {
   standardGeneric("depthMedian")
 })
 
 #' @rdname depthMedian-methods
 #' @export
-setMethod("depthMedian", "matrix", function(x, ...) {
-  depths <- depth(x, x, ...)
+setMethod("depthMedian", "matrix", function(x, depth_params = list()) {
+  ux_list <- list(u = x, X = x)
+  depths <- do.call(depth, c(ux_list, depth_params))
   med <- x[depths == max(depths), ]
   
   if (ncol(x) != length(med)) {
@@ -40,9 +41,9 @@ setMethod("depthMedian", "matrix", function(x, ...) {
 
 #' @rdname depthMedian-methods
 #' @export
-setMethod("depthMedian", "data.frame", function(x, ...) {
+setMethod("depthMedian", "data.frame", function(x, depth_params = list()) {
   x <- as.matrix(x)
-  depthMedian(x, ...)
+  depthMedian(x, depth_params)
 })
 
 #' @rdname depthMedian-methods

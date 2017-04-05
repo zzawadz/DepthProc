@@ -14,7 +14,8 @@
 #' @param points Logical. If TRUE points from matrix x will be drawn.
 #' @param colors function for colors pallete (e.g. gray.colors).
 #' @param levels number of levels for color scale.
-#' @param \dots Any additional parameters for function depth (such as method) or graphical parameters (e.g. lwd, lty, main).
+#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
+#' @param graph_params list of graphical parameters for functions filled.contour and contour (e.g. lwd, lty, main).
 #' 
 #' @details
 #' 
@@ -37,9 +38,11 @@
 #' data1990 <- na.omit(cbind(inf.mort[, 1], maesles.imm[, 1]))
 #' depthContour(data1990, n = 50, pmean = TRUE, mcol = "blue",
 #'              pdmedian = TRUE, mecol = "brown", legend = TRUE, points = TRUE,
-#'              xlab = "infant mortality rate per 1000 live birth",
-#'              ylab = "against masles immunized percentage",
-#'              main = "L2 depth, UN Fourth Goal 2011 year", method = "LP")
+#'              depth_params = list(method = "LP"),
+#'              graph_params = list(
+#'                xlab = "infant mortality rate per 1000 live birth",
+#'                ylab = "against masles immunized percentage",
+#'                main = "L2 depth, UN Fourth Goal 2011 year"))
 #' 
 #' @keywords
 #' contour
@@ -50,17 +53,20 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
                          ylim = extendrange(x[, 2], f = 0.1), n = 50,
                          pmean = TRUE, mcol = "blue", pdmedian = TRUE,
                          mecol = "brown", legend = TRUE, points = FALSE,
-                         colors = heat_hcl, levels = 10, ...) {
+                         colors = heat_hcl, levels = 10,
+                         depth_params = list(),
+                         graph_params = list()) {
   x_axis <- seq(xlim[1], xlim[2], length.out = n)
   y_axis <- seq(ylim[1], ylim[2], length.out = n)
   
   xy_surface <- expand.grid(x_axis, y_axis)
   xy_surface <- cbind(xy_surface[, 1], xy_surface[, 2])
   
-  depth_params <- .extractDepthParams(xy_surface, x, ...)
-  depth_surface <- do.call(depth, depth_params)
-  method <- depth_params$method
+  ux_list <- list(u = xy_surface, X = x)
   
+  depth_params <- c(ux_list, depth_params)
+  
+  depth_surface <- do.call(depth, depth_params)
   depth_surface <- matrix(depth_surface, ncol = n)
   
   if (length(levels) == 1 && is.numeric(levels)) {
@@ -74,8 +80,6 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
   } else {
     stop("Levels must be numeric vector of length 1.")
   }
-  
-  graph_params <- .removeDepthParams(...)
   
   do.call(
     filled.contour,
@@ -138,9 +142,9 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
           
           axis(1)
           axis(2)
-        })
-      ),
+        }) # end quote
+      ), # end list
       graph_params
-    )
-  )
+    ) # end c
+  ) # end do.call
 }

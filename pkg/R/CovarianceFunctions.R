@@ -8,8 +8,7 @@
 #' 
 #' @export
 #'
-setClass("CovDepthWeighted",
-         contains = "CovRobust")
+setClass("CovDepthWeighted", contains = "CovRobust")
 
 #' @title CovLp
 #'
@@ -58,7 +57,8 @@ CovLP <- function(x, pdim = 2, la = 1, lb = 1) {
   }
   
   cov <- CovLPCPP(x, pdim, la, lb)
-  center <- depthMedian(x, method = "LP", pdim = pdim, la = la, lb = lb)
+  depth_params <- list(method = "LP", pdim = pdim, la = la, lb = lb)
+  center <- depthMedian(x, depth_params)
   
   method <- "Depth Weighted Estimator"
   new("CovDepthWeighted", cov = cov, center = center, det = det(cov),

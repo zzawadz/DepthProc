@@ -5,9 +5,8 @@
 #' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
 #' @param method Character string which determines the depth function. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}}.
-#' @param name name for this data set --- it will be used on plots.
 #' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used. 
-#' @param ... parameters specific to method - see \code{\link{depthEuclid}}
+#' @param ... parameters specific to method --- see \code{\link{depthEuclid}}
 #'
 #' @details
 #'
@@ -55,7 +54,7 @@
 #' 
 #' @export
 #' 
-depth <- function(u, X, method = "Projection", name = "X", threads = -1, ...) {
+depth <- function(u, X, method = "Projection", threads = -1, ...) {
   
   # Data logic
   if (is.data.frame(u)) {
@@ -77,14 +76,14 @@ depth <- function(u, X, method = "Projection", name = "X", threads = -1, ...) {
   # Method logic
   output <- switch(
     method,
-    Mahalanobis = depthMah(u, X, name = name, threads = threads, ...),
-    Euclidean = depthEuclid(u, X, name = name),
-    Projection = depthProjection(u, X, name = name, threads = threads, ...),
-    Tukey = depthTukey(u, X, name = name, ...),
-    LP = depthLP(u, X, name = name, threads = threads, ...),
-    Local = depthLocal(u, X, name = name, ...),
+    Mahalanobis = depthMah(u, X, threads = threads, ...),
+    Euclidean = depthEuclid(u, X),
+    Projection = depthProjection(u, X, threads = threads, ...),
+    Tukey = depthTukey(u, X, ...),
+    LP = depthLP(u, X, threads = threads, ...),
+    Local = depthLocal(u, X, ...),
     MBD = ,
-    FM = fncDepth(u, X, name = name, method = method, ...)
+    FM = fncDepth(u, X, method = method, ...)
   )
   
   return(output)
@@ -97,7 +96,6 @@ depth <- function(u, X, method = "Projection", name = "X", threads = -1, ...) {
 #'
 #' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#' @param name name for this data set --- it will be used on plots from depthproc.
 #' @param \dots currently not supported.
 #'
 #' @details 
@@ -117,7 +115,7 @@ depth <- function(u, X, method = "Projection", name = "X", threads = -1, ...) {
 #' nonparametric
 #' depth function
 #' 
-depthEuclid <- function(u, X, name = "X", ...) {
+depthEuclid <- function(u, X, ...) {
   
   if (missing(X)) {
     X <- u
@@ -128,7 +126,7 @@ depthEuclid <- function(u, X, name = "X", ...) {
   center <- matrix(rep(center, n), nrow = n, byrow = TRUE)
   depth <- 1 / (1 + (rowSums((u - center) ^ 2)))
   
-  new("DepthEuclid", depth, u = u, X = X, method = "Euclidean", name = name)
+  new("DepthEuclid", depth, u = u, X = X, method = "Euclidean")
 }
 
 #' @title Mahalanobis Depth
@@ -137,7 +135,6 @@ depthEuclid <- function(u, X, name = "X", ...) {
 #'
 #' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#' @param name name for this data set --- it will be used on plots.
 #' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
 #' @param cov custom covariance matrix passed. If NULL standard calculations will be based on standard covariance estimator.
 #' @param mean custom mean vector. If null --- mean average will be used.
@@ -160,8 +157,7 @@ depthEuclid <- function(u, X, name = "X", ...) {
 #' nonparametric
 #' depth function
 #' 
-depthMah <- function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1,
-                     ...) {
+depthMah <- function(u, X, cov = NULL, mean = NULL, threads = -1, ...) {
   
   if (missing(X)) {
     X <- u
@@ -172,8 +168,7 @@ depthMah <- function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1,
   
   depth <- depthMahCPP(u, X, cov, mean, threads)
   
-  new("DepthMahalanobis", depth, u = u, X = X, method = "Mahalanobis",
-      name = name)
+  new("DepthMahalanobis", depth, u = u, X = X, method = "Mahalanobis")
 }
 
 #' @title Projection Depth
@@ -184,7 +179,6 @@ depthMah <- function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1,
 #' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
 #' @param ndir number of directions used in computations
 #' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
-#' @param name name for this data set --- it will be used on plots from depthproc.
 #' @param \dots currently not supported.
 #'
 #' @details 
@@ -204,15 +198,15 @@ depthMah <- function(u, X, name = "X", cov = NULL, mean = NULL, threads = -1,
 #' nonparametric
 #' depth function
 #' 
-depthProjection <- function(u, X, ndir = 1000, name = "X", threads = -1, ...) {
+depthProjection <- function(u, X, ndir = 1000, threads = -1, ...) {
+  
   if (missing(X)) {
     X <- u
   }
   
   depth <- depthProjCPP(u, X, ndir, threads)
   
-  new("DepthProjection", depth, u = u, X = X, method = "Projection",
-      name = name)
+  new("DepthProjection", depth, u = u, X = X, method = "Projection")
 }
 
 #' @title Tukey Depth
@@ -223,7 +217,6 @@ depthProjection <- function(u, X, ndir = 1000, name = "X", threads = -1, ...) {
 #' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
 #' @param ndir number of directions used in computations
 #' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
-#' @param name name for this data set --- it will be used on plots from depthproc.
 #' @param exact if TRUE exact alhorithm will be used . Currently it works only for 2 dimensional data set.
 #' @param \dots currently not supported.
 #'
@@ -250,8 +243,7 @@ depthProjection <- function(u, X, ndir = 1000, name = "X", threads = -1, ...) {
 #' nonparametric
 #' depth function
 #' 
-depthTukey <- function(u, X, ndir = 1000, name = "X", threads = -1,
-                       exact = FALSE, ...) {
+depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE, ...) {
   
   if (missing(X)) {
     X <- u
@@ -286,7 +278,7 @@ depthTukey <- function(u, X, ndir = 1000, name = "X", threads = -1,
     depth <- apply(OD, 1, min)
   }
   
-  new("DepthTukey", depth, u = u, X = X, method = "Tukey", name = name)
+  new("DepthTukey", depth, u = u, X = X, method = "Tukey")
 }
 
 #' @title LP Depth
@@ -298,7 +290,6 @@ depthTukey <- function(u, X, ndir = 1000, name = "X", threads = -1,
 #' @param pdim dimension used in calculating depth function.
 #' @param la slope the weighing function.
 #' @param lb intercept in the weighing function.
-#' @param name name for this data set --- it will be used on plots from depthproc.
 #' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
 #' @param func the weighing function. Currently it is not supported.
 #' @param \dots currently not supported.
@@ -320,7 +311,7 @@ depthTukey <- function(u, X, ndir = 1000, name = "X", threads = -1,
 #' nonparametric
 #' depth function
 #' 
-depthLP <- function(u, X, pdim = 2, la = 1, lb = 1, name = "X", threads = -1,
+depthLP <- function(u, X, pdim = 2, la = 1, lb = 1, threads = -1,
                     func = NULL, ...) {
   
   if (missing(X)) {
@@ -333,5 +324,5 @@ depthLP <- function(u, X, pdim = 2, la = 1, lb = 1, name = "X", threads = -1,
   
   # norm <- function(xi, z, p = 1) sum(abs(z - xi) ^ p) ^ (1 / p)
   
-  new("DepthLP", depth, u = u, X = X, method = "LP", name = name)
+  new("DepthLP", depth, u = u, X = X, method = "LP")
 }
