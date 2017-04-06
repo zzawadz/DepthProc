@@ -9,6 +9,8 @@ DepthProc
 
 [![CRAN version](http://www.r-pkg.org/badges/version/DepthProc)](http://cran.rstudio.com/web/packages/DepthProc/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/DepthProc)](http://cran.rstudio.com/web/packages/DepthProc/index.html)
 [![Build Status](https://travis-ci.org/zzawadz/DepthProc.svg?branch=master)](https://travis-ci.org/zzawadz/DepthProc)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/zzawadz/DepthProc?branch=master&svg=true)](https://ci.appveyor.com/project/zzawadz/DepthProc)
+[![Coverage Status](https://img.shields.io/codecov/c/github/zzawadz/DepthProc/master.svg)](https://codecov.io/github/zzawadz/DepthProc?branch=master)
 
 ## Installation
 

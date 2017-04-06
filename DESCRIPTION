@@ -34,6 +34,7 @@ Suggests:
     robustbase,
     dplyr,
     RcppArmadillo,
-    xts
+    xts,
+    covr
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 6.0.1

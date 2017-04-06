@@ -3,3 +3,5 @@
 .travis.yml
 Miscellaneous
 figure
+^codecov\.yml$
+^appveyor\.yml$
