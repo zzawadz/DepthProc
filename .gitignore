@@ -1,7 +1,7 @@
 JSSFigures
 *.html
-pkg/src-i386
-pkg/src-x64
+src-i386
+src-x64
 pkg.Rcheck
 Struktura
 *.so
