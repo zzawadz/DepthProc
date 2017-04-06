@@ -23,10 +23,10 @@
 Binning 2d
 }
 \examples{
- 
- tmp = binningDepth2D(x = mvrnorm(100,rep(0,2),diag(2)))
- plot(tmp)
- 
+
+tmp <- binningDepth2D(x = mvrnorm(100, rep(0, 2), diag(2)))
+plot(tmp)
+
 }
 \seealso{
 \code{\link{depth}}
@@ -36,4 +36,3 @@ Binning 2d
 \keyword{multivariate}
 \keyword{nonparametric}
 \keyword{robust}
-

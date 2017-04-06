@@ -3,15 +3,17 @@
 \docType{methods}
 \name{plot,DepthDensity,ANY-method}
 \alias{plot,DepthDensity,ANY-method}
-\title{Plot function for DepthDensity}
+\title{Plot function for DepthDensity.}
 \usage{
 \S4method{plot}{DepthDensity,ANY}(x, type = "depth", ...)
 }
 \arguments{
 \item{x}{object of class DepthDensity}
 
-\item{type}{type of density that will be plotted. 'depth' is a depth scaled density, and 'raw' is denisty without scaling.}
+\item{type}{type of density that will be plotted. "depth" is a depth scaled density, and "raw" is denisty without scaling.}
 
 \item{...}{graphical arguments.}
 }
-
+\description{
+Create plot for DepthDensity. See \code{\link{depthDensity}} for more information.
+}

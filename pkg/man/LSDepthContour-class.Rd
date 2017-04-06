@@ -4,4 +4,16 @@
 \name{LSDepthContour-class}
 \alias{LSDepthContour-class}
 \title{Location-Scale depth contour class}
+\description{
+Class used to store result of location-scale depth contours.
+}
+\section{Slots}{
+
+\describe{
+\item{\code{cont_depth}}{depth values used to calculate contours.}
+
+\item{\code{sample}}{original sample used to calculate depth contours.}
+
+\item{\code{.Data}}{list with estimated values of scale-depth contours.}
+}}
 

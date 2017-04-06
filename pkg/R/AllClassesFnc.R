@@ -10,21 +10,15 @@
 #' @slot name name that will be used on plots. By default it is a name of variable passed to fncDepth.
 #' @slot index numeric, or time-based object.
 #'  
-#' @aliases DepthMBD
 #' @rdname FunctionalDepth-class
 #' @exportClass FunctionalDepth
 #' 
-setClass("FunctionalDepth", representation = 
-           list(u = "matrix",
-                X = "matrix",
-                method = "character",
-                name = "character",
-                index = "ANY",
-                val_name = "ANY",
-                "VIRTUAL"))
-
-setClass("FncDepthMBD", representation(), contains = c("FunctionalDepth","numeric"))
-setClass("FncDepthFM", representation(), contains = c("FunctionalDepth","numeric"))
-
-setClass("FncBand", representation = c(index = "ANY", level = "numeric"),contains = "matrix")
-
+setClass("FunctionalDepth",
+         slots = c(u = "matrix", X = "matrix", method = "character",
+                   name = "character", index = "ANY"),
+         contains = "VIRTUAL")
+setClass("FncDepthMBD", contains = c("FunctionalDepth", "numeric"))
+setClass("FncDepthFM", contains = c("FunctionalDepth", "numeric"))
+setClass("FncBand",
+         slots = c(index = "ANY", level = "numeric"),
+         contains = "matrix")

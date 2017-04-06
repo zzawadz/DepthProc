@@ -4,8 +4,8 @@
 \alias{depthLP}
 \title{LP Depth}
 \usage{
-depthLP(u, X, pdim = 2, la = 1, lb = 1, name = "X", threads = -1,
-  func = NULL, ...)
+depthLP(u, X, pdim = 2, la = 1, lb = 1, threads = -1, func = NULL,
+  ...)
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}
@@ -17,8 +17,6 @@ depthLP(u, X, pdim = 2, la = 1, lb = 1, name = "X", threads = -1,
 \item{la}{slope the weighing function.}
 
 \item{lb}{intercept in the weighing function.}
-
-\item{name}{name for this data set - it will be used on plots from depthproc.}
 
 \item{threads}{number of threads used in parallel computations. Default value -1 means that all possible cores will be used.}
 
@@ -33,11 +31,11 @@ Computes the LP depth of a point or vectors of points with respect to a multivar
 Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
 }
 \examples{
- x = matrix(rnorm(3000), ncol = 3)
- 
- #Same results
- depthLP(x, x, ndir = 2000, pdim = 2) 
- 
+x <- matrix(rnorm(3000), ncol = 3)
+
+# Same results
+depthLP(x, x, ndir = 2000, pdim = 2) 
+
 }
 \author{
 Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
@@ -46,4 +44,3 @@ Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki fro
 \keyword{function}
 \keyword{multivariate}
 \keyword{nonparametric}
-

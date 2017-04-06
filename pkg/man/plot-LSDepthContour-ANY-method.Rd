@@ -11,7 +11,7 @@
 \arguments{
 \item{x}{object of class LSDepthContour}
 
-\item{cont}{plotted contours. Default NULL means that all contours stored in x will be plotted}
+\item{cont}{plotted contours. Default NULL means that all contours stored in x will be plotted.}
 
 \item{ratio}{ratio}
 
@@ -25,11 +25,13 @@
 
 \item{...}{other parameters passed to polygon}
 }
+\description{
+Create location-scale depth plot. See \code{\link{lsdSampleDepthContours}} for more information.
+}
 \examples{
 
-smp = rf(100,5,10)
-x = lsdSampleDepthContours(smp)
-plot(x, col = paste0("grey", col = rev(seq(10,40,10))))
+smp <- rf(100, 5, 10)
+x <- lsdSampleDepthContours(smp)
+plot(x, col = paste0("grey", col = rev(seq(10, 40, 10))))
 
 }
-

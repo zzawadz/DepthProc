@@ -10,4 +10,3 @@ AsymmetryCurve is a class that stores results of \link{asymmetryCurve} function.
 \details{
 The mechanism of creating plots with multiple curves is shown in \link{DepthCurve-class} (same mechanism is applied for ScaleCurve).
 }
-

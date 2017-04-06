@@ -4,18 +4,16 @@
 \alias{depthMah}
 \title{Mahalanobis Depth}
 \usage{
-depthMah(u, X, name = "X", cov = NULL, mean = NULL, threads = -1, ...)
+depthMah(u, X, cov = NULL, mean = NULL, threads = -1, ...)
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}
 
 \item{X}{The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).}
 
-\item{name}{name for this data set - it will be used on plots.}
-
 \item{cov}{custom covariance matrix passed. If NULL standard calculations will be based on standard covariance estimator.}
 
-\item{mean}{custom mean vector. If null mean average will be used.}
+\item{mean}{custom mean vector. If null --- mean average will be used.}
 
 \item{threads}{number of threads used in parallel computations. Default value -1 means that all possible cores will be used.}
 
@@ -26,15 +24,13 @@ Computes the mahalanobis depth of a point or vectors of points with respect to a
 }
 \details{
 Calculation of Mahalanobis depth is exact.
- 
- Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
+
+Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
 }
 \examples{
- x <- matrix(rnorm(9999), nc = 3)
- depthMah(x, x)
- 
- 
- 
+x <- matrix(rnorm(9999), nc = 3)
+depthMah(x, x)
+
 }
 \author{
 Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
@@ -43,4 +39,3 @@ Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki fro
 \keyword{function}
 \keyword{multivariate}
 \keyword{nonparametric}
-

@@ -4,8 +4,8 @@
 \alias{depthLocal}
 \title{Local depth}
 \usage{
-depthLocal(u, X, beta = 0.5, depth1 = "Projection", depth2 = depth1,
-  name = "X", ...)
+depthLocal(u, X, beta = 0.5, depth_params1 = list(method = "Projection"),
+  depth_params2 = depth_params1)
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}
@@ -14,51 +14,47 @@ depthLocal(u, X, beta = 0.5, depth1 = "Projection", depth2 = depth1,
 
 \item{beta}{cutoff value for neighbourhood}
 
-\item{depth1}{depth method for symmetrised data}
+\item{depth_params1}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).}
 
-\item{depth2}{depth method for calculation depth of given point}
-
-\item{name}{name for this data set - it will be used on plots.}
-
-\item{...}{additional parameters passed to depth1 and depth2}
+\item{depth_params2}{as above --- default is depth_params1.}
 }
 \description{
-Computes local version of depth according to proposals of Paindaveine and Van Bever - see referencess.
+Computes local version of depth according to proposals of Paindaveine and Van Bever --- see referencess.
 }
 \details{
-A successful concept of {local depth } was proposed by Paidaveine and Van Bever (2012) . For defining {a neighbourhood} of a point authors proposed using idea of {symmetrisation} of a distribution (a sample) with respect to a point in which depth is calculated. In their approach instead of a distribution  \eqn{ {P}^{X} } , a distribution  \eqn{ {{P}_{x}}=1/2{{P}^{X}}+1/2{{P}^{2x-X}} }  is used. For any  \eqn{ \beta \in [0,1] } , let us introduce the smallest depth region bigger or equal to  \eqn{ \beta  } ,  \deqn{ {R}^{\beta }(F)=\bigcap\limits_{\alpha \in A(\beta )}{{{D}_{\alpha }}}(F), }  where  \eqn{ A(\beta )=\left\{ \alpha \ge 0:P\left[ {{D}_{\alpha }}(F) \right]\ge \beta  \right\} } . Then for a locality parameter  \eqn{ \beta  }  we can take a neighbourhood of a point  \eqn{ x }  as  \eqn{ R_{x}^{\beta }(P) } .
- 
- Formally, let  \eqn{ D(\cdot,P) }  be a depth function. Then the {local depth }with the locality parameter  \eqn{ \beta  }  and w.r.t. a point  \eqn{ x }  is defined as  \deqn{ L{{D}^{\beta }}(z,P):z\to D(z,P_{x}^{\beta }), }  where  \eqn{ P_{x}^{\beta }(\cdot )=P\left( \cdot |R_{x}^{\beta }(P) \right) }  is cond. distr. of  \eqn{ P }  conditioned on  \eqn{ R_{x}^{\beta }(P) } .
+A successful concept of local depth was proposed by Paindaveine and Van Bever (2012). For defining a neighbourhood of a point authors proposed using idea of symmetrisation of a distribution (a sample) with respect to a point in which depth is calculated. In their approach instead of a distribution \eqn{ {P} ^ {X} }, a distribution \eqn{ {{P}_{x}} = \frac{ 1 }{ 2 }{{P} ^ {X}} + \frac{ 1 }{ 2 }{{P} ^ {2x - X}} } is used. For any \eqn{ \beta \in [0, 1] }, let us introduce the smallest depth region bigger or equal to \eqn{ \beta }, \deqn{ {R} ^ {\beta}(F) = \bigcap\limits_{\alpha \in A(\beta)} {{{D}_{\alpha}}}(F), } where \eqn{ A(\beta) = \left\{ \alpha \ge 0:P\left[ {{D}_{\alpha}}(F)\right] \ge \beta\right\} }. Then for a locality parameter \eqn{ \beta } we can take a neighbourhood of a point \eqn{ x } as \eqn{ R_{x} ^ {\beta}(P) }.
+
+Formally, let \eqn{ D(\cdot, P) } be a depth function. Then the local depth with the locality parameter \eqn{ \beta } and w.r.t. a point \eqn{ x } is defined as \deqn{ L{{D} ^ {\beta}}(z, P):z \to D(z, P_{x} ^ {\beta}), } where \eqn{ P_{x} ^ {\beta}(\cdot) = P\left( \cdot |R_{x} ^ {\beta}(P)\right) } is cond. distr. of \eqn{ P } conditioned on \eqn{ R_{x} ^ {\beta}(P) }.
 }
 \examples{
 
 \dontrun{
 # EXAMPLE 1
-data = mvrnorm(100, c(0,5), diag(2)*5)
-#by default depth2 = depth1
-depthLocal(data, data, depth1 = "LP")
-depthLocal(data, data, depth1 = "LP", depth2 = "Projection")
-## Depthcontour
-depthContour(data, method = "Local", depth1 = "LP")
-# EXAMPLE 2
-data(inf.mort,maesles.imm)
-data1990=na.omit(cbind(inf.mort[,1],maesles.imm[,1]))
-depthContour(data1990, method = "Local", depth1 = "LP",beta=0.3)
+data <- mvrnorm(100, c(0, 5), diag(2) * 5)
+# By default depth_params2 = depth_params1
+depthLocal(data, data, depth_params1 = list(method = "LP"))
+depthLocal(data, data, depth_params1 = list(method = "LP"),
+           depth_params2 = list(method = "Projection"))
+# Depth contour
+depthContour(data, method = "Local", depth_params1 = list(method = "LP"))
 
-#EXAMPLE 3
-Sigma1 = matrix(c(10,3,3,2),2,2)
-X1 = mvrnorm(n= 8500, mu= c(0,0),Sigma1)
-Sigma2 = matrix(c(10,0,0,2),2,2)
-X2 = mvrnorm(n= 1500, mu= c(-10,6),Sigma2)
-BALLOT=rbind(X1,X2)
+# EXAMPLE 2
+data(inf.mort, maesles.imm)
+data1990 <- na.omit(cbind(inf.mort[, 1], maesles.imm[, 1]))
+depthContour(data1990, method = "Local", depth1 = "LP", beta = 0.3)
+
+# EXAMPLE 3
+Sigma1 <- matrix(c(10, 3, 3, 2), 2, 2)
+X1 <- mvrnorm(n = 8500, mu = c(0, 0), Sigma1)
+Sigma2 <- matrix(c(10, 0, 0, 2), 2, 2)
+X2 <- mvrnorm(n = 1500, mu = c(-10, 6), Sigma2)
+BALLOT <- rbind(X1, X2)
 
 train <- sample(1:10000, 100)
-data<-BALLOT[train,]
-depthContour(data, method = "Local", depth1 = "Projection",beta=0.3)
+data <- BALLOT[train, ]
 }
 
 }
 \references{
-Paindaveine, D., Van Bever, G. (2013) From depth to local depth : a focus on centrality. Journal of the American Statistical Association 105, 1105-1119 (2013).
+Paindaveine, D., Van Bever, G. (2013) From depth to local depth : a focus on centrality. Journal of the American Statistical Association 105, 1105--1119.
 }
-

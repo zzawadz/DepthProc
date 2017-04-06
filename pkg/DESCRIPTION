@@ -1,6 +1,6 @@
 Package: DepthProc
 Version: 1.1.0
-Date: 2016-03-01
+Date: 2017-04-03
 Title: Statistical Depth Functions for Multivariate Analysis
 Author: Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt
     Zawadzki from Cracow University of Economics.
@@ -25,7 +25,8 @@ Imports:
     lattice,
     sm,
     geometry,
-    colorspace
+    colorspace,
+    zoo
 Suggests:
     mvtnorm,
     rgl,
@@ -33,7 +34,6 @@ Suggests:
     robustbase,
     dplyr,
     RcppArmadillo,
-    zoo,
     xts
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

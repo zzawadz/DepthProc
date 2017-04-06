@@ -10,102 +10,110 @@
 #' @param name name for data set
 #' @param \dots additional arguments passed to fncDepthFM.
 #' 
+#' @importFrom zoo index
 #' @rdname fncDepth
 #' @examples
 #' 
-#' x = matrix(rnorm(60), ncol = 20)
+#' x <- matrix(rnorm(60), ncol = 20)
 #' fncDepth(x, method = "FM", dep1d = "Mahalanobis")
 #' fncDepth(x, byrow = FALSE)
 #' 
 #' # zoo and xts
 #' library(xts)
 #' data(sample_matrix)
-#' sample.xts <- as.xts(sample_matrix, descr='my new xts object')
+#' sample.xts <- as.xts(sample_matrix, descr = "my new xts object")
 #' fncDepth(sample.xts) 
 #' 
-fncDepth = function(u, X = NULL, method = "MBD", byrow = NULL, name = deparse(substitute(u)), ...)
-{
-  if(!is.null(X))
-  {
-    if(class(u) != class(X)) stop("u and X must be the the same class!")
+fncDepth <- function(u, X = NULL, method = "MBD", byrow = NULL,
+                     name = deparse(substitute(u)), ...) {
+  
+  if (!is.null(X)) {
+    
+    if (class(u) != class(X)) {
+      stop("u and X must be the the same class!")
+    }
   }
+  
   UseMethod("fncDepth")
 }
+
 #' @export
 #' @rdname fncDepth
-fncDepth.matrix = function(u, X = NULL, method = "MBD", byrow = NULL, name = deparse(substitute(u)), ...)
-{
+fncDepth.matrix <- function(u, X = NULL, method = "MBD", byrow = NULL,
+                            name = deparse(substitute(u)), ...) {
   force(name) # Fix for name problem, after transposition
   
-  fast_mbd = FALSE
-  if(is.null(X) && method == "MBD") fast_mbd = TRUE
-  if(is.null(X)) X = u
+  fast_mbd <- FALSE
+  if (is.null(X) && method == "MBD") {
+    fast_mbd <- TRUE
+  }
+  if (is.null(X)) {
+    X <- u
+  }
   
   # For matrix - by default row is an observation
-  if(is.null(byrow)) byrow = TRUE
-  if( !byrow )
-  {
-    u = t(u)
-    X = t(X)
+  if (is.null(byrow)) {
+    byrow <- TRUE
+  }
+  if (!byrow) {
+    u <- t(u)
+    X <- t(X)
   }
   
-  if(method == "FM")  
-  {
-    dept = (fncDepthFM(u, X, ...))
-    depth = new("FncDepthFM", dept)
+  if (method == "FM") {
+    dept <- (fncDepthFM(u, X, ...))
+    depth <- new("FncDepthFM", dept)
   }
-  if(method == "MBD") 
-  {
-    if(fast_mbd) 
-    {
-      dept = fncDepthMBD(u) 
-    } else
-    {
-      dept = (fncDepthMBD(u, X))
+  if (method == "MBD") {
+    
+    if (fast_mbd) {
+      dept <- fncDepthMBD(u)
+    } else {
+      dept <- (fncDepthMBD(u, X))
     }
-    depth = new("FncDepthMBD", dept)
+    
+    depth <- new("FncDepthMBD", dept)
   }
   
-  depth@u = u
-  depth@X = X
-  depth@name = name
-  depth@method = method
-  depth@index = .extractIndexFromMatrix(u)
-  depth@val_name = if(!is.null(rownames(u))) rownames(u) else 1:nrow(u)
+  depth@u <- u
+  depth@X <- X
+  depth@name <- name
+  depth@method <- method
+  depth@index <- .extractIndexFromMatrix(u)
+  
   return(depth)
 }
 
 #' @export
 #' @rdname fncDepth
-fncDepth.zoo = function(u, X = NULL, method = "MBD", byrow = NULL, name = deparse(substitute(u)), ...)
-{
-  if(is.null(byrow)) byrow = FALSE
+fncDepth.zoo <- function(u, X = NULL, method = "MBD", byrow = NULL,
+                         name = deparse(substitute(u)), ...) {
   
-  if(is.null(X)) X = u
-  
-  um = as.matrix(u)
-  Xm = as.matrix(X)
-  
-  
-  if(!byrow)
-  {
-    um = t(um)
-    Xm = t(Xm)
+  if (is.null(byrow)) {
+    byrow <- FALSE
+  }
+  if (is.null(X)) {
+    X <- u
   }
   
-  depth = fncDepth(um,Xm, method, byrow = TRUE, name, ...)
+  um <- as.matrix(u)
+  Xm <- as.matrix(X)
   
-  depth@name = name
+  if (!byrow) {
+    um <- t(um)
+    Xm <- t(Xm)
+  }
   
-  if(!byrow) depth@index = index(u)
+  depth <- fncDepth(um, Xm, method, byrow = TRUE, name, ...)
   
+  depth@name <- name
+  
+  if (!byrow) {
+    depth@index <- index(u)
+  }
   
   depth
 }
-
-###################################################################
-###################################################################
-
 
 #' @title FM Depth
 #' @export
@@ -117,23 +125,25 @@ fncDepth.zoo = function(u, X = NULL, method = "MBD", byrow = NULL, name = depars
 #' @param \dots other arguments passed to depth function.
 #' 
 #' @examples
-#' x = matrix(rnorm(60), nc = 20)
+#' x <- matrix(rnorm(60), nc = 20)
 #' fncDepthFM(x)
 #' 
-fncDepthFM = function(u, X, dep1d = "Projection", ...)
-{
-  if(missing(X)) X = u
+fncDepthFM <- function(u, X, dep1d = "Projection", ...) {
   
-  depths = rep(0, nrow(X))
-  for(i in 1:ncol(X))
-  {
-    depths = depths + depth(u[,i], X[,i], method = dep1d, ...)
+  if (missing(X)) {
+    X <- u
   }
   
-  depths = as.numeric(depths/ncol(X))
-  return(depths)  
+  depths <- rep(0, nrow(X))
+  
+  for (i in 1:ncol(X)) {
+    depths <- depths + depth(u[, i], X[, i], method = dep1d, ...)
+  }
+  
+  depths <- as.numeric(depths / ncol(X))
+  
+  return(depths)
 }
-
 
 #'@title Modified band depth
 #'@export
@@ -144,19 +154,17 @@ fncDepthFM = function(u, X, dep1d = "Projection", ...)
 #'
 #'@examples
 #'
-#'  x = matrix(rnorm(60), nc = 20)
-#'  fncDepthMBD(x)
-#'  fncDepthMBD(x, x)
-#'  
-fncDepthMBD = function(u, X)
-{
-  if(missing(X)) 
-  {
-    X = u
-    depth = modBandDepth(u)
-  } else
-  {
-    depth = modBandDepthRef(u,X)  
+#' x <- matrix(rnorm(60), nc = 20)
+#' fncDepthMBD(x)
+#' fncDepthMBD(x, x)
+#' 
+fncDepthMBD <- function(u, X) {
+  
+  if (missing(X)) {
+    X <- u
+    depth <- modBandDepth(u)
+  } else {
+    depth <- modBandDepthRef(u, X)
   }
   
   as.numeric(depth)

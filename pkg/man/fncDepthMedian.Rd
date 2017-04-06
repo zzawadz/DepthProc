@@ -25,8 +25,7 @@ Calculate functional median based on data depth.
 }
 \examples{
 
-x = matrix(rnorm(600), nc = 20)
-md = fncDepthMedian(x, method = "FM", dep1d = "Mahalanobis")
+x <- matrix(rnorm(600), nc = 20)
+md <- fncDepthMedian(x, method = "FM", dep1d = "Mahalanobis")
 
 }
-

@@ -2,7 +2,6 @@
 % Please edit documentation in R/AllClassesFnc.R
 \docType{class}
 \name{FunctionalDepth-class}
-\alias{DepthMBD}
 \alias{FunctionalDepth-class}
 \title{Functional Depth}
 \description{

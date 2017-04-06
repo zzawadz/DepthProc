@@ -4,8 +4,7 @@
 \alias{depthTukey}
 \title{Tukey Depth}
 \usage{
-depthTukey(u, X, ndir = 1000, name = "X", threads = -1, exact = FALSE,
-  ...)
+depthTukey(u, X, ndir = 1000, threads = -1, exact = FALSE, ...)
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}
@@ -13,8 +12,6 @@ depthTukey(u, X, ndir = 1000, name = "X", threads = -1, exact = FALSE,
 \item{X}{The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).}
 
 \item{ndir}{number of directions used in computations}
-
-\item{name}{name for this data set - it will be used on plots from depthproc.}
 
 \item{threads}{number of threads used in parallel computations. Default value -1 means that all possible cores will be used.}
 
@@ -27,19 +24,19 @@ Computes the Tukey depth of a point or vectors of points with respect to a multi
 }
 \details{
 Irrespective of dimension, Projection and Tukey's depth is obtained by approximate calculation.
- 
- Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
+
+Returns the depth of multivariate point \code{u} with respect to data set \code{X}.
 }
 \examples{
- \dontrun{
- x = matrix(rnorm(3000), nc = 3)
- depthTukey(x, ndir = 2000)
- }
- 
- # Exact algorithm in 2d
- x = matrix(rnorm(2000), nc = 2)
- depthTukey(x, exact = TRUE)
- 
+\dontrun{
+x <- matrix(rnorm(3000), nc = 3)
+depthTukey(x, ndir = 2000)
+}
+
+# Exact algorithm in 2d
+x <- matrix(rnorm(2000), nc = 2)
+depthTukey(x, exact = TRUE)
+
 }
 \author{
 Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
@@ -48,4 +45,3 @@ Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki fro
 \keyword{function}
 \keyword{multivariate}
 \keyword{nonparametric}
-

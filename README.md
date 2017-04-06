@@ -37,8 +37,8 @@ Most of the code is written in C++ for additional efficiency. We also use OpenMP
 library(DepthProc)
 
 # Tested on Intel Core i7 3770K
-d = 10
-x = mvrnorm(1000, rep(0, d), diag(d))
+d <- 10
+x <- mvrnorm(1000, rep(0, d), diag(d))
 # Default - utilize as many threads as possible
 system.time(depth(x, x, method = "LP"))
 ```
@@ -71,7 +71,7 @@ system.time(depth(x, x, method = "LP", threads = 2))
 ## Available depth functions
 
 ```r
-x = mvrnorm(100, c(0, 0), diag(2))
+x <- mvrnorm(100, c(0, 0), diag(2))
 
 depthEuclid(x, x)
 depthMah(x, x)
@@ -94,7 +94,7 @@ depthMedian(x, method = "Local")
 
 ```r
 library(mvtnorm)
-y = rmvt(n = 200, sigma = diag(2), df = 4, delta = c(3, 5))
+y <- rmvt(n = 200, sigma = diag(2), df = 4, delta = c(3, 5))
 depthContour(y, points = TRUE, lwd = 2)
 ```
 ![plot of chunk contour](figure/contour.png) 
@@ -112,7 +112,7 @@ depthPersp(y, method = "Mahalanobis")
 There are two functional depths implemented - modified band depth (MBD), and Frainman-Muniz depth (FM):
 
 ```r
-x = matrix(rnorm(60), nc = 20)
+x <- matrix(rnorm(60), nc = 20)
 fncDepth(x, method = "MBD")
 fncDepth(x, method = "FM", dep1d = "Mahalanobis")
 ```
@@ -120,7 +120,7 @@ fncDepth(x, method = "FM", dep1d = "Mahalanobis")
 ### Functional BoxPlot
 
 ```r
-x  = matrix(rnorm(200), ncol = 10)
+x <- matrix(rnorm(200), ncol = 10)
 fncBoxPlot(x, bands = c(0, 0.5, 1), method = "FM")
 ```
 ![plot of chunk contour](figure/fncBoxPlot.png) 

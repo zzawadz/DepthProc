@@ -15,12 +15,11 @@ runifsphere(n, p = 2)
 This function generates random numbers from p-dimensional unit sphere.
 }
 \examples{
- 
-x = runifsphere(n=100)
+
+x <- runifsphere(n = 100)
 plot(x)
- 
+
 }
 \author{
 Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 }
-

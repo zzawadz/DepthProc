@@ -12,78 +12,74 @@
 #' @examples
 #' 
 #' # some data:
-#' x  = matrix(rnorm(200), ncol = 10)
+#' x <- matrix(rnorm(200), ncol = 10)
 #' 
 #' fncBoxPlot(x, bands = c(0, 0.5, 1), method = "FM")
 #' fncBoxPlot(x, bands = c(0, 0.5, 1), method = "FM", byrow = FALSE)
 #' 
-#' colnames(x) = paste0("f", 1:ncol(x))
+#' colnames(x) <- paste0("f", 1:ncol(x))
 #' fncBoxPlot(x, bands = c(0, 0.5, 1), method = "FM")
 #' 
 #' # fncBoxPlot handles zoo and xts objects
 #' library(xts)
-#' x  = matrix(rnorm(200), ncol = 10)
-#' time = as.POSIXct(1:ncol(x) * 86400, origin = "1970-01-01")
-#' x_xts = xts(t(x), order.by = time)
+#' x <- matrix(rnorm(200), ncol = 10)
+#' time <- as.POSIXct(1:ncol(x) * 86400, origin = "1970-01-01")
+#' x_xts <- xts(t(x), order.by = time)
 #' fncBoxPlot(x_xts, bands = c(0, 0.5, 1), method = "FM")
 #' 
-fncBoxPlot = function(u, X = NULL, bands = c(0,0.5), method = "MBD", byrow = NULL, type = "ggplot2", ...)
-{
-  depths = fncDepth(u, X, method = method, byrow = byrow, ...)
-  if(type == "ggplot2") return(.fncBoxPlotGGPlot(depths, bands))
+fncBoxPlot <- function(u, X = NULL, bands = c(0, 0.5), method = "MBD",
+                       byrow = NULL, type = "ggplot2", ...) {
+  depths <- fncDepth(u, X, method = method, byrow = byrow, ...)
+  
+  if (type == "ggplot2") {
+    return(.fncBoxPlotGGPlot(depths, bands))
+  }
 }
 
-
 # Create Functional BoxPlot based on ggplot2
-.fncBoxPlotGGPlot = function(obj, bands)
-{
-  bands = fncGetBandsDataFrame(obj, bands)
+.fncBoxPlotGGPlot <- function(obj, bands) {
+  bands <- fncGetBandsDataFrame(obj, bands)
   
-  p = ggplot(bands, aes_string(x = "index", fill = "level", color = "level")) 
-  p = p + geom_ribbon(aes_string(ymin = "lower", ymax = "upper"))
-  p = p + theme_bw()
-  p = p + scale_fill_brewer(palette = "Blues") + scale_color_brewer(palette = "Blues") 
+  p <- ggplot(bands, aes_string(x = "index", fill = "level", color = "level"))
+  p <- p + geom_ribbon(aes_string(ymin = "lower", ymax = "upper"))
+  p <- p + theme_bw()
+  p <- p + scale_fill_brewer(palette = "Blues") +
+    scale_color_brewer(palette = "Blues")
   
-  
-  if(is.factor(bands$fac_index))
-  { 
-    labels = unique(as.character(bands$fac_index))
-    index = unique(bands$index)
+  if (is.factor(bands$fac_index)) {
+    labels <- unique(as.character(bands$fac_index))
+    index <- unique(bands$index)
     
-    p = p + scale_x_continuous(breaks = index, labels =labels)
+    p <- p + scale_x_continuous(breaks = index, labels = labels)
   }
   
   return(p)
 }
 
-
 ############## Other functions ############
 
-
-fncBand2DataFrame = function(band)
-{
-  data.frame(index = band@index,lower = band[,1], upper = band[,2], level = band@level)
+fncBand2DataFrame <- function(band) {
+  data.frame(index = band@index, lower = band[, 1], upper = band[, 2],
+             level = band@level)
 }
 
-fncGetBandsDataFrame = function(obj, bands = c(0.25, 0.75))
-{
-  bands = sort(bands, decreasing = TRUE)
-  bands_list = lapply(bands, function(x) fncBand2DataFrame(fncGetBand(obj, x)))
+fncGetBandsDataFrame <- function(obj, bands = c(0.25, 0.75)) {
+  bands <- sort(bands, decreasing = TRUE)
+  bands_list <- lapply(bands, function(x) {
+    fncBand2DataFrame(fncGetBand(obj, x))
+  })
   
-  bands = Reduce(rbind, bands_list)
+  bands <- Reduce(rbind, bands_list)
   
-  levels = paste0(bands$level * 100, "%")
-  bands$level = factor(levels, levels = unique(levels),  ordered = TRUE)
+  levels <- paste0(bands$level * 100, "%")
+  bands$level <- factor(levels, levels = unique(levels), ordered = TRUE)
   
-  if(is.factor(bands$index))
-  {
-    bands$fac_index = bands$index
-    bands$index = as.numeric(bands$index)
-  } else 
-  {
-    bands$fac_index = bands$index
+  if (is.factor(bands$index)) {
+    bands$fac_index <- bands$index
+    bands$index <- as.numeric(bands$index)
+  } else {
+    bands$fac_index <- bands$index
   }
-
+  
   bands
 }
-

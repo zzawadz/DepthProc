@@ -1,4 +1,4 @@
-# Simple functions based on functioanl depths
+# Simple functions based on functional depths
 
 #' @title Functional median
 #' @description Calculate functional median based on data depth.
@@ -13,23 +13,20 @@
 #' 
 #' @examples
 #' 
-#' x = matrix(rnorm(600), nc = 20)
-#' md = fncDepthMedian(x, method = "FM", dep1d = "Mahalanobis")
+#' x <- matrix(rnorm(600), nc = 20)
+#' md <- fncDepthMedian(x, method = "FM", dep1d = "Mahalanobis")
 #' 
-fncDepthMedian = function(u, X = NULL, method = "MBD", byrow = NULL, unique = TRUE, ...)
-{
-  depths = fncDepth(u, X, method = method, byrow = byrow, ...)
-  meds = depths@u[depths == max(depths),, drop = FALSE]
+fncDepthMedian <- function(u, X = NULL, method = "MBD", byrow = NULL,
+                           unique = TRUE, ...) {
+  depths <- fncDepth(u, X, method = method, byrow = byrow, ...)
+  meds <- depths@u[depths == max(depths), , drop = FALSE]
   
-  if(unique) 
-  {
-    meds = colMeans(meds) 
-  } 
+  if (unique) {
+    meds <- colMeans(meds)
+  }
+  
   return(meds)
 }
-
-
-
 
 #' @title Functional bands
 #' @description Extract bands from functional depth object.
@@ -40,17 +37,15 @@ fncDepthMedian = function(u, X = NULL, method = "MBD", byrow = NULL, unique = TR
 #' 
 #' @examples
 #' 
-#' x = matrix(rnorm(600), nc = 20)
-#' obj = fncDepth(x, method = "FM", dep1d = "Mahalanobis")
+#' x <- matrix(rnorm(600), nc = 20)
+#' obj <- fncDepth(x, method = "FM", dep1d = "Mahalanobis")
 #' fncGetBand(obj)
 #' 
-fncGetBand = function(obj, band = 0.5)
-{
-  u = obj@u
-  depths = as.numeric(obj)
-  bands_q = quantile(obj, 1 - band)
-  tmp_u = u[depths >= bands_q, , drop = FALSE]
-  bands = t(apply(tmp_u, 2, range))
+fncGetBand <- function(obj, band = 0.5) {
+  u <- obj@u
+  depths <- as.numeric(obj)
+  bands_q <- quantile(obj, 1 - band)
+  tmp_u <- u[depths >= bands_q, , drop = FALSE]
+  bands <- t(apply(tmp_u, 2, range))
   new("FncBand", bands, index = obj@index, level = band)
 }
-
