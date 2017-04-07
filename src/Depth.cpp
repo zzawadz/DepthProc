@@ -23,7 +23,7 @@ namespace Depth
     
     if(threads < 1) threads = omp_get_max_threads();
     
-    //#pragma omp parallel for shared(depth, X, Y, n_x, n_y, d, p, b, a) private(k) num_threads(threads)
+    #pragma omp parallel for shared(depth, X, Y, n_x, n_y, d, p, b, a) private(k) num_threads(threads)
 		for(k = 0; k< n_x; k++)
 		{
       arma::rowvec tmp = arma::zeros<arma::rowvec>(d);
