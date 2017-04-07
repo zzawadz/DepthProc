@@ -2,9 +2,13 @@ Package: DepthProc
 Version: 1.1.0
 Date: 2017-04-03
 Title: Statistical Depth Functions for Multivariate Analysis
-Author: Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt
-    Zawadzki from Cracow University of Economics.
-Maintainer: Zygmunt Zawadzki <zawadzkizygmunt@gmail.com>
+Authors@R: c(
+    person("Zygmunt", "Zawadzki", role = c("aut", "cre"), email = "zygmunt@zstat.pl"),
+    person("Daniel", "Kosiorowski", role = c("aut"), email = "dkosioro@uek.krakow.pl"),
+    person("Krzysztof", "Slomczynski", role = c("ctb"), email = "krzysztofslomczynski@gmail.com"),
+    person("Mateusz", "Bocian", role = c("ctb")),
+    person("Anna", "Wegrzynkiewicz", role = c("ctb"))
+    )
 Description: Data depth concept offers a variety of powerful and user friendly
     tools for robust exploration and inference for multivariate data. The offered
     techniques may be successfully used in cases of lack of our knowledge on
