@@ -6,3 +6,4 @@ figure
 ^codecov\.yml$
 ^appveyor\.yml$
 ^\.travis\.yml$
+README.Rmd
