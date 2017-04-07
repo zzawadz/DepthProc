@@ -2,7 +2,7 @@ DepthProc
 ========================
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, results="hide")
 ```
 
 *DepthProc* project consist of a set of statistical procedures based on so called statistical depth functions. The project involves free available R package and its description.
@@ -88,7 +88,7 @@ depthMedian(x,
 
 ### Contour plot
 
-```{r}
+```{r contour}
 library(mvtnorm)
 y <- rmvt(n = 200, sigma = diag(2), df = 4, delta = c(3, 5))
 depthContour(y, points = TRUE, graph_params = list(lwd = 2))
@@ -96,7 +96,7 @@ depthContour(y, points = TRUE, graph_params = list(lwd = 2))
 
 ### Perspective plot
  
-```{r}
+```{r persp}
 depthPersp(y, depth_params = list(method = "Mahalanobis"))
 ```
 
@@ -112,12 +112,7 @@ fncDepth(x, method = "FM", dep1d = "Mahalanobis")
 
 ### Functional BoxPlot
 
-```{r}
+```{r fncBox}
 x <- matrix(rnorm(200), ncol = 10)
 fncBoxPlot(x, bands = c(0, 0.5, 1), method = "FM")
 ```
-![plot of chunk contour](figure/fncBoxPlot.png) 
-
-
-
-
