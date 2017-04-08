@@ -60,3 +60,15 @@ NULL
 #' 
 #'
 NULL
+
+#' Air pollination in Katowice city by hour.
+#' 
+#' @docType data
+#' @keywords datasets
+#' @name katowice.pollination
+#' @usage data("katowice.pollination")
+#' @format data frame containing 181 rows (days) and 24 columns. Each column is an air pollination for given hour.
+#' 
+#'
+NULL
+
