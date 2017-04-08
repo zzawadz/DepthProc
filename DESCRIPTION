@@ -39,6 +39,7 @@ Suggests:
     dplyr,
     RcppArmadillo,
     xts,
-    covr
+    covr,
+    testthat
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 6.0.1
