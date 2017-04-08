@@ -10,6 +10,9 @@
 #' colnames(u) <- c("fn1", "fn2")
 #' .extractIndexFromMatrix(u)
 #' 
+#' data("katowice.pollination")
+#' .extractIndexFromMatrix(katowice.pollination)
+#'  
 .extractIndexFromMatrix <- function(x) {
   
   if (is.null(colnames(x))) {
@@ -17,5 +20,5 @@
   }
   
   idx <- colnames(x)
-  factor(idx, ordered = TRUE)
+  factor(idx, levels = idx, ordered = TRUE)
 }
