@@ -5,7 +5,7 @@
 \title{Functional boxplot based on Modified Band Depth}
 \usage{
 fncBoxPlot(u, X = NULL, bands = c(0, 0.5), method = "MBD", byrow = NULL,
-  type = "ggplot2", ...)
+  ...)
 }
 \arguments{
 \item{u}{data matrix}
@@ -17,8 +17,6 @@ fncBoxPlot(u, X = NULL, bands = c(0, 0.5), method = "MBD", byrow = NULL,
 \item{method}{depth method}
 
 \item{byrow}{byrow}
-
-\item{type}{method used for create plot ("ggplot2" or "base")}
 
 \item{\dots}{other arguments passed to fncDepth}
 }

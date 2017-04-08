@@ -6,7 +6,6 @@
 #' @param bands limits for bands
 #' @param method depth method
 #' @param byrow byrow
-#' @param type method used for create plot ("ggplot2" or "base")
 #' @param \dots other arguments passed to fncDepth
 #'
 #' @examples
@@ -32,12 +31,11 @@
 #' pl + ggtitle("Air pollination in Katowice") + labs(y= "pollination ", x = "hour ")
 #'
 fncBoxPlot <- function(u, X = NULL, bands = c(0, 0.5), method = "MBD",
-                       byrow = NULL, type = "ggplot2", ...) {
+                       byrow = NULL, ...) {
+  
   depths <- fncDepth(u, X, method = method, byrow = byrow, ...)
   
-  if (type == "ggplot2") {
-    return(.fncBoxPlotGGPlot(depths, bands))
-  }
+  .fncBoxPlotGGPlot(depths, bands)
 }
 
 # Create Functional BoxPlot based on ggplot2
