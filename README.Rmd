@@ -41,7 +41,7 @@ install_github("zzawadz/DepthProc")
 Most of the code is written in C++ for additional efficiency. We also use OpenMP to speedup computations with multithreading:
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, results='markup'}
 library(DepthProc)
 set.seed(123)
 
@@ -50,13 +50,10 @@ d <- 10
 x <- mvrnorm(1000, rep(0, d), diag(d))
 # Default - utilize as many threads as possible
 system.time(depth(x, x, method = "LP"))
-```
-```{r}
+
 # Only single thread - 4 times slower:
 system.time(depth(x, x, method = "LP", threads = 1))
-```
 
-```{r}
 # Two threads - 2 times slower:
 system.time(depth(x, x, method = "LP", threads = 2))
 ```
