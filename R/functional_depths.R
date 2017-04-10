@@ -151,8 +151,8 @@ fncDepthFM <- function(u, X, dep1d = "Projection", ...) {
 #'
 #' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #' @param X The data as a matrix. If it is a matrix or data frame, then each row is viewed as one multivariate observation.
-#'
-#'@examples
+#' 
+#' @examples
 #'
 #' x <- matrix(rnorm(60), nc = 20)
 #' fncDepthMBD(x)
@@ -161,11 +161,21 @@ fncDepthFM <- function(u, X, dep1d = "Projection", ...) {
 fncDepthMBD <- function(u, X) {
   
   if (missing(X)) {
-    X <- u
-    depth <- modBandDepth(u)
+    depth <- fastMBD(t(u))
   } else {
     depth <- modBandDepthRef(u, X)
   }
   
   as.numeric(depth)
 }
+
+fastMBD <- function(u) 
+{
+  p = nrow(u)
+  n = ncol(u)
+  rmat = apply(u, 1, rank)
+  down = rmat - 1
+  up = n - rmat
+  (rowSums(up * down)/p + n - 1)/choose(n, 2)
+}
+

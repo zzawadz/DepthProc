@@ -40,6 +40,7 @@ Suggests:
     RcppArmadillo,
     xts,
     covr,
-    testthat
+    testthat,
+    fda
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 6.0.1
