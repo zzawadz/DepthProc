@@ -13,14 +13,14 @@ setMethod("plot", signature = c(x = "DepthCurveList"), function(x) {
 setMethod("initialize", "DepthCurveList", function(.Object, ...) {
   tmp <- list(...)
   n <- length(tmp)
-  
+
   if (n > 0) {
     .Object[[1]] <- tmp[[1]]
     if (n > 1) {
       for (i in 2:length(tmp)) .Object <- combineDepthCurves(.Object, tmp[[i]])
     }
   }
-  
+
   return(.Object)
 })
 
@@ -29,9 +29,9 @@ setMethod("initialize", "DepthCurveList", function(.Object, ...) {
 setMethod("combineDepthCurves", signature(.list = "list"),
   function(x, y, .list) {
     Reduce(combineDepthCurves, .list)
-  }  
+  }
 )
-    
+
 #' @rdname combineDepthCurves-methods
 #' @export
 setMethod("combineDepthCurves", signature(x = "DepthCurveList", y = "DepthCurve"),
@@ -40,23 +40,23 @@ setMethod("combineDepthCurves", signature(x = "DepthCurveList", y = "DepthCurve"
               xx@name
             })
             new_name <- y@name
-            
+
             if (any(new_name == names)) {
               warning("Names in DepthCurveList are not unique!")
               k <- 1
               new_name_tmp <- paste0(new_name)
-              
+
               while (any(new_name_tmp == names)) {
                 new_name_tmp <- paste0(new_name, k)
                 k <- k + 1
               }
-              
+
               y@name <- new_name_tmp
             }
-            
+
             n <- length(x)
             x[[n + 1]] <- y
-            
+
             return(x)
           }
 )
@@ -82,16 +82,16 @@ setMethod(".getPlot", "DepthCurveList", function(object) {
   len_alpha <- sapply(object, function(x) length(x@alpha))
   names <- sapply(object, function(x) x@name)
   names <- rep(names, len_alpha)
-  
+
   data <- data.frame(value, alpha, names)
-  
+
   p <- ggplot()
   p <- p + geom_line(data = data, aes(x = alpha, y = value, col = names),
                      size = 1.5)
   p <- p + theme_bw() + .depTheme()
   p <- p + ylim(c(0, max(data$value, na.rm = TRUE)))
   p <- p + xlim(c(0, max(data$alpha, na.rm = TRUE)))
-  
+
   return(p)
 })
 

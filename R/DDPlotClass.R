@@ -23,7 +23,7 @@ setMethod("getPlot", "DDPlot", function(object) {
   p <- p + ylim(c(0, max(a_est$y)))
   p <- p + xlim(c(0, max(a_est$x)))
   p <- p + geom_abline(color = "grey")
-  
+
   return(p)
 })
 setMethod("show", "DDPlot", function(object) {
@@ -38,7 +38,7 @@ setMethod("indexLiu", signature(ddplot = "DDPlot", gamma = "numeric"),
             indLiu <- sapply(gamma, function(x) {
               sum(tmp > x)
             })
-            
+
             return(indLiu)
           }
 )

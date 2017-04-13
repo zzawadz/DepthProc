@@ -1,0 +1,12 @@
+linters: 
+  list(
+    line_length_linter = line_length_linter(120),
+    absolute_paths_linter = absolute_paths_linter,
+    assignment_linter = assignment_linter,
+    closed_curly_linter = closed_curly_linter,
+    commas_linter = commas_linter,
+    infix_spaces_linter = infix_spaces_linter,
+    object_usage_linter = object_usage_linter,
+    trailing_blank_lines_linter = trailing_blank_lines_linter,
+    trailing_whitespace_linter = trailing_whitespace_linter
+  )

@@ -14,37 +14,37 @@
 #' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
 #'
 #' @details
-#' 
-#' For two probability distributions \eqn{ F } and \eqn{ G }, both in \eqn{ {{{R}} ^ {d}} }, we can define \code{depth vs. depth} plot being very useful generalization of the one dimensional quantile-quantile plot: \deqn{ DD(F, G) = \left\{\left( D({z}, F), D({z}, G) \right), {z} \in {{{R}} ^ {d}} \right\} } 
+#'
+#' For two probability distributions \eqn{ F } and \eqn{ G }, both in \eqn{ {{{R}} ^ {d}} }, we can define \code{depth vs. depth} plot being very useful generalization of the one dimensional quantile-quantile plot: \deqn{ DD(F, G) = \left\{\left( D({z}, F), D({z}, G) \right), {z} \in {{{R}} ^ {d}} \right\} }
 #' Its sample counterpart calculated for two samples \eqn{ {{{X}} ^ {n}} = \{{{X}_{1}}, ..., {{X}_{n}}\} } from \eqn{ F }, and \eqn{ {{Y} ^ {m}} = \{{{Y}_{1}}, ..., {{Y}_{m}}\} } from \eqn{ G } is defined as \deqn{ DD({{F}_{n}}, {{G}_{m}}) = \left\{\left( D({z}, {{F}_{n}}), D({z}, {{G}_{m}}) \right), {z} \in \{{{{X}} ^ {n}} \cup {{{Y}} ^ {m}}\} \right\} }
 #'
 #' @references
 #' Liu, R.Y., Parelius, J.M. and Singh, K. (1999), Multivariate analysis by data depth: Descriptive statistics, graphics and inference (with discussion), \emph{Ann. Statist.}, \bold{27}, 822--831.
-#' 
+#'
 #' Liu, R.Y., Singh K. (1993), A Quality Index Based on Data Depth and Multivariate Rank Test, \emph{Journal of the American Statistical Association} vol. 88.
-#' 
+#'
 #' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
-#' 
+#'
 #' @examples
 #' library(sn)
 #' library(mvtnorm)
-#' 
+#'
 #' # EXAMPLE 1: Location difference
 #' standard <- mvrnorm(1000, c(0, 0), diag(2))
 #' shift <- mvrnorm(1000, c(0.5, 0), diag(2))
 #' ddPlot(x = standard, y = shift, title = "Difference in position")
 #' ddPlot(x = standard, y = shift, location = TRUE, title = "Location aligned")
-#' 
+#'
 #' # EXAMPLE 2: Scale difference
 #' standard <- mvrnorm(1000, c(0, 0), diag(2))
 #' scale <- mvrnorm(1000, c(0, 0), 4 * diag(2))
 #' ddPlot(x = standard, y = scale)
 #' ddPlot(x = standard, y = scale, scale = TRUE)
-#' 
+#'
 ddPlot <- function(x, y, scale = FALSE, location = FALSE, name = "X",
                    name_y = "Y", title = "Depth vs. depth plot",
                    depth_params = list()) {
-  
+
   if (ncol(x) != ncol(y)) {
     stop("Wrong dimensions of the datasets! ncol(x) != ncol(y)")
   }
@@ -67,14 +67,14 @@ ddPlot <- function(x, y, scale = FALSE, location = FALSE, name = "X",
     x_new <- sweep(x_new, 2, medx, "-")
     y_new <- sweep(y_new, 2, medy, "-")
   }
-  
+
   data <- rbind(x_new, y_new)
   uxname_list_x_new <- list(u = data, X = x_new, name = name)
   uxname_list_y_new <- list(u = data, X = y_new, name = name_y)
   depth_x <- do.call(depth, c(uxname_list_x_new, depth_params))
   depth_y <- do.call(depth, c(uxname_list_y_new, depth_params))
-  
+
   ddplot <- new("DDPlot", X = depth_x, Y = depth_y, title = title)
-  
+
   return(ddplot)
 }

@@ -13,6 +13,6 @@
 #' 
 #' @export
 #' 
-runifsphere = function(n, p = 2) {
+runifsphere <- function(n, p = 2) {
   runifsphereCPP(n, p)
 }

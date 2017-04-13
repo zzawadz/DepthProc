@@ -51,15 +51,15 @@ setClass("CovDepthWeighted", contains = "CovRobust")
 #' depth function
 #'
 CovLP <- function(x, pdim = 2, la = 1, lb = 1) {
-  
+
   if (is.data.frame(x)) {
     x <- as.matrix(x)
   }
-  
+
   cov <- CovLPCPP(x, pdim, la, lb)
   depth_params <- list(method = "LP", pdim = pdim, la = la, lb = lb)
   center <- depthMedian(x, depth_params)
-  
+
   method <- "Depth Weighted Estimator"
   new("CovDepthWeighted", cov = cov, center = center, det = det(cov),
       n.obs = nrow(x), X = x, method = method, call = match.call())
