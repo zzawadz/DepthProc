@@ -69,7 +69,7 @@ asymmetryCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
                            movingmedian = FALSE, name = "X", name_y = "Y",
                            depth_params = list(method = "Projection")) {
   x <- na.omit(x)
-  
+
   if (nrow(x) < NCOL(x) * 10) {
     stop("Too small sample!")
   }
@@ -79,24 +79,22 @@ asymmetryCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
   if (!is.null(y) && !is.matrix(y)) {
     stop("Y must be a matrix!")
   }
-  
+
   uxname_list <- list(u = x, X = x, name = name)
-  
+
   depth_est <- do.call(depth, c(uxname_list, depth_params))
-  
+
   if (!movingmedian) {
-    # function in as_curve.R
-    x_est <- .asCurve(x, depth_est = depth_est, alpha = alpha, name = name,
+    x_est <- asCurve(x, depth_est = depth_est, alpha = alpha, name = name,
                       depth_params = depth_params)
   } else {
-    # function in as_curve_mm.R
-    x_est <- .asCurveMM(x, alpha = alpha, name = name,
+    x_est <- asCurveMM(x, alpha = alpha, name = name,
                         depth_params = depth_params)
   }
-  
+
   asc <- new("AsymmetryCurve", x_est[, 2], depth = depth_est,
              alpha = x_est[, 1], name = name)
-  
+
   if (!is.null(y)) {
     name <- name_y
     asc <- combineDepthCurves(
@@ -106,11 +104,11 @@ asymmetryCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
                      depth_params = list(method = "Projection"))
     )
   }
-  
+
   return(asc)
 }
 
-.asCurve <- function(X, depth_est = NULL, alpha = NULL, name = "X",
+asCurve <- function(X, depth_est = NULL, alpha = NULL, name = "X",
                      depth_params = list(method = "Projection")) {
   dim_X <- dim(X)[2]
   
@@ -158,7 +156,7 @@ asymmetryCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
   matrix(c(rev(1 - alpha_est), rev(nn)), ncol = 2)
 }
 
-.asCurveMM <- function(X, depth_est = NULL, alpha = NULL, name = "X",
+asCurveMM <- function(X, depth_est = NULL, alpha = NULL, name = "X",
                        depth_params = list(method = "Projection")) {
   dim_X <- dim(X)[2]
   

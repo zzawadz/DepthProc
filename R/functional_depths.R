@@ -79,7 +79,7 @@ fncDepth.matrix <- function(u, X = NULL, method = "MBD", byrow = NULL,
   depth@X <- X
   depth@name <- name
   depth@method <- method
-  depth@index <- .extractIndexFromMatrix(u)
+  depth@index <- extractIndexFromMatrix(u)
   
   return(depth)
 }
@@ -196,4 +196,3 @@ fastMBDRef <- function(u, X) {
   up = n - rmat
   (rowSums(up * down)/p + n - 1)/choose(n, 2)
 }
-

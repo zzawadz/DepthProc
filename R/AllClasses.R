@@ -258,7 +258,6 @@ setMethod("abline", "RobReg", function(a, ...) {
 })
 setMethod("show", "Depth", function(object) {
   cat("Depth method: ", object@method, "\n")
-  
   print(object@.Data, width = 20)
 })
 

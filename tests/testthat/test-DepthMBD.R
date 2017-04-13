@@ -42,11 +42,11 @@ test_that("Ref rank", {
   x <- c(1,4,4,4,4,5,6)
   expect_equal(refRank(x[4:5],x), rank(x)[4:5])
   
-  x = sort(katowice.pollination[,1])
-  
+  x = sort(katowice.pollination[, 1])
+
   rank.x <- rank(x)
-  
-  expect_equal(refRank(x,x), rank.x)
+
+  expect_equal(refRank(x, x), rank.x)
   expect_equal(refRank(x[10:30], x), rank.x[10:30])
   expect_equal(refRank(x[70:90], x), rank.x[70:90])
 })
