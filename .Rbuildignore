@@ -8,3 +8,4 @@ figure
 ^\.travis\.yml$
 README.Rmd
 README_files
+README.html
