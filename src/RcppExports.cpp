@@ -192,3 +192,15 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// refRank
+std::vector<double> refRank(std::vector<double> u, std::vector<double> x);
+RcppExport SEXP DepthProc_refRank(SEXP uSEXP, SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type u(uSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(refRank(u, x));
+    return rcpp_result_gen;
+END_RCPP
+}

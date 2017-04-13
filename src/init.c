@@ -18,6 +18,7 @@ extern SEXP DepthProc_depthTukeyCPP(SEXP, SEXP, SEXP, SEXP);
 extern SEXP DepthProc_meanCPP(SEXP, SEXP);
 extern SEXP DepthProc_modBandDepth(SEXP);
 extern SEXP DepthProc_modBandDepthRef(SEXP, SEXP);
+extern SEXP DepthProc_refRank(SEXP, SEXP);
 extern SEXP DepthProc_runifsphereCPP(SEXP, SEXP);
 extern SEXP DepthProc_sampleDepthContForMuCPP(SEXP, SEXP, SEXP);
 extern SEXP DepthProc_sampleMaxDepthForMuCPP(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -34,6 +35,7 @@ static const R_CallMethodDef CallEntries[] = {
   {"DepthProc_meanCPP",                   (DL_FUNC) &DepthProc_meanCPP,                   2},
   {"DepthProc_modBandDepth",              (DL_FUNC) &DepthProc_modBandDepth,              1},
   {"DepthProc_modBandDepthRef",           (DL_FUNC) &DepthProc_modBandDepthRef,           2},
+  {"DepthProc_refRank",                   (DL_FUNC) &DepthProc_refRank,                   2},
   {"DepthProc_runifsphereCPP",            (DL_FUNC) &DepthProc_runifsphereCPP,            2},
   {"DepthProc_sampleDepthContForMuCPP",   (DL_FUNC) &DepthProc_sampleDepthContForMuCPP,   3},
   {"DepthProc_sampleMaxDepthForMuCPP",    (DL_FUNC) &DepthProc_sampleMaxDepthForMuCPP,    5},

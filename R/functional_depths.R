@@ -163,7 +163,7 @@ fncDepthMBD <- function(u, X) {
   if (missing(X)) {
     depth <- fastMBD(t(u))
   } else {
-    depth <- modBandDepthRef(u, X)
+    depth <- fastMBDRef(t(u), t(X))
   }
   
   as.numeric(depth)
@@ -171,9 +171,27 @@ fncDepthMBD <- function(u, X) {
 
 fastMBD <- function(u) 
 {
-  p = nrow(u)
-  n = ncol(u)
-  rmat = apply(u, 1, rank)
+  p <- nrow(u)
+  n <- ncol(u)
+  rmat <- apply(u, 1, rank)
+  down <- rmat - 1
+  up <- n - rmat
+  (rowSums(up * down)/p + n - 1)/choose(n, 2)
+}
+
+fastMBDRef <- function(u, X) {
+  
+  p <- nrow(X)
+  n <- ncol(X)
+  
+  rmat <- u
+  
+  for(i in 1:p) {
+    rmat[i,] = refRank(u[i,], X[i,])
+  }
+  
+  rmat <- t(rmat)
+  
   down = rmat - 1
   up = n - rmat
   (rowSums(up * down)/p + n - 1)/choose(n, 2)
