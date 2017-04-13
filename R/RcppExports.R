@@ -60,3 +60,4 @@ meanCPP <- function(rX, threads) {
 refRank <- function(u, x) {
     .Call('DepthProc_refRank', PACKAGE = 'DepthProc', u, x)
 }
+
