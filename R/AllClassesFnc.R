@@ -2,21 +2,16 @@
 
 #' Functional Depth
 #'
-#' Virtual class with structure for every functional depth class from depthproc package.
+#' Virtual class with structure for every functional depth class from depthproc package. Inherits from \code{\link{Depth-class}}.
 #'
-#' @slot u data set.
-#' @slot X reference set.
-#' @slot method functional depth type.
-#' @slot name name that will be used on plots. By default it is a name of variable passed to fncDepth.
 #' @slot index numeric, or time-based object.
-#'  
+#'
 #' @rdname FunctionalDepth-class
 #' @exportClass FunctionalDepth
-#' 
+#'
 setClass("FunctionalDepth",
-         slots = c(u = "matrix", X = "matrix", method = "character",
-                   name = "character", index = "ANY"),
-         contains = "VIRTUAL")
+         slots = c(index = "ANY"),
+         contains = c("VIRTUAL", "Depth"))
 setClass("FncDepthMBD", contains = c("FunctionalDepth", "numeric"))
 setClass("FncDepthFM", contains = c("FunctionalDepth", "numeric"))
 setClass("FncBand",

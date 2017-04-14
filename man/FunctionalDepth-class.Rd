@@ -5,19 +5,11 @@
 \alias{FunctionalDepth-class}
 \title{Functional Depth}
 \description{
-Virtual class with structure for every functional depth class from depthproc package.
+Virtual class with structure for every functional depth class from depthproc package. Inherits from \code{\link{Depth-class}}.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{u}}{data set.}
-
-\item{\code{X}}{reference set.}
-
-\item{\code{method}}{functional depth type.}
-
-\item{\code{name}}{name that will be used on plots. By default it is a name of variable passed to fncDepth.}
-
 \item{\code{index}}{numeric, or time-based object.}
 }}
 
