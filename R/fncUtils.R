@@ -1,5 +1,5 @@
 #' Extract index from matrix.
-#'
+#' @noRd
 #' @details
 #'
 #' If matrix has column names, then oredered factor is returned.

@@ -77,7 +77,6 @@ fncDepth.matrix <- function(u, X = NULL, method = "MBD", byrow = NULL,
 
   depth@u <- u
   depth@X <- X
-  depth@name <- name
   depth@method <- method
   depth@index <- extractIndexFromMatrix(u)
 
@@ -105,8 +104,6 @@ fncDepth.zoo <- function(u, X = NULL, method = "MBD", byrow = NULL,
   }
 
   depth <- fncDepth(um, Xm, method, byrow = TRUE, name, ...)
-
-  depth@name <- name
 
   if (!byrow) {
     depth@index <- index(u)

@@ -28,7 +28,7 @@ ddPlot(x, y, scale = FALSE, location = FALSE, name = "X", name_y = "Y",
 Produces a DD plot which allows to compare two multivariate datasets or to compare a subject dataset with theoretical distribution.
 }
 \details{
-For two probability distributions \eqn{ F } and \eqn{ G }, both in \eqn{ {{{R}} ^ {d}} }, we can define \code{depth vs. depth} plot being very useful generalization of the one dimensional quantile-quantile plot: \deqn{ DD(F, G) = \left\{\left( D({z}, F), D({z}, G) \right), {z} \in {{{R}} ^ {d}} \right\} } 
+For two probability distributions \eqn{ F } and \eqn{ G }, both in \eqn{ {{{R}} ^ {d}} }, we can define \code{depth vs. depth} plot being very useful generalization of the one dimensional quantile-quantile plot: \deqn{ DD(F, G) = \left\{\left( D({z}, F), D({z}, G) \right), {z} \in {{{R}} ^ {d}} \right\} }
 Its sample counterpart calculated for two samples \eqn{ {{{X}} ^ {n}} = \{{{X}_{1}}, ..., {{X}_{n}}\} } from \eqn{ F }, and \eqn{ {{Y} ^ {m}} = \{{{Y}_{1}}, ..., {{Y}_{m}}\} } from \eqn{ G } is defined as \deqn{ DD({{F}_{n}}, {{G}_{m}}) = \left\{\left( D({z}, {{F}_{n}}), D({z}, {{G}_{m}}) \right), {z} \in \{{{{X}} ^ {n}} \cup {{{Y}} ^ {m}}\} \right\} }
 }
 \examples{

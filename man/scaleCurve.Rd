@@ -34,11 +34,11 @@ Draws a scale curve: measure of dispersion.
 \details{
 For sample depth function \eqn{ D({x}, {{{Z}} ^ {n}}) }, \eqn{ {x} \in {{{R}} ^ {d}} }, \eqn{ d \ge 2 }, \eqn{ {Z} ^ {n} = \{{{{z}}_{1}}, ..., {{{z}}_{n}}\} \subset {{{R}} ^ {d}} }, \eqn{ {{D}_{\alpha}}({{{Z}} ^ {n}}) } denoting \eqn{\alpha} --- central region, we can define the scale curve \eqn{ SC(\alpha) = \left(\alpha, vol({{D}_{\alpha}}({{{Z}} ^ {n}})\right) \subset {{{R}} ^ {2}} }, for \eqn{ \alpha \in [0, 1] }
 
-The scale curve is a two-dimensional method of describing the dispersion of random vector around the depth induced median. 
+The scale curve is a two-dimensional method of describing the dispersion of random vector around the depth induced median.
 
-Function scalecurve for determining the volumes of the convex hull containing points from alpha central regions, uses function convhulln from geometry package. 
+Function scalecurve for determining the volumes of the convex hull containing points from alpha central regions, uses function convhulln from geometry package.
 
-The minimal dimension of data in X or Y is 2. 
+The minimal dimension of data in X or Y is 2.
 
 ggplot2 package is used to draw a plot.
 }

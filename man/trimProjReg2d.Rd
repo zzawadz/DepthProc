@@ -42,7 +42,7 @@ abline(trimProjReg2d(x, y), lwd = 2, col = "red") # trimmed reg
 legend("bottomleft", c("LS", "TrimReg"), fill = c("black", "red"), cex = 1.4,
        bty = "n")
 
-##### Comparsion of a few regression methods ##### 
+##### Comparsion of a few regression methods #####
 library(DepthProc)
 library(MASS)
 
@@ -54,7 +54,7 @@ lm.fit <- lm(UR ~ MW, data = france)
 abline(lm.fit, lwd=2, cex=3, col='red')
 
 # M-estimator
-rlm.fit <- rlm(UR ~ MW, data = france) 
+rlm.fit <- rlm(UR ~ MW, data = france)
 abline(rlm.fit, lwd = 2,col = "blue")
 
 # LMS
