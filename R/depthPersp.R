@@ -76,8 +76,9 @@ depthPersp <- function(x, plot_method = "lattice",
     col <- colors[ztmp]
 
     if (plot_method == "rgl") {
+
       do.call(rgl::persp3d,
-              c(list(axis_x = axis_x, axis_y = axis_y, z_surface = z_surface,
+              c(list(x = axis_x, y = axis_y, z = z_surface,
                      color = col, back = "lines", xlab = xlab, ylab = ylab,
                      zlab = plot_title),
                 graph_params))
