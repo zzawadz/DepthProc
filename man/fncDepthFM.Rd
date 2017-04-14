@@ -4,14 +4,14 @@
 \alias{fncDepthFM}
 \title{FM Depth}
 \usage{
-fncDepthFM(u, X, dep1d = "Projection", ...)
+fncDepthFM(u, X, dep1d_params = list(method = "Projection"))
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}
 
 \item{X}{The data as a matrix. If it is a matrix or data frame, then each row is viewed as one multivariate observation.}
 
-\item{dep1d}{method for depth used in 1d.}
+\item{dep1d_params}{parameters passed to depth function used in one dimension.}
 
 \item{\dots}{other arguments passed to depth function.}
 }

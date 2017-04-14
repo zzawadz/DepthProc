@@ -85,7 +85,7 @@ scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
 
   dim_x <- dim(x)[2]
 
-  uxname_list <- list(u = x, X = x, name = name)
+  uxname_list <- list(u = x, X = x)
 
   depth_est <- do.call(depth, c(uxname_list, depth_params))
 

@@ -4,7 +4,7 @@
 \alias{depthProjection}
 \title{Projection Depth}
 \usage{
-depthProjection(u, X, ndir = 1000, threads = -1, ...)
+depthProjection(u, X, ndir = 1000, threads = -1)
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}

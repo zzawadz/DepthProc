@@ -7,7 +7,6 @@
 #' @param X reference set. If null u will be used as reference.
 #' @param method depth method - "MBD" (default), or "FM" (Frainman-Muniz depth)
 #' @param byrow logical or character.
-#' @param name name for data set
 #' @param \dots additional arguments passed to fncDepthFM.
 #'
 #' @importFrom zoo index
@@ -24,8 +23,7 @@
 #' sample.xts <- as.xts(sample_matrix, descr = "my new xts object")
 #' fncDepth(sample.xts)
 #'
-fncDepth <- function(u, X = NULL, method = "MBD", byrow = NULL,
-                     name = deparse(substitute(u)), ...) {
+fncDepth <- function(u, X = NULL, method = "MBD", byrow = NULL, ...) {
 
   if (!is.null(X)) {
 
@@ -39,9 +37,7 @@ fncDepth <- function(u, X = NULL, method = "MBD", byrow = NULL,
 
 #' @export
 #' @rdname fncDepth
-fncDepth.matrix <- function(u, X = NULL, method = "MBD", byrow = NULL,
-                            name = deparse(substitute(u)), ...) {
-  force(name) # Fix for name problem, after transposition
+fncDepth.matrix <- function(u, X = NULL, method = "MBD", byrow = NULL, ...) {
 
   fast_mbd <- FALSE
   if (is.null(X) && method == "MBD") {
@@ -85,8 +81,7 @@ fncDepth.matrix <- function(u, X = NULL, method = "MBD", byrow = NULL,
 
 #' @export
 #' @rdname fncDepth
-fncDepth.zoo <- function(u, X = NULL, method = "MBD", byrow = NULL,
-                         name = deparse(substitute(u)), ...) {
+fncDepth.zoo <- function(u, X = NULL, method = "MBD", byrow = NULL, ...) {
 
   if (is.null(byrow)) {
     byrow <- FALSE
@@ -103,7 +98,7 @@ fncDepth.zoo <- function(u, X = NULL, method = "MBD", byrow = NULL,
     Xm <- t(Xm)
   }
 
-  depth <- fncDepth(um, Xm, method, byrow = TRUE, name, ...)
+  depth <- fncDepth(um, Xm, method, byrow = TRUE, ...)
 
   if (!byrow) {
     depth@index <- index(u)
@@ -118,14 +113,14 @@ fncDepth.zoo <- function(u, X = NULL, method = "MBD", byrow = NULL,
 #'
 #' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #' @param X The data as a matrix. If it is a matrix or data frame, then each row is viewed as one multivariate observation.
-#' @param dep1d method for depth used in 1d.
+#' @param dep1d_params parameters passed to depth function used in one dimension.
 #' @param \dots other arguments passed to depth function.
 #'
 #' @examples
 #' x <- matrix(rnorm(60), nc = 20)
 #' fncDepthFM(x)
 #'
-fncDepthFM <- function(u, X, dep1d = "Projection", ...) {
+fncDepthFM <- function(u, X, dep1d_params = list(method = "Projection")) {
 
   if (missing(X)) {
     X <- u
@@ -134,7 +129,11 @@ fncDepthFM <- function(u, X, dep1d = "Projection", ...) {
   depths <- rep(0, nrow(X))
 
   for (i in 1:ncol(X)) {
-    depths <- depths + depth(u[, i], X[, i], method = dep1d, ...)
+
+    dep1d_params$u = u[,i]
+    dep1d_params$X = X[,i]
+
+    depths <- depths + do.call(depth, dep1d_params)
   }
 
   depths <- as.numeric(depths / ncol(X))

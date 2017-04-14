@@ -49,8 +49,8 @@ ddPlot <- function(x, y, scale = FALSE, location = FALSE, name = "X",
     stop("Wrong dimensions of the datasets! ncol(x) != ncol(y)")
   }
   if (scale) {
-    uxname_list_x <- list(u = x, X = x, name = name)
-    uxname_list_y <- list(u = y, X = y, name = name_y)
+    uxname_list_x <- list(u = x, X = x)
+    uxname_list_y <- list(u = y, X = y)
     depth_sample_x <- do.call(depth, c(uxname_list_x, depth_params))
     depth_sample_y <- do.call(depth, c(uxname_list_y, depth_params))
     varcovx <- cov(x[which(depth_sample_x >= median(depth_sample_x)), ])
@@ -69,8 +69,8 @@ ddPlot <- function(x, y, scale = FALSE, location = FALSE, name = "X",
   }
 
   data <- rbind(x_new, y_new)
-  uxname_list_x_new <- list(u = data, X = x_new, name = name)
-  uxname_list_y_new <- list(u = data, X = y_new, name = name_y)
+  uxname_list_x_new <- list(u = data, X = x_new)
+  uxname_list_y_new <- list(u = data, X = y_new)
   depth_x <- do.call(depth, c(uxname_list_x_new, depth_params))
   depth_y <- do.call(depth, c(uxname_list_y_new, depth_params))
 

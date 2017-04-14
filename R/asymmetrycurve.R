@@ -80,7 +80,7 @@ asymmetryCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
     stop("Y must be a matrix!")
   }
 
-  uxname_list <- list(u = x, X = x, name = name)
+  uxname_list <- list(u = x, X = x)
 
   depth_est <- do.call(depth, c(uxname_list, depth_params))
 
@@ -157,7 +157,7 @@ asCurveMM <- function(X, depth_est = NULL, alpha = NULL, name = "X",
   dim_X <- dim(X)[2]
 
   if (is.null(depth_est)) {
-    uxname_list <- list(u = X, X = X, name = name)
+    uxname_list <- list(u = X, X = X)
     depth_est <- do.call(depth, c(uxname_list, depth_params))
   }
   if (is.null(alpha)) {
@@ -179,7 +179,7 @@ asCurveMM <- function(X, depth_est = NULL, alpha = NULL, name = "X",
       alpha_est[i] <- alpha[i]
       means[i, ] <- colMeans(tmp_X)
 
-      uxname_list_temp <- list(u = tmp_X, X = tmp_X, name = name)
+      uxname_list_temp <- list(u = tmp_X, X = tmp_X)
       tmp_depth_est <- do.call(depth, c(uxname_list_temp, depth_params))
 
       med <- tmp_X[tmp_depth_est == max(tmp_depth_est), ]

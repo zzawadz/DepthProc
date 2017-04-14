@@ -115,7 +115,7 @@ depth <- function(u, X, method = "Projection", threads = -1, ...) {
 #' nonparametric
 #' depth function
 #'
-depthEuclid <- function(u, X, ...) {
+depthEuclid <- function(u, X) {
 
   if (missing(X)) {
     X <- u
@@ -157,7 +157,7 @@ depthEuclid <- function(u, X, ...) {
 #' nonparametric
 #' depth function
 #'
-depthMah <- function(u, X, cov = NULL, mean = NULL, threads = -1, ...) {
+depthMah <- function(u, X, cov = NULL, mean = NULL, threads = -1) {
 
   if (missing(X)) {
     X <- u
@@ -198,7 +198,7 @@ depthMah <- function(u, X, cov = NULL, mean = NULL, threads = -1, ...) {
 #' nonparametric
 #' depth function
 #'
-depthProjection <- function(u, X, ndir = 1000, threads = -1, ...) {
+depthProjection <- function(u, X, ndir = 1000, threads = -1) {
 
   if (missing(X)) {
     X <- u
@@ -243,7 +243,7 @@ depthProjection <- function(u, X, ndir = 1000, threads = -1, ...) {
 #' nonparametric
 #' depth function
 #'
-depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE, ...) {
+depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
 
   if (missing(X)) {
     X <- u
@@ -304,7 +304,7 @@ depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE, ...) {
 #' x <- matrix(rnorm(3000), ncol = 3)
 #'
 #' # Same results
-#' depthLP(x, x, ndir = 2000, pdim = 2)
+#' depthLP(x, x, pdim = 2)
 #'
 #' @keywords
 #' multivariate
@@ -312,7 +312,7 @@ depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE, ...) {
 #' depth function
 #'
 depthLP <- function(u, X, pdim = 2, la = 1, lb = 1, threads = -1,
-                    func = NULL, ...) {
+                    func = NULL) {
 
   if (missing(X)) {
     X <- u

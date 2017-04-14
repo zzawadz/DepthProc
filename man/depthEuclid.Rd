@@ -4,7 +4,7 @@
 \alias{depthEuclid}
 \title{Euclidean Depth}
 \usage{
-depthEuclid(u, X, ...)
+depthEuclid(u, X)
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}

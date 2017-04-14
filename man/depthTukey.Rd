@@ -4,7 +4,7 @@
 \alias{depthTukey}
 \title{Tukey Depth}
 \usage{
-depthTukey(u, X, ndir = 1000, threads = -1, exact = FALSE, ...)
+depthTukey(u, X, ndir = 1000, threads = -1, exact = FALSE)
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}

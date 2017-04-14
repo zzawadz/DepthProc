@@ -4,8 +4,7 @@
 \alias{depthLP}
 \title{LP Depth}
 \usage{
-depthLP(u, X, pdim = 2, la = 1, lb = 1, threads = -1, func = NULL,
-  ...)
+depthLP(u, X, pdim = 2, la = 1, lb = 1, threads = -1, func = NULL)
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}
@@ -34,7 +33,7 @@ Returns the depth of multivariate point \code{u} with respect to data set \code{
 x <- matrix(rnorm(3000), ncol = 3)
 
 # Same results
-depthLP(x, x, ndir = 2000, pdim = 2)
+depthLP(x, x, pdim = 2)
 
 }
 \author{

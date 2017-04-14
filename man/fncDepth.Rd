@@ -6,14 +6,11 @@
 \alias{fncDepth.zoo}
 \title{Basic function for functional depths}
 \usage{
-fncDepth(u, X = NULL, method = "MBD", byrow = NULL,
-  name = deparse(substitute(u)), ...)
+fncDepth(u, X = NULL, method = "MBD", byrow = NULL, ...)
 
-\method{fncDepth}{matrix}(u, X = NULL, method = "MBD", byrow = NULL,
-  name = deparse(substitute(u)), ...)
+\method{fncDepth}{matrix}(u, X = NULL, method = "MBD", byrow = NULL, ...)
 
-\method{fncDepth}{zoo}(u, X = NULL, method = "MBD", byrow = NULL,
-  name = deparse(substitute(u)), ...)
+\method{fncDepth}{zoo}(u, X = NULL, method = "MBD", byrow = NULL, ...)
 }
 \arguments{
 \item{u}{data}
@@ -23,8 +20,6 @@ fncDepth(u, X = NULL, method = "MBD", byrow = NULL,
 \item{method}{depth method - "MBD" (default), or "FM" (Frainman-Muniz depth)}
 
 \item{byrow}{logical or character.}
-
-\item{name}{name for data set}
 
 \item{\dots}{additional arguments passed to fncDepthFM.}
 }
