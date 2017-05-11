@@ -12,7 +12,6 @@
 #' @param name_y Name of matrix Y used in legend.
 #' @param title title of the plot.
 #' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
-#' @param ... Any additional parameters for plotting.
 #'
 #' @details
 #'
@@ -64,7 +63,7 @@
 #'
 scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
                        name_y = "Y", title = "Scale Curve",
-                       depth_params = list(method = "Projection"), ...) {
+                       depth_params = list(method = "Projection")) {
   x <- na.omit(x)
 
   if (is.data.frame(x)) {

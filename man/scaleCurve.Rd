@@ -6,7 +6,7 @@
 \usage{
 scaleCurve(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
   name_y = "Y", title = "Scale Curve", depth_params = list(method =
-  "Projection"), ...)
+  "Projection"))
 }
 \arguments{
 \item{x}{Multivariate data as a matrix.}
@@ -22,8 +22,6 @@ scaleCurve(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
 \item{title}{title of the plot.}
 
 \item{depth_params}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).}
-
-\item{...}{Any additional parameters for plotting.}
 }
 \value{
 Returns the volume of the convex hull containing subsequent central points of \code{X}.
