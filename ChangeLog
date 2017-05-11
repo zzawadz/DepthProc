@@ -1,2 +1,16 @@
-Changes in 1.1
-  - new interface for functional depth
+Changes in DepthProc 2.0
+
+Version 2.0 comes with a lot of breaking changes! There is high chance that old code will not work with the new version! However, if you just used the `depth` function or its different version like `depthTukey`, there shouldn't be any problems.
+
+If you have any problem with migrating from version 1.0.7 to 2.0, please fill an issue on https://github.com/zzawadz/DepthProc/issues or send an e-mail to zygmunt@zstat.pl.
+
+Breaking changes:
+- `combineDepthCurves` replaced `%+%` operator (`%+%` is no longer available).
+- New interface for plotting functions. Parameters for depth function are passed using `depth_params` argument, and parameters for drawing function using `graph_params`.
+- New interface for `mWilcoxonTest` and `depthMedian` and `depthLocal`.
+
+Introduced functional depth:
+- Introduced new interface for functional depth with `fncDepth`
+- `fncDepthMBD` - Modified Band Depth
+- `fncDepthFM` - Frainman-Muniz depth for functional data
+- `fncBoxPlot` - create functional boxplot based on depth function.
