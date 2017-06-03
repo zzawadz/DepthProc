@@ -36,6 +36,7 @@ namespace Depth
 				tmp = arma::abs(tmp);
 				tmp = arma::pow(tmp, p);
 				tmp_sum = arma::sum(tmp);
+				tmp_sum = std::pow(tmp_sum, 1.0 / p);
 				tmp_sum = a*tmp_sum + b;
 				sum_res = sum_res + tmp_sum;
 			}
