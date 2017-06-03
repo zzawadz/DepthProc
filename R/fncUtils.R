@@ -10,8 +10,8 @@
 #' colnames(u) <- c("fn1", "fn2")
 #' extractIndexFromMatrix(u)
 #'
-#' data("katowice.pollination")
-#' extractIndexFromMatrix(katowice.pollination)
+#' data("katowice.airpollution")
+#' extractIndexFromMatrix(katowice.airpollution)
 #'
 extractIndexFromMatrix <- function(x) {
 

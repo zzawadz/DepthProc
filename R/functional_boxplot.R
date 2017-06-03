@@ -26,9 +26,9 @@
 #' x_xts <- xts(t(x), order.by = time)
 #' fncBoxPlot(x_xts, bands = c(0, 0.5, 1), method = "FM")
 #'
-#' data("katowice.pollination")
-#' pl <- fncBoxPlot(katowice.pollination, bands = c(0, 0.5, 1), method = "MBD")
-#' pl + ggtitle("Air pollination in Katowice") + labs(y= "pollination ", x = "hour ")
+#' data("katowice.airpollution")
+#' pl <- fncBoxPlot(katowice.airpollution, bands = c(0, 0.5, 1), method = "MBD")
+#' pl + ggtitle("Air pollution in Katowice") + labs(y= "pollination ", x = "hour ")
 #'
 fncBoxPlot <- function(u, X = NULL, bands = c(0, 0.5), method = "MBD",
                        byrow = NULL, ...) {

@@ -1,24 +1,24 @@
 context("Test MBD")
 
 test_that("Equal to fda", {
-  data("katowice.pollination")
-  expect_equal(fda:::fMBD(t(katowice.pollination)),
-               fncDepthMBD(katowice.pollination))
+  data("katowice.airpollution")
+  expect_equal(fda:::fMBD(t(katowice.airpollution)),
+               fncDepthMBD(katowice.airpollution))
 
 })
 
 context("Test MBD")
 
 test_that("Equal interfaces", {
-  data("katowice.pollination")
+  data("katowice.airpollution")
   expect_equal(
-    fncDepthMBD(katowice.pollination),
-    fncDepthMBD(katowice.pollination, katowice.pollination)
+    fncDepthMBD(katowice.airpollution),
+    fncDepthMBD(katowice.airpollution, katowice.airpollution)
   )
 
   expect_equal(
-    fncDepthMBD(katowice.pollination)[10:20],
-    fncDepthMBD(katowice.pollination[10:20, ], katowice.pollination)
+    fncDepthMBD(katowice.airpollution)[10:20],
+    fncDepthMBD(katowice.airpollution[10:20, ], katowice.airpollution)
   )
 
 })
@@ -44,7 +44,7 @@ test_that("Ref rank", {
   x <- c(1, 4, 4, 4, 4, 5, 6)
   expect_equal(refRank(x[4:5], x), rank(x)[4:5])
 
-  x <- sort(katowice.pollination[, 1])
+  x <- sort(katowice.airpollution[, 1])
 
   rank.x <- rank(x)
 
