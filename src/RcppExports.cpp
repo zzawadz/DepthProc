@@ -6,6 +6,114 @@
 
 using namespace Rcpp;
 
+// CovLPCPP
+SEXP CovLPCPP(SEXP X, double p, double a, double b);
+RcppExport SEXP DepthProc_CovLPCPP(SEXP XSEXP, SEXP pSEXP, SEXP aSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type p(pSEXP);
+    Rcpp::traits::input_parameter< double >::type a(aSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(CovLPCPP(X, p, a, b));
+    return rcpp_result_gen;
+END_RCPP
+}
+// depth2dcpp
+NumericVector depth2dcpp(SEXP R_x, SEXP R_y);
+RcppExport SEXP DepthProc_depth2dcpp(SEXP R_xSEXP, SEXP R_ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type R_x(R_xSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type R_y(R_ySEXP);
+    rcpp_result_gen = Rcpp::wrap(depth2dcpp(R_x, R_y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// depthMahCPP
+SEXP depthMahCPP(SEXP ru, SEXP rX, SEXP rcov, SEXP rmean, int threads);
+RcppExport SEXP DepthProc_depthMahCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP rcovSEXP, SEXP rmeanSEXP, SEXP threadsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type ru(ruSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type rcov(rcovSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type rmean(rmeanSEXP);
+    Rcpp::traits::input_parameter< int >::type threads(threadsSEXP);
+    rcpp_result_gen = Rcpp::wrap(depthMahCPP(ru, rX, rcov, rmean, threads));
+    return rcpp_result_gen;
+END_RCPP
+}
+// depthProjCPP
+SEXP depthProjCPP(SEXP ru, SEXP rX, double nproj, int threads);
+RcppExport SEXP DepthProc_depthProjCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP nprojSEXP, SEXP threadsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type ru(ruSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP);
+    Rcpp::traits::input_parameter< double >::type nproj(nprojSEXP);
+    Rcpp::traits::input_parameter< int >::type threads(threadsSEXP);
+    rcpp_result_gen = Rcpp::wrap(depthProjCPP(ru, rX, nproj, threads));
+    return rcpp_result_gen;
+END_RCPP
+}
+// depthLPCPP
+SEXP depthLPCPP(SEXP ru, SEXP rX, double p, double a, double b, int threads);
+RcppExport SEXP DepthProc_depthLPCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP pSEXP, SEXP aSEXP, SEXP bSEXP, SEXP threadsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type ru(ruSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP);
+    Rcpp::traits::input_parameter< double >::type p(pSEXP);
+    Rcpp::traits::input_parameter< double >::type a(aSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    Rcpp::traits::input_parameter< int >::type threads(threadsSEXP);
+    rcpp_result_gen = Rcpp::wrap(depthLPCPP(ru, rX, p, a, b, threads));
+    return rcpp_result_gen;
+END_RCPP
+}
+// depthTukeyCPP
+SEXP depthTukeyCPP(SEXP ru, SEXP rX, bool exact, int threads);
+RcppExport SEXP DepthProc_depthTukeyCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP exactSEXP, SEXP threadsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type ru(ruSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP);
+    Rcpp::traits::input_parameter< bool >::type exact(exactSEXP);
+    Rcpp::traits::input_parameter< int >::type threads(threadsSEXP);
+    rcpp_result_gen = Rcpp::wrap(depthTukeyCPP(ru, rX, exact, threads));
+    return rcpp_result_gen;
+END_RCPP
+}
+// modBandDepthRef
+SEXP modBandDepthRef(SEXP rX, SEXP rxRef);
+RcppExport SEXP DepthProc_modBandDepthRef(SEXP rXSEXP, SEXP rxRefSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type rxRef(rxRefSEXP);
+    rcpp_result_gen = Rcpp::wrap(modBandDepthRef(rX, rxRef));
+    return rcpp_result_gen;
+END_RCPP
+}
+// modBandDepth
+SEXP modBandDepth(SEXP rX);
+RcppExport SEXP DepthProc_modBandDepth(SEXP rXSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP);
+    rcpp_result_gen = Rcpp::wrap(modBandDepth(rX));
+    return rcpp_result_gen;
+END_RCPP
+}
 // sampleDepthContForMuCPP
 SEXP sampleDepthContForMuCPP(double d, double mu, SEXP rY);
 RcppExport SEXP DepthProc_sampleDepthContForMuCPP(SEXP dSEXP, SEXP muSEXP, SEXP rYSEXP) {
@@ -93,114 +201,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::vector<double> >::type u(uSEXP);
     Rcpp::traits::input_parameter< std::vector<double> >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(refRank(u, x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// CovLPCPP
-SEXP CovLPCPP(SEXP X, double p, double a, double b);
-RcppExport SEXP DepthProc_CovLPCPP(SEXP XSEXP, SEXP pSEXP, SEXP aSEXP, SEXP bSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
-    Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    Rcpp::traits::input_parameter< double >::type a(aSEXP);
-    Rcpp::traits::input_parameter< double >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(CovLPCPP(X, p, a, b));
-    return rcpp_result_gen;
-END_RCPP
-}
-// depthMahCPP
-SEXP depthMahCPP(SEXP ru, SEXP rX, SEXP rcov, SEXP rmean, int threads);
-RcppExport SEXP DepthProc_depthMahCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP rcovSEXP, SEXP rmeanSEXP, SEXP threadsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type ru(ruSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type rcov(rcovSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type rmean(rmeanSEXP);
-    Rcpp::traits::input_parameter< int >::type threads(threadsSEXP);
-    rcpp_result_gen = Rcpp::wrap(depthMahCPP(ru, rX, rcov, rmean, threads));
-    return rcpp_result_gen;
-END_RCPP
-}
-// depthProjCPP
-SEXP depthProjCPP(SEXP ru, SEXP rX, double nproj, int threads);
-RcppExport SEXP DepthProc_depthProjCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP nprojSEXP, SEXP threadsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type ru(ruSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP);
-    Rcpp::traits::input_parameter< double >::type nproj(nprojSEXP);
-    Rcpp::traits::input_parameter< int >::type threads(threadsSEXP);
-    rcpp_result_gen = Rcpp::wrap(depthProjCPP(ru, rX, nproj, threads));
-    return rcpp_result_gen;
-END_RCPP
-}
-// depthLPCPP
-SEXP depthLPCPP(SEXP ru, SEXP rX, double p, double a, double b, int threads);
-RcppExport SEXP DepthProc_depthLPCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP pSEXP, SEXP aSEXP, SEXP bSEXP, SEXP threadsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type ru(ruSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP);
-    Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    Rcpp::traits::input_parameter< double >::type a(aSEXP);
-    Rcpp::traits::input_parameter< double >::type b(bSEXP);
-    Rcpp::traits::input_parameter< int >::type threads(threadsSEXP);
-    rcpp_result_gen = Rcpp::wrap(depthLPCPP(ru, rX, p, a, b, threads));
-    return rcpp_result_gen;
-END_RCPP
-}
-// depthTukeyCPP
-SEXP depthTukeyCPP(SEXP ru, SEXP rX, bool exact, int threads);
-RcppExport SEXP DepthProc_depthTukeyCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP exactSEXP, SEXP threadsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type ru(ruSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP);
-    Rcpp::traits::input_parameter< bool >::type exact(exactSEXP);
-    Rcpp::traits::input_parameter< int >::type threads(threadsSEXP);
-    rcpp_result_gen = Rcpp::wrap(depthTukeyCPP(ru, rX, exact, threads));
-    return rcpp_result_gen;
-END_RCPP
-}
-// modBandDepthRef
-SEXP modBandDepthRef(SEXP rX, SEXP rxRef);
-RcppExport SEXP DepthProc_modBandDepthRef(SEXP rXSEXP, SEXP rxRefSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type rxRef(rxRefSEXP);
-    rcpp_result_gen = Rcpp::wrap(modBandDepthRef(rX, rxRef));
-    return rcpp_result_gen;
-END_RCPP
-}
-// modBandDepth
-SEXP modBandDepth(SEXP rX);
-RcppExport SEXP DepthProc_modBandDepth(SEXP rXSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP);
-    rcpp_result_gen = Rcpp::wrap(modBandDepth(rX));
-    return rcpp_result_gen;
-END_RCPP
-}
-// depth2dcpp
-NumericVector depth2dcpp(SEXP R_x, SEXP R_y);
-RcppExport SEXP DepthProc_depth2dcpp(SEXP R_xSEXP, SEXP R_ySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type R_x(R_xSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type R_y(R_ySEXP);
-    rcpp_result_gen = Rcpp::wrap(depth2dcpp(R_x, R_y));
     return rcpp_result_gen;
 END_RCPP
 }
