@@ -91,8 +91,9 @@ scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
   k <- length(alpha)
   vol <- 1:k
 
+  alpha_border <- ecdf(depth_est)(depth_est)
   for (i in 1:k) {
-    tmp_x <- x[depth_est >= alpha[i], ]
+    tmp_x <- x[alpha_border >= alpha[i], ]
     np <- nrow(as.matrix(tmp_x))
 
     if (np > dim_x) {

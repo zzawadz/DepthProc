@@ -14,3 +14,8 @@ Introduced functional depth:
 - `fncDepthMBD` - Modified Band Depth
 - `fncDepthFM` - Frainman-Muniz depth for functional data
 - `fncBoxPlot` - create functional boxplot based on depth function.
+
+Bug fixes
+
+- Calculate scale and asymmetry curve based on quantiles of depth rather than raw values.
+- Add missing root in LPdepth.

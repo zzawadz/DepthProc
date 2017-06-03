@@ -127,9 +127,10 @@ asCurve <- function(X, depth_est = NULL, alpha = NULL, name = "X",
   vol <- 1:k
   alpha_est <- 1:k
   means <- matrix(nrow = k, ncol = dim_X)
+  alpha_border <- ecdf(depth_est)(depth_est)
 
   for (i in 1:k) {
-    tmp_X <- X[depth_est >= alpha[i], ]
+    tmp_X <- X[alpha_border >= alpha[i], ]
     np <- dim(as.matrix(tmp_X))[1]
 
     if ((np > ((2 * (dim_X + 2)) ^ 2)) && (np > 100)) {
@@ -170,8 +171,11 @@ asCurveMM <- function(X, depth_est = NULL, alpha = NULL, name = "X",
   means <- matrix(nrow = k, ncol = dim_X)
   medians <- matrix(nrow = k, ncol = dim_X)
 
+
+  alpha_border <- ecdf(depth_est)(depth_est)
+
   for (i in 1:k) {
-    tmp_X <- X[depth_est >= alpha[i], ]
+    tmp_X <- X[alpha_border >= alpha[i], ]
     np <- dim(as.matrix(tmp_X))[1]
 
     if ((np > ((2 * (dim_X + 2)) ^ 2)) && (np > 100)) {
