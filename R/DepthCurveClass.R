@@ -37,7 +37,7 @@ setMethod("combineDepthCurves", signature(.list = "list"),
 setMethod("combineDepthCurves",
           signature(x = "DepthCurveList", y = "DepthCurve"),
           function(x, y, .list) {
-            names <- vapply(x, FUN.VALUE = character(), function(xx) {
+            names <- vapply(x, FUN.VALUE = "", function(xx) {
               xx@name
             })
             new_name <- y@name
@@ -82,10 +82,10 @@ setMethod(".getPlot", "DepthCurveList", function(object) {
   value <- unlist(object)
   alpha <- as.vector(sapply(object, function(x) x@alpha))
   len_alpha <- vapply(object,
-                      FUN.VALUE = numeric(),
+                      FUN.VALUE = 0,
                       function(x) length(x@alpha))
   names <- vapply(object,
-                  FUN.VALUE = character(),
+                  FUN.VALUE = "",
                   function(x) x@name)
   names <- rep(names, len_alpha)
 

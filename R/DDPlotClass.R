@@ -35,7 +35,7 @@ setGeneric("indexLiu", function(ddplot, gamma) standardGeneric("indexLiu"))
 setMethod("indexLiu", signature(ddplot = "DDPlot", gamma = "numeric"),
           function(ddplot, gamma) {
             tmp <- abs(as.vector(ddplot@X - ddplot@Y))
-            indLiu <- vapply(gamma, FUN.VALUE = numeric(), function(x) {
+            indLiu <- vapply(gamma, FUN.VALUE = 0, function(x) {
               sum(tmp > x)
             })
 

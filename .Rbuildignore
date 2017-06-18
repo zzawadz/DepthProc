@@ -10,3 +10,5 @@ README.Rmd
 README_files
 README.html
 .lintr
+src/init.gcda
+src/init.gcno

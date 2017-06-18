@@ -99,7 +99,7 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
     }
 
     cut <- cut(x, breaks = breaks)
-    midpoints <- vapply(2:length(breaks), FUN.VALUE = numeric(), function(x) {
+    midpoints <- vapply(2:length(breaks), FUN.VALUE = 0, function(x) {
       mean(breaks[(x - 1):x])
     })
 
