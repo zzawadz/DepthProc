@@ -93,9 +93,9 @@ depthLocal <- function(u, X, beta = 0.5,
     X <- u
   }
 
-  depths <- 1:nrow(u)
+  depths <- seq_len(nrow(u))
 
-  for (i in 1:nrow(u)) {
+  for (i in seq_len(nrow(u))) {
     depths[i] <- .depthLocal(
       u[i,, drop = FALSE], X, beta, depth_params1, depth_params2) #nolint
   }

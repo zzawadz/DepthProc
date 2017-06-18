@@ -16,7 +16,7 @@
 extractIndexFromMatrix <- function(x) {
 
   if (is.null(colnames(x))) {
-    return(1:ncol(x))
+    return(seq_len(ncol(x)))
   }
 
   idx <- colnames(x)

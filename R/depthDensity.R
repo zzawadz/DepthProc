@@ -90,7 +90,7 @@ setMethod("plot", "DepthDensity", function(x, type = "depth", ...) {
   xlim[2] <- xlim[2] + rn
   plot(xlim, range(yg), type = "n", ...)
 
-  for (i in 1:length(xg)) {
+  for (i in seq_len(length(xg))) {
     lines(xg[i] + density[, i], yg, ...)
   }
 
@@ -103,11 +103,11 @@ setMethod("plot", "DepthDensity", function(x, type = "depth", ...) {
   yg <- seq(min(y), max(y), length.out = ny)
 
   r <- NULL
-  tmp <- sapply(xg, function(i) {
+  tmp <- lapply(xg, function(i) {
     cbind(i, yg)
-  }, simplify = FALSE)
+  })
 
-  for (i in 1:length(tmp)) {
+  for (i in seq_len(length(tmp))) {
     r <- rbind(r, tmp[[i]])
   }
 
@@ -120,7 +120,7 @@ setMethod("plot", "DepthDensity", function(x, type = "depth", ...) {
     cbind(i, yg)
   }, simplify = FALSE)
 
-  for (i in 1:length(tmp)) {
+  for (i in seq_len(length(tmp))) {
     r <- rbind(r, tmp[[i]])
   }
 
@@ -133,7 +133,7 @@ setMethod("plot", "DepthDensity", function(x, type = "depth", ...) {
     cbind(i, rnorm(n, mean = i))
   }, simplify = FALSE)
 
-  for (i in 1:length(tmp)) {
+  for (i in seq_len(length(tmp))) {
     r <- rbind(r, tmp[[i]])
   }
 

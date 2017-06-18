@@ -214,15 +214,15 @@ sample.depth.cont.for.mu <- function(d, mu, y, length = 100) {
         case <- 0
 
         if (lbound <= ubound) {
-          tbound <- T
+          tbound <- TRUE
         } else {
-          tbound <- F
+          tbound <- FALSE
         }
       } else {
         lbound <- 1
         ubound <- 0
         case <- 0
-        tbound <- F
+        tbound <- FALSE
       }
     }
     if (y[M + 1] == mu) {
@@ -239,15 +239,15 @@ sample.depth.cont.for.mu <- function(d, mu, y, length = 100) {
         case <- 1
 
         if (lbound <= ubound) {
-          tbound <- T
+          tbound <- TRUE
         } else {
-          tbound <- F
+          tbound <- FALSE
         }
       } else {
         lbound <- 1
         ubound <- 0
         case <- 1
-        tbound <- F
+        tbound <- FALSE
       }
     }
 

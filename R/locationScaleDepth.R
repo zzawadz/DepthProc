@@ -112,7 +112,7 @@ lsdSampleDepthContours <- function(x, depth = c(0.1, 0.2, 0.3, 0.4),
     colnames(cont) <- c("lbound", "ubound", "tbound", "case", "M")
 
     if (sum(cont[, "tbound"]) > 1) {
-      cont.exist <- T
+      cont.exist <- TRUE
       tbound <- as.logical(cont[, "tbound"])
       cont <- cont[tbound, ]
       lbound <- cont[, "lbound"]
@@ -121,7 +121,7 @@ lsdSampleDepthContours <- function(x, depth = c(0.1, 0.2, 0.3, 0.4),
       cont.all[[i]] <- list(depth = d, cont.exist = cont.exist,
                             mubound = mubound, lbound = lbound, ubound = ubound)
     } else {
-      cont.exist <- F
+      cont.exist <- FALSE
       cat(" No contour for the depth ", d, "\n")
       cont.all[[i]] <- list(depth = d, cont.exist = cont.exist)
     }
@@ -287,7 +287,7 @@ setMethod("plot", signature = c(x = "LSDepthContour"),
                  ylim = c(0, (1 / ratio) * (mu_max - mu_min)),
                  xlim = c(mu_min, mu_max), xlab = expression(mu),
                  ylab = expression(sigma))
-            sapply(1:length(cont), function(i, ...) {
+            sapply(seq_len(cont), function(i, ...) {
               lsdAddContour(x, cont[i], col = col[i], border = border[i], ...)
             }, ...)
 
