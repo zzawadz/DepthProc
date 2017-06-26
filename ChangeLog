@@ -1,3 +1,9 @@
+Changes in DepthProc 2.0.2
+
+Bug fixes
+
+- Buffer overflow in refRank c++ function.
+
 Changes in DepthProc 2.0
 
 Version 2.0 comes with a lot of breaking changes! There is high chance that old code will not work with the new version! However, if you just used the `depth` function or its different version like `depthTukey`, there shouldn't be any problems.
