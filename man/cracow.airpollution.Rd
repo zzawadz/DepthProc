@@ -14,6 +14,6 @@ Air pollution with PM10 in Cracow within day and night in December 2016
 \references{
 1. Kosiorowski D, Rydlewski J P, Zawadzki Z (2017). 'Functional Outliers Detection By The Example Of Air Quality Monitoring.' submitted.
 
-2. Kosiorowski D, Szlachtowska E (2017). 'K- local Median Algorithm for Functional Data in Empirical Analysis of Air Pollution Data.' Proceedings from the 11th Professor A. Zelias International Conference, pp. 153–162. Cracow University of Economics.
+2. Kosiorowski D, Szlachtowska E (2017). 'K- local Median Algorithm for Functional Data in Empirical Analysis of Air Pollution Data.' Proceedings from the 11th Professor A. Zelias International Conference, pp. 153-162. Cracow University of Economics.
 }
 \keyword{datasets}
