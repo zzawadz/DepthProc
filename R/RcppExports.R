@@ -2,62 +2,62 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 CovLPCPP <- function(X, p, a, b) {
-    .Call('_DepthProc_CovLPCPP', PACKAGE = 'DepthProc', X, p, a, b)
+    .Call(`_DepthProc_CovLPCPP`, X, p, a, b)
 }
 
 depth2dcpp <- function(R_x, R_y) {
-    .Call('_DepthProc_depth2dcpp', PACKAGE = 'DepthProc', R_x, R_y)
+    .Call(`_DepthProc_depth2dcpp`, R_x, R_y)
 }
 
 depthMahCPP <- function(ru, rX, rcov, rmean, threads) {
-    .Call('_DepthProc_depthMahCPP', PACKAGE = 'DepthProc', ru, rX, rcov, rmean, threads)
+    .Call(`_DepthProc_depthMahCPP`, ru, rX, rcov, rmean, threads)
 }
 
 depthProjCPP <- function(ru, rX, nproj, threads) {
-    .Call('_DepthProc_depthProjCPP', PACKAGE = 'DepthProc', ru, rX, nproj, threads)
+    .Call(`_DepthProc_depthProjCPP`, ru, rX, nproj, threads)
 }
 
 depthLPCPP <- function(ru, rX, p, a, b, threads) {
-    .Call('_DepthProc_depthLPCPP', PACKAGE = 'DepthProc', ru, rX, p, a, b, threads)
+    .Call(`_DepthProc_depthLPCPP`, ru, rX, p, a, b, threads)
 }
 
 depthTukeyCPP <- function(ru, rX, exact, threads) {
-    .Call('_DepthProc_depthTukeyCPP', PACKAGE = 'DepthProc', ru, rX, exact, threads)
+    .Call(`_DepthProc_depthTukeyCPP`, ru, rX, exact, threads)
 }
 
 modBandDepthRef <- function(rX, rxRef) {
-    .Call('_DepthProc_modBandDepthRef', PACKAGE = 'DepthProc', rX, rxRef)
+    .Call(`_DepthProc_modBandDepthRef`, rX, rxRef)
 }
 
 modBandDepth <- function(rX) {
-    .Call('_DepthProc_modBandDepth', PACKAGE = 'DepthProc', rX)
+    .Call(`_DepthProc_modBandDepth`, rX)
 }
 
 sampleDepthContForMuCPP <- function(d, mu, rY) {
-    .Call('_DepthProc_sampleDepthContForMuCPP', PACKAGE = 'DepthProc', d, mu, rY)
+    .Call(`_DepthProc_sampleDepthContForMuCPP`, d, mu, rY)
 }
 
 sampleMaxDepthForMuCPP <- function(mu, rY, d_min, max_iter, eps) {
-    .Call('_DepthProc_sampleMaxDepthForMuCPP', PACKAGE = 'DepthProc', mu, rY, d_min, max_iter, eps)
+    .Call(`_DepthProc_sampleMaxDepthForMuCPP`, mu, rY, d_min, max_iter, eps)
 }
 
 sampleMaxLocScaleDepthCPP <- function(ry, iter, eps, p_length) {
-    .Call('_DepthProc_sampleMaxLocScaleDepthCPP', PACKAGE = 'DepthProc', ry, iter, eps, p_length)
+    .Call(`_DepthProc_sampleMaxLocScaleDepthCPP`, ry, iter, eps, p_length)
 }
 
 runifsphereCPP <- function(n, p) {
-    .Call('_DepthProc_runifsphereCPP', PACKAGE = 'DepthProc', n, p)
+    .Call(`_DepthProc_runifsphereCPP`, n, p)
 }
 
 covCPP <- function(rX, threads) {
-    .Call('_DepthProc_covCPP', PACKAGE = 'DepthProc', rX, threads)
+    .Call(`_DepthProc_covCPP`, rX, threads)
 }
 
 meanCPP <- function(rX, threads) {
-    .Call('_DepthProc_meanCPP', PACKAGE = 'DepthProc', rX, threads)
+    .Call(`_DepthProc_meanCPP`, rX, threads)
 }
 
 refRank <- function(u, x) {
-    .Call('_DepthProc_refRank', PACKAGE = 'DepthProc', u, x)
+    .Call(`_DepthProc_refRank`, u, x)
 }
 
