@@ -110,9 +110,9 @@ depthContour(
 )
 
 ### Figure 11
-
+data("cracow.airpollution")
 attach(cracow.airpollution)
-
+library(zoo)
 NO.fst= rollapply(NO,
                   width = 24,
                   by = 24,
@@ -162,8 +162,15 @@ views <- internet.users[1:17280, 6]
 
 ind_1 = which(internet.users[, 1] == 1)
 DATA_1 = internet.users[ind_1,] #the first Internet service
+ind_2 = which(internet.users[, 1] == 2)
+DATA_2 = internet.users[ind_2,]
+
 users_1 <- DATA_1[1:8759, 5] #the number of unique users in the service 1#
 views_1 <- DATA_1[1:8759, 6] #the number of page views in the service 1#
+
+users_2 <- DATA_2[1:8759, 5] #the number of unique users in the service 2#
+views_2 <- DATA_2[1:8759, 6] #the number of page views in the service 2
+
 
 library(zoo)
 window <- function(x) { x }
@@ -305,16 +312,6 @@ data(inf.mort)
 data(maesles.imm)
 data(under5.mort)
 
-# prepare data for melting with country name as a variable
-inf.mort = cbind(name = rownames(inf.mort), inf.mort)
-maesles.imm = cbind(name = rownames(maesles.imm), maesles.imm)
-under5.mort = cbind(name = rownames(under5.mort), under5.mort)
-
-# melt all data with reshape2
-inf.mort = melt(inf.mort)
-maesles.imm = melt(maesles.imm)
-under5.mort = melt(under5.mort)
-
 # rescale maesles.imm into occurrences/1000
 maesles.imm[,3] = (100 - maesles.imm[,3])*10
 
@@ -374,6 +371,16 @@ ddPlot(dt1990, dt2011, depth_params = list(method = "LP"), scale = TRUE)
 ddPlot(dt1990, dt2011, depth_params = list(method = "LP"), location = TRUE)
 
 ### Figure 35 - 36
+
+# prepare data for melting with country name as a variable
+inf.mort = cbind(name = rownames(inf.mort), inf.mort)
+maesles.imm = cbind(name = rownames(maesles.imm), maesles.imm)
+under5.mort = cbind(name = rownames(under5.mort), under5.mort)
+
+# melt all data with reshape2
+inf.mort = melt(inf.mort)
+maesles.imm = melt(maesles.imm)
+under5.mort = melt(under5.mort)
 
 all_data = merge(maesles.imm, under5.mort, by = c("name","variable"))
 all_data = merge(all_data, inf.mort, by = c("name","variable"))
