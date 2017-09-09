@@ -287,7 +287,7 @@ setMethod("plot", signature = c(x = "LSDepthContour"),
                  ylim = c(0, (1 / ratio) * (mu_max - mu_min)),
                  xlim = c(mu_min, mu_max), xlab = expression(mu),
                  ylab = expression(sigma))
-            sapply(seq_len(cont), function(i, ...) {
+            sapply(seq_along(cont), function(i, ...) {
               lsdAddContour(x, cont[i], col = col[i], border = border[i], ...)
             }, ...)
 
