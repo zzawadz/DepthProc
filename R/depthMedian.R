@@ -27,15 +27,16 @@ setGeneric("depthMedian", function(x, depth_params = list()) {
 
 #' @rdname depthMedian-methods
 #' @export
-setMethod("depthMedian", "matrix", function(x, depth_params = list()) {
+setMethod("depthMedian", "matrix", function(x, depth_params = list(), convex = TRUE) {
   ux_list <- list(u = x, X = x)
   depths <- do.call(depth, c(ux_list, depth_params))
   med <- x[depths == max(depths), ]
 
-  if (ncol(x) != length(med)) {
+  if (ncol(x) != length(med) && convex) {
+    med <- colMeans(med[chull(med),])
+  } else if(ncol(x) != length(med)) {
     med <- colMeans(med)
   }
-
   med
 })
 
