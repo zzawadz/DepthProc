@@ -8,18 +8,20 @@
 \alias{depthMedian,Depth-method}
 \title{Depth median}
 \usage{
-depthMedian(x, depth_params = list())
+depthMedian(x, depth_params = list(), convex = FALSE)
 
-\S4method{depthMedian}{matrix}(x, depth_params = list())
+\S4method{depthMedian}{matrix}(x, depth_params = list(), convex = FALSE)
 
-\S4method{depthMedian}{data.frame}(x, depth_params = list())
+\S4method{depthMedian}{data.frame}(x, depth_params = list(), convex = FALSE)
 
-\S4method{depthMedian}{Depth}(x)
+\S4method{depthMedian}{Depth}(x, convex = FALSE)
 }
 \arguments{
 \item{x}{object of class Depth or matrix.}
 
 \item{depth_params}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).}
+
+\item{convex}{logical. If true, than centroid of the convex hull created from deepest points is returned.}
 }
 \description{
 Return point with maximum depth function value. If multiple points have the same value, mean average of them will be returned.
