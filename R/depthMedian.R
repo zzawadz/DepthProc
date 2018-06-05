@@ -27,6 +27,7 @@ setGeneric("depthMedian", function(x, depth_params = list(), convex = FALSE) {
 })
 
 #' @rdname depthMedian-methods
+#' @importFrom grDevices chull
 #' @export
 setMethod("depthMedian", "matrix", function(x, depth_params = list(), convex = FALSE) {
   ux_list <- list(u = x, X = x)
