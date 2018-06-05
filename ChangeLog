@@ -2,6 +2,12 @@ Changes in DepthProc 2.0.3
 
 Bug fixes
 
+- AddressSanitizer: stack-buffer-overflow in refRank c++ function.
+
+Changes in DepthProc 2.0.3
+
+Bug fixes
+
 - Fixed problem with plotting location-scale depth.
 
 Changes in DepthProc 2.0.2
