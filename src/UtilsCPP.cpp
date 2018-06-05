@@ -82,7 +82,7 @@ std::vector<double> refRank(std::vector<double> u, std::vector<double> x) {
 
     double rank = total_rank;
 
-    if(val == tbl->first) {
+    if(tbl != table.end() && val == tbl->first) {
       rank += 0.5 + (0.5*tbl->second);
     }
 
