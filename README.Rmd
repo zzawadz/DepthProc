@@ -2,6 +2,7 @@ DepthProc
 ========================
 
 ```{r setup, include=FALSE}
+set.seed(123)
 knitr::opts_chunk$set(echo = TRUE, results="hide")
 ```
 
@@ -110,6 +111,6 @@ fncDepth(x, method = "FM", dep1d = "Mahalanobis")
 ### Functional BoxPlot
 
 ```{r fncBox}
-x <- matrix(rnorm(200), ncol = 10)
+x <- matrix(rnorm(2000), ncol = 100)
 fncBoxPlot(x, bands = c(0, 0.5, 1), method = "FM")
 ```

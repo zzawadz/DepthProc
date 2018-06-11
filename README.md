@@ -17,6 +17,8 @@ version](http://www.r-pkg.org/badges/version/DepthProc)](http://cran.rstudio.com
 Status](https://travis-ci.org/zzawadz/DepthProc.svg?branch=master)](https://travis-ci.org/zzawadz/DepthProc)
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/zzawadz/DepthProc?branch=master&svg=true)](https://ci.appveyor.com/project/zzawadz/DepthProc)
+[![Coverage
+Status](https://img.shields.io/codecov/c/github/zzawadz/DepthProc/master.svg)](https://codecov.io/github/zzawadz/DepthProc?branch=master)
 
 Installation
 ------------
@@ -48,19 +50,19 @@ use OpenMP to speedup computations with multithreading:
     system.time(depth(x, x, method = "LP"))
 
     ##    user  system elapsed 
-    ##    0.48    0.00    0.08
+    ##   0.361   0.000   0.148
 
     # Only single thread - 4 times slower:
     system.time(depth(x, x, method = "LP", threads = 1))
 
     ##    user  system elapsed 
-    ##    0.25    0.00    0.25
+    ##    0.22    0.00    0.22
 
     # Two threads - 2 times slower:
     system.time(depth(x, x, method = "LP", threads = 2))
 
     ##    user  system elapsed 
-    ##    0.25    0.00    0.12
+    ##   0.363   0.000   0.184
 
 Available depth functions
 -------------------------
@@ -111,9 +113,11 @@ and Frainman-Muniz depth (FM):
     fncDepth(x, method = "MBD")
     fncDepth(x, method = "FM", dep1d = "Mahalanobis")
 
+    ## Warning in dep1d_params$u <- u[, i]: Coercing LHS to a list
+
 ### Functional BoxPlot
 
-    x <- matrix(rnorm(200), ncol = 10)
+    x <- matrix(rnorm(2000), ncol = 100)
     fncBoxPlot(x, bands = c(0, 0.5, 1), method = "FM")
 
 ![](README_files/figure-markdown_strict/fncBox-1.png)
