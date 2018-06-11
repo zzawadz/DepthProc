@@ -10,9 +10,9 @@ available R package and its description.
 #### CRAN release version
 
 [![CRAN
-version](http://www.r-pkg.org/badges/version/DepthProc)](http://cran.rstudio.com/web/packages/DepthProc/index.html)
-[![Downloads](http://cranlogs.r-pkg.org/badges/DepthProc)](http://cran.rstudio.com/package=DepthProc)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/DepthProc)](http://cran.rstudio.com/web/packages/DepthProc/index.html)
+version](https://www.r-pkg.org/badges/version/DepthProc)](https://cran.rstudio.com/web/packages/DepthProc/index.html)
+[![Downloads](https://cranlogs.r-pkg.org/badges/DepthProc)](https://cran.rstudio.com/package=DepthProc)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/DepthProc)](https://cran.rstudio.com/web/packages/DepthProc/index.html)
 [![Build
 Status](https://travis-ci.org/zzawadz/DepthProc.svg?branch=master)](https://travis-ci.org/zzawadz/DepthProc)
 [![AppVeyor Build

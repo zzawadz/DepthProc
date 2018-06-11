@@ -76,7 +76,7 @@
 <div id="cran-release-version" class="section level4">
 <h4 class="hasAnchor">
 <a href="#cran-release-version" class="anchor"></a>CRAN release version</h4>
-<p><a href="http://cran.rstudio.com/web/packages/DepthProc/index.html"><img src="http://www.r-pkg.org/badges/version/DepthProc" alt="CRAN version"></a> <a href="http://cran.rstudio.com/package=DepthProc"><img src="http://cranlogs.r-pkg.org/badges/DepthProc" alt="Downloads"></a> <a href="http://cran.rstudio.com/web/packages/DepthProc/index.html"><img src="http://cranlogs.r-pkg.org/badges/grand-total/DepthProc"></a> <a href="https://travis-ci.org/zzawadz/DepthProc"><img src="https://travis-ci.org/zzawadz/DepthProc.svg?branch=master" alt="Build Status"></a> <a href="https://ci.appveyor.com/project/zzawadz/DepthProc"><img src="https://ci.appveyor.com/api/projects/status/github/zzawadz/DepthProc?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a> <a href="https://codecov.io/github/zzawadz/DepthProc?branch=master"><img src="https://img.shields.io/codecov/c/github/zzawadz/DepthProc/master.svg" alt="Coverage Status"></a></p>
+<p><a href="https://cran.rstudio.com/web/packages/DepthProc/index.html"><img src="https://www.r-pkg.org/badges/version/DepthProc" alt="CRAN version"></a> <a href="https://cran.rstudio.com/package=DepthProc"><img src="https://cranlogs.r-pkg.org/badges/DepthProc" alt="Downloads"></a> <a href="https://cran.rstudio.com/web/packages/DepthProc/index.html"><img src="https://cranlogs.r-pkg.org/badges/grand-total/DepthProc"></a> <a href="https://travis-ci.org/zzawadz/DepthProc"><img src="https://travis-ci.org/zzawadz/DepthProc.svg?branch=master" alt="Build Status"></a> <a href="https://ci.appveyor.com/project/zzawadz/DepthProc"><img src="https://ci.appveyor.com/api/projects/status/github/zzawadz/DepthProc?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a> <a href="https://codecov.io/github/zzawadz/DepthProc?branch=master"><img src="https://img.shields.io/codecov/c/github/zzawadz/DepthProc/master.svg" alt="Coverage Status"></a></p>
 </div>
 </div>
 <div id="installation" class="section level2">
@@ -104,15 +104,15 @@ x &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dv"
 <span class="co"># Default - utilize as many threads as possible</span>
 <span class="kw">system.time</span>(<span class="kw"><a href="reference/depth.html">depth</a></span>(x, x, <span class="dt">method =</span> <span class="st">"LP"</span>))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.372   0.000   0.104</code></pre>
+##   0.327   0.001   0.046</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Only single thread - 4 times slower:</span>
 <span class="kw">system.time</span>(<span class="kw"><a href="reference/depth.html">depth</a></span>(x, x, <span class="dt">method =</span> <span class="st">"LP"</span>, <span class="dt">threads =</span> <span class="dv">1</span>))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.215   0.000   0.216</code></pre>
+##   0.183   0.000   0.183</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Two threads - 2 times slower:</span>
 <span class="kw">system.time</span>(<span class="kw"><a href="reference/depth.html">depth</a></span>(x, x, <span class="dt">method =</span> <span class="st">"LP"</span>, <span class="dt">threads =</span> <span class="dv">2</span>))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.217   0.000   0.112</code></pre>
+##   0.167   0.000   0.085</code></pre>
 </div>
 </div>
 <div id="available-depth-functions" class="section level2">
@@ -166,7 +166,7 @@ y &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentat
 <div id="functional-boxplot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#functional-boxplot" class="anchor"></a>Functional BoxPlot</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">200</span>), <span class="dt">ncol =</span> <span class="dv">10</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">2000</span>), <span class="dt">ncol =</span> <span class="dv">100</span>)
 <span class="kw"><a href="reference/fncBoxPlot.html">fncBoxPlot</a></span>(x, <span class="dt">bands =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>), <span class="dt">method =</span> <span class="st">"FM"</span>)</code></pre></div>
 <p><img src="index_files/figure-html/fncBox-1.png" width="700"></p>
 </div>
