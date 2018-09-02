@@ -4,8 +4,8 @@
 \alias{fncDepthMedian}
 \title{Functional median}
 \usage{
-fncDepthMedian(u, X = NULL, method = "MBD", byrow = NULL, unique = TRUE,
-  ...)
+fncDepthMedian(u, X = NULL, method = "MBD", byrow = NULL,
+  unique = TRUE, ...)
 }
 \arguments{
 \item{u}{data matrix}

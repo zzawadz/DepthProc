@@ -4,7 +4,8 @@
 \alias{lsdSampleDepthContours}
 \title{Calculate sample Mizera and Muller Student depth contours}
 \usage{
-lsdSampleDepthContours(x, depth = c(0.1, 0.2, 0.3, 0.4), lengthmu = 1000)
+lsdSampleDepthContours(x, depth = c(0.1, 0.2, 0.3, 0.4),
+  lengthmu = 1000)
 }
 \arguments{
 \item{x}{one dimensional vector with sample}

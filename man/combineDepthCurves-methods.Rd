@@ -19,7 +19,8 @@ combineDepthCurves(x, y, .list = NULL)
 \S4method{combineDepthCurves}{DepthCurve,DepthCurveList,ANY}(x, y,
   .list = NULL)
 
-\S4method{combineDepthCurves}{DepthCurve,DepthCurve,ANY}(x, y, .list = NULL)
+\S4method{combineDepthCurves}{DepthCurve,DepthCurve,ANY}(x, y,
+  .list = NULL)
 }
 \arguments{
 \item{x}{object}

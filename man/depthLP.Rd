@@ -4,7 +4,8 @@
 \alias{depthLP}
 \title{LP Depth}
 \usage{
-depthLP(u, X, pdim = 2, la = 1, lb = 1, threads = -1, func = NULL)
+depthLP(u, X, pdim = 2, la = 1, lb = 1, threads = -1,
+  func = NULL)
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}

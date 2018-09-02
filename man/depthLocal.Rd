@@ -4,8 +4,8 @@
 \alias{depthLocal}
 \title{Local depth}
 \usage{
-depthLocal(u, X, beta = 0.5, depth_params1 = list(method = "Projection"),
-  depth_params2 = depth_params1)
+depthLocal(u, X, beta = 0.5, depth_params1 = list(method =
+  "Projection"), depth_params2 = depth_params1)
 }
 \arguments{
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}

@@ -4,8 +4,9 @@
 \alias{asymmetryCurve}
 \title{Asymmetry curve based on depths}
 \usage{
-asymmetryCurve(x, y = NULL, alpha = seq(0, 1, 0.01), movingmedian = FALSE,
-  name = "X", name_y = "Y", depth_params = list(method = "Projection"))
+asymmetryCurve(x, y = NULL, alpha = seq(0, 1, 0.01),
+  movingmedian = FALSE, name = "X", name_y = "Y",
+  depth_params = list(method = "Projection"))
 }
 \arguments{
 \item{x}{The data as a matrix or data frame. If it is a matrix or data frame, then each row is viewed as one multivariate observation.}

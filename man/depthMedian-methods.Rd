@@ -10,9 +10,11 @@
 \usage{
 depthMedian(x, depth_params = list(), convex = FALSE)
 
-\S4method{depthMedian}{matrix}(x, depth_params = list(), convex = FALSE)
+\S4method{depthMedian}{matrix}(x, depth_params = list(),
+  convex = FALSE)
 
-\S4method{depthMedian}{data.frame}(x, depth_params = list(), convex = FALSE)
+\S4method{depthMedian}{data.frame}(x, depth_params = list(),
+  convex = FALSE)
 
 \S4method{depthMedian}{Depth}(x, convex = FALSE)
 }

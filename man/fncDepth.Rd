@@ -8,9 +8,11 @@
 \usage{
 fncDepth(u, X = NULL, method = "MBD", byrow = NULL, ...)
 
-\method{fncDepth}{matrix}(u, X = NULL, method = "MBD", byrow = NULL, ...)
+\method{fncDepth}{matrix}(u, X = NULL, method = "MBD", byrow = NULL,
+  ...)
 
-\method{fncDepth}{zoo}(u, X = NULL, method = "MBD", byrow = NULL, ...)
+\method{fncDepth}{zoo}(u, X = NULL, method = "MBD", byrow = NULL,
+  ...)
 }
 \arguments{
 \item{u}{data}

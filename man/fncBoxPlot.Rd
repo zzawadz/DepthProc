@@ -4,8 +4,8 @@
 \alias{fncBoxPlot}
 \title{Functional boxplot based on Modified Band Depth}
 \usage{
-fncBoxPlot(u, X = NULL, bands = c(0, 0.5), method = "MBD", byrow = NULL,
-  ...)
+fncBoxPlot(u, X = NULL, bands = c(0, 0.5), method = "MBD",
+  byrow = NULL, ...)
 }
 \arguments{
 \item{u}{data matrix}
