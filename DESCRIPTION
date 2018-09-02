@@ -1,6 +1,6 @@
 Package: DepthProc
 Version: 2.0.4
-Date: 2018-06-05
+Date: 2018-09-02
 Title: Statistical Depth Functions for Multivariate Analysis
 Authors@R: c(
     person("Zygmunt", "Zawadzki", role = c("aut", "cre"), email = "zygmunt@zstat.pl"),
