@@ -1,11 +1,13 @@
 context("Test MBD")
 
-test_that("Equal to fda", {
-  data("katowice.airpollution")
-  expect_equal(fda:::fMBD(t(katowice.airpollution)),
-               fncDepthMBD(katowice.airpollution))
+if(require("fda", quietly = TRUE)) {
+  test_that("Equal to fda", {
+    data("katowice.airpollution")
+    expect_equal(fda:::fMBD(t(katowice.airpollution)),
+                 fncDepthMBD(katowice.airpollution))
 
-})
+  })
+}
 
 context("Test MBD")
 
