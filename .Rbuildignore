@@ -13,3 +13,4 @@ README.html
 .lintr
 src/init.gcda
 src/init.gcno
+docs
