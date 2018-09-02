@@ -94,7 +94,7 @@ scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
   alpha_border <- ecdf(depth_est)(depth_est)
   for (i in 1:k) {
     tmp_x <- x[alpha_border >= alpha[i], ]
-    np <- nrow(as.matrix(tmp_x))
+    np <- nrow(unique(as.matrix(tmp_x)))
 
     if (np > dim_x) {
       vol[i] <- convhulln(tmp_x, options = "FA")$vol
