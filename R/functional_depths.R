@@ -130,8 +130,8 @@ fncDepthFM <- function(u, X, dep1d_params = list(method = "Projection")) {
 
   for (i in seq_len(ncol(X))) {
 
-    dep1d_params$u <- u[,i]
-    dep1d_params$X <- X[,i]
+    dep1d_params$u <- u[, i]
+    dep1d_params$X <- X[, i]
 
     depths <- depths + do.call(depth, dep1d_params)
   }

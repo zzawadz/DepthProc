@@ -1,6 +1,7 @@
 Changes in DepthProc 2.0.4
 
 - Fixed error in the documentations of the deepReg2d and trimprojreg2d functions. (thanks to Shao Tang)
+- Fixed error in scaleCurve when the most deep data points are not unique.
 
 Changes in DepthProc 2.0.3
 

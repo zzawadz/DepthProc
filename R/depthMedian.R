@@ -35,7 +35,7 @@ setMethod("depthMedian", "matrix", function(x, depth_params = list(), convex = F
   med <- x[depths == max(depths), ]
 
   if (ncol(x) != length(med) && convex) {
-    med <- colMeans(med[chull(med),])
+    med <- colMeans(med[chull(med), ])
   } else if(ncol(x) != length(med)) {
     med <- colMeans(med)
   }
@@ -56,7 +56,7 @@ setMethod("depthMedian", "Depth", function(x, convex = FALSE) {
   med <- x@u[pos, ]
 
   if (ncol(x@u) != length(med) && convex) {
-    med <- colMeans(med[chull(med),])
+    med <- colMeans(med[chull(med), ])
   } else if(ncol(x@u) != length(med)) {
     med <- colMeans(med)
   }

@@ -87,4 +87,3 @@ NULL
 #' 2. Kosiorowski D, Szlachtowska E (2017). 'K- local Median Algorithm for Functional Data in Empirical Analysis of Air Pollution Data.' Proceedings from the 11th Professor A. Zelias International Conference, pp. 153-162. Cracow University of Economics.
 #'
 NULL
-

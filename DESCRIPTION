@@ -41,7 +41,8 @@ Suggests:
     xts,
     covr,
     testthat,
-    fda
+    fda,
+    lintr
 LinkingTo: Rcpp, RcppArmadillo
 SystemRequirements: C++11
 RoxygenNote: 6.0.1
