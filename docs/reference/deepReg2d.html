@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DepthProc</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.0.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.0.4</span>
       </span>
     </div>
 
@@ -131,20 +131,39 @@
     <pre class="examples"><div class='input'>
 <span class='co'># EXAMPLE 1</span>
 <span class='fu'>data</span>(<span class='no'>pension</span>)
-<span class='fu'><a href='plot-methods.html'>plot</a></span>(<span class='no'>pension</span>)</div><div class='input'><span class='fu'>abline</span>(<span class='fu'>lm</span>(<span class='no'>Reserves</span> ~ <span class='no'>Income</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>pension</span>), <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='co'># lm</span></div><div class='input'><span class='fu'>abline</span>(<span class='fu'>deepReg2d</span>(<span class='no'>pension</span>[, <span class='fl'>1</span>], <span class='no'>pension</span>[, <span class='fl'>2</span>]), <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='co'># deepreg2d</span></div><div class='img'><img src='deepReg2d-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='plot-methods.html'>plot</a></span>(<span class='no'>pension</span>)</div><div class='input'><span class='fu'>abline</span>(
+  <span class='fu'>lm</span>(<span class='no'>Reserves</span> ~ <span class='no'>Income</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>pension</span>),
+  <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='co'># lm</span></div><div class='input'><span class='fu'>abline</span>(
+  <span class='fu'>deepReg2d</span>(<span class='no'>pension</span>[, <span class='fl'>1</span>], <span class='no'>pension</span>[, <span class='fl'>2</span>]),
+  <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='co'># deepreg2d</span></div><div class='img'><img src='deepReg2d-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># EXAMPLE 2</span>
 <span class='fu'>data</span>(<span class='no'>under5.mort</span>)
 <span class='fu'>data</span>(<span class='no'>inf.mort</span>)
 <span class='fu'>data</span>(<span class='no'>maesles.imm</span>)
-<span class='no'>data2011</span> <span class='kw'>&lt;-</span> <span class='fu'>na.omit</span>(<span class='fu'>cbind</span>(<span class='no'>under5.mort</span>[, <span class='fl'>22</span>], <span class='no'>inf.mort</span>[, <span class='fl'>22</span>],
-                          <span class='no'>maesles.imm</span>[, <span class='fl'>22</span>]))
+<span class='no'>data2011</span> <span class='kw'>&lt;-</span> <span class='fu'>na.omit</span>(
+    <span class='fu'>cbind</span>(<span class='no'>under5.mort</span>[, <span class='fl'>22</span>], <span class='no'>inf.mort</span>[, <span class='fl'>22</span>],
+    <span class='no'>maesles.imm</span>[, <span class='fl'>22</span>]))
+
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>data2011</span>[, <span class='fl'>3</span>]
 <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='no'>data2011</span>[, <span class='fl'>2</span>]
-<span class='fu'><a href='plot-methods.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1.2</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"infant mortality rate per 1000 live birth"</span>,
-<span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"against masles immunized percentage"</span>,
-<span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Projection Depth Trimmed vs. LS regressions"</span>)</div><div class='input'><span class='fu'>abline</span>(<span class='fu'>lm</span>(<span class='no'>x</span> ~ <span class='no'>y</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>pension</span>), <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"black"</span>) <span class='co'># lm</span></div><div class='input'><span class='fu'>abline</span>(<span class='fu'>deepReg2d</span> (<span class='no'>x</span>, <span class='no'>y</span>), <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"red"</span>) <span class='co'># trimmed reg</span></div><div class='input'><span class='fu'>legend</span>(<span class='st'>"bottomleft"</span>, <span class='fu'>c</span>(<span class='st'>"LS"</span>, <span class='st'>"DeepReg"</span>), <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"black"</span>, <span class='st'>"red"</span>), <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1.4</span>,
-       <span class='kw'>bty</span> <span class='kw'>=</span> <span class='st'>"n"</span>)</div><div class='img'><img src='deepReg2d-2.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+<span class='fu'><a href='plot-methods.html'>plot</a></span>(
+  <span class='no'>x</span>, <span class='no'>y</span>,
+  <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1.2</span>,
+  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"infant mortality rate per 1000 live birth"</span>,
+  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"against masles immunized percentage"</span>,
+  <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Projection Depth Trimmed vs. LS regressions"</span>
+)</div><div class='input'><span class='fu'>abline</span>(<span class='fu'>lm</span>(<span class='no'>x</span> ~ <span class='no'>y</span>), <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"black"</span>) <span class='co'># lm</span></div><div class='input'><span class='fu'>abline</span>(
+  <span class='fu'>deepReg2d</span> (<span class='no'>x</span>, <span class='no'>y</span>),
+  <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"red"</span>
+) <span class='co'># trimmed reg</span></div><div class='input'>
+<span class='fu'>legend</span>(
+  <span class='st'>"bottomleft"</span>,
+  <span class='fu'>c</span>(<span class='st'>"LS"</span>, <span class='st'>"DeepReg"</span>),
+  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"black"</span>, <span class='st'>"red"</span>),
+  <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1.4</span>,
+  <span class='kw'>bty</span> <span class='kw'>=</span> <span class='st'>"n"</span>
+)</div><div class='img'><img src='deepReg2d-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

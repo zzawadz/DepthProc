@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">DepthProc</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.0.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.0.4</span>
       </span>
     </div>
 
@@ -83,10 +83,10 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p><em>DepthProc</em> is avaiable on CRAN:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"DepthProc"</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"DepthProc"</span>)</a></code></pre></div>
 <p>You can also install it from GitHub with <em>devtools</em> package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"zzawadz/DepthProc"</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(devtools)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"zzawadz/DepthProc"</span>)</a></code></pre></div>
 </div>
 <div id="main-features" class="section level2">
 <h2 class="hasAnchor">
@@ -95,47 +95,46 @@
 <h3 class="hasAnchor">
 <a href="#speed-and-multithreading" class="anchor"></a>Speed and multithreading</h3>
 <p>Most of the code is written in C++ for additional efficiency. We also use OpenMP to speedup computations with multithreading:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(DepthProc)
-<span class="kw">set.seed</span>(<span class="dv">123</span>)
-
-<span class="co"># Tested on Intel Core i7 3770K</span>
-d &lt;-<span class="st"> </span><span class="dv">10</span>
-x &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dv">1000</span>, <span class="kw">rep</span>(<span class="dv">0</span>, d), <span class="kw">diag</span>(d))
-<span class="co"># Default - utilize as many threads as possible</span>
-<span class="kw">system.time</span>(<span class="kw"><a href="reference/depth.html">depth</a></span>(x, x, <span class="dt">method =</span> <span class="st">"LP"</span>))</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(DepthProc)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">d &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">x &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dv">1000</span>, <span class="kw">rep</span>(<span class="dv">0</span>, d), <span class="kw">diag</span>(d))</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co"># Default - utilize as many threads as possible</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw">system.time</span>(<span class="kw"><a href="reference/depth.html">depth</a></span>(x, x, <span class="dt">method =</span> <span class="st">"LP"</span>))</a></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.327   0.001   0.046</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Only single thread - 4 times slower:</span>
-<span class="kw">system.time</span>(<span class="kw"><a href="reference/depth.html">depth</a></span>(x, x, <span class="dt">method =</span> <span class="st">"LP"</span>, <span class="dt">threads =</span> <span class="dv">1</span>))</code></pre></div>
+##   0.359   0.000   0.115</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Only single thread - 4 times slower:</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">system.time</span>(<span class="kw"><a href="reference/depth.html">depth</a></span>(x, x, <span class="dt">method =</span> <span class="st">"LP"</span>, <span class="dt">threads =</span> <span class="dv">1</span>))</a></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.183   0.000   0.183</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Two threads - 2 times slower:</span>
-<span class="kw">system.time</span>(<span class="kw"><a href="reference/depth.html">depth</a></span>(x, x, <span class="dt">method =</span> <span class="st">"LP"</span>, <span class="dt">threads =</span> <span class="dv">2</span>))</code></pre></div>
+##   0.215   0.000   0.216</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Two threads - 2 times slower:</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">system.time</span>(<span class="kw"><a href="reference/depth.html">depth</a></span>(x, x, <span class="dt">method =</span> <span class="st">"LP"</span>, <span class="dt">threads =</span> <span class="dv">2</span>))</a></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.167   0.000   0.085</code></pre>
+##   0.258   0.000   0.136</code></pre>
 </div>
 </div>
 <div id="available-depth-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#available-depth-functions" class="anchor"></a>Available depth functions</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dv">100</span>, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="kw">diag</span>(<span class="dv">2</span>))
-
-<span class="kw"><a href="reference/depthEuclid.html">depthEuclid</a></span>(x, x)
-<span class="kw"><a href="reference/depthMah.html">depthMah</a></span>(x, x)
-<span class="kw"><a href="reference/depthLP.html">depthLP</a></span>(x, x)
-<span class="kw"><a href="reference/depthProjection.html">depthProjection</a></span>(x, x)
-<span class="kw"><a href="reference/depthLocal.html">depthLocal</a></span>(x, x)
-<span class="kw"><a href="reference/depthTukey.html">depthTukey</a></span>(x, x)
-
-## Base function to call others:
-<span class="kw"><a href="reference/depth.html">depth</a></span>(x, x, <span class="dt">method =</span> <span class="st">"Projection"</span>)
-<span class="kw"><a href="reference/depth.html">depth</a></span>(x, x, <span class="dt">method =</span> <span class="st">"Local"</span>, <span class="dt">depth_params1 =</span> <span class="kw">list</span>(<span class="dt">method =</span> <span class="st">"LP"</span>))
-
-## Get median
-<span class="kw"><a href="reference/depthMedian-methods.html">depthMedian</a></span>(x, 
-  <span class="dt">depth_params =</span> <span class="kw">list</span>(
-    <span class="dt">method =</span> <span class="st">"Local"</span>,
-    <span class="dt">depth_params1 =</span> <span class="kw">list</span>(<span class="dt">method =</span> <span class="st">"LP"</span>)))</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dv">100</span>, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="kw">diag</span>(<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw"><a href="reference/depthEuclid.html">depthEuclid</a></span>(x, x)</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw"><a href="reference/depthMah.html">depthMah</a></span>(x, x)</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="kw"><a href="reference/depthLP.html">depthLP</a></span>(x, x)</a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="kw"><a href="reference/depthProjection.html">depthProjection</a></span>(x, x)</a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="kw"><a href="reference/depthLocal.html">depthLocal</a></span>(x, x)</a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="kw"><a href="reference/depthTukey.html">depthTukey</a></span>(x, x)</a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10">## Base function to call others:</a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="kw"><a href="reference/depth.html">depth</a></span>(x, x, <span class="dt">method =</span> <span class="st">"Projection"</span>)</a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="kw"><a href="reference/depth.html">depth</a></span>(x, x, <span class="dt">method =</span> <span class="st">"Local"</span>, <span class="dt">depth_params1 =</span> <span class="kw">list</span>(<span class="dt">method =</span> <span class="st">"LP"</span>))</a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14">## Get median</a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="kw"><a href="reference/depthMedian-methods.html">depthMedian</a></span>(x, </a>
+<a class="sourceLine" id="cb9-16" data-line-number="16">  <span class="dt">depth_params =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb9-17" data-line-number="17">    <span class="dt">method =</span> <span class="st">"Local"</span>,</a>
+<a class="sourceLine" id="cb9-18" data-line-number="18">    <span class="dt">depth_params1 =</span> <span class="kw">list</span>(<span class="dt">method =</span> <span class="st">"LP"</span>)))</a></code></pre></div>
 </div>
 <div id="basic-plots" class="section level2">
 <h2 class="hasAnchor">
@@ -143,15 +142,15 @@ x &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dv"
 <div id="contour-plot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#contour-plot" class="anchor"></a>Contour plot</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mvtnorm)
-y &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/mvtnorm/topics/Mvt">rmvt</a></span>(<span class="dt">n =</span> <span class="dv">200</span>, <span class="dt">sigma =</span> <span class="kw">diag</span>(<span class="dv">2</span>), <span class="dt">df =</span> <span class="dv">4</span>, <span class="dt">delta =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">5</span>))
-<span class="kw"><a href="reference/depthContour.html">depthContour</a></span>(y, <span class="dt">points =</span> <span class="ot">TRUE</span>, <span class="dt">graph_params =</span> <span class="kw">list</span>(<span class="dt">lwd =</span> <span class="dv">2</span>))</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">library</span>(mvtnorm)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/mvtnorm/topics/Mvt">rmvt</a></span>(<span class="dt">n =</span> <span class="dv">200</span>, <span class="dt">sigma =</span> <span class="kw">diag</span>(<span class="dv">2</span>), <span class="dt">df =</span> <span class="dv">4</span>, <span class="dt">delta =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw"><a href="reference/depthContour.html">depthContour</a></span>(y, <span class="dt">points =</span> <span class="ot">TRUE</span>, <span class="dt">graph_params =</span> <span class="kw">list</span>(<span class="dt">lwd =</span> <span class="dv">2</span>))</a></code></pre></div>
 <p><img src="index_files/figure-html/contour-1.png" width="700"></p>
 </div>
 <div id="perspective-plot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#perspective-plot" class="anchor"></a>Perspective plot</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/depthPersp.html">depthPersp</a></span>(y, <span class="dt">depth_params =</span> <span class="kw">list</span>(<span class="dt">method =</span> <span class="st">"Mahalanobis"</span>))</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="reference/depthPersp.html">depthPersp</a></span>(y, <span class="dt">depth_params =</span> <span class="kw">list</span>(<span class="dt">method =</span> <span class="st">"Mahalanobis"</span>))</a></code></pre></div>
 <p><img src="index_files/figure-html/persp-1.png" width="700"></p>
 </div>
 </div>
@@ -159,15 +158,15 @@ y &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentat
 <h2 class="hasAnchor">
 <a href="#functional-depths" class="anchor"></a>Functional depths:</h2>
 <p>There are two functional depths implemented - modified band depth (MBD), and Frainman-Muniz depth (FM):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">60</span>), <span class="dt">nc =</span> <span class="dv">20</span>)
-<span class="kw"><a href="reference/fncDepth.html">fncDepth</a></span>(x, <span class="dt">method =</span> <span class="st">"MBD"</span>)
-<span class="kw"><a href="reference/fncDepth.html">fncDepth</a></span>(x, <span class="dt">method =</span> <span class="st">"FM"</span>, <span class="dt">dep1d =</span> <span class="st">"Mahalanobis"</span>)</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">60</span>), <span class="dt">nc =</span> <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw"><a href="reference/fncDepth.html">fncDepth</a></span>(x, <span class="dt">method =</span> <span class="st">"MBD"</span>)</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw"><a href="reference/fncDepth.html">fncDepth</a></span>(x, <span class="dt">method =</span> <span class="st">"FM"</span>, <span class="dt">dep1d =</span> <span class="st">"Mahalanobis"</span>)</a></code></pre></div>
 <pre><code>## Warning in dep1d_params$u &lt;- u[, i]: Coercing LHS to a list</code></pre>
 <div id="functional-boxplot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#functional-boxplot" class="anchor"></a>Functional BoxPlot</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">2000</span>), <span class="dt">ncol =</span> <span class="dv">100</span>)
-<span class="kw"><a href="reference/fncBoxPlot.html">fncBoxPlot</a></span>(x, <span class="dt">bands =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>), <span class="dt">method =</span> <span class="st">"FM"</span>)</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">2000</span>), <span class="dt">ncol =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw"><a href="reference/fncBoxPlot.html">fncBoxPlot</a></span>(x, <span class="dt">bands =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>), <span class="dt">method =</span> <span class="st">"FM"</span>)</a></code></pre></div>
 <p><img src="index_files/figure-html/fncBox-1.png" width="700"></p>
 </div>
 </div>

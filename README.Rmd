@@ -46,7 +46,6 @@ Most of the code is written in C++ for additional efficiency. We also use OpenMP
 library(DepthProc)
 set.seed(123)
 
-# Tested on Intel Core i7 3770K
 d <- 10
 x <- mvrnorm(1000, rep(0, d), diag(d))
 # Default - utilize as many threads as possible
