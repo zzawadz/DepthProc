@@ -40,3 +40,5 @@ resList <- list(
   depthProc10000 = depthProc10000[worstDepthProc,],
   ddalpha10000 = ddalpha10000[worstDepthProc,]
 )
+
+boxplot(resList)
