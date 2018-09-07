@@ -8,7 +8,8 @@ depthContour(x, xlim = extendrange(x[, 1], f = 0.1),
   ylim = extendrange(x[, 2], f = 0.1), n = 50, pmean = TRUE,
   mcol = "blue", pdmedian = TRUE, mecol = "brown", legend = TRUE,
   points = FALSE, colors = heat_hcl, levels = 10,
-  depth_params = list(), graph_params = list())
+  depth_params = list(), graph_params = list(),
+  contour_method = c("auto", "convexhull", "contour"))
 }
 \arguments{
 \item{x}{Bivariate data}
@@ -38,6 +39,11 @@ depthContour(x, xlim = extendrange(x[, 1], f = 0.1),
 \item{depth_params}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).}
 
 \item{graph_params}{list of graphical parameters for functions filled.contour and contour (e.g. lwd, lty, main).}
+
+\item{contour_method}{determines the method used to draw the contour lines. The default value ("auto") tries
+to determine the best method for given depth function.
+"convexhull" uses a convex hull algorithm to determine boundaries.
+"contour" uses the algorithm from \code{\link{filled.contour}}.}
 }
 \description{
 Draws an approximate contours of depth for bivariate data.
@@ -47,6 +53,7 @@ The set of all points that have depth at least \eqn{ \alpha } is called \eqn{ \a
 }
 \examples{
 # EXAMPLE 1
+set.seed(123)
 x <- mvrnorm(1000, c(0, 0), diag(2))
 depthContour(x, colors = gray.colors)
 # with points
@@ -63,6 +70,15 @@ depthContour(data1990, n = 50, pmean = TRUE, mcol = "blue",
                xlab = "infant mortality rate per 1000 live birth",
                ylab = "against masles immunized percentage",
                main = "L2 depth, UN Fourth Goal 2011 year"))
+
+
+#EXAMPLE 3
+data("france")
+depthContour(france,
+    depth_params = list(method = "Tukey"),
+    points = TRUE
+)
+
 
 }
 \seealso{

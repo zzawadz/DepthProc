@@ -30,7 +30,8 @@ Imports:
     sm,
     geometry,
     colorspace,
-    zoo
+    zoo,
+    grDevices
 Suggests:
     mvtnorm,
     rgl,

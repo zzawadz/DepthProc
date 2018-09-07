@@ -16,6 +16,10 @@
 #' @param levels number of levels for color scale.
 #' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
 #' @param graph_params list of graphical parameters for functions filled.contour and contour (e.g. lwd, lty, main).
+#' @param contour_method determines the method used to draw the contour lines. The default value ("auto") tries
+#' to determine the best method for given depth function.
+#' "convexhull" uses a convex hull algorithm to determine boundaries.
+#' "contour" uses the algorithm from \code{\link{filled.contour}}.
 #'
 #' @details
 #'
@@ -27,6 +31,7 @@
 #'
 #' @examples
 #' # EXAMPLE 1
+#' set.seed(123)
 #' x <- mvrnorm(1000, c(0, 0), diag(2))
 #' depthContour(x, colors = gray.colors)
 #' # with points
@@ -44,6 +49,15 @@
 #'                ylab = "against masles immunized percentage",
 #'                main = "L2 depth, UN Fourth Goal 2011 year"))
 #'
+#'
+#' #EXAMPLE 3
+#' data("france")
+#' depthContour(france,
+#'     depth_params = list(method = "Tukey"),
+#'     points = TRUE
+#' )
+#'
+#'
 #' @keywords
 #' contour
 #' depth
@@ -56,7 +70,7 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
                          colors = heat_hcl, levels = 10,
                          depth_params = list(),
                          graph_params = list(),
-                         use_grid = TRUE
+                         contour_method = c("auto", "convexhull", "contour")
                          ) {
   x_axis <- seq(xlim[1], xlim[2], length.out = n)
   y_axis <- seq(ylim[1], ylim[2], length.out = n)
@@ -69,7 +83,7 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
   depth_params_list <- c(ux_list, depth_params)
 
   depth_surface_raw <- do.call(depth, depth_params_list)
-  depth_surface <- matrix(depth_surface, ncol = n)
+  depth_surface <- matrix(depth_surface_raw, ncol = n)
 
   if (length(levels) == 1 && is.numeric(levels)) {
     # levels must include 0
@@ -79,16 +93,25 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
     stop("Levels must be numeric vector of length 1.")
   }
 
+  # set contour method
+  contour_method <- contour_method[1]
+  if(contour_method == "auto") {
+    dp_method <- depth_params[["method"]]
+    if(!is.null(dp_method) && dp_method == "Tukey") {
+      contour_method <- "convexhull"
+    } else {
+      contour_method <- "contour"
+    }
+  }
+
   addConvexHull <- function(data, depth, cutoff, col = "black") {
     idx <- depth >= cutoff
     x <- data[idx,1]
     y <- data[idx,2]
-    hpts <- chull(x = x, y = y)
+    hpts <- grDevices::chull(x = x, y = y)
     hpts <- c(hpts, hpts[1])
-    polygon(x[hpts], y[hpts], border = 1, col = col)
-    #lines(x[hpts], y[hpts], col = col, lwd = 1)
+    graphics::polygon(x[hpts], y[hpts], border = 1, col = col)
   }
-
 
   do.call(
     filled.contour,
@@ -105,14 +128,16 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
                                   levels = levels),
                              graph_params))
 
-          colors_all <- colors(length(levels))
-          for(lvl in seq_along(levels)) {
-            addConvexHull(
-              xy_surface,
-              depth_surface_raw,
-              cutoff = levels[lvl],
-              col = colors_all[lvl]
-            )
+          if(contour_method == "convexhull") {
+            colors_all <- colors(length(levels))
+            for(lvl in seq_along(levels)) {
+              addConvexHull(
+                xy_surface,
+                depth_surface_raw,
+                cutoff = levels[lvl],
+                col = colors_all[lvl]
+              )
+            }
           }
 
           if (points) {
