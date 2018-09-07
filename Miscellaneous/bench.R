@@ -48,9 +48,9 @@ all.equal(
 )
 
 # tukey 5d
-x5d <- generateData(1000, ndim = 5)
+x5d <- generateData(200, ndim = 5)
 benchResult5dTukey <- summary(microbenchmark(
-  "depth" = apply(x5d, 1, depth, x = x5d),
+  "depth" = apply(x5d, 1, depth, x = x5d, approx = TRUE),
   "DepthProc" = depthTukey(x5d, exact = TRUE)
 ))[,c("expr", "lq", "mean", "median", "uq")]
 
