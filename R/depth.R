@@ -123,6 +123,8 @@ depthEuclid <- function(u, X) {
     X <- u
   }
 
+  if (is.vector(u)) u <- matrix(u, ncol = ncol(X))
+
   n <- dim(u)[1]
   center <- colMeans(X)
   center <- matrix(rep(center, n), nrow = n, byrow = TRUE)
@@ -164,6 +166,9 @@ depthMah <- function(u, X, cov = NULL, mean = NULL, threads = -1) {
   if (missing(X)) {
     X <- u
   }
+
+  if (is.vector(u)) u <- matrix(u, ncol = ncol(X))
+
   if (!is.null(mean)) {
     mean <- matrix(mean, ncol = length(mean))
   }
@@ -205,6 +210,8 @@ depthProjection <- function(u, X, ndir = 1000, threads = -1) {
   if (missing(X)) {
     X <- u
   }
+
+  if (is.vector(u)) u <- matrix(u, ncol = ncol(X))
 
   depth <- depthProjCPP(u, X, ndir, threads)
 
@@ -250,6 +257,8 @@ depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
   if (missing(X)) {
     X <- u
   }
+
+  if (is.vector(u)) u <- matrix(u, ncol = ncol(X))
 
   tukey1d <- function(u, X) {
     Xecdf <- ecdf(X)
@@ -319,6 +328,8 @@ depthLP <- function(u, X, pdim = 2, la = 1, lb = 1, threads = -1,
   if (missing(X)) {
     X <- u
   }
+
+  if (is.vector(u)) u <- matrix(u, ncol = ncol(X))
 
   if (is.null(func)) {
     depth <- depthLPCPP(u, X, pdim, la, lb, threads = threads)

@@ -1,6 +1,7 @@
 Changes in DepthProc 2.1.0
 
 - New parameter in depthContour to determine the method used to draw the boundaries.
+- Fixed error when using vector as a first parameter in depth* functions family (e.g. depthTukey).
 
 Changes in DepthProc 2.0.4
 
