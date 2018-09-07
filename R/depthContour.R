@@ -55,7 +55,9 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
                          mecol = "brown", legend = TRUE, points = FALSE,
                          colors = heat_hcl, levels = 10,
                          depth_params = list(),
-                         graph_params = list()) {
+                         graph_params = list(),
+                         use_grid = TRUE
+                         ) {
   x_axis <- seq(xlim[1], xlim[2], length.out = n)
   y_axis <- seq(ylim[1], ylim[2], length.out = n)
 
@@ -64,9 +66,9 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
 
   ux_list <- list(u = xy_surface, X = x)
 
-  depth_params <- c(ux_list, depth_params)
+  depth_params_list <- c(ux_list, depth_params)
 
-  depth_surface <- do.call(depth, depth_params)
+  depth_surface_raw <- do.call(depth, depth_params_list)
   depth_surface <- matrix(depth_surface, ncol = n)
 
   if (length(levels) == 1 && is.numeric(levels)) {
@@ -76,6 +78,17 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
   } else {
     stop("Levels must be numeric vector of length 1.")
   }
+
+  addConvexHull <- function(data, depth, cutoff, col = "black") {
+    idx <- depth >= cutoff
+    x <- data[idx,1]
+    y <- data[idx,2]
+    hpts <- chull(x = x, y = y)
+    hpts <- c(hpts, hpts[1])
+    polygon(x[hpts], y[hpts], border = 1, col = col)
+    #lines(x[hpts], y[hpts], col = col, lwd = 1)
+  }
+
 
   do.call(
     filled.contour,
@@ -92,8 +105,15 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
                                   levels = levels),
                              graph_params))
 
-          # contour(x_axis, y_axis, depth_surface, add = TRUE,
-          #         drawlabels = FALSE);
+          colors_all <- colors(length(levels))
+          for(lvl in seq_along(levels)) {
+            addConvexHull(
+              xy_surface,
+              depth_surface_raw,
+              cutoff = levels[lvl],
+              col = colors_all[lvl]
+            )
+          }
 
           if (points) {
             points(x[, 1], x[, 2], col = "white", pch = 19, cex = 1.2)
@@ -143,4 +163,5 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
       graph_params
     ) # end c
   ) # end do.call
+
 }
