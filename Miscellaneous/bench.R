@@ -24,11 +24,9 @@ benchResult <- as.data.frame(summary(benchResult))
 benchTable <- benchResult[,c("expr", "lq", "mean", "median", "uq")]
 xtable(benchTable) ## create latex table
 
-##### Tukey depth ####
+##### Tukey depth #####
 library(depth)
 x2d <- generateData(1000, ndim = 2)
-depth::depth(u = x2d, x = x2d)
-
 
 ## All points
 benchResult2dTukey <- summary(microbenchmark(
@@ -43,7 +41,18 @@ benchResult2dTukey <- summary(microbenchmark(
   "DepthProc" = depthTukey(xm, x2d, exact = TRUE)
 ))[,c("expr", "lq", "mean", "median", "uq")]
 
+all.equal(
+  apply(x2d, 1, depth, x = x2d),
+  as.numeric(depthTukey(x2d, exact = TRUE)),
+  tolerance = 1e-7
+)
 
+# tukey 5d
+x5d <- generateData(1000, ndim = 5)
+benchResult5dTukey <- summary(microbenchmark(
+  "depth" = apply(x5d, 1, depth, x = x5d),
+  "DepthProc" = depthTukey(x5d, exact = TRUE)
+))[,c("expr", "lq", "mean", "median", "uq")]
 
 
 
