@@ -1,5 +1,7 @@
-DepthProc
-=========
+
+# DepthProc
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 *DepthProc* project consist of a set of statistical procedures based on
 so called statistical depth functions. The project involves free
@@ -20,104 +22,110 @@ Status](https://ci.appveyor.com/api/projects/status/github/zzawadz/DepthProc?bra
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/zzawadz/DepthProc/master.svg)](https://codecov.io/github/zzawadz/DepthProc?branch=master)
 
-Installation
-------------
+## Installation
 
 *DepthProc* is avaiable on CRAN:
 
-    install.packages("DepthProc")
+``` r
+install.packages("DepthProc")
+```
 
 You can also install it from GitHub with *devtools* package:
 
-    library(devtools)
-    install_github("zzawadz/DepthProc")
+``` r
+library(devtools)
+install_github("zzawadz/DepthProc")
+```
 
-Main features:
---------------
+## Main features:
 
 ### Speed and multithreading
 
 Most of the code is written in C++ for additional efficiency. We also
 use OpenMP to speedup computations with multithreading:
 
-    library(DepthProc)
-    set.seed(123)
+``` r
+library(DepthProc)
+set.seed(123)
 
-    # Tested on Intel Core i7 3770K
-    d <- 10
-    x <- mvrnorm(1000, rep(0, d), diag(d))
-    # Default - utilize as many threads as possible
-    system.time(depth(x, x, method = "LP"))
+d <- 10
+x <- mvrnorm(1000, rep(0, d), diag(d))
+# Default - utilize as many threads as possible
+system.time(depth(x, x, method = "LP"))
+#>    user  system elapsed 
+#>   0.359   0.000   0.107
 
-    ##    user  system elapsed 
-    ##   0.361   0.000   0.148
+# Only single thread - 4 times slower:
+system.time(depth(x, x, method = "LP", threads = 1))
+#>    user  system elapsed 
+#>   0.199   0.000   0.199
 
-    # Only single thread - 4 times slower:
-    system.time(depth(x, x, method = "LP", threads = 1))
+# Two threads - 2 times slower:
+system.time(depth(x, x, method = "LP", threads = 2))
+#>    user  system elapsed 
+#>   0.234   0.000   0.127
+```
 
-    ##    user  system elapsed 
-    ##    0.22    0.00    0.22
+## Available depth functions
 
-    # Two threads - 2 times slower:
-    system.time(depth(x, x, method = "LP", threads = 2))
+``` r
+x <- mvrnorm(100, c(0, 0), diag(2))
 
-    ##    user  system elapsed 
-    ##   0.363   0.000   0.184
+depthEuclid(x, x)
+depthMah(x, x)
+depthLP(x, x)
+depthProjection(x, x)
+depthLocal(x, x)
+depthTukey(x, x)
 
-Available depth functions
--------------------------
+## Base function to call others:
+depth(x, x, method = "Projection")
+depth(x, x, method = "Local", depth_params1 = list(method = "LP"))
 
-    x <- mvrnorm(100, c(0, 0), diag(2))
+## Get median
+depthMedian(x, 
+  depth_params = list(
+    method = "Local",
+    depth_params1 = list(method = "LP")))
+```
 
-    depthEuclid(x, x)
-    depthMah(x, x)
-    depthLP(x, x)
-    depthProjection(x, x)
-    depthLocal(x, x)
-    depthTukey(x, x)
-
-    ## Base function to call others:
-    depth(x, x, method = "Projection")
-    depth(x, x, method = "Local", depth_params1 = list(method = "LP"))
-
-    ## Get median
-    depthMedian(x, 
-      depth_params = list(
-        method = "Local",
-        depth_params1 = list(method = "LP")))
-
-Basic plots
------------
+## Basic plots
 
 ### Contour plot
 
-    library(mvtnorm)
-    y <- rmvt(n = 200, sigma = diag(2), df = 4, delta = c(3, 5))
-    depthContour(y, points = TRUE, graph_params = list(lwd = 2))
+``` r
+library(mvtnorm)
+y <- rmvt(n = 200, sigma = diag(2), df = 4, delta = c(3, 5))
+depthContour(y, points = TRUE, graph_params = list(lwd = 2))
+```
 
-![](README_files/figure-markdown_strict/contour-1.png)
+![](man/figures/README-contour-1.png)<!-- -->
 
 ### Perspective plot
 
-    depthPersp(y, depth_params = list(method = "Mahalanobis"))
+``` r
+depthPersp(y, depth_params = list(method = "Mahalanobis"))
+```
 
-![](README_files/figure-markdown_strict/persp-1.png)
+![](man/figures/README-persp-1.png)<!-- -->
 
-Functional depths:
-------------------
+## Functional depths:
 
 There are two functional depths implemented - modified band depth (MBD),
 and Frainman-Muniz depth (FM):
 
-    x <- matrix(rnorm(60), nc = 20)
-    fncDepth(x, method = "MBD")
-    fncDepth(x, method = "FM", dep1d = "Mahalanobis")
-
-    ## Warning in dep1d_params$u <- u[, i]: Coercing LHS to a list
+``` r
+x <- matrix(rnorm(60), nc = 20)
+fncDepth(x, method = "MBD")
+fncDepth(x, method = "FM", dep1d = "Mahalanobis")
+#> Warning in dep1d_params$u <- u[, i]: Coercing LHS to a list
+```
 
 ### Functional BoxPlot
 
-    x <- matrix(rnorm(2000), ncol = 100)
-    fncBoxPlot(x, bands = c(0, 0.5, 1), method = "FM")
+``` r
+x <- matrix(rnorm(2000), ncol = 100)
+fncBoxPlot(x, bands = c(0, 0.5, 1), method = "FM")
+```
 
-![](README_files/figure-markdown_strict/fncBox-1.png)
+![](man/figures/README-fncBox-1.png)<!-- -->

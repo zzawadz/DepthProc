@@ -7,7 +7,6 @@ figure
 ^appveyor\.yml$
 ^\.travis\.yml$
 README.Rmd
-README.md
 README_files
 README.html
 .lintr

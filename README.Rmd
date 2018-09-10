@@ -1,9 +1,21 @@
-DepthProc
-========================
+---
+output: github_document
+---
 
-```{r setup, include=FALSE}
+DepthProc
+========================================================
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, echo=FALSE}
 set.seed(123)
-knitr::opts_chunk$set(echo = TRUE, results="hide")
+knitr::opts_chunk$set(
+  echo = TRUE,
+  results="hide",
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-"
+)
 ```
 
 *DepthProc* project consist of a set of statistical procedures based on so called statistical depth functions. The project involves free available R package and its description.

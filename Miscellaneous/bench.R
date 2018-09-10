@@ -54,8 +54,6 @@ benchResult5dTukey <- summary(microbenchmark(
   "DepthProc" = depthTukey(x5d, exact = TRUE)
 ))[,c("expr", "lq", "mean", "median", "uq")]
 
-
-
 # precision for a point
 depthProc1000 <- replicate(500, depthProjection(x, ndir = 1000))
 ddalpha1000 <- replicate(500, depth.projection(x, x, num.directions = 1000))
