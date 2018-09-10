@@ -46,3 +46,5 @@ Suggests:
 LinkingTo: Rcpp, RcppArmadillo
 SystemRequirements: C++11
 RoxygenNote: 6.1.0
+URL: https://www.depthproc.zstat.pl/, https://github.com/zzawadz/DepthProc
+BugReports: https://github.com/zzawadz/DepthProc/issues

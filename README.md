@@ -11,6 +11,11 @@ available R package and its description.
 
 #### CRAN release version
 
+[![GitHub
+stars](https://img.shields.io/github/stars/zzawadz/DepthProc.svg?style=social&label=Stars)](https://github.com/zzawadz/DepthProc/stargazers)
+[![GitHub
+watchers](https://img.shields.io/github/watchers/zzawadz/DepthProc.svg?style=social&label=Watch)](https://github.com/zzawadz/DepthProc)
+
 [![CRAN
 version](https://www.r-pkg.org/badges/version/DepthProc)](https://cran.rstudio.com/web/packages/DepthProc/index.html)
 [![Downloads](https://cranlogs.r-pkg.org/badges/DepthProc)](https://cran.rstudio.com/package=DepthProc)
@@ -21,6 +26,9 @@ Status](https://travis-ci.org/zzawadz/DepthProc.svg?branch=master)](https://trav
 Status](https://ci.appveyor.com/api/projects/status/github/zzawadz/DepthProc?branch=master&svg=true)](https://ci.appveyor.com/project/zzawadz/DepthProc)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/zzawadz/DepthProc/master.svg)](https://codecov.io/github/zzawadz/DepthProc?branch=master)
+[![Project Status: Active - The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
 ## Installation
 
@@ -53,17 +61,17 @@ x <- mvrnorm(1000, rep(0, d), diag(d))
 # Default - utilize as many threads as possible
 system.time(depth(x, x, method = "LP"))
 #>    user  system elapsed 
-#>   0.359   0.000   0.107
+#>   0.351   0.000   0.090
 
 # Only single thread - 4 times slower:
 system.time(depth(x, x, method = "LP", threads = 1))
 #>    user  system elapsed 
-#>   0.199   0.000   0.199
+#>   0.208   0.000   0.208
 
 # Two threads - 2 times slower:
 system.time(depth(x, x, method = "LP", threads = 2))
 #>    user  system elapsed 
-#>   0.234   0.000   0.127
+#>   0.201   0.000   0.103
 ```
 
 ## Available depth functions

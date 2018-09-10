@@ -24,12 +24,17 @@ knitr::opts_chunk$set(
 
 #### CRAN release version
 
+[![GitHub stars](https://img.shields.io/github/stars/zzawadz/DepthProc.svg?style=social&label=Stars)](https://github.com/zzawadz/DepthProc/stargazers)
+[![GitHub watchers](https://img.shields.io/github/watchers/zzawadz/DepthProc.svg?style=social&label=Watch)](https://github.com/zzawadz/DepthProc)
+
 [![CRAN version](https://www.r-pkg.org/badges/version/DepthProc)](https://cran.rstudio.com/web/packages/DepthProc/index.html)
 [![Downloads](https://cranlogs.r-pkg.org/badges/DepthProc)](https://cran.rstudio.com/package=DepthProc)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/DepthProc)](https://cran.rstudio.com/web/packages/DepthProc/index.html)
 [![Build Status](https://travis-ci.org/zzawadz/DepthProc.svg?branch=master)](https://travis-ci.org/zzawadz/DepthProc)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/zzawadz/DepthProc?branch=master&svg=true)](https://ci.appveyor.com/project/zzawadz/DepthProc)
 [![Coverage Status](https://img.shields.io/codecov/c/github/zzawadz/DepthProc/master.svg)](https://codecov.io/github/zzawadz/DepthProc?branch=master)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+
 
 ## Installation
 
