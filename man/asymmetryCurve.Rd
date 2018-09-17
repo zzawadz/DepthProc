@@ -36,14 +36,13 @@ Asymmetry curve takes uses function convhulln from package geometry for computin
 \examples{
 
 # EXAMPLE 1
-library(sn)
 xi <- c(0, 0)
 alpha <- c(2, -5)
 Omega <- diag(2) * 5
 
 n <- 500
 X <- MASS::mvrnorm(n, xi, Omega) # normal distribution
-Y <- rmst(n, xi, Omega, alpha, nu = 1)
+Y <- sn::rmst(n, xi, Omega, alpha, nu = 1)
 asymmetryCurve(X, Y, name = "NORM", name_y = "S_T(2, -5, 10)")
 
 # EXAMPLE 2

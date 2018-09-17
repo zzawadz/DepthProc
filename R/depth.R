@@ -35,7 +35,6 @@
 #' @seealso \code{\link{depthContour}} and \code{\link{depthPersp}} for depth graphics.
 #'
 #' @examples
-#' library(robustbase)
 #'
 #' # Calculation of Projection depth
 #' data(starsCYG, package = "robustbase")

@@ -19,7 +19,7 @@ Computes projection trimmed regression in 2 dimensions.
 \examples{
 
 # EXAMPLE 1
-data(pension)
+data(pension, package = "robustbase")
 plot(pension)
 abline(lm(Reserves ~ Income, data = pension), lty = 3, lwd = 2) # lm
 abline(trimProjReg2d(pension[, 1], pension[, 2]), lwd = 2) # trimprojreg2d
@@ -43,8 +43,6 @@ legend("bottomleft", c("LS", "TrimReg"), fill = c("black", "red"), cex = 1.4,
        bty = "n")
 
 ##### Comparsion of a few regression methods #####
-library(DepthProc)
-library(MASS)
 
 data("france")
 plot(UR ~ MW, pch = 19, data = france)

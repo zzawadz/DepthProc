@@ -31,7 +31,6 @@
 #' data1990 <- na.omit(cbind(inf.mort[, 1], maesles.imm[, 1]))
 #'
 #' \dontrun{
-#' library(rgl)
 #' depthPersp(data1990, plot_method = "rgl",
 #'            depth_params = list(method = "Projection"))
 #' }

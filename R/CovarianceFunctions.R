@@ -7,7 +7,8 @@
 #' See \code{\link{CovLP}} for the function used to calculate weighted by \eqn{ L ^ p } depth covariance matrix.
 #'
 #' @export
-#' @importFrom rrcov CovRobust
+#' @importClassesFrom rrcov CovRobust Cov
+#' @importMethodsFrom rrcov getCenter
 #'
 setClass("CovDepthWeighted", contains = "CovRobust")
 
@@ -37,7 +38,7 @@ setClass("CovDepthWeighted", contains = "CovRobust")
 #'
 #' @examples
 #' # EXAMPLE 1
-#' x <- mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
+#' x <- MASS::mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
 #' cov_x <- CovLP(x, 2, 1, 1)
 #'
 #' # EXAMPLE 2

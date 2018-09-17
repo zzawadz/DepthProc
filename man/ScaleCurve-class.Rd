@@ -13,9 +13,8 @@ ScaleCurve intherits behviour from numeric vector, so raw values of ScaleCurve c
 The mechanism of creating plots with multiple curves is shown in \link{DepthCurve-class} (same mechanism is applied for AsymmetryCurve).
 }
 \examples{
-library(mvtnorm)
 x <- MASS::mvrnorm(n = 100, mu = c(0, 0), Sigma = 2 * diag(2))
-y <- rmvt(n = 100, sigma = diag(2), df = 4)
+y <- mvtnorm::rmvt(n = 100, sigma = diag(2), df = 4)
 s1 <- scaleCurve(x, depth_params = list(method = "Projection"))
 s2 <- scaleCurve(y, depth_params = list(method = "Projection"), name = "Set2")
 

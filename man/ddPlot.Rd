@@ -33,8 +33,6 @@ For two probability distributions \eqn{ F } and \eqn{ G }, both in \eqn{ {{{R}} 
 Its sample counterpart calculated for two samples \eqn{ {{{X}} ^ {n}} = \{{{X}_{1}}, ..., {{X}_{n}}\} } from \eqn{ F }, and \eqn{ {{Y} ^ {m}} = \{{{Y}_{1}}, ..., {{Y}_{m}}\} } from \eqn{ G } is defined as \deqn{ DD({{F}_{n}}, {{G}_{m}}) = \left\{\left( D({z}, {{F}_{n}}), D({z}, {{G}_{m}}) \right), {z} \in \{{{{X}} ^ {n}} \cup {{{Y}} ^ {m}}\} \right\} }
 }
 \examples{
-library(sn)
-library(mvtnorm)
 
 # EXAMPLE 1: Location difference
 standard <- MASS::mvrnorm(1000, c(0, 0), diag(2))

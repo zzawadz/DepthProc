@@ -35,9 +35,9 @@ fncDepth(x, method = "FM", dep1d = "Mahalanobis")
 fncDepth(x, byrow = FALSE)
 
 # zoo and xts
-library(xts)
-data(sample_matrix)
-sample.xts <- as.xts(sample_matrix, descr = "my new xts object")
+data(sample_matrix, package = "xts")
+sample.xts <- xts::as.xts(sample_matrix,
+  descr = "my new xts object")
 fncDepth(sample.xts)
 
 }

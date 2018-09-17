@@ -32,7 +32,7 @@ The \pkg{DepthProc} package offers these estimators for weighted \eqn{ {L} ^ {p}
 }
 \examples{
 # EXAMPLE 1
-x <- mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
+x <- MASS::mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
 cov_x <- CovLP(x, 2, 1, 1)
 
 # EXAMPLE 2

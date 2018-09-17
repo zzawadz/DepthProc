@@ -32,7 +32,6 @@ Next interesting depth is the weighted \eqn{ {L} ^ {p} } depth. The weighted \eq
 The Projection and Tukey's depths are calculated using an approximate algorithm. Calculations of Mahalanobis, Euclidean and \eqn{ L ^ p } depths are exact. Returns the depth of multivariate point u with respect to data set X.
 }
 \examples{
-library(robustbase)
 
 # Calculation of Projection depth
 data(starsCYG, package = "robustbase")

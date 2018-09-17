@@ -26,8 +26,6 @@
 #' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #'
 #' @examples
-#' library(sn)
-#' library(mvtnorm)
 #'
 #' # EXAMPLE 1: Location difference
 #' standard <- MASS::mvrnorm(1000, c(0, 0), diag(2))

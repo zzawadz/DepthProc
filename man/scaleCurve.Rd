@@ -41,9 +41,8 @@ The minimal dimension of data in X or Y is 2.
 ggplot2 package is used to draw a plot.
 }
 \examples{
-library(mvtnorm)
 x <- MASS::mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
-y <- rmvt(n = 100, sigma = diag(2), df = 2)
+y <- mvtnorm::rmvt(n = 100, sigma = diag(2), df = 2)
 scaleCurve(x, y, depth_params = list(method = "Projection"))
 # Comparing two scale curves
 # normal distribution and mixture of normal distributions

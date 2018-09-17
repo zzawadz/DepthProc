@@ -164,7 +164,7 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
 #'
 #' @examples
 #'
-#' tmp <- binningDepth2D(x = mvrnorm(100, rep(0, 2), diag(2)))
+#' tmp <- binningDepth2D(x = MASS::mvrnorm(100, rep(0, 2), diag(2)))
 #' plot(tmp)
 #'
 #' @keywords
@@ -200,5 +200,4 @@ setMethod("plot", signature = c(x = "BinnDepth2d"), function(x, ...,
   if (add_mid) {
     graphics::points(tmp[, 1], tmp[, 2], col = "red", pch = 17)
   }
-  # abline(v = breaks_x, lty = 2) abline(h = breaks_y, lty = 2)
 })
