@@ -17,14 +17,14 @@ Description: Data depth concept offers a variety of powerful and user friendly
     multivariate Wilcoxon tests and robust regressions.
 License: GPL-2
 Depends:
-    R (>= 3.0.0),
+    R (>= 3.4.0)
+Imports:
+    rrcov,
     ggplot2,
-    Rcpp (>= 0.11.2),
     rrcov,
     methods,
+    np,
     MASS,
-    np
-Imports:
     lattice,
     sm,
     geometry,
