@@ -31,15 +31,6 @@ setGeneric("combineDepthCurves", function(x, y, .list = NULL) {
 #' @rdname Depth-class
 #' @exportClass Depth
 #'
-#' @importFrom colorspace heat_hcl
-#' @importFrom geometry convhulln
-#' @importFrom lattice wireframe
-#' @importFrom sm binning
-#' @importFrom grDevices col2rgb extendrange gray.colors rgb
-#' @importFrom graphics filled.contour lines matplot points polygon rect segments
-#' @importFrom stats cov ecdf lm mad median na.omit quantile rnorm wilcox.test
-#' @importFrom utils tail
-#'
 setClass("Depth",
          slots = c(u = "matrix", X = "matrix", method = "character"),
          contains = "VIRTUAL")

@@ -9,7 +9,6 @@
 #' @param byrow logical or character.
 #' @param \dots additional arguments passed to fncDepthFM.
 #'
-#' @importFrom zoo index
 #' @rdname fncDepth
 #' @examples
 #'
@@ -101,7 +100,7 @@ fncDepth.zoo <- function(u, X = NULL, method = "MBD", byrow = NULL, ...) {
   depth <- fncDepth(um, Xm, method, byrow = TRUE, ...)
 
   if (!byrow) {
-    depth@index <- index(u)
+    depth@index <- zoo::index(u)
   }
 
   depth

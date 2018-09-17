@@ -6,7 +6,7 @@
 \usage{
 depthPersp(x, plot_method = "lattice", xlim = extendrange(x[, 1], f =
   0.1), ylim = extendrange(x[, 2], f = 0.1), n = 50, xlab = "x",
-  ylab = "y", plot_title = NULL, colors = heat_hcl,
+  ylab = "y", plot_title = NULL, colors = colorspace::heat_hcl,
   depth_params = list(), graph_params = list())
 }
 \arguments{

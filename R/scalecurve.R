@@ -1,7 +1,6 @@
 #' @title Scale curve
 #' @export
 #'
-#' @importFrom geometry convhulln
 #'
 #' @description Draws a scale curve: measure of dispersion.
 #'
@@ -97,7 +96,7 @@ scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
     np <- nrow(unique(as.matrix(tmp_x)))
 
     if (np > dim_x) {
-      vol[i] <- convhulln(tmp_x, options = "FA")$vol
+      vol[i] <- geometry::convhulln(tmp_x, options = "FA")$vol
     } else {
       vol[i] <- 0
     }

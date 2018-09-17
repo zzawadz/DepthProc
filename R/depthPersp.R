@@ -1,8 +1,6 @@
 #' @name depthPersp
 #' @title Perspective plot for depth functions
 #' @export
-#' @importFrom lattice wireframe
-#' @importFrom colorspace heat_hcl
 #' @description Draws a perspective plot of depth function over x-y plane.
 #'
 #' @param x bivariate data
@@ -41,7 +39,7 @@
 depthPersp <- function(x, plot_method = "lattice",
                        xlim = extendrange(x[, 1], f = 0.1),
                        ylim = extendrange(x[, 2], f = 0.1), n = 50, xlab = "x",
-                       ylab = "y", plot_title = NULL, colors = heat_hcl,
+                       ylab = "y", plot_title = NULL, colors = colorspace::heat_hcl,
                        depth_params = list(),
                        graph_params = list()) {
 

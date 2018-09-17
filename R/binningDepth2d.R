@@ -1,5 +1,4 @@
 #' @title 2d Binning
-#' @importFrom sm binning
 #' @description A robust method of decreasing a sample size and therefore a complexity of a statistical procedure. The method may be used within a kernel density or a predictive distribution estimation.
 #'
 #' @param x bivariate matrix containing data. Each row is viewed as one two-dimensional observation.
@@ -133,7 +132,7 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
   b <- cbind(tmp1[[1]], tmp2[[1]])
   b[b == Inf] <- 1e+06
   b[b == -Inf] <- -1e+06
-  tmp <- binning(x = x, breaks = b)$table.freq
+  tmp <- sm::binning(x = x, breaks = b)$table.freq
 
   if (remove_borders == TRUE) {
     tmp <- tmp[-c(1, nrow(tmp)), -c(1, ncol(tmp))]

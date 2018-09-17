@@ -27,7 +27,6 @@ setGeneric("depthMedian", function(x, depth_params = list(), convex = FALSE) {
 })
 
 #' @rdname depthMedian-methods
-#' @importFrom grDevices chull
 #' @export
 setMethod("depthMedian", "matrix", function(x, depth_params = list(), convex = FALSE) {
   ux_list <- list(u = x, X = x)
@@ -35,7 +34,7 @@ setMethod("depthMedian", "matrix", function(x, depth_params = list(), convex = F
   med <- x[depths == max(depths), ]
 
   if (ncol(x) != length(med) && convex) {
-    med <- colMeans(med[chull(med), ])
+    med <- colMeans(med[grDevices::chull(med), ])
   } else if(ncol(x) != length(med)) {
     med <- colMeans(med)
   }
