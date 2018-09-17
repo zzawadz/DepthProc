@@ -67,7 +67,7 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
                          ylim = extendrange(x[, 2], f = 0.1), n = 50,
                          pmean = TRUE, mcol = "blue", pdmedian = TRUE,
                          mecol = "brown", legend = TRUE, points = FALSE,
-                         colors = heat_hcl, levels = 10,
+                         colors = colorspace::heat_hcl, levels = 10,
                          depth_params = list(),
                          graph_params = list(),
                          contour_method = c("auto", "convexhull", "contour")
@@ -102,15 +102,6 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
     } else {
       contour_method <- "contour"
     }
-  }
-
-  addConvexHull <- function(data, depth, cutoff, col = "black") {
-    idx <- depth >= cutoff
-    x <- data[idx,1]
-    y <- data[idx,2]
-    hpts <- grDevices::chull(x = x, y = y)
-    hpts <- c(hpts, hpts[1])
-    graphics::polygon(x[hpts], y[hpts], border = 1, col = col)
   }
 
   do.call(
@@ -190,3 +181,13 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
   ) # end do.call
 
 }
+
+addConvexHull <- function(data, depth, cutoff, col = "black") {
+  idx <- depth >= cutoff
+  x <- data[idx,1]
+  y <- data[idx,2]
+  hpts <- grDevices::chull(x = x, y = y)
+  hpts <- c(hpts, hpts[1])
+  graphics::polygon(x[hpts], y[hpts], border = 1, col = col)
+}
+

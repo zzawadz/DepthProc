@@ -2,11 +2,12 @@
 #'
 #' @description This class, derived from the virtual class "CovRobust" accomodates weighted by \eqn{ L ^ p } depth multivariate location and scatter estimator.
 #'
-#' @details 
-#' 
+#' @details
+#'
 #' See \code{\link{CovLP}} for the function used to calculate weighted by \eqn{ L ^ p } depth covariance matrix.
-#' 
+#'
 #' @export
+#' @importFrom rrcov CovRobust
 #'
 setClass("CovDepthWeighted", contains = "CovRobust")
 

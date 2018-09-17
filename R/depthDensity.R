@@ -40,8 +40,8 @@ depthDensity <- function(x, y, nx = 5, ny = 32, xg = NULL, yg = NULL, ...) {
 
   xy <- cbind(x, y)
 
-  dens_raw <- npudens(xy, edat = xy_grid)$dens
-  dens_x <- npudens(x, edat = xy_grid[, 1])$dens
+  dens_raw <- np::npudens(xy, edat = xy_grid)$dens
+  dens_x <-   np::npudens(x, edat = xy_grid[, 1])$dens
 
   dens <- dens_raw / dens_x
 

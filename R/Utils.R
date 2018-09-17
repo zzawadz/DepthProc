@@ -1,14 +1,16 @@
 .depTheme <- function() {
-  return(theme(axis.title.x = element_text(face = "bold", vjust = 0, size = 16),
-               axis.title.y = element_text(face = "bold", angle = 90,
-                                           vjust = 0.2, size = 16),
-               axis.text.x = element_text(size = 14),
-               axis.text.y = element_text(size = 14),
-               title = element_text(face = "bold", vjust = 1, size = 18)))
+  return(ggplot2::theme(
+    axis.title.x = ggplot2::element_text(face = "bold", vjust = 0, size = 16),
+    axis.title.y = ggplot2::element_text(
+      face = "bold", angle = 90,
+      vjust = 0.2, size = 16),
+   axis.text.x = ggplot2::element_text(size = 14),
+   axis.text.y = ggplot2::element_text(size = 14),
+   title = ggplot2::element_text(face = "bold", vjust = 1, size = 18)))
 }
 
 .testNorm <- function(d = 2) {
-  mvrnorm(100, rep(1, d), diag(d))
+  MASS::mvrnorm(100, rep(1, d), diag(d))
 }
 
 .addAlpha <- function(col, alpha = 1) {

@@ -134,7 +134,7 @@ asCurve <- function(X, depth_est = NULL, alpha = NULL, name = "X",
     np <- dim(unique(as.matrix(tmp_X)))[1]
 
     if ((np > ((2 * (dim_X + 2)) ^ 2)) && (np > 100)) {
-      vol[i] <- convhulln(tmp_X, options = "FA")$vol
+      vol[i] <- geometry::convhulln(tmp_X, options = "FA")$vol
       alpha_est[i] <- alpha[i]
       means[i, ] <- colMeans(tmp_X)
     } else {
@@ -179,7 +179,7 @@ asCurveMM <- function(X, depth_est = NULL, alpha = NULL, name = "X",
     np <- dim(as.matrix(tmp_X))[1]
 
     if ((np > ((2 * (dim_X + 2)) ^ 2)) && (np > 100)) {
-      vol[i] <- convhulln(tmp_X, options = "FA")$vol
+      vol[i] <- geometry::convhulln(tmp_X, options = "FA")$vol
       alpha_est[i] <- alpha[i]
       means[i, ] <- colMeans(tmp_X)
 

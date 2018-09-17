@@ -19,6 +19,7 @@ License: GPL-2
 Depends:
     R (>= 3.4.0)
 Imports:
+    Rcpp (>= 0.12.18),
     rrcov,
     ggplot2,
     rrcov,
