@@ -46,12 +46,12 @@
 #' abline(lm.fit, lwd=2, cex=3, col='red')
 #'
 #' # M-estimator
-#' rlm.fit <- rlm(UR ~ MW, data = france)
+#' rlm.fit <- MASS::rlm(UR ~ MW, data = france)
 #' abline(rlm.fit, lwd = 2,col = "blue")
 #'
 #' # LMS
-#' lqs.lms <- lqs(UR ~ MW, method = "lms", data = france) #least median of squares#
-#' lqs.lts <- lqs(UR ~ MW, method = "lts", data = france) #least trimmed squares#
+#' lqs.lms <- MASS::lqs(UR ~ MW, method = "lms", data = france) #least median of squares#
+#' lqs.lts <- MASS::lqs(UR ~ MW, method = "lts", data = france) #least trimmed squares#
 #' abline(lqs.lms, lwd = 2, col="green")
 #' abline(lqs.lts, lwd = 2, col="pink")
 #'
