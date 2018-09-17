@@ -4,7 +4,7 @@ library(DepthProc)
 library(xtable)
 
 generateData <- function(n, ndim) {
-  matrix(rnorm(n), ncol = ndim)
+  matrix(rt(n), ncol = ndim)
 }
 
 x <- generateData(1000, 4)
@@ -71,3 +71,50 @@ resList <- list(
 )
 
 boxplot(resList)
+
+###### depth median
+
+# 2D case – sample 500 observations from Student t with 3 degree of freedom
+generateData <- function(n, ndim, df) {
+  matrix(rt(n, df = df), ncol = ndim)
+}
+
+library(microbenchmark)
+library(depth)
+library(DepthProc)
+x2d<- generateData(500, 2, 3)
+
+benchResult <- microbenchmark(
+  "depth (exact)" = med(x2d, method = "Tukey", approx = FALSE),
+
+  "DepthProc (1000 proj)" = depthMedian(x2d, depth_params = list(
+    method = "Tukey",
+    threads = 1,
+    ndir = 1000
+  )),
+  "DepthProc (exact)" = depthMedian(x2d, depth_params = list(
+    method = "Tukey",
+    threads = 1,
+    exact = TRUE
+  ))
+)
+
+benchResult <- as.data.frame(summary(benchResult))
+
+benchTable <- benchResult[,c("expr", "lq", "mean", "median", "uq")]
+xtable(benchTable) ## create latex table
+
+
+5D case – sample 100 observations with 3 degree of freedom
+x5d<- generateData(500, 5,3)
+
+
+benchResult<-microbenchmark(
+  "depth (1000 proj)"=med(x5d, method = "Tukey", approx = TRUE,ndir=1000),
+
+  "DepthProc (1000 proj)" =depthMedian(x5d,depth_params = list(method = "Tukey",threads = 1, ndir = 1000)))
+
+benchResult <- as.data.frame(summary(benchResult))
+
+benchTable <- benchResult[,c("expr", "lq", "mean", "median", "uq")]
+xtable(benchTable) ## create latex table
