@@ -2,8 +2,8 @@
 #' @export
 setMethod("getPlot", "AsymmetryCurveList", function(object) {
   p <- .getPlot(object)
-  p <- p + ggtitle("Asymmetry Curve")
-  p <- p + ylab("")
-  p <- p + xlab("Alpha")
+  p <- p + ggplot2::ggtitle("Asymmetry Curve")
+  p <- p + ggplot2::ylab("")
+  p <- p + ggplot2::xlab("Alpha")
   return(p)
 })

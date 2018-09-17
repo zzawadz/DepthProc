@@ -30,7 +30,7 @@ Formally, let \eqn{ D(\cdot, P) } be a depth function. Then the local depth with
 
 \dontrun{
 # EXAMPLE 1
-data <- mvrnorm(100, c(0, 5), diag(2) * 5)
+data <- MASS::mvrnorm(100, c(0, 5), diag(2) * 5)
 # By default depth_params2 = depth_params1
 depthLocal(data, data, depth_params1 = list(method = "LP"))
 depthLocal(data, data, depth_params1 = list(method = "LP"),
@@ -50,9 +50,9 @@ depthContour(data1990,
 
 # EXAMPLE 3
 Sigma1 <- matrix(c(10, 3, 3, 2), 2, 2)
-X1 <- mvrnorm(n = 8500, mu = c(0, 0), Sigma1)
+X1 <- MASS::mvrnorm(n = 8500, mu = c(0, 0), Sigma1)
 Sigma2 <- matrix(c(10, 0, 0, 2), 2, 2)
-X2 <- mvrnorm(n = 1500, mu = c(-10, 6), Sigma2)
+X2 <- MASS::mvrnorm(n = 1500, mu = c(-10, 6), Sigma2)
 BALLOT <- rbind(X1, X2)
 
 train <- sample(1:10000, 100)

@@ -57,7 +57,7 @@ fncDepth.matrix <- function(u, X = NULL, method = "MBD", byrow = NULL, ...) {
 
   if (method == "FM") {
     dept <- (fncDepthFM(u, X, ...))
-    depth <- new("FncDepthFM", dept)
+    depth <- methods::new("FncDepthFM", dept)
   }
   if (method == "MBD") {
 
@@ -67,7 +67,7 @@ fncDepth.matrix <- function(u, X = NULL, method = "MBD", byrow = NULL, ...) {
       dept <- (fncDepthMBD(u, X))
     }
 
-    depth <- new("FncDepthMBD", dept)
+    depth <- methods::new("FncDepthMBD", dept)
   }
 
   depth@u <- u

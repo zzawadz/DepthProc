@@ -37,9 +37,9 @@
 #'
 #' # EXAMPLE 1
 #' Sigma1 <- matrix(c(10, 3, 3, 2), 2, 2)
-#' X1 <- mvrnorm(n = 8500, mu = c(0, 0), Sigma1)
+#' X1 <- MASS::mvrnorm(n = 8500, mu = c(0, 0), Sigma1)
 #' Sigma2 <- matrix(c(10, 0, 0, 2), 2, 2)
-#' X2 <- mvrnorm(n = 1500, mu = c(-10, 6), Sigma2)
+#' X2 <- MASS::mvrnorm(n = 1500, mu = c(-10, 6), Sigma2)
 #' BALLOT <- rbind(X1, X2)
 #' train <- sample(1:10000, 500)
 #' data <- BALLOT[train, ]
@@ -76,7 +76,7 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
       sigma <- k * dep_stat@sigma
       dep_stat <- c(dep_stat@max_depth, dep_stat@mu, dep_stat@sigma)
     } else if (binmethod == "LP") {
-      sigma <- mad(x)
+      sigma <- stats::mad(x)
       dep_stat <- c(mu = mean, sigma = sigma)
     }
 
@@ -144,7 +144,7 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
   }
 
   tmp <- matrix(as.vector(tmp), ncol = ncol(tmp))
-  new("BinnDepth2d", freq = tmp, mid_x = tmp1[[2]], mid_y = tmp2[[2]],
+  methods::new("BinnDepth2d", freq = tmp, mid_x = tmp1[[2]], mid_y = tmp2[[2]],
       breaks_x = tmp1[[1]], breaks_y = tmp2[[1]], input_data = x,
       max_depth_x = tmp1[[3]], max_depth_y = tmp2[[3]])
   # return(result)
@@ -179,24 +179,26 @@ setMethod("plot", signature = c(x = "BinnDepth2d"), function(x, ...,
                                                              add_mid = TRUE) {
   breaks_y <- x@breaks_y
   breaks_x <- x@breaks_x
-  breaks_x[is.infinite(breaks_x)] <- extendrange(x@input_data[, 1], f = 10)
-  breaks_y[is.infinite(breaks_y)] <- extendrange(x@input_data[, 2], f = 10)
+  breaks_x[is.infinite(breaks_x)] <- grDevices::extendrange(x@input_data[, 1], f = 10)
+  breaks_y[is.infinite(breaks_y)] <- grDevices::extendrange(x@input_data[, 2], f = 10)
 
-  xlim <- extendrange(x@input_data[, 1], f = 0.1)
-  ylim <- extendrange(x@input_data[, 2], f = 0.1)
+  xlim <- grDevices::extendrange(x@input_data[, 1], f = 0.1)
+  ylim <- grDevices::extendrange(x@input_data[, 2], f = 0.1)
   plot(x@input_data, xlim = xlim, ylim = ylim, xlab = "", ylab = "")
-  rect(xleft = min(breaks_x), xright = max(breaks_x), ybottom = min(breaks_y),
-       ytop = max(breaks_y), col = rgb(1, 0, 0, alpha))
+  graphics::rect(
+    xleft = min(breaks_x), xright = max(breaks_x),
+    ybottom = min(breaks_y), ytop = max(breaks_y),
+    col = grDevices::rgb(1, 0, 0, alpha))
 
-  segments(x0 = min(breaks_x), x1 = max(breaks_x), y0 = breaks_y, y1 = breaks_y,
+  graphics::segments(x0 = min(breaks_x), x1 = max(breaks_x), y0 = breaks_y, y1 = breaks_y,
            lty = 2)
-  segments(x0 = breaks_x, x1 = breaks_x, y0 = min(breaks_y), y1 = max(breaks_y),
+  graphics::segments(x0 = breaks_x, x1 = breaks_x, y0 = min(breaks_y), y1 = max(breaks_y),
            lty = 2)
 
   tmp <- expand.grid(x@mid_x, x@mid_y)
 
   if (add_mid) {
-    points(tmp[, 1], tmp[, 2], col = "red", pch = 17)
+    graphics::points(tmp[, 1], tmp[, 2], col = "red", pch = 17)
   }
   # abline(v = breaks_x, lty = 2) abline(h = breaks_y, lty = 2)
 })

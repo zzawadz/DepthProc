@@ -62,6 +62,6 @@ CovLP <- function(x, pdim = 2, la = 1, lb = 1) {
   center <- depthMedian(x, depth_params)
 
   method <- "Depth Weighted Estimator"
-  new("CovDepthWeighted", cov = cov, center = center, det = det(cov),
+  methods::new("CovDepthWeighted", cov = cov, center = center, det = det(cov),
       n.obs = nrow(x), X = x, method = method, call = match.call())
 }

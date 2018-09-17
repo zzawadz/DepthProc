@@ -30,14 +30,14 @@
 #' library(mvtnorm)
 #'
 #' # EXAMPLE 1: Location difference
-#' standard <- mvrnorm(1000, c(0, 0), diag(2))
-#' shift <- mvrnorm(1000, c(0.5, 0), diag(2))
+#' standard <- MASS::mvrnorm(1000, c(0, 0), diag(2))
+#' shift <- MASS::mvrnorm(1000, c(0.5, 0), diag(2))
 #' ddPlot(x = standard, y = shift, title = "Difference in position")
 #' ddPlot(x = standard, y = shift, location = TRUE, title = "Location aligned")
 #'
 #' # EXAMPLE 2: Scale difference
-#' standard <- mvrnorm(1000, c(0, 0), diag(2))
-#' scale <- mvrnorm(1000, c(0, 0), 4 * diag(2))
+#' standard <- MASS::mvrnorm(1000, c(0, 0), diag(2))
+#' scale <- MASS::mvrnorm(1000, c(0, 0), 4 * diag(2))
 #' ddPlot(x = standard, y = scale)
 #' ddPlot(x = standard, y = scale, scale = TRUE)
 #'
@@ -53,8 +53,8 @@ ddPlot <- function(x, y, scale = FALSE, location = FALSE, name = "X",
     uxname_list_y <- list(u = y, X = y)
     depth_sample_x <- do.call(depth, c(uxname_list_x, depth_params))
     depth_sample_y <- do.call(depth, c(uxname_list_y, depth_params))
-    varcovx <- cov(x[which(depth_sample_x >= median(depth_sample_x)), ])
-    varcovy <- cov(y[which(depth_sample_y >= median(depth_sample_y)), ])
+    varcovx <- stats::cov(x[which(depth_sample_x >= stats::median(depth_sample_x)), ])
+    varcovy <- stats::cov(y[which(depth_sample_y >= stats::median(depth_sample_y)), ])
     x_new <- t(solve(chol(varcovx)) %*% t(x))
     y_new <- t(solve(chol(varcovy)) %*% t(y))
   } else {
@@ -74,7 +74,7 @@ ddPlot <- function(x, y, scale = FALSE, location = FALSE, name = "X",
   depth_x <- do.call(depth, c(uxname_list_x_new, depth_params))
   depth_y <- do.call(depth, c(uxname_list_y_new, depth_params))
 
-  ddplot <- new("DDPlot", X = depth_x, Y = depth_y, title = title)
+  ddplot <- methods::new("DDPlot", X = depth_x, Y = depth_y, title = title)
 
   return(ddplot)
 }

@@ -1,7 +1,7 @@
 #' @rdname plot-methods
 #' @export
 setMethod("plot", signature = c(x = "DepthCurve"), function(x) {
-  plot(new(paste0(class(x), "List"), x))
+  plot(methods::new(paste0(class(x), "List"), x))
 })
 
 #' @rdname plot-methods
@@ -75,7 +75,7 @@ setMethod("combineDepthCurves",
 #' @export
 setMethod("combineDepthCurves", signature(x = "DepthCurve", y = "DepthCurve"),
           function(x, y, .list) {
-            return(new(paste0(class(x), "List"), x, y))
+            return(methods::new(paste0(class(x), "List"), x, y))
           }
 )
 setMethod(".getPlot", "DepthCurveList", function(object) {
@@ -91,12 +91,14 @@ setMethod(".getPlot", "DepthCurveList", function(object) {
 
   data <- data.frame(value, alpha, names)
 
-  p <- ggplot()
-  p <- p + geom_line(data = data, aes(x = alpha, y = value, col = names),
-                     size = 1.5)
-  p <- p + theme_bw() + .depTheme()
-  p <- p + ylim(c(0, max(data$value, na.rm = TRUE)))
-  p <- p + xlim(c(0, max(data$alpha, na.rm = TRUE)))
+  p <- ggplot2::ggplot()
+  p <- p + ggplot2::geom_line(
+    data = data,
+    ggplot2::aes(x = alpha, y = value, col = names),
+    size = 1.5)
+  p <- p + ggplot2::theme_bw() + .depTheme()
+  p <- p + ggplot2::ylim(c(0, max(data$value, na.rm = TRUE)))
+  p <- p + ggplot2::xlim(c(0, max(data$alpha, na.rm = TRUE)))
 
   return(p)
 })

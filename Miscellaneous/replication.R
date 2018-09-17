@@ -670,7 +670,7 @@ SV  <- function(n, gamma, phi, sigma, delta) {
   for(t in 2:(2 * n)) {
     h[t] <- exp(gamma + phi * (h[t - 1] - gamma) + sigma * eta[t])
   }
-  Z <- sqrt(tail(h, n)) * epsilon
+  Z <- sqrt(utils::tail(h, n)) * epsilon
   return(Z)
 }
 example <- SV(100, 0, 0.2, 0.5, 0.1)

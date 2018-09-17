@@ -31,8 +31,8 @@
 #'
 #' @examples
 #' # EXAMPLE 1
-#' norm <- mvrnorm(1000, c(0, 0, 0), diag(3))
-#' con <- mvrnorm(100, c(1, 2, 5), 3 * diag(3))
+#' norm <- MASS::mvrnorm(1000, c(0, 0, 0), diag(3))
+#' con  <- MASS::mvrnorm(100, c(1, 2, 5), 3 * diag(3))
 #' sample <- rbind(norm, con)
 #' ddMvnorm(sample, robust = TRUE)
 #'
@@ -47,17 +47,17 @@ ddMvnorm <- function(x, size = nrow(x), robust = FALSE, alpha = 0.05,
   depth_sample <- do.call(depth, c(ux_list, depth_params))
 
   if (robust) {
-    varcov <- cov(x[depth_sample >= quantile(depth_sample, alpha), ])
+    varcov <- stats::cov(x[depth_sample >= stats::quantile(depth_sample, alpha), ])
     location <- depthMedian(x, depth_params)
   } else {
     location <- apply(x, 2, mean)
-    varcov <- cov(x)
+    varcov <- stats::cov(x)
   }
 
   theoretical <- MASS::mvrnorm(size, location, varcov)
   ux_list_theoretical <- list(u = x, X = theoretical)
   depth_theoretical <- do.call(depth, c(ux_list_theoretical, depth_params))
-  ddplot <- new("DDPlot", X = depth_sample, Y = depth_theoretical,
+  ddplot <- methods::new("DDPlot", X = depth_sample, Y = depth_theoretical,
                 title = title)
 
   return(ddplot)

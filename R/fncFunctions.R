@@ -44,8 +44,8 @@ fncDepthMedian <- function(u, X = NULL, method = "MBD", byrow = NULL,
 fncGetBand <- function(obj, band = 0.5) {
   u <- obj@u
   depths <- as.numeric(obj)
-  bands_q <- quantile(obj, 1 - band)
+  bands_q <- stats::quantile(obj, 1 - band)
   tmp_u <- u[depths >= bands_q, , drop = FALSE] #nolint
   bands <- t(apply(tmp_u, 2, range))
-  new("FncBand", bands, index = obj@index, level = band)
+  methods::new("FncBand", bands, index = obj@index, level = band)
 }

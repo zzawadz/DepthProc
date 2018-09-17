@@ -38,8 +38,8 @@
 #' @examples
 #'
 #' # EXAMPLE 1
-#' x <- mvrnorm(100, c(0, 0), diag(2))
-#' y <- mvrnorm(100, c(0, 0), diag(2) * 1.4)
+#' x <- MASS::mvrnorm(100, c(0, 0), diag(2))
+#' y <- MASS::mvrnorm(100, c(0, 0), diag(2) * 1.4)
 #' mWilcoxonTest(x, y)
 #' mWilcoxonTest(x, y, depth_params = list(method = "LP"))
 #'
@@ -59,7 +59,7 @@ mWilcoxonTest <- function(x, y, alternative = "two.sided",
   uxname_list_y <- list(u = y, X = total)
   dep_x <- do.call(depth, c(uxname_list_x, depth_params))
   dep_y <- do.call(depth, c(uxname_list_y, depth_params))
-  test_res <- wilcox.test(dep_x, dep_y, alternative = alternative)
+  test_res <- stats::wilcox.test(dep_x, dep_y, alternative = alternative)
 
   test_res$null.value <- 1
   test_res$method <- "Multivariate Wilcoxon test for equality of dispersion"

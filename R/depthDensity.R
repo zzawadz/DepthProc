@@ -57,7 +57,7 @@ depthDensity <- function(x, y, nx = 5, ny = 32, xg = NULL, yg = NULL, ...) {
   dens_mat <- matrix(dens, ncol = length(xg))
   dep_scale_mat <- matrix(dep_scale, ncol = length(xg))
 
-  new("DepthDensity", dep_scale = dep_scale_mat, density_raw = dens_mat,
+  methods::new("DepthDensity", dep_scale = dep_scale_mat, density_raw = dens_mat,
       density = dens_mat / dep_scale_mat, xgrid = xg, ygrid = yg)
 }
 
@@ -91,7 +91,7 @@ setMethod("plot", "DepthDensity", function(x, type = "depth", ...) {
   plot(xlim, range(yg), type = "n", ...)
 
   for (i in seq_len(length(xg))) {
-    lines(xg[i] + density[, i], yg, ...)
+    graphics::lines(xg[i] + density[, i], yg, ...)
   }
 
   abline(v = xg)
@@ -130,7 +130,7 @@ setMethod("plot", "DepthDensity", function(x, type = "depth", ...) {
 .sampleData <- function(x, n) {
   r <- NULL
   tmp <- sapply(x, function(i) {
-    cbind(i, rnorm(n, mean = i))
+    cbind(i, stats::rnorm(n, mean = i))
   }, simplify = FALSE)
 
   for (i in seq_len(length(tmp))) {

@@ -40,7 +40,7 @@
 #' Omega <- diag(2) * 5
 #'
 #' n <- 500
-#' X <- mvrnorm(n, xi, Omega) # normal distribution
+#' X <- MASS::mvrnorm(n, xi, Omega) # normal distribution
 #' Y <- rmst(n, xi, Omega, alpha, nu = 1)
 #' asymmetryCurve(X, Y, name = "NORM", name_y = "S_T(2, -5, 10)")
 #'
@@ -53,7 +53,7 @@
 #' as1990 <- asymmetryCurve(data1990, name = "scale curve 1990")
 #' as2011 <- asymmetryCurve(data2011, name = "scale curve 2011")
 #' figure <- getPlot(combineDepthCurves(as1990, as2011)) +
-#'   ggtitle("Scale curves")
+#'   ggplot2::ggtitle("Scale curves")
 #' figure
 #'
 #' @keywords
@@ -68,7 +68,7 @@
 asymmetryCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
                            movingmedian = FALSE, name = "X", name_y = "Y",
                            depth_params = list(method = "Projection")) {
-  x <- na.omit(x)
+  x <- stats::na.omit(x)
 
   if (nrow(x) < NCOL(x) * 10) {
     stop("Too small sample!")
@@ -92,7 +92,7 @@ asymmetryCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
                         depth_params = depth_params)
   }
 
-  asc <- new("AsymmetryCurve", x_est[, 2], depth = depth_est,
+  asc <- methods::new("AsymmetryCurve", x_est[, 2], depth = depth_est,
              alpha = x_est[, 1], name = name)
 
   if (!is.null(y)) {
@@ -127,7 +127,7 @@ asCurve <- function(X, depth_est = NULL, alpha = NULL, name = "X",
   vol <- 1:k
   alpha_est <- 1:k
   means <- matrix(nrow = k, ncol = dim_X)
-  alpha_border <- ecdf(depth_est)(depth_est)
+  alpha_border <- stats::ecdf(depth_est)(depth_est)
 
   for (i in 1:k) {
     tmp_X <- X[alpha_border >= alpha[i], ]
@@ -172,7 +172,7 @@ asCurveMM <- function(X, depth_est = NULL, alpha = NULL, name = "X",
   medians <- matrix(nrow = k, ncol = dim_X)
 
 
-  alpha_border <- ecdf(depth_est)(depth_est)
+  alpha_border <- stats::ecdf(depth_est)(depth_est)
 
   for (i in 1:k) {
     tmp_X <- X[alpha_border >= alpha[i], ]

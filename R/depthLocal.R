@@ -16,7 +16,7 @@
   uxDepthList1 <- list(u = X, X = symDATA)
 
   depths <- as.numeric(do.call(depth, c(uxDepthList1, depth_params1)))
-  quan <- quantile(depths, probs = 1 - beta)
+  quan <- stats::quantile(depths, probs = 1 - beta)
   Rset <- as.matrix(X[signif(depths, digits = 6) >= signif(quan, digits = 6), ])
 
   uxDepthList2 <- list(u = u, X = Rset)
@@ -48,7 +48,7 @@
 #'
 #' \dontrun{
 #' # EXAMPLE 1
-#' data <- mvrnorm(100, c(0, 5), diag(2) * 5)
+#' data <- MASS::mvrnorm(100, c(0, 5), diag(2) * 5)
 #' # By default depth_params2 = depth_params1
 #' depthLocal(data, data, depth_params1 = list(method = "LP"))
 #' depthLocal(data, data, depth_params1 = list(method = "LP"),
@@ -68,9 +68,9 @@
 #'
 #' # EXAMPLE 3
 #' Sigma1 <- matrix(c(10, 3, 3, 2), 2, 2)
-#' X1 <- mvrnorm(n = 8500, mu = c(0, 0), Sigma1)
+#' X1 <- MASS::mvrnorm(n = 8500, mu = c(0, 0), Sigma1)
 #' Sigma2 <- matrix(c(10, 0, 0, 2), 2, 2)
-#' X2 <- mvrnorm(n = 1500, mu = c(-10, 6), Sigma2)
+#' X2 <- MASS::mvrnorm(n = 1500, mu = c(-10, 6), Sigma2)
 #' BALLOT <- rbind(X1, X2)
 #'
 #' train <- sample(1:10000, 100)
@@ -100,6 +100,6 @@ depthLocal <- function(u, X, beta = 0.5,
       u[i,, drop = FALSE], X, beta, depth_params1, depth_params2) #nolint
   }
 
-  new("DepthLocal", depths, u = u, X = X, method = "Local",
+  methods::new("DepthLocal", depths, u = u, X = X, method = "Local",
       depth_params1 = depth_params1, depth_params2 = depth_params2)
 }

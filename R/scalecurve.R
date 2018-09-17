@@ -42,14 +42,14 @@
 #'
 #' @examples
 #' library(mvtnorm)
-#' x <- mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
+#' x <- MASS::mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
 #' y <- rmvt(n = 100, sigma = diag(2), df = 2)
 #' scaleCurve(x, y, depth_params = list(method = "Projection"))
 #' # Comparing two scale curves
 #' # normal distribution and mixture of normal distributions
-#' x <- mvrnorm(100, c(0, 0), diag(2))
-#' y <- mvrnorm(80, c(0, 0), diag(2))
-#' z <- mvrnorm(20, c(5, 5), diag(2))
+#' x <- MASS::mvrnorm(100, c(0, 0), diag(2))
+#' y <- MASS::mvrnorm(80, c(0, 0), diag(2))
+#' z <- MASS::mvrnorm(20, c(5, 5), diag(2))
 #' scaleCurve(x, rbind(y, z), name = "N", name_y = "Mixture of N",
 #'            depth_params = list(method = "Projection"))
 #'
@@ -63,7 +63,7 @@
 scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
                        name_y = "Y", title = "Scale Curve",
                        depth_params = list(method = "Projection")) {
-  x <- na.omit(x)
+  x <- stats::na.omit(x)
 
   if (is.data.frame(x)) {
     x <- as.matrix(x)
@@ -90,7 +90,7 @@ scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
   k <- length(alpha)
   vol <- 1:k
 
-  alpha_border <- ecdf(depth_est)(depth_est)
+  alpha_border <- stats::ecdf(depth_est)(depth_est)
   for (i in 1:k) {
     tmp_x <- x[alpha_border >= alpha[i], ]
     np <- nrow(unique(as.matrix(tmp_x)))
@@ -102,7 +102,7 @@ scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
     }
   }
 
-  scale_curve <- new("ScaleCurve", rev(vol), alpha = alpha, depth = depth_est,
+  scale_curve <- methods::new("ScaleCurve", rev(vol), alpha = alpha, depth = depth_est,
                      name = name, title = title)
 
   if (!is.null(y)) {

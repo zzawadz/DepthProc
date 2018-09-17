@@ -32,7 +32,7 @@
 #' @examples
 #' # EXAMPLE 1
 #' set.seed(123)
-#' x <- mvrnorm(1000, c(0, 0), diag(2))
+#' x <- MASS::mvrnorm(1000, c(0, 0), diag(2))
 #' depthContour(x, colors = gray.colors)
 #' # with points
 #' depthContour(x, points = TRUE)
@@ -63,8 +63,8 @@
 #' depth
 #' @export
 #'
-depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
-                         ylim = extendrange(x[, 2], f = 0.1), n = 50,
+depthContour <- function(x, xlim = grDevices::extendrange(x[, 1], f = 0.1),
+                         ylim = grDevices::extendrange(x[, 2], f = 0.1), n = 50,
                          pmean = TRUE, mcol = "blue", pdmedian = TRUE,
                          mecol = "brown", legend = TRUE, points = FALSE,
                          colors = colorspace::heat_hcl, levels = 10,
@@ -105,7 +105,7 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
   }
 
   do.call(
-    filled.contour,
+    graphics::filled.contour,
     c(
       list(
         x = x_axis,
@@ -150,7 +150,7 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
             }
 
             dmedian <- med
-            points(dmedian[1], dmedian[2], pch = 4, col = mecol, cex = 1.5,
+            graphics::points(dmedian[1], dmedian[2], pch = 4, col = mecol, cex = 1.5,
                    lwd = 2.5)
             # abline(h = dmedian[2], col = mecol, lwd = 1.8)
           }

@@ -28,7 +28,7 @@
 #'
 #' data("katowice.airpollution")
 #' pl <- fncBoxPlot(katowice.airpollution, bands = c(0, 0.5, 1), method = "MBD")
-#' pl + ggtitle("Air pollution in Katowice") + labs(y= "pollination ", x = "hour ")
+#' pl + ggplot2::ggtitle("Air pollution in Katowice") + labs(y= "pollination ", x = "hour ")
 #'
 fncBoxPlot <- function(u, X = NULL, bands = c(0, 0.5), method = "MBD",
                        byrow = NULL, ...) {

@@ -64,7 +64,7 @@ abline(lqs.lms, lwd = 2, col="green")
 abline(lqs.lts, lwd = 2, col="pink")
 
 # Lowess
-lines(lowess(france$MW, france$UR, f = 0.5, iter = 0), lwd = 2) # loess
+graphics::lines(lowess(france$MW, france$UR, f = 0.5, iter = 0), lwd = 2) # loess
 
 # Depth trimmed regression
 trim.reg <- trimProjReg2d(france$MW, france$UR) #trimprojreg2d

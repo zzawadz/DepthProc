@@ -58,7 +58,7 @@
 #' abline(lqs.lts, lwd = 2, col="pink")
 #'
 #' # Lowess
-#' lines(lowess(france$MW, france$UR, f = 0.5, iter = 0), lwd = 2) # loess
+#' graphics::lines(lowess(france$MW, france$UR, f = 0.5, iter = 0), lwd = 2) # loess
 #'
 #' # Depth trimmed regression
 #' trim.reg <- trimProjReg2d(france$MW, france$UR) #trimprojreg2d
@@ -67,13 +67,13 @@
 trimProjReg2d <- function(x, y, alpha = 0.1) {
   yX <- cbind(y, x)
   depth <- depth(yX, yX, method = "Projection")
-  cut <- quantile(depth, alpha)
+  cut <- stats::quantile(depth, alpha)
 
   ycut <- y[depth > cut]
   xcut <- x[depth > cut]
 
   data <- data.frame(ycut, xcut)
 
-  fitcut <- lm(ycut ~ xcut, data = data)$coeff
-  new("TrimReg2d", coef = fitcut)
+  fitcut <- stats::lm(ycut ~ xcut, data = data)$coeff
+  methods::new("TrimReg2d", coef = fitcut)
 }

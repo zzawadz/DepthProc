@@ -61,9 +61,7 @@ lsdSampleMaxDepth <- function(x, iter = 100, eps = 1e-04, p_length = 10) {
                                    p_length)
   res <- as.numeric(res)
 
-  new("LSDepth", max_depth = res[1], mu = res[2], sigma = res[3])
-  # names(res) <- c("max.depth", "mu", "sigma")
-  # return(res)
+  methods::new("LSDepth", max_depth = res[1], mu = res[2], sigma = res[3])
 }
 
 #' @title Calculate sample Mizera and Muller Student depth contours
@@ -128,7 +126,7 @@ lsdSampleDepthContours <- function(x, depth = c(0.1, 0.2, 0.3, 0.4),
   }
 
   cont.all
-  new("LSDepthContour", cont.all, cont_depth = depth / length(x), sample = x)
+  methods::new("LSDepthContour", cont.all, cont_depth = depth / length(x), sample = x)
 }
 
 ######################## Utils functions - not exported ####################
@@ -221,7 +219,7 @@ setMethod("lsdAddContour", signature = c(x = "LSDepthContour"),
             d <- contour$d
             lmu <- length(mubound)
 
-            polygon(c(mubound, rev(mubound)), c(ubound, rev(lbound)), ...)
+            graphics::polygon(c(mubound, rev(mubound)), c(ubound, rev(lbound)), ...)
           }
 )
 
@@ -268,7 +266,7 @@ setMethod("plot", signature = c(x = "LSDepthContour"),
               mu_min <- mubound[1]
             }
             if (is.null(mu_max)) {
-              mu_max <- tail(mubound, 1)
+              mu_max <- utils::tail(mubound, 1)
             }
             if (is.null(col)) {
               col <- 0

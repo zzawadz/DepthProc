@@ -34,8 +34,8 @@ The distribution of \eqn{ S } is symmetric about \eqn{ E(S) = \frac{ 1 }{ 2 }m(m
 \examples{
 
 # EXAMPLE 1
-x <- mvrnorm(100, c(0, 0), diag(2))
-y <- mvrnorm(100, c(0, 0), diag(2) * 1.4)
+x <- MASS::mvrnorm(100, c(0, 0), diag(2))
+y <- MASS::mvrnorm(100, c(0, 0), diag(2) * 1.4)
 mWilcoxonTest(x, y)
 mWilcoxonTest(x, y, depth_params = list(method = "LP"))
 

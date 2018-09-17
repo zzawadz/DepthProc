@@ -22,7 +22,6 @@ Imports:
     Rcpp (>= 0.12.18),
     rrcov,
     ggplot2,
-    rrcov,
     methods,
     np,
     MASS,

@@ -4,8 +4,9 @@
 \alias{depthPersp}
 \title{Perspective plot for depth functions}
 \usage{
-depthPersp(x, plot_method = "lattice", xlim = extendrange(x[, 1], f =
-  0.1), ylim = extendrange(x[, 2], f = 0.1), n = 50, xlab = "x",
+depthPersp(x, plot_method = "lattice",
+  xlim = grDevices::extendrange(x[, 1], f = 0.1),
+  ylim = grDevices::extendrange(x[, 2], f = 0.1), n = 50, xlab = "x",
   ylab = "y", plot_title = NULL, colors = colorspace::heat_hcl,
   depth_params = list(), graph_params = list())
 }
@@ -40,7 +41,7 @@ plot_method --- rgl package is not in depends list beacuse it may cause problems
 }
 \examples{
 # EXAMPLE 1
-x <- mvrnorm(100, c(0, 0), diag(2))
+x <- MASS::mvrnorm(100, c(0, 0), diag(2))
 depthPersp(x, depth_params = list(method = "Euclidean"))
 
 # EXAMPLE 2

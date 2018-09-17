@@ -55,7 +55,7 @@ setMethod("depthMedian", "Depth", function(x, convex = FALSE) {
   med <- x@u[pos, ]
 
   if (ncol(x@u) != length(med) && convex) {
-    med <- colMeans(med[chull(med), ])
+    med <- colMeans(med[grDevices::chull(med), ])
   } else if(ncol(x@u) != length(med)) {
     med <- colMeans(med)
   }

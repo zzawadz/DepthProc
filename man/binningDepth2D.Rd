@@ -47,9 +47,9 @@ Assume we analyze a data stream \eqn{ \{{X}_{t}\} } using a moving window of a f
 
 # EXAMPLE 1
 Sigma1 <- matrix(c(10, 3, 3, 2), 2, 2)
-X1 <- mvrnorm(n = 8500, mu = c(0, 0), Sigma1)
+X1 <- MASS::mvrnorm(n = 8500, mu = c(0, 0), Sigma1)
 Sigma2 <- matrix(c(10, 0, 0, 2), 2, 2)
-X2 <- mvrnorm(n = 1500, mu = c(-10, 6), Sigma2)
+X2 <- MASS::mvrnorm(n = 1500, mu = c(-10, 6), Sigma2)
 BALLOT <- rbind(X1, X2)
 train <- sample(1:10000, 500)
 data <- BALLOT[train, ]

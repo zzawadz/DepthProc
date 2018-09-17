@@ -4,11 +4,11 @@
 \alias{depthContour}
 \title{Approximate depth contours}
 \usage{
-depthContour(x, xlim = extendrange(x[, 1], f = 0.1),
-  ylim = extendrange(x[, 2], f = 0.1), n = 50, pmean = TRUE,
-  mcol = "blue", pdmedian = TRUE, mecol = "brown", legend = TRUE,
-  points = FALSE, colors = heat_hcl, levels = 10,
-  depth_params = list(), graph_params = list(),
+depthContour(x, xlim = grDevices::extendrange(x[, 1], f = 0.1),
+  ylim = grDevices::extendrange(x[, 2], f = 0.1), n = 50,
+  pmean = TRUE, mcol = "blue", pdmedian = TRUE, mecol = "brown",
+  legend = TRUE, points = FALSE, colors = colorspace::heat_hcl,
+  levels = 10, depth_params = list(), graph_params = list(),
   contour_method = c("auto", "convexhull", "contour"))
 }
 \arguments{
@@ -54,7 +54,7 @@ The set of all points that have depth at least \eqn{ \alpha } is called \eqn{ \a
 \examples{
 # EXAMPLE 1
 set.seed(123)
-x <- mvrnorm(1000, c(0, 0), diag(2))
+x <- MASS::mvrnorm(1000, c(0, 0), diag(2))
 depthContour(x, colors = gray.colors)
 # with points
 depthContour(x, points = TRUE)
