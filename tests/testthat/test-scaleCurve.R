@@ -14,3 +14,22 @@ for xdata", {
   sc <- scaleCurve(xdata)
   expect_equal(unique(sc@.Data), 0)
 })
+
+test_that("Scale curve plot", {
+  set.seed(123)
+  x <- MASS::mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
+  y <- mvtnorm::rmvt(n = 100, sigma = diag(2), df = 2)
+  y <- as.data.frame(y)
+
+  pp <- scaleCurve(x, y,
+    depth_params = list(method = "Projection"),
+    name_y = "Y")
+  pp <- getPlot(pp)
+  expect_doppelganger("Scale curve plot X vs Y", pp)
+})
+
+test_that("Scale curve api call", {
+  x <- list(1,2)
+  expect_error(scaleCurve(x))
+  expect_error(scaleCurve(cbind(1,1), x))
+})
