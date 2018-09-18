@@ -20,6 +20,7 @@ test_that("Scale curve plot", {
   x <- MASS::mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
   y <- mvtnorm::rmvt(n = 100, sigma = diag(2), df = 2)
   y <- as.data.frame(y)
+  x <- as.data.frame(x)
 
   pp <- scaleCurve(x, y,
     depth_params = list(method = "Projection"),
