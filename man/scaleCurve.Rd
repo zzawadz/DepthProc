@@ -36,7 +36,7 @@ The scale curve is a two-dimensional method of describing the dispersion of rand
 
 Function scalecurve for determining the volumes of the convex hull containing points from alpha central regions, uses function convhulln from geometry package.
 
-The minimal dimension of data in X or Y is 2.
+The minimal dimension of data in X or Y is 2. However if the dimension is equal to 1, the range (difference between min and max values) of each central region is returned.
 
 ggplot2 package is used to draw a plot.
 }

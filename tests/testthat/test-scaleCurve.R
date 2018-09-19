@@ -34,3 +34,13 @@ test_that("Scale curve api call", {
   expect_error(scaleCurve(x))
   expect_error(scaleCurve(cbind(1,1), x))
 })
+
+test_that("Scale curve works for one dimensional vectors", {
+  x <- rnorm(100)
+  sc <- scaleCurve(x)
+  expect_equal(
+    diff(range(x)),
+    max(as.numeric(sc))
+  )
+  expect_true(inherits(sc, "ScaleCurve"))
+})

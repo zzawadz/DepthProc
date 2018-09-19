@@ -20,7 +20,7 @@
 #'
 #' Function scalecurve for determining the volumes of the convex hull containing points from alpha central regions, uses function convhulln from geometry package.
 #'
-#' The minimal dimension of data in X or Y is 2.
+#' The minimal dimension of data in X or Y is 2. However if the dimension is equal to 1, the range (difference between min and max values) of each central region is returned.
 #'
 #' ggplot2 package is used to draw a plot.
 #'
@@ -64,6 +64,10 @@ scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
                        depth_params = list(method = "Projection")) {
   x <- stats::na.omit(x)
 
+  if(is.vector(x)) {
+    x <- as.matrix(x)
+  }
+
   if (is.data.frame(x)) {
     x <- as.matrix(x)
   }
@@ -95,7 +99,11 @@ scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
     np <- nrow(unique(as.matrix(tmp_x)))
 
     if (np > dim_x) {
-      vol[i] <- geometry::convhulln(tmp_x, options = "FA")$vol
+      if(dim_x > 1) {
+        vol[i] <- geometry::convhulln(tmp_x, options = "FA")$vol
+      } else {
+        vol[i] <- diff(range(tmp_x))
+      }
     } else {
       vol[i] <- 0
     }
