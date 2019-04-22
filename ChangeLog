@@ -1,3 +1,7 @@
+Changes in DepthProc 2.1.1
+
+- Update Makevars for the new CRAN policy (no strip debug info)
+
 Changes in DepthProc 2.1.0
 
 - New parameter in depthContour to determine the method used to draw the boundaries.
