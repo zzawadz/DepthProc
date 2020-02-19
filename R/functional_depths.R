@@ -114,7 +114,6 @@ fncDepth.zoo <- function(u, X = NULL, method = "MBD", byrow = NULL, ...) {
 #' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #' @param X The data as a matrix. If it is a matrix or data frame, then each row is viewed as one multivariate observation.
 #' @param dep1d_params parameters passed to depth function used in one dimension.
-#' @param \dots other arguments passed to depth function.
 #'
 #' @examples
 #' x <- matrix(rnorm(60), nc = 20)

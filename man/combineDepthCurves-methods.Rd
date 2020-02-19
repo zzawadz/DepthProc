@@ -13,14 +13,11 @@ combineDepthCurves(x, y, .list = NULL)
 
 \S4method{combineDepthCurves}{ANY,ANY,list}(x, y, .list = NULL)
 
-\S4method{combineDepthCurves}{DepthCurveList,DepthCurve,ANY}(x, y,
-  .list = NULL)
+\S4method{combineDepthCurves}{DepthCurveList,DepthCurve,ANY}(x, y, .list = NULL)
 
-\S4method{combineDepthCurves}{DepthCurve,DepthCurveList,ANY}(x, y,
-  .list = NULL)
+\S4method{combineDepthCurves}{DepthCurve,DepthCurveList,ANY}(x, y, .list = NULL)
 
-\S4method{combineDepthCurves}{DepthCurve,DepthCurve,ANY}(x, y,
-  .list = NULL)
+\S4method{combineDepthCurves}{DepthCurve,DepthCurve,ANY}(x, y, .list = NULL)
 }
 \arguments{
 \item{x}{object}

@@ -10,8 +10,6 @@ depthEuclid(u, X)
 \item{u}{Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.}
 
 \item{X}{The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).}
-
-\item{\dots}{currently not supported.}
 }
 \description{
 Computes the euclidean depth of a point or vectors of points with respect to a multivariate data set.

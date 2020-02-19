@@ -1,3 +1,7 @@
+Changes in DepthProc 2.1.3
+
+- Fixed docs warnings.
+
 Changes in DepthProc 2.1.2
 
 - Fixed fncDepth class error (changed class(u) != class(X) to all(class(u) != class(X)))

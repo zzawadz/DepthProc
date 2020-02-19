@@ -5,8 +5,14 @@
 \alias{ddMvnorm}
 \title{Normal depth versus depth plot}
 \usage{
-ddMvnorm(x, size = nrow(x), robust = FALSE, alpha = 0.05,
-  title = "ddMvnorm", depth_params = list())
+ddMvnorm(
+  x,
+  size = nrow(x),
+  robust = FALSE,
+  alpha = 0.05,
+  title = "ddMvnorm",
+  depth_params = list()
+)
 }
 \arguments{
 \item{x}{The data sample for DD plot.}

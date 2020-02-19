@@ -4,8 +4,14 @@
 \alias{binningDepth2D}
 \title{2d Binning}
 \usage{
-binningDepth2D(x, binmethod = "LocDepth", nbins = 8, k = 1,
-  remove_borders = FALSE, depth_params = list(method = "LP"))
+binningDepth2D(
+  x,
+  binmethod = "LocDepth",
+  nbins = 8,
+  k = 1,
+  remove_borders = FALSE,
+  depth_params = list(method = "LP")
+)
 }
 \arguments{
 \item{x}{bivariate matrix containing data. Each row is viewed as one two-dimensional observation.}

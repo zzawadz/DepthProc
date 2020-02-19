@@ -12,8 +12,6 @@ fncDepthFM(u, X, dep1d_params = list(method = "Projection"))
 \item{X}{The data as a matrix. If it is a matrix or data frame, then each row is viewed as one multivariate observation.}
 
 \item{dep1d_params}{parameters passed to depth function used in one dimension.}
-
-\item{\dots}{other arguments passed to depth function.}
 }
 \description{
 Computes Frainman-Muniz depth for functional data.

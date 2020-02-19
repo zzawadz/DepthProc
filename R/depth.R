@@ -98,7 +98,6 @@ depth <- function(u, X, method = "Projection", threads = -1, ...) {
 #'
 #' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#' @param \dots currently not supported.
 #'
 #' @details
 #'
@@ -142,7 +141,6 @@ depthEuclid <- function(u, X) {
 #' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
 #' @param cov custom covariance matrix passed. If NULL standard calculations will be based on standard covariance estimator.
 #' @param mean custom mean vector. If null --- mean average will be used.
-#' @param \dots currently not supported.
 #'
 #' @details
 #'
@@ -186,7 +184,6 @@ depthMah <- function(u, X, cov = NULL, mean = NULL, threads = -1) {
 #' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
 #' @param ndir number of directions used in computations
 #' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
-#' @param \dots currently not supported.
 #'
 #' @details
 #'
@@ -227,7 +224,6 @@ depthProjection <- function(u, X, ndir = 1000, threads = -1) {
 #' @param ndir number of directions used in computations
 #' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
 #' @param exact if TRUE exact alhorithm will be used . Currently it works only for 2 dimensional data set.
-#' @param \dots currently not supported.
 #'
 #' @details
 #'
@@ -303,7 +299,6 @@ depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
 #' @param lb intercept in the weighing function.
 #' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
 #' @param func the weighing function. Currently it is not supported.
-#' @param \dots currently not supported.
 #'
 #' @details
 #'

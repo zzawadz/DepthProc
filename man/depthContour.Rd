@@ -4,12 +4,23 @@
 \alias{depthContour}
 \title{Approximate depth contours}
 \usage{
-depthContour(x, xlim = extendrange(x[, 1], f = 0.1),
-  ylim = extendrange(x[, 2], f = 0.1), n = 50, pmean = TRUE,
-  mcol = "blue", pdmedian = TRUE, mecol = "brown", legend = TRUE,
-  points = FALSE, colors = heat_hcl, levels = 10,
-  depth_params = list(), graph_params = list(),
-  contour_method = c("auto", "convexhull", "contour"))
+depthContour(
+  x,
+  xlim = extendrange(x[, 1], f = 0.1),
+  ylim = extendrange(x[, 2], f = 0.1),
+  n = 50,
+  pmean = TRUE,
+  mcol = "blue",
+  pdmedian = TRUE,
+  mecol = "brown",
+  legend = TRUE,
+  points = FALSE,
+  colors = heat_hcl,
+  levels = 10,
+  depth_params = list(),
+  graph_params = list(),
+  contour_method = c("auto", "convexhull", "contour")
+)
 }
 \arguments{
 \item{x}{Bivariate data}

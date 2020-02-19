@@ -14,8 +14,6 @@ depthProjection(u, X, ndir = 1000, threads = -1)
 \item{ndir}{number of directions used in computations}
 
 \item{threads}{number of threads used in parallel computations. Default value -1 means that all possible cores will be used.}
-
-\item{\dots}{currently not supported.}
 }
 \description{
 Computes the Projection depth of a point or vectors of points with respect to a multivariate data set.

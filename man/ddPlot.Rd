@@ -4,9 +4,16 @@
 \alias{ddPlot}
 \title{Depth versus depth plot}
 \usage{
-ddPlot(x, y, scale = FALSE, location = FALSE, name = "X",
-  name_y = "Y", title = "Depth vs. depth plot",
-  depth_params = list())
+ddPlot(
+  x,
+  y,
+  scale = FALSE,
+  location = FALSE,
+  name = "X",
+  name_y = "Y",
+  title = "Depth vs. depth plot",
+  depth_params = list()
+)
 }
 \arguments{
 \item{x}{The first or only data sample for ddPlot.}

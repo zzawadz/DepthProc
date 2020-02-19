@@ -5,8 +5,7 @@
 \alias{plot,BinnDepth2d,ANY-method}
 \title{2d Binning plot}
 \usage{
-\S4method{plot}{BinnDepth2d,ANY}(x, ..., alpha = 0.1, bg_col = "red",
-  add_mid = TRUE)
+\S4method{plot}{BinnDepth2d,ANY}(x, ..., alpha = 0.1, bg_col = "red", add_mid = TRUE)
 }
 \arguments{
 \item{x}{object of class BinnDepth2d}

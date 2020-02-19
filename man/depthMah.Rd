@@ -16,8 +16,6 @@ depthMah(u, X, cov = NULL, mean = NULL, threads = -1)
 \item{mean}{custom mean vector. If null --- mean average will be used.}
 
 \item{threads}{number of threads used in parallel computations. Default value -1 means that all possible cores will be used.}
-
-\item{\dots}{currently not supported.}
 }
 \description{
 Computes the mahalanobis depth of a point or vectors of points with respect to a multivariate data set.

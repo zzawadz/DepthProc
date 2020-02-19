@@ -4,9 +4,15 @@
 \alias{scaleCurve}
 \title{Scale curve}
 \usage{
-scaleCurve(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
-  name_y = "Y", title = "Scale Curve", depth_params = list(method =
-  "Projection"))
+scaleCurve(
+  x,
+  y = NULL,
+  alpha = seq(0, 1, 0.01),
+  name = "X",
+  name_y = "Y",
+  title = "Scale Curve",
+  depth_params = list(method = "Projection")
+)
 }
 \arguments{
 \item{x}{Multivariate data as a matrix.}
