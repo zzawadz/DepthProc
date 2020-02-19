@@ -1,3 +1,7 @@
+Changes in DepthProc 2.1.2
+
+- Fixed fncDepth class error (changed class(u) != class(X) to all(class(u) != class(X)))
+
 Changes in DepthProc 2.1.1
 
 - Update Makevars for the new CRAN policy (no strip debug info)

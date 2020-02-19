@@ -27,7 +27,7 @@ fncDepth <- function(u, X = NULL, method = "MBD", byrow = NULL, ...) {
 
   if (!is.null(X)) {
 
-    if (class(u) != class(X)) {
+    if (all(class(u) != class(X))) {
       stop("u and X must be the the same class!")
     }
   }

@@ -17,9 +17,9 @@ stars](https://img.shields.io/github/stars/zzawadz/DepthProc.svg?style=social&la
 watchers](https://img.shields.io/github/watchers/zzawadz/DepthProc.svg?style=social&label=Watch)](https://github.com/zzawadz/DepthProc)
 
 [![CRAN
-version](https://www.r-pkg.org/badges/version/DepthProc)](https://cran.rstudio.com/package=DepthProc)
-[![Downloads](https://cranlogs.r-pkg.org/badges/DepthProc)](https://cran.rstudio.com/package=DepthProc)
-[![](https://cranlogs.r-pkg.org/badges/grand-total/DepthProc)](https://cran.rstudio.com/package=DepthProc)
+version](https://www.r-pkg.org/badges/version/DepthProc)](https://CRAN.R-project.org/package=DepthProc)
+[![Downloads](https://cranlogs.r-pkg.org/badges/DepthProc)](https://CRAN.R-project.org/package=DepthProc)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/DepthProc)](https://CRAN.R-project.org/package=DepthProc)
 [![Build
 Status](https://travis-ci.org/zzawadz/DepthProc.svg?branch=master)](https://travis-ci.org/zzawadz/DepthProc)
 [![AppVeyor Build
