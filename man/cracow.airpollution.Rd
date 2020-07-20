@@ -4,7 +4,9 @@
 \name{cracow.airpollution}
 \alias{cracow.airpollution}
 \title{Air pollution with PM10 in Cracow within day and night in December 2016}
-\format{data frame containing 744 rows.}
+\format{
+data frame containing 744 rows.
+}
 \usage{
 data("cracow.airpollution")
 }

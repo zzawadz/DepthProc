@@ -187,7 +187,61 @@ fastMBDRef <- function(u, X) {
 
   rmat <- t(rmat)
 
-  down <- rmat - 1
+  down <- rmat
   up <- n - rmat
   (rowSums(up * down) / p + n - 1) / choose(n, 2)
 }
+
+
+#'@title Band Depth
+#'@export
+#'@description Computes the band depth.
+#'
+#' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
+#' @param X The data according to which the depth is calculated, optional
+#'
+#' @examples
+#'
+#' x <- matrix(rnorm(60), nc = 20)
+#' fncDepthMBD(x)
+#' fncDepthMBD(x, x)
+#'
+fncDepthBD <- function(u, X) {
+
+  if (missing(X)) {
+    depth <- fastBD(t(u))
+  } else {
+    depth <- fastBDRef(t(u), t(X))
+  }
+
+  as.numeric(depth)
+}
+
+fastBD <- function(u)
+{
+  p <- nrow(u)
+  n <- ncol(u)
+  rmat <- apply(u, 1, rank)
+  down <- apply(rmat,1,min) - 1
+  up <- n - apply(rmat,1,max)
+  ((up * down)+ n - 1) / choose(n, 2)
+}
+
+fastBDRef <- function(u, X) {
+
+  p <- nrow(X)
+  n <- ncol(X)
+
+  rmat <- u
+
+  for(i in 1:p) {
+    rmat[i, ] <- DepthProc:::refRank(u[i, ], X[i, ])
+  }
+
+  rmat <- t(rmat)
+
+  down <- apply(rmat,1,min)
+  up <- n - apply(rmat,1,max)
+  ((up * down) + n - 1) / choose(n, 2)
+}
+
