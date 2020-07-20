@@ -4,7 +4,9 @@
 \name{maesles.imm}
 \alias{maesles.imm}
 \title{Children 1 year old immunized against measles, percentage}
-\format{A data frame with 654 rows and 4 variables}
+\format{
+A data frame with 654 rows and 4 variables
+}
 \source{
 http://mdgs.un.org/unsd/mdg/Data.aspx
 }

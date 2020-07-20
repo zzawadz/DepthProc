@@ -4,7 +4,9 @@
 \name{france}
 \alias{france}
 \title{Relation between minimum wage (MW) and unemployment rate (UR) in France.}
-\format{data frame containing 17 rows and two column. MW is a minimum wage, and UR is an unemployment rate.}
+\format{
+data frame containing 17 rows and two column. MW is a minimum wage, and UR is an unemployment rate.
+}
 \usage{
 data(france)
 }

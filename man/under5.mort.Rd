@@ -4,7 +4,9 @@
 \name{under5.mort}
 \alias{under5.mort}
 \title{Children under 5 months mortality rate per 1,000 live births}
-\format{A data frame with 654 rows and 4 variables}
+\format{
+A data frame with 654 rows and 4 variables
+}
 \source{
 http://mdgs.un.org/unsd/mdg/Data.aspx
 }

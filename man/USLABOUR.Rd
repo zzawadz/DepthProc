@@ -4,7 +4,9 @@
 \name{USLABOUR}
 \alias{USLABOUR}
 \title{US Labour dataset}
-\format{A data frame with 654 rows and 4 variables}
+\format{
+A data frame with 654 rows and 4 variables
+}
 \source{
 U.S.Department of Labor --- Bureau of Labour Statistics FRED
 }
