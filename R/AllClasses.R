@@ -250,6 +250,7 @@ setClass("TrimReg2d", contains = "RobReg")
 #' @param untf not supported.
 #'
 #' @export
+#' @aliases abline,RobReg,ANY,ANY,ANY-method
 #'
 setMethod("abline", "RobReg", function(a, ...) {
   abline(a@coef, ...)

@@ -4,7 +4,9 @@
 \name{katowice.airpollution}
 \alias{katowice.airpollution}
 \title{Air pollution in Katowice city by hour.}
-\format{data frame containing 181 rows (days) and 24 columns. Each column is an air pollination for given hour.}
+\format{
+data frame containing 181 rows (days) and 24 columns. Each column is an air pollination for given hour.
+}
 \usage{
 data("katowice.airpollution")
 }
