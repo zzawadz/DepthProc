@@ -32,7 +32,7 @@
 #'
 #' Hall, P., Wand, M. P. (1996) On the Accuracy of Binned Kernel Density Estimators, Journal of Multivariate Analysis archive, Volume 56 Issue 2, 165--184
 #'
-#' Holmstrom, L. (2000) The Accuracy and the Computational Complexity of a Multivariate Binned Kernel Density Estimator, Journal of Multivariate Analysis, Volume 72, Issue 2, 264--309, \url{http://dx.doi.org/10.1006/jmva.1999.1863}. (\url{http://www.sciencedirect.com/science/article/pii/S0047259X99918638})
+#' Holmstrom, L. (2000) The Accuracy and the Computational Complexity of a Multivariate Binned Kernel Density Estimator, Journal of Multivariate Analysis, Volume 72, Issue 2, 264--309, \doi{10.1006/jmva.1999.1863}. (\url{https://www.sciencedirect.com/science/article/pii/S0047259X99918638})
 #'
 #' @examples
 #'
