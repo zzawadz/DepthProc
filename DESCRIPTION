@@ -42,7 +42,9 @@ Suggests:
     covr,
     testthat,
     fda,
-    lintr
+    lintr,
+    roxygen2,
+    pkgbuild
 LinkingTo: Rcpp, RcppArmadillo
 SystemRequirements: C++11
 RoxygenNote: 7.1.2
