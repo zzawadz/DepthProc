@@ -42,8 +42,8 @@ fncBoxPlot <- function(u, X = NULL, bands = c(0, 0.5), method = "MBD",
 .fncBoxPlotGGPlot <- function(obj, bands) {
   bands <- fncGetBandsDataFrame(obj, bands)
 
-  p <- ggplot(bands, aes_string(x = "index", fill = "level", color = "level"))
-  p <- p + geom_ribbon(aes_string(ymin = "lower", ymax = "upper"))
+  p <- ggplot(bands, aes(x = .data$index, fill = .data$level, color = .data$level))
+  p <- p + geom_ribbon(aes(ymin = .data$lower, ymax = .data$upper))
   p <- p + theme_bw()
   p <- p + scale_fill_brewer(palette = "Blues") +
     scale_color_brewer(palette = "Blues")
