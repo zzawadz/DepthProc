@@ -19,7 +19,7 @@ namespace Depth
 		//const double pr = 1/p;
 
 		arma::vec depth(n_x);
-    size_t k,i;
+    size_t k;
 
     if(threads < 1) threads = omp_get_max_threads();
 
