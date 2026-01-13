@@ -46,7 +46,7 @@ setMethod("depthMedian", "matrix", function(x, depth_params = list(), convex = F
 #' @export
 setMethod("depthMedian", "data.frame", function(x, depth_params = list(), convex = FALSE) {
   x <- as.matrix(x)
-  depthMedian(x, depth_params)
+  depthMedian(x, depth_params, convex = convex)
 })
 
 #' @rdname depthMedian-methods
