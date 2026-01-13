@@ -106,6 +106,9 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
 
   addConvexHull <- function(data, depth, cutoff, col = "black") {
     idx <- depth >= cutoff
+    if (sum(idx, na.rm = TRUE) < 3) {
+      return(invisible(NULL))
+    }
     x <- data[idx,1]
     y <- data[idx,2]
     hpts <- grDevices::chull(x = x, y = y)
