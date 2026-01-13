@@ -61,5 +61,5 @@ deepReg2d <- function(x, y) {
   y <- y[order(x)]
   x <- sort(x)
   tmp <- depth2dcpp(x, y)
-  new("DeepReg2d", coef = tmp[2:1], depth = tmp[3])
+  methods::new("DeepReg2d", coef = tmp[2:1], depth = tmp[3])
 }

@@ -1,16 +1,16 @@
 #' @rdname plot-methods
 #' @export
-setMethod("plot", signature = c(x = "DepthCurve"), function(x) {
-  plot(new(paste0(class(x), "List"), x))
+methods::setMethod("plot", signature = c(x = "DepthCurve"), function(x) {
+  plot(methods::new(paste0(class(x), "List"), x))
 })
 
 #' @rdname plot-methods
 #' @export
-setMethod("plot", signature = c(x = "DepthCurveList"), function(x) {
+methods::setMethod("plot", signature = c(x = "DepthCurveList"), function(x) {
   p <- getPlot(x)
   print(p)
 })
-setMethod("initialize", "DepthCurveList", function(.Object, ...) {
+methods::setMethod("initialize", "DepthCurveList", function(.Object, ...) {
   tmp <- list(...)
   n <- length(tmp)
 
@@ -26,7 +26,7 @@ setMethod("initialize", "DepthCurveList", function(.Object, ...) {
 
 #' @rdname combineDepthCurves-methods
 #' @export
-setMethod("combineDepthCurves", signature(.list = "list"),
+methods::setMethod("combineDepthCurves", signature(.list = "list"),
   function(x, y, .list) {
     Reduce(combineDepthCurves, .list)
   }
@@ -34,7 +34,7 @@ setMethod("combineDepthCurves", signature(.list = "list"),
 
 #' @rdname combineDepthCurves-methods
 #' @export
-setMethod("combineDepthCurves",
+methods::setMethod("combineDepthCurves",
           signature(x = "DepthCurveList", y = "DepthCurve"),
           function(x, y, .list) {
             names <- vapply(x, FUN.VALUE = "", function(xx) {
@@ -64,7 +64,7 @@ setMethod("combineDepthCurves",
 
 #' @rdname combineDepthCurves-methods
 #' @export
-setMethod("combineDepthCurves",
+methods::setMethod("combineDepthCurves",
           signature(x = "DepthCurve", y = "DepthCurveList"),
           function(x, y, .list) {
             combineDepthCurves(y, x)
@@ -73,12 +73,12 @@ setMethod("combineDepthCurves",
 
 #' @rdname combineDepthCurves-methods
 #' @export
-setMethod("combineDepthCurves", signature(x = "DepthCurve", y = "DepthCurve"),
+methods::setMethod("combineDepthCurves", signature(x = "DepthCurve", y = "DepthCurve"),
           function(x, y, .list) {
-            return(new(paste0(class(x), "List"), x, y))
+            return(methods::new(paste0(class(x), "List"), x, y))
           }
 )
-setMethod(".getPlot", "DepthCurveList", function(object) {
+methods::setMethod(".getPlot", "DepthCurveList", function(object) {
   value <- unlist(object)
   alpha <- as.vector(sapply(object, function(x) x@alpha))
   len_alpha <- vapply(object,
@@ -91,29 +91,29 @@ setMethod(".getPlot", "DepthCurveList", function(object) {
 
   data <- data.frame(value, alpha, names)
 
-  p <- ggplot()
-  p <- p + geom_line(data = data, aes(x = alpha, y = value, col = names),
+  p <- ggplot2::ggplot()
+  p <- p + ggplot2::geom_line(data = data, ggplot2::aes(x = alpha, y = value, col = names),
                      size = 1.5)
-  p <- p + theme_bw() + .depTheme()
-  p <- p + ylim(c(0, max(data$value, na.rm = TRUE)))
-  p <- p + xlim(c(0, max(data$alpha, na.rm = TRUE)))
+  p <- p + ggplot2::theme_bw() + .depTheme()
+  p <- p + ggplot2::ylim(c(0, max(data$value, na.rm = TRUE)))
+  p <- p + ggplot2::xlim(c(0, max(data$alpha, na.rm = TRUE)))
 
   return(p)
 })
 
 #' @rdname as.matrix-methods
 #' @export
-setMethod("as.matrix", signature(x = "DepthCurveList"), function(x) {
+methods::setMethod("as.matrix", signature(x = "DepthCurveList"), function(x) {
   names <- sapply(x, function(x) x@name)
   tmp <- matrix(unlist(x), ncol = length(x))
   colnames(tmp) <- names
   tmp
 })
-setMethod("show", "DepthCurve", function(object) {
+methods::setMethod("show", "DepthCurve", function(object) {
   cat("Object of class:", class(object))
   plot(object)
 })
-setMethod("show", "DepthCurveList", function(object) {
+methods::setMethod("show", "DepthCurveList", function(object) {
   cat("Object of class:", class(object))
   print(getPlot(object))
 })

@@ -145,7 +145,7 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
   }
 
   tmp <- matrix(as.vector(tmp), ncol = ncol(tmp))
-  new("BinnDepth2d", freq = tmp, mid_x = tmp1[[2]], mid_y = tmp2[[2]],
+  methods::new("BinnDepth2d", freq = tmp, mid_x = tmp1[[2]], mid_y = tmp2[[2]],
       breaks_x = tmp1[[1]], breaks_y = tmp2[[1]], input_data = x,
       max_depth_x = tmp1[[3]], max_depth_y = tmp2[[3]])
   # return(result)
@@ -174,7 +174,7 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
 #' robust
 #' depth function
 #'
-setMethod("plot", signature = c(x = "BinnDepth2d"), function(x, ...,
+methods::setMethod("plot", signature = c(x = "BinnDepth2d"), function(x, ...,
                                                              alpha = 0.1,
                                                              bg_col = "red",
                                                              add_mid = TRUE) {

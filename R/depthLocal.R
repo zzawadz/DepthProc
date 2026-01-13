@@ -100,6 +100,6 @@ depthLocal <- function(u, X, beta = 0.5,
       u[i,, drop = FALSE], X, beta, depth_params1, depth_params2) #nolint
   }
 
-  new("DepthLocal", depths, u = u, X = X, method = "Local",
+  methods::new("DepthLocal", depths, u = u, X = X, method = "Local",
       depth_params1 = depth_params1, depth_params2 = depth_params2)
 }

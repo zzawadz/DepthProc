@@ -98,7 +98,7 @@ asymmetryCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
                         depth_params = depth_params)
   }
 
-  asc <- new("AsymmetryCurve", x_est[, 2], depth = depth_est,
+  asc <- methods::new("AsymmetryCurve", x_est[, 2], depth = depth_est,
              alpha = x_est[, 1], name = name)
 
   if (!is.null(y)) {
