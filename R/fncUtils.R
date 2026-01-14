@@ -6,12 +6,12 @@
 #'
 #' @examples
 #' u <- matrix(1:10, ncol = 2)
-#' extractIndexFromMatrix(u)
+#' DepthProc:::extractIndexFromMatrix(u)
 #' colnames(u) <- c("fn1", "fn2")
-#' extractIndexFromMatrix(u)
+#' DepthProc:::extractIndexFromMatrix(u)
 #'
-#' data("katowice.airpollution")
-#' extractIndexFromMatrix(katowice.airpollution)
+#' data("katowice.airpollution", package = "DepthProc")
+#' DepthProc:::extractIndexFromMatrix(katowice.airpollution)
 #'
 extractIndexFromMatrix <- function(x) {
 

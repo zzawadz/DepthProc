@@ -8,7 +8,7 @@
 #'
 #' @examples
 #' 
-#' x <- runifsphere(n = 100)
+#' x <- DepthProc::runifsphere(n = 100)
 #' plot(x)
 #' 
 #' @export

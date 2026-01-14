@@ -14,14 +14,13 @@
 #' @examples
 #'
 #' x <- matrix(rnorm(60), ncol = 20)
-#' fncDepth(x, method = "FM", dep1d = "Mahalanobis")
-#' fncDepth(x, byrow = FALSE)
+#' DepthProc::fncDepth(x, method = "FM", dep1d = "Mahalanobis")
+#' DepthProc::fncDepth(x, byrow = FALSE)
 #'
 #' # zoo and xts
-#' library(xts)
-#' data(sample_matrix)
-#' sample.xts <- as.xts(sample_matrix, descr = "my new xts object")
-#' fncDepth(sample.xts)
+#' data("sample_matrix", package = "DepthProc")
+#' sample.xts <- xts::as.xts(sample_matrix, descr = "my new xts object")
+#' DepthProc::fncDepth(sample.xts)
 #'
 fncDepth <- function(u, X = NULL, method = "MBD", byrow = NULL, ...) {
 
@@ -117,7 +116,7 @@ fncDepth.zoo <- function(u, X = NULL, method = "MBD", byrow = NULL, ...) {
 #'
 #' @examples
 #' x <- matrix(rnorm(60), nc = 20)
-#' fncDepthFM(x)
+#' DepthProc::fncDepthFM(x)
 #'
 fncDepthFM <- function(u, X, dep1d_params = list(method = "Projection")) {
 
@@ -150,8 +149,8 @@ fncDepthFM <- function(u, X, dep1d_params = list(method = "Projection")) {
 #' @examples
 #'
 #' x <- matrix(rnorm(60), nc = 20)
-#' fncDepthMBD(x)
-#' fncDepthMBD(x, x)
+#' DepthProc::fncDepthMBD(x)
+#' DepthProc::fncDepthMBD(x, x)
 #'
 fncDepthMBD <- function(u, X) {
 
@@ -203,8 +202,8 @@ fastMBDRef <- function(u, X) {
 #' @examples
 #'
 #' x <- matrix(rnorm(60), nc = 20)
-#' fncDepthMBD(x)
-#' fncDepthMBD(x, x)
+#' DepthProc::fncDepthMBD(x)
+#' DepthProc::fncDepthMBD(x, x)
 #'
 fncDepthBD <- function(u, X) {
 
@@ -244,4 +243,3 @@ fastBDRef <- function(u, X) {
   up <- n - apply(rmat,1,max)
   ((up * down) + n - 1) / choose(n, 2)
 }
-

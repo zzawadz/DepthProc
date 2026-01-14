@@ -16,11 +16,11 @@
 #'
 #' # depthMedian for matrix
 #' x <- matrix(rnorm(600), nc = 3)
-#' depthMedian(x)
+#' DepthProc::depthMedian(x)
 #'
 #' # depthMedian works with object of class Depth
-#' dp <- depth(x)
-#' depthMedian(dp)
+#' dp <- DepthProc::depth(x)
+#' DepthProc::depthMedian(dp)
 #'
 methods::setGeneric("depthMedian", function(x, depth_params = list(), convex = FALSE) {
   standardGeneric("depthMedian")

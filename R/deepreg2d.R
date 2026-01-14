@@ -15,20 +15,20 @@
 #' @examples
 #'
 #' # EXAMPLE 1
-#' data(pension)
+#' data("pension", package = "DepthProc")
 #' plot(pension)
 #' abline(
 #'   lm(Reserves ~ Income, data = pension),
 #'   lty = 3,
 #'   lwd = 2) # lm
 #' abline(
-#'   deepReg2d(pension[, 1], pension[, 2]),
+#'   DepthProc::deepReg2d(pension[, 1], pension[, 2]),
 #'   lwd = 2) # deepreg2d
 #'
 #' # EXAMPLE 2
-#' data(under5.mort)
-#' data(inf.mort)
-#' data(maesles.imm)
+#' data("under5.mort", package = "DepthProc")
+#' data("inf.mort", package = "DepthProc")
+#' data("maesles.imm", package = "DepthProc")
 #' data2011 <- na.omit(
 #'     cbind(under5.mort[, 22], inf.mort[, 22],
 #'     maesles.imm[, 22]))
@@ -44,7 +44,7 @@
 #' )
 #' abline(lm(x ~ y), lwd = 2, col = "black") # lm
 #' abline(
-#'   deepReg2d (x, y),
+#'   DepthProc::deepReg2d (x, y),
 #'   lwd = 2, col = "red"
 #' ) # trimmed reg
 #'

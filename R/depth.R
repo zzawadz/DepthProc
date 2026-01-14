@@ -35,18 +35,17 @@
 #' @seealso \code{\link{depthContour}} and \code{\link{depthPersp}} for depth graphics.
 #'
 #' @examples
-#' library(robustbase)
 #'
 #' # Calculation of Projection depth
-#' data(starsCYG, package = "robustbase")
-#' depth(t(colMeans(starsCYG)), starsCYG)
+#' data("starsCYG", package = "robustbase")
+#' DepthProc::depth(t(colMeans(starsCYG)), starsCYG)
 #'
 #' # Also for matrices
-#' depth(starsCYG, starsCYG)
+#' DepthProc::depth(starsCYG, starsCYG)
 #'
 #' # Projection depth applied to a large bivariate data set
 #' x <- matrix(rnorm(9999), nc = 3)
-#' depth(x, x)
+#' DepthProc::depth(x, x)
 #'
 #' @keywords
 #' multivariate
@@ -109,7 +108,7 @@ depth <- function(u, X, method = "Projection", threads = -1, ...) {
 #'
 #' @examples
 #' x <- matrix(rnorm(9999), nc = 3)
-#' depthEuclid(x, x)
+#' DepthProc::depthEuclid(x, x)
 #'
 #' @keywords
 #' multivariate
@@ -163,7 +162,7 @@ depthEuclid <- function(u, X) {
 #'
 #' @examples
 #' x <- matrix(rnorm(9999), nc = 3)
-#' depthMah(x, x)
+#' DepthProc::depthMah(x, x)
 #'
 #' @keywords
 #' multivariate
@@ -217,7 +216,7 @@ depthMah <- function(u, X, cov = NULL, mean = NULL, threads = -1) {
 #'
 #' @examples
 #' x <- matrix(rnorm(3000), nc = 3)
-#' a <- depthProjection(x, x, ndir = 2000)
+#' a <- DepthProc::depthProjection(x, x, ndir = 2000)
 #'
 #' @keywords
 #' multivariate
@@ -269,12 +268,12 @@ depthProjection <- function(u, X, ndir = 1000, threads = -1) {
 #' @examples
 #' \dontrun{
 #' x <- matrix(rnorm(3000), nc = 3)
-#' depthTukey(x, ndir = 2000)
+#' DepthProc::depthTukey(x, ndir = 2000)
 #' }
 #'
 #' # Exact algorithm in 2d
 #' x <- matrix(rnorm(2000), nc = 2)
-#' depthTukey(x, exact = TRUE)
+#' DepthProc::depthTukey(x, exact = TRUE)
 #'
 #' @keywords
 #' multivariate
@@ -354,7 +353,7 @@ depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
 #' x <- matrix(rnorm(3000), ncol = 3)
 #'
 #' # Same results
-#' depthLP(x, x, pdim = 2)
+#' DepthProc::depthLP(x, x, pdim = 2)
 #'
 #' @keywords
 #' multivariate
