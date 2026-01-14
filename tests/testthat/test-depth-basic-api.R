@@ -36,7 +36,9 @@ test_that("LP depth works with vector", {
 vectorInputMatchesMatrixWhenMissingX <- function(dep, ...) {
   set.seed(123)
   u <- rnorm(10)
+  set.seed(123)
   d1 <- dep(u, ...)
+  set.seed(123)
   d2 <- dep(matrix(u, ncol = 1), ...)
   expect_equal(d1, d2)
 }
