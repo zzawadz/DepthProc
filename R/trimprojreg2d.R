@@ -75,5 +75,5 @@ trimProjReg2d <- function(x, y, alpha = 0.1) {
   data <- data.frame(ycut, xcut)
 
   fitcut <- lm(ycut ~ xcut, data = data)$coeff
-  new("TrimReg2d", coef = fitcut)
+  methods::new("TrimReg2d", coef = fitcut)
 }

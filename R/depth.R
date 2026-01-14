@@ -129,7 +129,7 @@ depthEuclid <- function(u, X) {
   center <- matrix(rep(center, n), nrow = n, byrow = TRUE)
   depth <- 1 / (1 + (rowSums((u - center) ^ 2)))
 
-  new("DepthEuclid", depth, u = u, X = X, method = "Euclidean")
+  methods::new("DepthEuclid", depth, u = u, X = X, method = "Euclidean")
 }
 
 #' @title Mahalanobis Depth
@@ -173,7 +173,7 @@ depthMah <- function(u, X, cov = NULL, mean = NULL, threads = -1) {
 
   depth <- depthMahCPP(u, X, cov, mean, threads)
 
-  new("DepthMahalanobis", depth, u = u, X = X, method = "Mahalanobis")
+  methods::new("DepthMahalanobis", depth, u = u, X = X, method = "Mahalanobis")
 }
 
 #' @title Projection Depth
@@ -212,7 +212,7 @@ depthProjection <- function(u, X, ndir = 1000, threads = -1) {
 
   depth <- depthProjCPP(u, X, ndir, threads)
 
-  new("DepthProjection", depth, u = u, X = X, method = "Projection")
+  methods::new("DepthProjection", depth, u = u, X = X, method = "Projection")
 }
 
 #' @title Tukey Depth
@@ -285,7 +285,7 @@ depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
     depth <- apply(OD, 1, min)
   }
 
-  new("DepthTukey", depth, u = u, X = X, method = "Tukey")
+  methods::new("DepthTukey", depth, u = u, X = X, method = "Tukey")
 }
 
 #' @title LP Depth
@@ -330,5 +330,5 @@ depthLP <- function(u, X, pdim = 2, la = 1, lb = 1, threads = -1,
     depth <- depthLPCPP(u, X, pdim, la, lb, threads = threads)
   }
 
-  new("DepthLP", depth, u = u, X = X, method = "LP")
+  methods::new("DepthLP", depth, u = u, X = X, method = "LP")
 }

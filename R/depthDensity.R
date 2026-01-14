@@ -40,8 +40,8 @@ depthDensity <- function(x, y, nx = 5, ny = 32, xg = NULL, yg = NULL, ...) {
 
   xy <- cbind(x, y)
 
-  dens_raw <- npudens(xy, edat = xy_grid)$dens
-  dens_x <- npudens(x, edat = xy_grid[, 1])$dens
+  dens_raw <- np::npudens(xy, edat = xy_grid)$dens
+  dens_x <- np::npudens(x, edat = xy_grid[, 1])$dens
 
   dens <- dens_raw / dens_x
 
@@ -57,7 +57,7 @@ depthDensity <- function(x, y, nx = 5, ny = 32, xg = NULL, yg = NULL, ...) {
   dens_mat <- matrix(dens, ncol = length(xg))
   dep_scale_mat <- matrix(dep_scale, ncol = length(xg))
 
-  new("DepthDensity", dep_scale = dep_scale_mat, density_raw = dens_mat,
+  methods::new("DepthDensity", dep_scale = dep_scale_mat, density_raw = dens_mat,
       density = dens_mat / dep_scale_mat, xgrid = xg, ygrid = yg)
 }
 
@@ -71,7 +71,7 @@ depthDensity <- function(x, y, nx = 5, ny = 32, xg = NULL, yg = NULL, ...) {
 #'
 #' @export
 #'
-setMethod("plot", "DepthDensity", function(x, type = "depth", ...) {
+methods::setMethod("plot", "DepthDensity", function(x, type = "depth", ...) {
   den <- x
 
   if (type == "raw") {

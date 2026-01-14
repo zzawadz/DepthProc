@@ -12,7 +12,7 @@
 #' See \code{\link{DepthCurve-class}} for description.
 #'
 #' @export
-setGeneric("combineDepthCurves", function(x, y, .list = NULL) {
+methods::setGeneric("combineDepthCurves", function(x, y, .list = NULL) {
   standardGeneric("combineDepthCurves")
 })
 
@@ -40,15 +40,15 @@ setGeneric("combineDepthCurves", function(x, y, .list = NULL) {
 #' @importFrom stats cov ecdf lm mad median na.omit quantile rnorm wilcox.test
 #' @importFrom utils tail
 #'
-setClass("Depth",
+methods::setClass("Depth",
          slots = c(u = "matrix", X = "matrix", method = "character"),
          contains = "VIRTUAL")
-setClass("DepthEuclid", contains = c("Depth", "numeric"))
-setClass("DepthProjection", contains = c("Depth", "numeric"))
-setClass("DepthMahalanobis", contains = c("Depth", "numeric"))
-setClass("DepthTukey", contains = c("Depth", "numeric"))
-setClass("DepthLP", contains = c("Depth", "numeric"))
-setClass("DepthLocal",
+methods::setClass("DepthEuclid", contains = c("Depth", "numeric"))
+methods::setClass("DepthProjection", contains = c("Depth", "numeric"))
+methods::setClass("DepthMahalanobis", contains = c("Depth", "numeric"))
+methods::setClass("DepthTukey", contains = c("Depth", "numeric"))
+methods::setClass("DepthLP", contains = c("Depth", "numeric"))
+methods::setClass("DepthLocal",
          slots = c(depth_params1 = "list", depth_params2 = "list"),
          contains = c("Depth", "numeric"))
 
@@ -65,7 +65,7 @@ setClass("DepthLocal",
 #' @slot title title of a plot.
 #'
 #' @export
-setClass("DDPlot", slots = c(X = "Depth", Y = "Depth", title = "character"))
+methods::setClass("DDPlot", slots = c(X = "Depth", Y = "Depth", title = "character"))
 
 #####################################
 ############ DepthCurve #############
@@ -100,7 +100,7 @@ setClass("DDPlot", slots = c(X = "Depth", Y = "Depth", title = "character"))
 #' plot(combineDepthCurves(sc_list, s3)) # Add third curve and draw a plot
 #'
 #' @export
-setClass("DepthCurve",
+methods::setClass("DepthCurve",
          slots = c(depth = "Depth", name = "character", title = "character",
                    alpha = "numeric"),
          contains = "VIRTUAL")
@@ -109,7 +109,7 @@ setClass("DepthCurve",
 #'
 #' DepthCurveList is a special container for DepthCurve objects. See \link{DepthCurve-class}
 #'
-setClass("DepthCurveList", contains = "VIRTUAL")
+methods::setClass("DepthCurveList", contains = "VIRTUAL")
 
 #' ScaleCurve and ScaleCurveList
 #'
@@ -135,8 +135,8 @@ setClass("DepthCurveList", contains = "VIRTUAL")
 #' plot(combineDepthCurves(sc_list, s3)) # Add third curve and draw a plot
 #'
 #' @export
-setClass("ScaleCurve", contains = c("DepthCurve", "numeric"))
-setClass("ScaleCurveList", contains = c("DepthCurveList", "list"))
+methods::setClass("ScaleCurve", contains = c("DepthCurve", "numeric"))
+methods::setClass("ScaleCurveList", contains = c("DepthCurveList", "list"))
 
 #' AsymmetryCurve and AsymmetryCurveList
 #'
@@ -145,8 +145,8 @@ setClass("ScaleCurveList", contains = c("DepthCurveList", "list"))
 #' The mechanism of creating plots with multiple curves is shown in \link{DepthCurve-class} (same mechanism is applied for ScaleCurve).
 #'
 #' @export
-setClass("AsymmetryCurve", contains = c("DepthCurve", "numeric"))
-setClass("AsymmetryCurveList", contains = c("DepthCurveList", "list"))
+methods::setClass("AsymmetryCurve", contains = c("DepthCurve", "numeric"))
+methods::setClass("AsymmetryCurveList", contains = c("DepthCurveList", "list"))
 
 #' BinnDepth2d
 #'
@@ -163,7 +163,7 @@ setClass("AsymmetryCurveList", contains = c("DepthCurveList", "list"))
 #'
 #' @export
 #'
-setClass("BinnDepth2d",
+methods::setClass("BinnDepth2d",
          slots = c(freq = "matrix", mid_x = "numeric", mid_y = "numeric",
                    breaks_x = "numeric", breaks_y = "numeric",
                    input_data = "matrix", max_depth_x = "numeric",
@@ -183,10 +183,10 @@ setClass("BinnDepth2d",
 #' @export
 #' @rdname getPlot-methods
 #'
-setGeneric("getPlot", function(object) {
+methods::setGeneric("getPlot", function(object) {
   standardGeneric("getPlot")
 })
-setGeneric(".getPlot", function(object) {
+methods::setGeneric(".getPlot", function(object) {
   standardGeneric(".getPlot")
 })
 
@@ -200,7 +200,7 @@ setGeneric(".getPlot", function(object) {
 #' @rdname as.matrix-methods
 #' @export
 
-setGeneric("as.matrix", function(x, ...) {
+methods::setGeneric("as.matrix", function(x, ...) {
   standardGeneric("as.matrix")
 })
 
@@ -216,7 +216,7 @@ setGeneric("as.matrix", function(x, ...) {
 #'
 #' @export
 #'
-setClass("RobReg", slots = c(coef = "numeric"), contains = "VIRTUAL")
+methods::setClass("RobReg", slots = c(coef = "numeric"), contains = "VIRTUAL")
 
 #' DeepReg2d
 #'
@@ -227,7 +227,7 @@ setClass("RobReg", slots = c(coef = "numeric"), contains = "VIRTUAL")
 #'
 #' @export
 #'
-setClass("DeepReg2d", slots = c(depth = "numeric"), contains = "RobReg")
+methods::setClass("DeepReg2d", slots = c(depth = "numeric"), contains = "RobReg")
 
 #' TrimReg2d
 #'
@@ -235,7 +235,7 @@ setClass("DeepReg2d", slots = c(depth = "numeric"), contains = "RobReg")
 #'
 #' @export
 #'
-setClass("TrimReg2d", contains = "RobReg")
+methods::setClass("TrimReg2d", contains = "RobReg")
 
 #' @title Add line to plot
 #' @description Add fitted line to a plot. This is overloaded function for robust regression methods from package depthproc.
@@ -252,10 +252,10 @@ setClass("TrimReg2d", contains = "RobReg")
 #' @export
 #' @aliases abline,RobReg,ANY,ANY,ANY-method
 #'
-setMethod("abline", "RobReg", function(a, ...) {
+methods::setMethod("abline", "RobReg", function(a, ...) {
   abline(a@coef, ...)
 })
-setMethod("show", "Depth", function(object) {
+methods::setMethod("show", "Depth", function(object) {
   cat("Depth method: ", object@method, "\n")
   print(object@.Data, width = 20)
 })
@@ -274,7 +274,7 @@ setMethod("show", "Depth", function(object) {
 #'
 #' @export
 #'
-setClass("DepthDensity",
+methods::setClass("DepthDensity",
          slots = c(xgrid = "numeric", ygrid = "numeric", dep_scale = "matrix",
                    density_raw = "matrix", density = "matrix"))
 
@@ -295,4 +295,4 @@ setClass("DepthDensity",
 #' sc <- scaleCurve(x)
 #' plot(sc)
 #'
-setGeneric("plot")
+methods::setGeneric("plot")

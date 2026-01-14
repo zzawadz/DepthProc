@@ -47,5 +47,5 @@ fncGetBand <- function(obj, band = 0.5) {
   bands_q <- quantile(obj, 1 - band)
   tmp_u <- u[depths >= bands_q, , drop = FALSE] #nolint
   bands <- t(apply(tmp_u, 2, range))
-  new("FncBand", bands, index = obj@index, level = band)
+  methods::new("FncBand", bands, index = obj@index, level = band)
 }

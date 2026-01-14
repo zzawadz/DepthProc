@@ -16,7 +16,7 @@
 #' @slot sigma scale estimate in the deepest point.
 #'
 #' @export
-setClass("LSDepth",
+methods::setClass("LSDepth",
          slots = c(max_depth = "numeric", mu = "numeric", sigma = "numeric"))
 
 #' @title Location-Scale depth contour class
@@ -28,7 +28,7 @@ setClass("LSDepth",
 #' @slot .Data list with estimated values of scale-depth contours.
 #'
 #' @export
-setClass("LSDepthContour",
+methods::setClass("LSDepthContour",
          slots = c(cont_depth = "numeric", sample = "numeric"),
          contains = "list")
 
@@ -61,7 +61,7 @@ lsdSampleMaxDepth <- function(x, iter = 100, eps = 1e-04, p_length = 10) {
                                    p_length)
   res <- as.numeric(res)
 
-  new("LSDepth", max_depth = res[1], mu = res[2], sigma = res[3])
+  methods::new("LSDepth", max_depth = res[1], mu = res[2], sigma = res[3])
   # names(res) <- c("max.depth", "mu", "sigma")
   # return(res)
 }
@@ -128,7 +128,7 @@ lsdSampleDepthContours <- function(x, depth = c(0.1, 0.2, 0.3, 0.4),
   }
 
   cont.all
-  new("LSDepthContour", cont.all, cont_depth = depth / length(x), sample = x)
+  methods::new("LSDepthContour", cont.all, cont_depth = depth / length(x), sample = x)
 }
 
 ######################## Utils functions - not exported ####################
@@ -167,13 +167,13 @@ getMuLS <- function(x, n, d, lengthmu) {
 #' # get contour that is not present in dcont
 #' # it will be automatically calculated
 #' lsdGetContour(dcont, 0.3)
-setGeneric("lsdGetContour", function(x, cont) {
+methods::setGeneric("lsdGetContour", function(x, cont) {
   standardGeneric("lsdGetContour")
 })
 
 #' @rdname lsdGetContour-methods
 #' @export
-setMethod("lsdGetContour", signature = "LSDepthContour", function(x, cont) {
+methods::setMethod("lsdGetContour", signature = "LSDepthContour", function(x, cont) {
   i <- which(x@cont_depth == cont)
 
   if (length(i) > 0) {
@@ -201,13 +201,13 @@ setMethod("lsdGetContour", signature = "LSDepthContour", function(x, cont) {
 #' plot(x)
 #' lsdAddContour(x, 0.1, col = "grey50")
 #' lsdAddContour(x, 0.3, col = "grey10", border = "red", lwd = 4)
-setGeneric("lsdAddContour", function(x, cont = NULL, ...) {
+methods::setGeneric("lsdAddContour", function(x, cont = NULL, ...) {
   standardGeneric("lsdAddContour")
 })
 
 #' @rdname lsdAddContour-methods
 #' @export
-setMethod("lsdAddContour", signature = c(x = "LSDepthContour"),
+methods::setMethod("lsdAddContour", signature = c(x = "LSDepthContour"),
           function(x, cont = NULL, ...) {
             contour <- lsdGetContour(x, cont)
 
@@ -246,7 +246,7 @@ setMethod("lsdAddContour", signature = c(x = "LSDepthContour"),
 #' x <- lsdSampleDepthContours(smp)
 #' plot(x, col = paste0("grey", col = rev(seq(10, 40, 10))))
 #'
-setMethod("plot", signature = c(x = "LSDepthContour"),
+methods::setMethod("plot", signature = c(x = "LSDepthContour"),
           function(x, cont = NULL, ratio = 1, mu_min = NULL, mu_max = NULL,
                    col = NULL, border = NULL, ...) {
 

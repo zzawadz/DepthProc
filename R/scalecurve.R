@@ -103,7 +103,7 @@ scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
     }
   }
 
-  scale_curve <- new("ScaleCurve", rev(vol), alpha = alpha, depth = depth_est,
+  scale_curve <- methods::new("ScaleCurve", rev(vol), alpha = alpha, depth = depth_est,
                      name = name, title = title)
 
   if (!is.null(y)) {
