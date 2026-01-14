@@ -54,10 +54,10 @@ ddMvnorm <- function(x, size = nrow(x), robust = FALSE, alpha = 0.05,
     varcov <- cov(x)
   }
 
-  theoretical <- mvrnorm(size, location, varcov)
+  theoretical <- MASS::mvrnorm(size, location, varcov)
   ux_list_theoretical <- list(u = x, X = theoretical)
   depth_theoretical <- do.call(depth, c(ux_list_theoretical, depth_params))
-  ddplot <- new("DDPlot", X = depth_sample, Y = depth_theoretical,
+  ddplot <- methods::new("DDPlot", X = depth_sample, Y = depth_theoretical,
                 title = title)
 
   return(ddplot)

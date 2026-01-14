@@ -13,11 +13,11 @@
 #' # some data:
 #' x <- matrix(rnorm(200), ncol = 10)
 #'
-#' fncBoxPlot(x, bands = c(0, 0.5, 1), method = "FM")
-#' fncBoxPlot(x, bands = c(0, 0.5, 1), method = "FM", byrow = FALSE)
+#' fncBoxPlot(x, bands = c(0, 0.5, 1), method = "MBD")
+#' fncBoxPlot(x, bands = c(0, 0.5, 1), method = "MBD", byrow = FALSE)
 #'
 #' colnames(x) <- paste0("f", 1:ncol(x))
-#' fncBoxPlot(x, bands = c(0, 0.5, 1), method = "FM")
+#' fncBoxPlot(x, bands = c(0, 0.5, 1), method = "MBD")
 #'
 #' # fncBoxPlot handles zoo and xts objects
 #' library(xts)
@@ -42,17 +42,17 @@ fncBoxPlot <- function(u, X = NULL, bands = c(0, 0.5), method = "MBD",
 .fncBoxPlotGGPlot <- function(obj, bands) {
   bands <- fncGetBandsDataFrame(obj, bands)
 
-  p <- ggplot(bands, aes_string(x = "index", fill = "level", color = "level"))
-  p <- p + geom_ribbon(aes_string(ymin = "lower", ymax = "upper"))
-  p <- p + theme_bw()
-  p <- p + scale_fill_brewer(palette = "Blues") +
-    scale_color_brewer(palette = "Blues")
+  p <- ggplot2::ggplot(bands, ggplot2::aes(x = .data$index, fill = .data$level, color = .data$level))
+  p <- p + ggplot2::geom_ribbon(ggplot2::aes(ymin = .data$lower, ymax = .data$upper))
+  p <- p + ggplot2::theme_bw()
+  p <- p + ggplot2::scale_fill_brewer(palette = "Blues") +
+    ggplot2::scale_color_brewer(palette = "Blues")
 
   if (is.factor(bands$fac_index)) {
     labels <- unique(as.character(bands$fac_index))
     index <- unique(bands$index)
 
-    p <- p + scale_x_continuous(breaks = index, labels = labels)
+    p <- p + ggplot2::scale_x_continuous(breaks = index, labels = labels)
   }
 
   return(p)

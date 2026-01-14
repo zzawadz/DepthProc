@@ -32,3 +32,19 @@ test_that("Tukey depth works with vector", {
 test_that("LP depth works with vector", {
   matrixApiMatchVectorApi(depthLP)
 })
+
+vectorInputMatchesMatrixWhenMissingX <- function(dep, ...) {
+  set.seed(123)
+  u <- rnorm(10)
+  d1 <- dep(u, ...)
+  d2 <- dep(matrix(u, ncol = 1), ...)
+  expect_equal(d1, d2)
+}
+
+test_that("Depth helpers handle vector input when X is missing", {
+  vectorInputMatchesMatrixWhenMissingX(depthEuclid)
+  vectorInputMatchesMatrixWhenMissingX(depthMah)
+  vectorInputMatchesMatrixWhenMissingX(depthProjection, ndir = 50)
+  vectorInputMatchesMatrixWhenMissingX(depthTukey, ndir = 50)
+  vectorInputMatchesMatrixWhenMissingX(depthLP, pdim = 1)
+})

@@ -23,7 +23,13 @@ Having two samples \eqn{ {X} ^ {n} } and \eqn{ {Y} ^ {m} } using any depth funct
 
 For example if we observe \eqn{ {X}_{l}'s } depths are more likely to cluster tightly around the center of the combined sample, while \eqn{ {Y}_{l}'s } depths are more likely to scatter outlying positions, then we conclude \eqn{ {Y} ^ {m} } was drawn from a distribution with larger scale.
 
-Properties of the DD plot based statistics in the i.i.d setting were studied by Li & Liu (2004). Authors proposed several DD-plot based statistics and presented bootstrap arguments for their consistency and good effectiveness in comparison to Hotelling \eqn{ T ^ 2 } and multivariate analogues of Ansari-Bradley and Tukey-Siegel statistics. Asymptotic distributions of depth based multivariate Wilcoxon rank-sum test statistic under the null and general alternative hypotheses were obtained by Zuo & He (2006). Several properties of the depth based rang test involving its unbiasedness was critically discussed by Jureckova & Kalina (2012). Basing on DD-plot object, which is available within the \pkg{DepthProc} it is possible to define several multivariate generalizations of one-dimensional rank and order statistics in an easy way. These generalizations cover well known {Wilcoxon rang-sum statistic}.
+Properties of the DD plot based statistics in the i.i.d setting were studied by Li & Liu (2004).
+Authors proposed several DD-plot based statistics and presented bootstrap arguments for their consistency
+and good effectiveness in comparison to Hotelling \eqn{ T ^ 2 } and multivariate analogues of Ansari-Bradley
+and Tukey-Siegel statistics. Asymptotic distributions of depth based multivariate Wilcoxon rank-sum test statistic
+under the null and general alternative hypotheses were obtained by Zuo & He (2006). Several properties of the depth based rang test involving its unbiasedness was critically discussed by Jureckova & Kalina (2012).
+Basing on DD-plot object, which is available within the \pkg{DepthProc} it is possible to define several multivariate generalizations of one-dimensional rank and order statistics
+in an easy way. These generalizations cover well known Wilcoxon rang-sum statistic.
 
 The depth based multivariate Wilcoxon rang sum test is especially useful for the multivariate scale changes detection and was introduced among other by Liu & Singh (2003) and intensively studied by Jureckowa & Kalina (2012) and Zuo & He (2006) in the i.i.d. setting.
 

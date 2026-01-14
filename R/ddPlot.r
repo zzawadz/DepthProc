@@ -74,7 +74,7 @@ ddPlot <- function(x, y, scale = FALSE, location = FALSE, name = "X",
   depth_x <- do.call(depth, c(uxname_list_x_new, depth_params))
   depth_y <- do.call(depth, c(uxname_list_y_new, depth_params))
 
-  ddplot <- new("DDPlot", X = depth_x, Y = depth_y, title = title)
+  ddplot <- methods::new("DDPlot", X = depth_x, Y = depth_y, title = title)
 
   return(ddplot)
 }

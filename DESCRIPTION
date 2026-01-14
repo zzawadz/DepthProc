@@ -1,5 +1,5 @@
 Package: DepthProc
-Version: 2.1.3
+Version: 2.1.6
 Title: Statistical Depth Functions for Multivariate Analysis
 Authors@R: c(
     person("Zygmunt", "Zawadzki", role = c("aut", "cre"), email = "zygmunt@zstat.pl"),
@@ -17,14 +17,14 @@ Description: Data depth concept offers a variety of powerful and user friendly
     multivariate Wilcoxon tests and robust regressions.
 License: GPL-2
 Depends:
-    R (>= 3.0.0),
+    R (>= 3.0.0)
+Imports:
     ggplot2,
     Rcpp (>= 0.11.2),
     rrcov,
     methods,
     MASS,
-    np
-Imports:
+    np,
     lattice,
     sm,
     geometry,
@@ -42,7 +42,9 @@ Suggests:
     covr,
     testthat,
     fda,
-    lintr
+    lintr,
+    roxygen2,
+    pkgbuild
 LinkingTo: Rcpp, RcppArmadillo
 SystemRequirements: C++11
 RoxygenNote: 7.1.1

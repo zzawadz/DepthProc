@@ -9,11 +9,11 @@
 #' @rdname FunctionalDepth-class
 #' @exportClass FunctionalDepth
 #'
-setClass("FunctionalDepth",
+methods::setClass("FunctionalDepth",
          slots = c(index = "ANY"),
          contains = c("VIRTUAL", "Depth"))
-setClass("FncDepthMBD", contains = c("FunctionalDepth", "numeric"))
-setClass("FncDepthFM", contains = c("FunctionalDepth", "numeric"))
-setClass("FncBand",
+methods::setClass("FncDepthMBD", contains = c("FunctionalDepth", "numeric"))
+methods::setClass("FncDepthFM", contains = c("FunctionalDepth", "numeric"))
+methods::setClass("FncBand",
          slots = c(index = "ANY", level = "numeric"),
          contains = "matrix")

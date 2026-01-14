@@ -2,6 +2,7 @@
 % Please edit documentation in R/AllClasses.R
 \name{abline,RobReg-method}
 \alias{abline,RobReg-method}
+\alias{abline,RobReg,ANY,ANY,ANY-method}
 \title{Add line to plot}
 \usage{
 \S4method{abline}{RobReg}(

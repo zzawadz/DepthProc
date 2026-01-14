@@ -22,14 +22,14 @@
 #' dp <- depth(x)
 #' depthMedian(dp)
 #'
-setGeneric("depthMedian", function(x, depth_params = list(), convex = FALSE) {
+methods::setGeneric("depthMedian", function(x, depth_params = list(), convex = FALSE) {
   standardGeneric("depthMedian")
 })
 
 #' @rdname depthMedian-methods
 #' @importFrom grDevices chull
 #' @export
-setMethod("depthMedian", "matrix", function(x, depth_params = list(), convex = FALSE) {
+methods::setMethod("depthMedian", "matrix", function(x, depth_params = list(), convex = FALSE) {
   ux_list <- list(u = x, X = x)
   depths <- do.call(depth, c(ux_list, depth_params))
   med <- x[depths == max(depths), ]
@@ -44,14 +44,14 @@ setMethod("depthMedian", "matrix", function(x, depth_params = list(), convex = F
 
 #' @rdname depthMedian-methods
 #' @export
-setMethod("depthMedian", "data.frame", function(x, depth_params = list(), convex = FALSE) {
+methods::setMethod("depthMedian", "data.frame", function(x, depth_params = list(), convex = FALSE) {
   x <- as.matrix(x)
-  depthMedian(x, depth_params)
+  depthMedian(x, depth_params, convex = convex)
 })
 
 #' @rdname depthMedian-methods
 #' @export
-setMethod("depthMedian", "Depth", function(x, convex = FALSE) {
+methods::setMethod("depthMedian", "Depth", function(x, convex = FALSE) {
   pos <- which(x == max(x))
   med <- x@u[pos, ]
 

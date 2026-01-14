@@ -13,7 +13,13 @@
 #'
 #' @details
 #'
-#' For sample depth function \eqn{ D({x}, {{{Z}} ^ {n}}) }, \eqn{ {x} \in {{{R}} ^ {d}} }, \eqn{ d \ge 2 }, \eqn{ {Z} ^ {n} = \{{{{z}}_{1}}, ..., {{{z}}_{n}}\} \subset {{{R}} ^ {d}} }, \eqn{ {{D}_{\alpha}}({{{Z}} ^ {n}}) } denoting \eqn{ \alpha } --- central region, we can define {the asymmetry curve} \eqn{ AC(\alpha) = \left(\alpha, \left\| {{c} ^ {-1}}(\{{\bar{z}} - med|{{D}_{\alpha}}({{{Z}} ^ {n}})\}) \right\|\right) \subset {{{R}} ^ {2}} }, for \eqn{ \alpha \in [0, 1] } being nonparametric scale and asymmetry functional correspondingly, where \eqn{ c } --- denotes constant, \eqn{ {\bar{z}} } --- denotes mean vector, denotes multivariate median induced by depth function and \eqn{ vol } --- denotes a volume.
+#' For sample depth function \eqn{ D({x}, {{{Z}} ^ {n}}) },
+#' \eqn{ {x} \in {{{R}} ^ {d}} }, \eqn{ d \ge 2 },
+#' \eqn{ {Z} ^ {n} = \{{{{z}}_{1}}, ..., {{{z}}_{n}}\} \subset {{{R}} ^ {d}} }, \eqn{ {{D}_{\alpha}}({{{Z}} ^ {n}}) }
+#' denoting \eqn{ \alpha } --- central region, we can define the asymmetry curve
+#' \eqn{ AC(\alpha) = \left(\alpha, \left\| {{c} ^ {-1}}(\{{\bar{z}} - med|{{D}_{\alpha}}({{{Z}} ^ {n}})\}) \right\|\right) \subset {{{R}} ^ {2}} }, for \eqn{ \alpha \in [0, 1] }
+#' being nonparametric scale and asymmetry functional correspondingly, where \eqn{ c } --- denotes constant, \eqn{ {\bar{z}} } --- denotes mean vector,
+#' denotes multivariate median induced by depth function and \eqn{ vol } --- denotes a volume.
 #'
 #' Asymmetry curve takes uses function convhulln from package geometry for computing a volume of convex hull containing central region.
 #'
@@ -92,7 +98,7 @@ asymmetryCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
                         depth_params = depth_params)
   }
 
-  asc <- new("AsymmetryCurve", x_est[, 2], depth = depth_est,
+  asc <- methods::new("AsymmetryCurve", x_est[, 2], depth = depth_est,
              alpha = x_est[, 1], name = name)
 
   if (!is.null(y)) {

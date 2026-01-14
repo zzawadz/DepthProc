@@ -20,12 +20,6 @@ watchers](https://img.shields.io/github/watchers/zzawadz/DepthProc.svg?style=soc
 version](https://www.r-pkg.org/badges/version/DepthProc)](https://CRAN.R-project.org/package=DepthProc)
 [![Downloads](https://cranlogs.r-pkg.org/badges/DepthProc)](https://CRAN.R-project.org/package=DepthProc)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/DepthProc)](https://CRAN.R-project.org/package=DepthProc)
-[![Build
-Status](https://travis-ci.org/zzawadz/DepthProc.svg?branch=master)](https://travis-ci.org/zzawadz/DepthProc)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/zzawadz/DepthProc?branch=master&svg=true)](https://ci.appveyor.com/project/zzawadz/DepthProc)
-[![Coverage
-Status](https://img.shields.io/codecov/c/github/zzawadz/DepthProc/master.svg)](https://codecov.io/github/zzawadz/DepthProc?branch=master)
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -61,17 +55,17 @@ x <- mvrnorm(1000, rep(0, d), diag(d))
 # Default - utilize as many threads as possible
 system.time(depth(x, x, method = "LP"))
 #>    user  system elapsed 
-#>   0.351   0.000   0.090
+#>   0.408   0.054   0.033
 
 # Only single thread - 4 times slower:
 system.time(depth(x, x, method = "LP", threads = 1))
 #>    user  system elapsed 
-#>   0.208   0.000   0.208
+#>   0.039   0.000   0.039
 
 # Two threads - 2 times slower:
 system.time(depth(x, x, method = "LP", threads = 2))
 #>    user  system elapsed 
-#>   0.201   0.000   0.103
+#>   0.036   0.000   0.020
 ```
 
 ## Available depth functions
