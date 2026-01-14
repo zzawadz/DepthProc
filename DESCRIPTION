@@ -46,7 +46,8 @@ Suggests:
     roxygen2,
     pkgbuild
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 7.1.2
+SystemRequirements: C++11
+RoxygenNote: 7.1.1
 Encoding: UTF-8
 URL: https://www.depthproc.zstat.pl/, https://github.com/zzawadz/DepthProc
 BugReports: https://github.com/zzawadz/DepthProc/issues
