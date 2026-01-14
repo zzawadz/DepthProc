@@ -122,7 +122,18 @@ depthEuclid <- function(u, X) {
     X <- u
   }
 
-  if (is.vector(u)) u <- matrix(u, ncol = ncol(X))
+  if (is.data.frame(u)) {
+    u <- as.matrix(u)
+  }
+  if (is.data.frame(X)) {
+    X <- as.matrix(X)
+  }
+  if (is.vector(X)) {
+    X <- matrix(X, ncol = 1)
+  }
+  if (is.vector(u)) {
+    u <- matrix(u, ncol = ncol(X))
+  }
 
   n <- dim(u)[1]
   center <- colMeans(X)
@@ -165,7 +176,18 @@ depthMah <- function(u, X, cov = NULL, mean = NULL, threads = -1) {
     X <- u
   }
 
-  if (is.vector(u)) u <- matrix(u, ncol = ncol(X))
+  if (is.data.frame(u)) {
+    u <- as.matrix(u)
+  }
+  if (is.data.frame(X)) {
+    X <- as.matrix(X)
+  }
+  if (is.vector(X)) {
+    X <- matrix(X, ncol = 1)
+  }
+  if (is.vector(u)) {
+    u <- matrix(u, ncol = ncol(X))
+  }
 
   if (!is.null(mean)) {
     mean <- matrix(mean, ncol = length(mean))
@@ -208,7 +230,18 @@ depthProjection <- function(u, X, ndir = 1000, threads = -1) {
     X <- u
   }
 
-  if (is.vector(u)) u <- matrix(u, ncol = ncol(X))
+  if (is.data.frame(u)) {
+    u <- as.matrix(u)
+  }
+  if (is.data.frame(X)) {
+    X <- as.matrix(X)
+  }
+  if (is.vector(X)) {
+    X <- matrix(X, ncol = 1)
+  }
+  if (is.vector(u)) {
+    u <- matrix(u, ncol = ncol(X))
+  }
 
   depth <- depthProjCPP(u, X, ndir, threads)
 
@@ -254,7 +287,18 @@ depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
     X <- u
   }
 
-  if (is.vector(u)) u <- matrix(u, ncol = ncol(X))
+  if (is.data.frame(u)) {
+    u <- as.matrix(u)
+  }
+  if (is.data.frame(X)) {
+    X <- as.matrix(X)
+  }
+  if (is.vector(X)) {
+    X <- matrix(X, ncol = 1)
+  }
+  if (is.vector(u)) {
+    u <- matrix(u, ncol = ncol(X))
+  }
 
   tukey1d <- function(u, X) {
     Xecdf <- ecdf(X)
@@ -324,7 +368,18 @@ depthLP <- function(u, X, pdim = 2, la = 1, lb = 1, threads = -1,
     X <- u
   }
 
-  if (is.vector(u)) u <- matrix(u, ncol = ncol(X))
+  if (is.data.frame(u)) {
+    u <- as.matrix(u)
+  }
+  if (is.data.frame(X)) {
+    X <- as.matrix(X)
+  }
+  if (is.vector(X)) {
+    X <- matrix(X, ncol = 1)
+  }
+  if (is.vector(u)) {
+    u <- matrix(u, ncol = ncol(X))
+  }
 
   if (is.null(func)) {
     depth <- depthLPCPP(u, X, pdim, la, lb, threads = threads)
