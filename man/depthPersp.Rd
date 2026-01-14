@@ -49,16 +49,16 @@ plot_method --- rgl package is not in depends list beacuse it may cause problems
 }
 \examples{
 # EXAMPLE 1
-x <- mvrnorm(100, c(0, 0), diag(2))
-depthPersp(x, depth_params = list(method = "Euclidean"))
+x <- MASS::mvrnorm(100, c(0, 0), diag(2))
+DepthProc::depthPersp(x, depth_params = list(method = "Euclidean"))
 
 # EXAMPLE 2
-data(inf.mort, maesles.imm)
+data("inf.mort", package = "DepthProc")
+data("maesles.imm", package = "DepthProc")
 data1990 <- na.omit(cbind(inf.mort[, 1], maesles.imm[, 1]))
 
 \dontrun{
-library(rgl)
-depthPersp(data1990, plot_method = "rgl",
+DepthProc::depthPersp(data1990, plot_method = "rgl",
            depth_params = list(method = "Projection"))
 }
 

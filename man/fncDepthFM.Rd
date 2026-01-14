@@ -18,6 +18,6 @@ Computes Frainman-Muniz depth for functional data.
 }
 \examples{
 x <- matrix(rnorm(60), nc = 20)
-fncDepthFM(x)
+DepthProc::fncDepthFM(x)
 
 }

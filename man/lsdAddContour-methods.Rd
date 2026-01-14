@@ -22,8 +22,8 @@ This function add one location-scale contour to the existing plot.
 }
 \examples{
 smp <- rf(100, 5, 10)
-x <- lsdSampleDepthContours(smp)
+x <- DepthProc::lsdSampleDepthContours(smp)
 plot(x)
-lsdAddContour(x, 0.1, col = "grey50")
-lsdAddContour(x, 0.3, col = "grey10", border = "red", lwd = 4)
+DepthProc::lsdAddContour(x, 0.1, col = "grey50")
+DepthProc::lsdAddContour(x, 0.3, col = "grey10", border = "red", lwd = 4)
 }

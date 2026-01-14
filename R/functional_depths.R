@@ -234,7 +234,7 @@ fastBDRef <- function(u, X) {
   rmat <- u
 
   for(i in 1:p) {
-    rmat[i, ] <- DepthProc:::refRank(u[i, ], X[i, ])
+    rmat[i, ] <- refRank(u[i, ], X[i, ])
   }
 
   rmat <- t(rmat)

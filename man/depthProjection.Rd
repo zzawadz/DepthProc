@@ -25,7 +25,7 @@ Returns the depth of multivariate point \code{u} with respect to data set \code{
 }
 \examples{
 x <- matrix(rnorm(3000), nc = 3)
-a <- depthProjection(x, x, ndir = 2000)
+a <- DepthProc::depthProjection(x, x, ndir = 2000)
 
 }
 \author{

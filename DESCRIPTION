@@ -1,5 +1,5 @@
 Package: DepthProc
-Version: 2.1.6
+Version: 2.2.0
 Title: Statistical Depth Functions for Multivariate Analysis
 Authors@R: c(
     person("Zygmunt", "Zawadzki", role = c("aut", "cre"), email = "zygmunt@zstat.pl"),
@@ -46,8 +46,7 @@ Suggests:
     roxygen2,
     pkgbuild
 LinkingTo: Rcpp, RcppArmadillo
-SystemRequirements: C++11
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.3
 Encoding: UTF-8
 URL: https://www.depthproc.zstat.pl/, https://github.com/zzawadz/DepthProc
 BugReports: https://github.com/zzawadz/DepthProc/issues

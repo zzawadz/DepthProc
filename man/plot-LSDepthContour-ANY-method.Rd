@@ -38,7 +38,7 @@ Create location-scale depth plot. See \code{\link{lsdSampleDepthContours}} for m
 \examples{
 
 smp <- rf(100, 5, 10)
-x <- lsdSampleDepthContours(smp)
+x <- DepthProc::lsdSampleDepthContours(smp)
 plot(x, col = paste0("grey", col = rev(seq(10, 40, 10))))
 
 }

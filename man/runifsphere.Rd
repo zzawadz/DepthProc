@@ -16,7 +16,7 @@ This function generates random numbers from p-dimensional unit sphere.
 }
 \examples{
 
-x <- runifsphere(n = 100)
+x <- DepthProc::runifsphere(n = 100)
 plot(x)
 
 }

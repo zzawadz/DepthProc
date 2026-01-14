@@ -29,13 +29,12 @@ Calculates depth functions.
 \examples{
 
 x <- matrix(rnorm(60), ncol = 20)
-fncDepth(x, method = "FM", dep1d = "Mahalanobis")
-fncDepth(x, byrow = FALSE)
+DepthProc::fncDepth(x, method = "FM", dep1d = "Mahalanobis")
+DepthProc::fncDepth(x, byrow = FALSE)
 
 # zoo and xts
-library(xts)
-data(sample_matrix)
-sample.xts <- as.xts(sample_matrix, descr = "my new xts object")
-fncDepth(sample.xts)
+data("sample_matrix", package = "DepthProc")
+sample.xts <- xts::as.xts(sample_matrix, descr = "my new xts object")
+DepthProc::fncDepth(sample.xts)
 
 }
