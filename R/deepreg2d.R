@@ -15,7 +15,7 @@
 #' @examples
 #'
 #' # EXAMPLE 1
-#' data("pension", package = "DepthProc")
+#' data("pension", package = "robustbase")
 #' plot(pension)
 #' abline(
 #'   lm(Reserves ~ Income, data = pension),
