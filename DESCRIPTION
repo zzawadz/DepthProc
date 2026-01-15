@@ -20,7 +20,6 @@ Depends:
     R (>= 3.0.0)
 Imports:
     ggplot2,
-    Rcpp (>= 0.11.2),
     rrcov,
     methods,
     MASS,
@@ -30,14 +29,14 @@ Imports:
     geometry,
     colorspace,
     zoo,
-    grDevices
+    grDevices,
+    rlang
 Suggests:
     mvtnorm,
     rgl,
     sn,
     robustbase,
     dplyr,
-    RcppArmadillo,
     xts,
     covr,
     testthat,

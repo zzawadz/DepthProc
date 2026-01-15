@@ -54,7 +54,10 @@
 #' DepthProc::depthLocal(data, data, depth_params1 = list(method = "LP"),
 #'            depth_params2 = list(method = "Projection"))
 #' # Depth contour
-#' DepthProc::depthContour(data, depth_params = list(method = "Local", depth_params1 = list(method = "LP")))
+#' DepthProc::depthContour(
+#'   data,
+#'   depth_params = list(method = "Local", depth_params1 = list(method = "LP"))
+#' )
 #'
 #' # EXAMPLE 2
 #' data("inf.mort", package = "DepthProc")

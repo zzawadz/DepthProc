@@ -8,6 +8,7 @@
 #' @param byrow byrow
 #' @param \dots other arguments passed to fncDepth
 #'
+#' @importFrom rlang .data
 #' @examples
 #'
 #' # some data:
