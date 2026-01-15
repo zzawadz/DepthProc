@@ -28,12 +28,12 @@ Returns the depth of multivariate point \code{u} with respect to data set \code{
 \examples{
 \dontrun{
 x <- matrix(rnorm(3000), nc = 3)
-depthTukey(x, ndir = 2000)
+DepthProc::depthTukey(x, ndir = 2000)
 }
 
 # Exact algorithm in 2d
 x <- matrix(rnorm(2000), nc = 2)
-depthTukey(x, exact = TRUE)
+DepthProc::depthTukey(x, exact = TRUE)
 
 }
 \author{

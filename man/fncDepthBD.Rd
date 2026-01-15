@@ -17,7 +17,7 @@ Computes the band depth.
 \examples{
 
 x <- matrix(rnorm(60), nc = 20)
-fncDepthMBD(x)
-fncDepthMBD(x, x)
+DepthProc::fncDepthMBD(x)
+DepthProc::fncDepthMBD(x, x)
 
 }

@@ -31,7 +31,7 @@ Returns the depth of multivariate point \code{u} with respect to data set \code{
 x <- matrix(rnorm(3000), ncol = 3)
 
 # Same results
-depthLP(x, x, pdim = 2)
+DepthProc::depthLP(x, x, pdim = 2)
 
 }
 \author{

@@ -27,7 +27,7 @@ Returns the depth of multivariate point \code{u} with respect to data set \code{
 }
 \examples{
 x <- matrix(rnorm(9999), nc = 3)
-depthMah(x, x)
+DepthProc::depthMah(x, x)
 
 }
 \author{

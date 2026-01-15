@@ -33,7 +33,7 @@ data <- DepthProc:::.sampleData(1:5, 100)
 x <- data[, 1]
 y <- data[, 2]
 plot(x, y)
-dep <- depthDensity(x, y)
+dep <- DepthProc::depthDensity(x, y)
 plot(dep, type = "raw")
 plot(dep, type = "depth")
 }

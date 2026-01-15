@@ -23,9 +23,9 @@ Calculations are based on lsdepth algorithm written by Ch. Muller.
 }
 \examples{
 x <- rnorm(100)
-lsdSampleMaxDepth(x)
+DepthProc::lsdSampleMaxDepth(x)
 y <- rf(100, 4, 10)
-lsdSampleMaxDepth(y)
+DepthProc::lsdSampleMaxDepth(y)
 
 }
 \references{

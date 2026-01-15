@@ -52,9 +52,9 @@ methods::setClass("LSDepthContour",
 #'
 #' @examples
 #' x <- rnorm(100)
-#' lsdSampleMaxDepth(x)
+#' DepthProc::lsdSampleMaxDepth(x)
 #' y <- rf(100, 4, 10)
-#' lsdSampleMaxDepth(y)
+#' DepthProc::lsdSampleMaxDepth(y)
 #'
 lsdSampleMaxDepth <- function(x, iter = 100, eps = 1e-04, p_length = 10) {
   res <- sampleMaxLocScaleDepthCPP(ry = as.numeric(x), iter = iter, eps = eps,
@@ -86,12 +86,12 @@ lsdSampleMaxDepth <- function(x, iter = 100, eps = 1e-04, p_length = 10) {
 #' @examples
 #' # EXAMPLE 1
 #' # F-distribution
-#' dcont <- lsdSampleDepthContours(rf(200, 4, 7))
+#' dcont <- DepthProc::lsdSampleDepthContours(rf(200, 4, 7))
 #' plot(dcont)
 #'
 #' # EXAMPLE 2
 #' # normal distribution - more contours calculated
-#' dcont_norm <- lsdSampleDepthContours(rnorm(100), seq(0.05, 0.4, 0.05))
+#' dcont_norm <- DepthProc::lsdSampleDepthContours(rnorm(100), seq(0.05, 0.4, 0.05))
 #' plot(dcont_norm)
 #'
 lsdSampleDepthContours <- function(x, depth = c(0.1, 0.2, 0.3, 0.4),
@@ -159,14 +159,14 @@ getMuLS <- function(x, n, d, lengthmu) {
 #' Calculations are based on lsdepth algorithm written by Ch. Muller.
 #'
 #' @examples
-#' dcont <- lsdSampleDepthContours(rf(200, 4, 7), depth = c(0.1, 0.2))
+#' dcont <- DepthProc::lsdSampleDepthContours(rf(200, 4, 7), depth = c(0.1, 0.2))
 #'
 #' # get contour that is present in dcont object
-#' lsdGetContour(dcont, 0.1)
+#' DepthProc::lsdGetContour(dcont, 0.1)
 #'
 #' # get contour that is not present in dcont
 #' # it will be automatically calculated
-#' lsdGetContour(dcont, 0.3)
+#' DepthProc::lsdGetContour(dcont, 0.3)
 methods::setGeneric("lsdGetContour", function(x, cont) {
   standardGeneric("lsdGetContour")
 })
@@ -197,10 +197,10 @@ methods::setMethod("lsdGetContour", signature = "LSDepthContour", function(x, co
 #'
 #' @examples
 #' smp <- rf(100, 5, 10)
-#' x <- lsdSampleDepthContours(smp)
+#' x <- DepthProc::lsdSampleDepthContours(smp)
 #' plot(x)
-#' lsdAddContour(x, 0.1, col = "grey50")
-#' lsdAddContour(x, 0.3, col = "grey10", border = "red", lwd = 4)
+#' DepthProc::lsdAddContour(x, 0.1, col = "grey50")
+#' DepthProc::lsdAddContour(x, 0.3, col = "grey10", border = "red", lwd = 4)
 methods::setGeneric("lsdAddContour", function(x, cont = NULL, ...) {
   standardGeneric("lsdAddContour")
 })
@@ -243,7 +243,7 @@ methods::setMethod("lsdAddContour", signature = c(x = "LSDepthContour"),
 #' @examples
 #'
 #' smp <- rf(100, 5, 10)
-#' x <- lsdSampleDepthContours(smp)
+#' x <- DepthProc::lsdSampleDepthContours(smp)
 #' plot(x, col = paste0("grey", col = rev(seq(10, 40, 10))))
 #'
 methods::setMethod("plot", signature = c(x = "LSDepthContour"),

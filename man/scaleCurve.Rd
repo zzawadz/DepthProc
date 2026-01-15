@@ -47,16 +47,15 @@ The minimal dimension of data in X or Y is 2.
 ggplot2 package is used to draw a plot.
 }
 \examples{
-library(mvtnorm)
-x <- mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
-y <- rmvt(n = 100, sigma = diag(2), df = 2)
-scaleCurve(x, y, depth_params = list(method = "Projection"))
+x <- MASS::mvrnorm(n = 100, mu = c(0, 0), Sigma = 3 * diag(2))
+y <- mvtnorm::rmvt(n = 100, sigma = diag(2), df = 2)
+DepthProc::scaleCurve(x, y, depth_params = list(method = "Projection"))
 # Comparing two scale curves
 # normal distribution and mixture of normal distributions
-x <- mvrnorm(100, c(0, 0), diag(2))
-y <- mvrnorm(80, c(0, 0), diag(2))
-z <- mvrnorm(20, c(5, 5), diag(2))
-scaleCurve(x, rbind(y, z), name = "N", name_y = "Mixture of N",
+x <- MASS::mvrnorm(100, c(0, 0), diag(2))
+y <- MASS::mvrnorm(80, c(0, 0), diag(2))
+z <- MASS::mvrnorm(20, c(5, 5), diag(2))
+DepthProc::scaleCurve(x, rbind(y, z), name = "N", name_y = "Mixture of N",
            depth_params = list(method = "Projection"))
 
 }

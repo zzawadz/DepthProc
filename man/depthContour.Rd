@@ -65,16 +65,17 @@ The set of all points that have depth at least \eqn{ \alpha } is called \eqn{ \a
 \examples{
 # EXAMPLE 1
 set.seed(123)
-x <- mvrnorm(1000, c(0, 0), diag(2))
-depthContour(x, colors = gray.colors)
+x <- MASS::mvrnorm(1000, c(0, 0), diag(2))
+DepthProc::depthContour(x, colors = gray.colors)
 # with points
-depthContour(x, points = TRUE)
-depthContour(x, points = FALSE, levels = 10)
+DepthProc::depthContour(x, points = TRUE)
+DepthProc::depthContour(x, points = FALSE, levels = 10)
 
 # EXAMPLE 2
-data(inf.mort, maesles.imm)
+data("inf.mort", package = "DepthProc")
+data("maesles.imm", package = "DepthProc")
 data1990 <- na.omit(cbind(inf.mort[, 1], maesles.imm[, 1]))
-depthContour(data1990, n = 50, pmean = TRUE, mcol = "blue",
+DepthProc::depthContour(data1990, n = 50, pmean = TRUE, mcol = "blue",
              pdmedian = TRUE, mecol = "brown", legend = TRUE, points = TRUE,
              depth_params = list(method = "LP"),
              graph_params = list(
@@ -84,8 +85,8 @@ depthContour(data1990, n = 50, pmean = TRUE, mcol = "blue",
 
 
 #EXAMPLE 3
-data("france")
-depthContour(france,
+data("france", package = "DepthProc")
+DepthProc::depthContour(france,
     depth_params = list(method = "Tukey"),
     points = TRUE
 )

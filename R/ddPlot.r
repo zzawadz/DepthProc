@@ -26,20 +26,18 @@
 #' @author Daniel Kosiorowski, Mateusz Bocian, Anna Wegrzynkiewicz and Zygmunt Zawadzki from Cracow University of Economics.
 #'
 #' @examples
-#' library(sn)
-#' library(mvtnorm)
 #'
 #' # EXAMPLE 1: Location difference
-#' standard <- mvrnorm(1000, c(0, 0), diag(2))
-#' shift <- mvrnorm(1000, c(0.5, 0), diag(2))
-#' ddPlot(x = standard, y = shift, title = "Difference in position")
-#' ddPlot(x = standard, y = shift, location = TRUE, title = "Location aligned")
+#' standard <- MASS::mvrnorm(1000, c(0, 0), diag(2))
+#' shift <- MASS::mvrnorm(1000, c(0.5, 0), diag(2))
+#' DepthProc::ddPlot(x = standard, y = shift, title = "Difference in position")
+#' DepthProc::ddPlot(x = standard, y = shift, location = TRUE, title = "Location aligned")
 #'
 #' # EXAMPLE 2: Scale difference
-#' standard <- mvrnorm(1000, c(0, 0), diag(2))
-#' scale <- mvrnorm(1000, c(0, 0), 4 * diag(2))
-#' ddPlot(x = standard, y = scale)
-#' ddPlot(x = standard, y = scale, scale = TRUE)
+#' standard <- MASS::mvrnorm(1000, c(0, 0), diag(2))
+#' scale <- MASS::mvrnorm(1000, c(0, 0), 4 * diag(2))
+#' DepthProc::ddPlot(x = standard, y = scale)
+#' DepthProc::ddPlot(x = standard, y = scale, scale = TRUE)
 #'
 ddPlot <- function(x, y, scale = FALSE, location = FALSE, name = "X",
                    name_y = "Y", title = "Depth vs. depth plot",
