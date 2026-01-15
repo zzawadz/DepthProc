@@ -93,7 +93,7 @@ methods::setMethod(".getPlot", "DepthCurveList", function(object) {
 
   p <- ggplot2::ggplot()
   p <- p + ggplot2::geom_line(data = data, ggplot2::aes(x = alpha, y = value, col = names),
-                     size = 1.5)
+                              linewidth = 1.5)
   p <- p + ggplot2::theme_bw() + .depTheme()
   p <- p + ggplot2::ylim(c(0, max(data$value, na.rm = TRUE)))
   p <- p + ggplot2::xlim(c(0, max(data$alpha, na.rm = TRUE)))
