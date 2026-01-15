@@ -186,7 +186,7 @@ fastMBDRef <- function(u, X) {
 
   rmat <- t(rmat)
 
-  down <- rmat
+  down <- rmat - 1
   up <- n - rmat
   (rowSums(up * down) / p + n - 1) / choose(n, 2)
 }
