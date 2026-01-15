@@ -33,7 +33,7 @@ DepthProc::fncDepth(x, method = "FM", dep1d = "Mahalanobis")
 DepthProc::fncDepth(x, byrow = FALSE)
 
 # zoo and xts
-data("sample_matrix", package = "DepthProc")
+data("sample_matrix", package = "xts")
 sample.xts <- xts::as.xts(sample_matrix, descr = "my new xts object")
 DepthProc::fncDepth(sample.xts)
 
