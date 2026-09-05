@@ -17,7 +17,11 @@
 
   depths <- as.numeric(do.call(depth, c(uxDepthList1, depth_params1)))
   quan <- quantile(depths, probs = 1 - beta)
-  Rset <- as.matrix(X[signif(depths, digits = 6) >= signif(quan, digits = 6), ])
+  # a small beta can leave a single point in the neighbourhood; without
+  # drop = FALSE that row collapses to a vector and as.matrix() stood it back
+  # up as a d x 1 column, so the depth kernel was handed the data transposed
+  keep <- signif(depths, digits = 6) >= signif(quan, digits = 6)
+  Rset <- X[keep, , drop = FALSE]
 
   uxDepthList2 <- list(u = u, X = Rset)
 
@@ -93,9 +97,11 @@ depthLocal <- function(u, X, beta = 0.5,
                        depth_params1 = list(method = "Projection"),
                        depth_params2 = depth_params1) {
 
-  if (missing(X)) {
-    X <- u
-  }
+  # the same contract as the other entry points: depthLocal indexes u by row,
+  # so a data frame or a bare vector has to become a matrix here too
+  dat <- .coerceDepthInput(u, X)
+  u <- dat$u
+  X <- dat$X
 
   depths <- seq_len(nrow(u))
 

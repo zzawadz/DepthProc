@@ -53,22 +53,9 @@
 #'
 depth <- function(u, X, method = "Projection", threads = -1, ...) {
 
-  # Data logic
-  if (is.data.frame(u)) {
-    u <- as.matrix(u)
-  }
-  if (missing(X)) {
-    X <- u
-  }
-  if (is.data.frame(X)) {
-    X <- as.matrix(X)
-  }
-  if (is.vector(X)) {
-    X <- matrix(X, ncol = 1)
-  }
-  if (is.vector(u)) {
-    u <- matrix(u, ncol = ncol(X))
-  }
+  dat <- .coerceDepthInput(u, X)
+  u <- dat$u
+  X <- dat$X
 
   # Method logic
   if (!is.character(method)) {
@@ -125,22 +112,9 @@ depth <- function(u, X, method = "Projection", threads = -1, ...) {
 #'
 depthEuclid <- function(u, X) {
 
-  if (missing(X)) {
-    X <- u
-  }
-
-  if (is.data.frame(u)) {
-    u <- as.matrix(u)
-  }
-  if (is.data.frame(X)) {
-    X <- as.matrix(X)
-  }
-  if (is.vector(X)) {
-    X <- matrix(X, ncol = 1)
-  }
-  if (is.vector(u)) {
-    u <- matrix(u, ncol = ncol(X))
-  }
+  dat <- .coerceDepthInput(u, X)
+  u <- dat$u
+  X <- dat$X
 
   n <- dim(u)[1]
   center <- colMeans(X)
@@ -176,21 +150,19 @@ depthEuclid <- function(u, X) {
 #'
 depthMah <- function(u, X, cov = NULL, mean = NULL, threads = -1) {
 
-  if (missing(X)) {
-    X <- u
-  }
+  dat <- .coerceDepthInput(u, X)
+  u <- dat$u
+  X <- dat$X
 
-  if (is.data.frame(u)) {
-    u <- as.matrix(u)
-  }
-  if (is.data.frame(X)) {
-    X <- as.matrix(X)
-  }
-  if (is.vector(X)) {
-    X <- matrix(X, ncol = 1)
-  }
-  if (is.vector(u)) {
-    u <- matrix(u, ncol = ncol(X))
+  if (is.null(cov) && nrow(X) < 2L) {
+    # a single observation has no sample covariance; Armadillo returns a 1x1
+    # from arma::cov() and the multiplication that follows throws inside an
+    # OpenMP loop, which aborts the R session rather than raising an error
+    stop(gettextf(
+      paste("'X' has %d observation, which is not enough to estimate a",
+            "covariance matrix; use at least two rows, or pass 'cov'"),
+      nrow(X)
+    ))
   }
 
   if (!is.null(mean)) {
@@ -227,22 +199,9 @@ depthMah <- function(u, X, cov = NULL, mean = NULL, threads = -1) {
 #'
 depthProjection <- function(u, X, ndir = 1000, threads = -1) {
 
-  if (missing(X)) {
-    X <- u
-  }
-
-  if (is.data.frame(u)) {
-    u <- as.matrix(u)
-  }
-  if (is.data.frame(X)) {
-    X <- as.matrix(X)
-  }
-  if (is.vector(X)) {
-    X <- matrix(X, ncol = 1)
-  }
-  if (is.vector(u)) {
-    u <- matrix(u, ncol = ncol(X))
-  }
+  dat <- .coerceDepthInput(u, X)
+  u <- dat$u
+  X <- dat$X
 
   depth <- depthProjCPP(u, X, ndir, threads)
 
@@ -281,29 +240,9 @@ depthProjection <- function(u, X, ndir = 1000, threads = -1) {
 #'
 depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
 
-  if (missing(X)) {
-    X <- u
-  }
-
-  if (is.data.frame(u)) {
-    u <- as.matrix(u)
-  }
-  if (is.data.frame(X)) {
-    X <- as.matrix(X)
-  }
-  if (is.vector(X)) {
-    X <- matrix(X, ncol = 1)
-  }
-  if (is.vector(u)) {
-    u <- matrix(u, ncol = ncol(X))
-  }
-
-  if (ncol(u) != ncol(X)) {
-    stop(gettextf(
-      "'u' has %d column(s) but 'X' has %d; the dimensions must match",
-      ncol(u), ncol(X)
-    ))
-  }
+  dat <- .coerceDepthInput(u, X)
+  u <- dat$u
+  X <- dat$X
 
   tukey1d <- function(u, X) {
     Xecdf <- ecdf(X)
@@ -377,22 +316,9 @@ depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
 depthLP <- function(u, X, pdim = 2, la = 1, lb = 1, threads = -1,
                     func = NULL) {
 
-  if (missing(X)) {
-    X <- u
-  }
-
-  if (is.data.frame(u)) {
-    u <- as.matrix(u)
-  }
-  if (is.data.frame(X)) {
-    X <- as.matrix(X)
-  }
-  if (is.vector(X)) {
-    X <- matrix(X, ncol = 1)
-  }
-  if (is.vector(u)) {
-    u <- matrix(u, ncol = ncol(X))
-  }
+  dat <- .coerceDepthInput(u, X)
+  u <- dat$u
+  X <- dat$X
 
   if (!is.null(func)) {
     stop("'func' is not supported yet; leave it as NULL")
