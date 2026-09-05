@@ -24,9 +24,9 @@ ddPlot(
 
 \item{location}{determines whether the location is to be aligned to 0 vector with depth median.}
 
-\item{name}{name for data set x. It will be passed to drawing function.}
+\item{name}{name for data set x. It labels the horizontal axis of the plot.}
 
-\item{name_y}{as above for y}
+\item{name_y}{as above for y, labelling the vertical axis.}
 
 \item{title}{title of the plot.}
 
