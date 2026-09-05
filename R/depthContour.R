@@ -59,9 +59,7 @@
 #' )
 #'
 #'
-#' @keywords
-#' contour
-#' depth
+#' @keywords contour depth
 #' @export
 #'
 depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),

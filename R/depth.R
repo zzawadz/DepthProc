@@ -47,11 +47,7 @@
 #' x <- matrix(rnorm(9999), nc = 3)
 #' DepthProc::depth(x, x)
 #'
-#' @keywords
-#' multivariate
-#' nonparametric
-#' robust
-#' depth function
+#' @keywords multivariate nonparametric robust depth function
 #'
 #' @export
 #'
@@ -75,6 +71,15 @@ depth <- function(u, X, method = "Projection", threads = -1, ...) {
   }
 
   # Method logic
+  if (!is.character(method)) {
+    stop(gettextf("'method' must be a character value, not %s",
+                  sQuote(class(method)[1L])))
+  }
+  if (length(method) != 1L) {
+    stop(gettextf("'method' must be a single value, not a vector of length %d",
+                  length(method)))
+  }
+
   output <- switch(
     method,
     Mahalanobis = depthMah(u, X, threads = threads, ...),
@@ -84,7 +89,13 @@ depth <- function(u, X, method = "Projection", threads = -1, ...) {
     LP = depthLP(u, X, threads = threads, ...),
     Local = depthLocal(u, X, ...),
     MBD = fncDepth(u, X, method = method, ...),
-    FM = fncDepth(u, X, method = method, ...)
+    FM = fncDepth(u, X, method = method, ...),
+    stop(gettextf(
+      "unknown depth method %s; must be one of %s",
+      sQuote(method),
+      paste(sQuote(c("Mahalanobis", "Euclidean", "Projection", "Tukey",
+                     "LP", "Local", "MBD", "FM")), collapse = ", ")
+    ))
   )
 
   return(output)
@@ -110,10 +121,7 @@ depth <- function(u, X, method = "Projection", threads = -1, ...) {
 #' x <- matrix(rnorm(9999), nc = 3)
 #' DepthProc::depthEuclid(x, x)
 #'
-#' @keywords
-#' multivariate
-#' nonparametric
-#' depth function
+#' @keywords multivariate nonparametric depth function
 #'
 depthEuclid <- function(u, X) {
 
@@ -164,10 +172,7 @@ depthEuclid <- function(u, X) {
 #' x <- matrix(rnorm(9999), nc = 3)
 #' DepthProc::depthMah(x, x)
 #'
-#' @keywords
-#' multivariate
-#' nonparametric
-#' depth function
+#' @keywords multivariate nonparametric depth function
 #'
 depthMah <- function(u, X, cov = NULL, mean = NULL, threads = -1) {
 
@@ -218,10 +223,7 @@ depthMah <- function(u, X, cov = NULL, mean = NULL, threads = -1) {
 #' x <- matrix(rnorm(3000), nc = 3)
 #' a <- DepthProc::depthProjection(x, x, ndir = 2000)
 #'
-#' @keywords
-#' multivariate
-#' nonparametric
-#' depth function
+#' @keywords multivariate nonparametric depth function
 #'
 depthProjection <- function(u, X, ndir = 1000, threads = -1) {
 
@@ -275,10 +277,7 @@ depthProjection <- function(u, X, ndir = 1000, threads = -1) {
 #' x <- matrix(rnorm(2000), nc = 2)
 #' DepthProc::depthTukey(x, exact = TRUE)
 #'
-#' @keywords
-#' multivariate
-#' nonparametric
-#' depth function
+#' @keywords multivariate nonparametric depth function
 #'
 depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
 
@@ -297,6 +296,13 @@ depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
   }
   if (is.vector(u)) {
     u <- matrix(u, ncol = ncol(X))
+  }
+
+  if (ncol(u) != ncol(X)) {
+    stop(gettextf(
+      "'u' has %d column(s) but 'X' has %d; the dimensions must match",
+      ncol(u), ncol(X)
+    ))
   }
 
   tukey1d <- function(u, X) {
@@ -355,10 +361,7 @@ depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
 #' # Same results
 #' DepthProc::depthLP(x, x, pdim = 2)
 #'
-#' @keywords
-#' multivariate
-#' nonparametric
-#' depth function
+#' @keywords multivariate nonparametric depth function
 #'
 depthLP <- function(u, X, pdim = 2, la = 1, lb = 1, threads = -1,
                     func = NULL) {

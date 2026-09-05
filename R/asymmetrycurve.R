@@ -61,12 +61,7 @@
 #'   ggplot2::ggtitle("Scale curves")
 #' figure
 #'
-#' @keywords
-#' multivariate
-#' nonparametric
-#' robust
-#' depth function
-#' asymmetry
+#' @keywords multivariate nonparametric robust depth function asymmetry
 #'
 #' @export
 #'
@@ -106,7 +101,7 @@ asymmetryCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
       asc,
       asymmetryCurve(y, y = NULL, alpha = alpha, movingmedian = movingmedian,
                      name = name, name_y = "Y",
-                     depth_params = list(method = "Projection"))
+                     depth_params = depth_params)
     )
   }
 

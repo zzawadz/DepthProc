@@ -57,11 +57,7 @@
 #' data2011 <- cbind(under5.mort[, 22], maesles.imm[, 22])
 #' plot(DepthProc::binningDepth2D(data2011, nbins = 8, k = 0.5, remove_borders = TRUE))
 #'
-#' @keywords
-#' multivariate
-#' nonparametric
-#' robust
-#' depth function
+#' @keywords multivariate nonparametric robust depth function
 #'
 #' @export
 #'
@@ -168,11 +164,7 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
 #' tmp <- DepthProc::binningDepth2D(x = MASS::mvrnorm(100, rep(0, 2), diag(2)))
 #' plot(tmp)
 #'
-#' @keywords
-#' multivariate
-#' nonparametric
-#' robust
-#' depth function
+#' @keywords multivariate nonparametric robust depth function
 #'
 methods::setMethod("plot", signature = c(x = "BinnDepth2d"), function(x, ...,
                                                              alpha = 0.1,

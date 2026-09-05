@@ -45,7 +45,7 @@ Suggests:
     roxygen2,
     pkgbuild
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 7.3.3
 Encoding: UTF-8
 URL: https://www.depthproc.zstat.pl/, https://github.com/zzawadz/DepthProc
 BugReports: https://github.com/zzawadz/DepthProc/issues
+Config/roxygen2/version: 8.1.0

@@ -32,12 +32,15 @@ methods::setGeneric("depthMedian", function(x, depth_params = list(), convex = F
 methods::setMethod("depthMedian", "matrix", function(x, depth_params = list(), convex = FALSE) {
   ux_list <- list(u = x, X = x)
   depths <- do.call(depth, c(ux_list, depth_params))
-  med <- x[depths == max(depths), ]
+  med <- x[depths == max(depths), , drop = FALSE]
 
-  if (ncol(x) != length(med) && convex) {
-    med <- colMeans(med[chull(med), ])
-  } else if(ncol(x) != length(med)) {
+  if (nrow(med) > 1L) {
+    if (convex && ncol(med) > 1L) {
+      med <- med[chull(med), , drop = FALSE]
+    }
     med <- colMeans(med)
+  } else {
+    med <- med[1L, ]
   }
   med
 })
@@ -53,14 +56,15 @@ methods::setMethod("depthMedian", "data.frame", function(x, depth_params = list(
 #' @export
 methods::setMethod("depthMedian", "Depth", function(x, convex = FALSE) {
   pos <- which(x == max(x))
-  med <- x@u[pos, ]
+  med <- x@u[pos, , drop = FALSE]
 
-  if (ncol(x@u) != length(med) && convex) {
-    med <- colMeans(med[chull(med), ])
-  } else if(ncol(x@u) != length(med)) {
+  if (nrow(med) > 1L) {
+    if (convex && ncol(med) > 1L) {
+      med <- med[chull(med), , drop = FALSE]
+    }
     med <- colMeans(med)
+  } else {
+    med <- med[1L, ]
   }
-  med
-
   med
 })
