@@ -108,3 +108,22 @@ test_that("depthMedian averages over the convex hull of tied deepest points", {
   expect_equal(depthMedian(depth(square, square, method = "Euclidean"),
                            convex = TRUE), c(0.5, 0.5))
 })
+
+test_that("depthMedian rejects depth_params for a Depth object", {
+  set.seed(804)
+  x <- matrix(rnorm(300), ncol = 3)
+  dp <- depth(x, method = "Mahalanobis")
+
+  # the generic offers depth_params and the shared help page documents it, but
+  # the Depth method used to leave it out of its own signature, so S4 discarded
+  # it silently and returned a median from the already-stored method
+  expect_error(depthMedian(dp, depth_params = list(method = "LP")),
+               "does not apply")
+  expect_error(depthMedian(dp, list(method = "LP")), "does not apply")
+
+  # the supported calls still work, and still agree with the matrix method
+  expect_equal(depthMedian(dp),
+               depthMedian(x, list(method = "Mahalanobis")))
+  expect_equal(depthMedian(dp, convex = TRUE),
+               depthMedian(x, list(method = "Mahalanobis"), convex = TRUE))
+})

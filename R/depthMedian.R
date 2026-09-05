@@ -3,7 +3,7 @@
 #' @rdname depthMedian-methods
 #'
 #' @param x object of class Depth or matrix.
-#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
+#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact). Used by the \code{matrix} and \code{data.frame} methods, which compute the depths; a \code{Depth} object already carries its own, so passing this to the \code{Depth} method is an error rather than a silent no-op.
 #' @param convex logical. If true, than centroid of the convex hull created from deepest points is returned.
 #'
 #' @description
@@ -54,7 +54,20 @@ methods::setMethod("depthMedian", "data.frame", function(x, depth_params = list(
 
 #' @rdname depthMedian-methods
 #' @export
-methods::setMethod("depthMedian", "Depth", function(x, convex = FALSE) {
+methods::setMethod("depthMedian", "Depth", function(x, depth_params = list(),
+                                                   convex = FALSE) {
+  # the generic and the shared help page both offer depth_params, but the depths
+  # in a Depth object are already computed - accepting and discarding it would
+  # hand back a median from the stored method with no sign the override was lost
+  if (length(depth_params) > 0L) {
+    stop(gettextf(
+      paste("'depth_params' does not apply to an object of class %s: its depths",
+            "were already computed with method %s. Call depthMedian() on the data",
+            "itself to use a different method."),
+      dQuote(class(x)[1L]), dQuote(x@method)
+    ))
+  }
+
   pos <- which(x == max(x))
   med <- x@u[pos, , drop = FALSE]
 

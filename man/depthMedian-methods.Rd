@@ -14,12 +14,12 @@ depthMedian(x, depth_params = list(), convex = FALSE)
 
 \S4method{depthMedian}{data.frame}(x, depth_params = list(), convex = FALSE)
 
-\S4method{depthMedian}{Depth}(x, convex = FALSE)
+\S4method{depthMedian}{Depth}(x, depth_params = list(), convex = FALSE)
 }
 \arguments{
 \item{x}{object of class Depth or matrix.}
 
-\item{depth_params}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).}
+\item{depth_params}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact). Used by the \code{matrix} and \code{data.frame} methods, which compute the depths; a \code{Depth} object already carries its own, so passing this to the \code{Depth} method is an error rather than a silent no-op.}
 
 \item{convex}{logical. If true, than centroid of the convex hull created from deepest points is returned.}
 }
