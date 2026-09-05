@@ -4,8 +4,8 @@
 #'
 #' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#' @param method Character string which determines the depth function. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}}.
-#' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
+#' @param method Character string which determines the depth function. \code{method} can be one of "Projection" (the default), "Mahalanobis", "Euclidean", "Tukey", "LP" or "Local" for multivariate data, or "MBD" or "FM" for functional data, in which case the call is forwarded to \code{\link{fncDepth}}. Any other value is an error. For details see \code{\link{depth}}.
+#' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used. It is forwarded to the "Mahalanobis", "Projection", "LP" and "Tukey" methods; "Euclidean" and "Local" have no parallel implementation and ignore it.
 #' @param ... parameters specific to method --- see \code{\link{depthEuclid}}
 #'
 #' @details
@@ -85,7 +85,7 @@ depth <- function(u, X, method = "Projection", threads = -1, ...) {
     Mahalanobis = depthMah(u, X, threads = threads, ...),
     Euclidean = depthEuclid(u, X),
     Projection = depthProjection(u, X, threads = threads, ...),
-    Tukey = depthTukey(u, X, ...),
+    Tukey = depthTukey(u, X, threads = threads, ...),
     LP = depthLP(u, X, threads = threads, ...),
     Local = depthLocal(u, X, ...),
     MBD = fncDepth(u, X, method = method, ...),
@@ -257,7 +257,7 @@ depthProjection <- function(u, X, ndir = 1000, threads = -1) {
 #' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
 #' @param ndir number of directions used in computations
 #' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
-#' @param exact if TRUE exact alhorithm will be used . Currently it works only for 2 dimensional data set.
+#' @param exact if TRUE the exact algorithm will be used. It is implemented for two-dimensional data only; for a higher-dimensional \code{X} the approximate algorithm is used instead and a warning is raised. One-dimensional data is always computed exactly, whatever \code{exact} is set to.
 #'
 #' @details
 #'
@@ -313,6 +313,17 @@ depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
     depth <- uecdf
     depth[min.ecdf] <- uecdf2[min.ecdf]
     depth
+  }
+
+  if (exact && ncol(X) > 2) {
+    # the exact algorithm exists for 2d only; say so rather than quietly
+    # handing back an approximation the caller explicitly asked not to get
+    warning(gettextf(
+      paste("exact Tukey depth is available for two-dimensional data only;",
+            "X has %d columns, so the approximate algorithm with ndir = %d",
+            "random directions was used instead"),
+      ncol(X), ndir
+    ))
   }
 
   if (ncol(X) == 1) {

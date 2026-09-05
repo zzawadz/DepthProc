@@ -8,8 +8,8 @@
 #' @param y The second data sample. \code{x} and \code{y} must be of the same space.
 #' @param scale logical. determines whether the dispersion is to be aligned.
 #' @param location determines whether the location is to be aligned to 0 vector with depth median.
-#' @param name name for data set x. It will be passed to drawing function.
-#' @param name_y as above for y
+#' @param name name for data set x. It labels the horizontal axis of the plot.
+#' @param name_y as above for y, labelling the vertical axis.
 #' @param title title of the plot.
 #' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
 #'
@@ -72,7 +72,8 @@ ddPlot <- function(x, y, scale = FALSE, location = FALSE, name = "X",
   depth_x <- do.call(depth, c(uxname_list_x_new, depth_params))
   depth_y <- do.call(depth, c(uxname_list_y_new, depth_params))
 
-  ddplot <- methods::new("DDPlot", X = depth_x, Y = depth_y, title = title)
+  ddplot <- methods::new("DDPlot", X = depth_x, Y = depth_y, title = title,
+                         name = name, name_y = name_y)
 
   return(ddplot)
 }

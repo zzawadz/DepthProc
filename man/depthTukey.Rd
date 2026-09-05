@@ -15,7 +15,7 @@ depthTukey(u, X, ndir = 1000, threads = -1, exact = FALSE)
 
 \item{threads}{number of threads used in parallel computations. Default value -1 means that all possible cores will be used.}
 
-\item{exact}{if TRUE exact alhorithm will be used . Currently it works only for 2 dimensional data set.}
+\item{exact}{if TRUE the exact algorithm will be used. It is implemented for two-dimensional data only; for a higher-dimensional \code{X} the approximate algorithm is used instead and a warning is raised. One-dimensional data is always computed exactly, whatever \code{exact} is set to.}
 }
 \description{
 Computes the Tukey depth of a point or vectors of points with respect to a multivariate data set.

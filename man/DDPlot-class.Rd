@@ -15,5 +15,9 @@ Class fro DDPlot
 \item{\code{Y}}{Object of class \link{Depth-class}.}
 
 \item{\code{title}}{title of a plot.}
+
+\item{\code{name}}{name of the x data set, used to label the horizontal axis.}
+
+\item{\code{name_y}}{name of the y data set, used to label the vertical axis.}
 }}
 

@@ -63,9 +63,14 @@ methods::setClass("DepthLocal",
 #' @slot X Object of class \link{Depth-class}.
 #' @slot Y Object of class \link{Depth-class}.
 #' @slot title title of a plot.
+#' @slot name name of the x data set, used to label the horizontal axis.
+#' @slot name_y name of the y data set, used to label the vertical axis.
 #'
 #' @export
-methods::setClass("DDPlot", slots = c(X = "Depth", Y = "Depth", title = "character"))
+methods::setClass("DDPlot",
+         slots = c(X = "Depth", Y = "Depth", title = "character",
+                   name = "character", name_y = "character"),
+         prototype = methods::prototype(name = "X", name_y = "Y"))
 
 #####################################
 ############ DepthCurve #############
