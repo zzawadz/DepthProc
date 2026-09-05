@@ -106,3 +106,22 @@ test_that("a one-observation reference sample is refused by Mahalanobis depth", 
   expect_silent(depthLP(u, X))
   expect_silent(depthEuclid(u, X))
 })
+
+test_that("depthLocal survives a beta that leaves one point in the neighbourhood", {
+  set.seed(807)
+  X <- MASS::mvrnorm(50, c(0, 0), diag(2))
+
+  # the neighbourhood used to lose a dimension here: X[keep, ] dropped to a
+  # vector and as.matrix() stood it back up as a d x 1 column, so the kernel
+  # got the data transposed and aborted the session
+  expect_error(depthLocal(X[1:3, ], X, beta = 0.02,
+                          depth_params1 = list(method = "Mahalanobis")),
+               "not enough to estimate a covariance")
+
+  # with a depth that can work from a single point, it now returns
+  d <- depthLocal(X[1:3, ], X, beta = 0.02,
+                  depth_params1 = list(method = "Mahalanobis"),
+                  depth_params2 = list(method = "Euclidean"))
+  expect_length(as.numeric(d), 3L)
+  expect_true(all(is.finite(as.numeric(d))))
+})

@@ -17,7 +17,11 @@
 
   depths <- as.numeric(do.call(depth, c(uxDepthList1, depth_params1)))
   quan <- quantile(depths, probs = 1 - beta)
-  Rset <- as.matrix(X[signif(depths, digits = 6) >= signif(quan, digits = 6), ])
+  # a small beta can leave a single point in the neighbourhood; without
+  # drop = FALSE that row collapses to a vector and as.matrix() stood it back
+  # up as a d x 1 column, so the depth kernel was handed the data transposed
+  keep <- signif(depths, digits = 6) >= signif(quan, digits = 6)
+  Rset <- X[keep, , drop = FALSE]
 
   uxDepthList2 <- list(u = u, X = Rset)
 
