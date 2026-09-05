@@ -51,7 +51,7 @@ library(DepthProc)
 set.seed(123)
 
 d <- 10
-x <- mvrnorm(1000, rep(0, d), diag(d))
+x <- MASS::mvrnorm(1000, rep(0, d), diag(d))
 # Default - utilize as many threads as possible
 system.time(depth(x, x, method = "LP"))
 #>    user  system elapsed 
@@ -71,7 +71,7 @@ system.time(depth(x, x, method = "LP", threads = 2))
 ## Available depth functions
 
 ``` r
-x <- mvrnorm(100, c(0, 0), diag(2))
+x <- MASS::mvrnorm(100, c(0, 0), diag(2))
 
 depthEuclid(x, x)
 depthMah(x, x)
