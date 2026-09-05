@@ -155,16 +155,62 @@ namespace Depth
 			mads(i) = arma::median(arma::abs(tmpProj - medians(i)));
 		}
 
-		arma::rowvec tmpX(nproj);
+		// A direction on which the projected reference sample has zero MAD gives
+		// an outlyingness ratio of |x - median| / 0, which the plain division
+		// below turns into Inf or NaN. It is not meaningless, though:
+		//
+		//   * a query off that common value lies outside the sample's support in
+		//     this direction, so its outlyingness is unbounded and its depth 0;
+		//   * a query on it gives 0/0 and simply contributes nothing.
+		//
+		// This needs more than half the projected values to coincide, so in
+		// practice either no direction is flat or all of them are.
+		arma::uvec flat = arma::find(mads <= 0.0);
+
+		if(flat.is_empty())
+		{
+			arma::rowvec tmpX(nproj);
 
     #pragma omp parallel for shared(X,directions,medians,mads,nx,depth) private(i, tmpX) num_threads(threads)
-		for(i = 0; i < nx; i++)
+			for(i = 0; i < nx; i++)
+			{
+				tmpX = X.row(i) * directions;
+				tmpX -= medians;
+				tmpX /= mads;
+				tmpX = arma::abs(tmpX);
+				depth(i) = arma::max(tmpX);
+			}
+		}
+		else
 		{
-			tmpX = X.row(i) * directions;
-			tmpX -= medians;
-			tmpX /= mads;
-			tmpX = arma::abs(tmpX);
-			depth(i) = arma::max(tmpX);
+			arma::uvec ok = arma::find(mads > 0.0);
+
+			arma::mat dirs_flat = directions.cols(flat);
+			arma::rowvec med_flat = medians.cols(flat);
+			arma::mat dirs_ok = directions.cols(ok);
+			arma::rowvec med_ok = medians.cols(ok);
+			arma::rowvec mad_ok = mads.cols(ok);
+
+			double tol = std::sqrt(arma::datum::eps) *
+			             (1.0 + arma::abs(med_flat).max());
+
+    #pragma omp parallel for shared(X,dirs_flat,med_flat,dirs_ok,med_ok,mad_ok,ok,tol,nx,depth) private(i) num_threads(threads)
+			for(i = 0; i < nx; i++)
+			{
+				if(arma::any(arma::abs(X.row(i) * dirs_flat - med_flat) > tol))
+				{
+					depth(i) = arma::datum::inf;
+				}
+				else if(ok.is_empty())
+				{
+					depth(i) = 0.0;
+				}
+				else
+				{
+					depth(i) = arma::max(
+						arma::abs(X.row(i) * dirs_ok - med_ok) / mad_ok);
+				}
+			}
 		}
 
 		depth = 1/(1+depth);

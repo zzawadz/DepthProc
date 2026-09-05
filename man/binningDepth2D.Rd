@@ -22,7 +22,8 @@ binningDepth2D(
 
 \item{k}{responsible for tightness of bins.}
 
-\item{remove_borders}{Logical, include or not marginal bins}
+\item{remove_borders}{Logical, include or not marginal bins. Requires at
+least three bins in each dimension, i.e. \code{nbins >= 3}.}
 
 \item{depth_params}{other arguments passed to depthMedian}
 }

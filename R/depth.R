@@ -383,9 +383,11 @@ depthLP <- function(u, X, pdim = 2, la = 1, lb = 1, threads = -1,
     u <- matrix(u, ncol = ncol(X))
   }
 
-  if (is.null(func)) {
-    depth <- depthLPCPP(u, X, pdim, la, lb, threads = threads)
+  if (!is.null(func)) {
+    stop("'func' is not supported yet; leave it as NULL")
   }
+
+  depth <- depthLPCPP(u, X, pdim, la, lb, threads = threads)
 
   methods::new("DepthLP", depth, u = u, X = X, method = "LP")
 }

@@ -6,7 +6,8 @@
 #' @param binmethod A method for calculation center and dispersion measures. "LocDepth" uses location-scale depth, MAD uses median and MAD in each dimension.
 #' @param nbins number of bins in each dimension
 #' @param k responsible for tightness of bins.
-#' @param remove_borders Logical, include or not marginal bins
+#' @param remove_borders Logical, include or not marginal bins. Requires at
+#'   least three bins in each dimension, i.e. \code{nbins >= 3}.
 #' @param depth_params other arguments passed to depthMedian
 #'
 #' @return freq: a matrix containing the binned frequencies
@@ -88,9 +89,11 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
 
       if (nbins > 0) {
         s_bound <- 1:(nbins / 2) * sigma
+      } else {
+        # nbins <= 2 leaves only the two unbounded border bins
+        s_bound <- numeric(0)
       }
 
-      0:nbins * sigma
       breaks <- sort(c(-Inf, -s_bound + mean, mean, s_bound + mean, Inf))
     }
 
@@ -100,15 +103,23 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
     })
 
     if (nbins != "auto") {
-      midpoints[1] <- midpoints[2] - 2 * sigma # mean(x[x < breaks[2]])
-      midpoints[length(midpoints)] <- midpoints[(length(midpoints) - 1)] +
-        2 * sigma # mean(x[x > breaks[length(breaks) - 1]])
-      if (is.na(midpoints[1])) {
-        midpoints[1] <- midpoints[2] - 2 * sigma
-      }
-      if (is.na(midpoints[length(midpoints)])) {
-        midpoints[(length(midpoints))] <- midpoints[(length(midpoints) - 1)] +
-          2 * sigma
+
+      if (length(midpoints) == 2L) {
+        # only the two unbounded border bins, so neither has a finite neighbour
+        # to be offset from; anchor both on the split point instead, keeping the
+        # 2 * sigma offset used for border bins below
+        midpoints <- c(mean - 2 * sigma, mean + 2 * sigma)
+      } else {
+        midpoints[1] <- midpoints[2] - 2 * sigma # mean(x[x < breaks[2]])
+        midpoints[length(midpoints)] <- midpoints[(length(midpoints) - 1)] +
+          2 * sigma # mean(x[x > breaks[length(breaks) - 1]])
+        if (is.na(midpoints[1])) {
+          midpoints[1] <- midpoints[2] - 2 * sigma
+        }
+        if (is.na(midpoints[length(midpoints)])) {
+          midpoints[(length(midpoints))] <- midpoints[(length(midpoints) - 1)] +
+            2 * sigma
+        }
       }
     }
 
@@ -132,6 +143,13 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
   tmp <- binning(x = x, breaks = b)$table.freq
 
   if (remove_borders == TRUE) {
+    if (nrow(tmp) < 3 || ncol(tmp) < 3) {
+      stop("remove_borders = TRUE drops the first and last bin in each ",
+           "dimension, so it needs at least three bins in each, but the ",
+           "binning has ", nrow(tmp), " x ", ncol(tmp), " bins. ",
+           "Use nbins >= 3, or remove_borders = FALSE.")
+    }
+
     tmp <- tmp[-c(1, nrow(tmp)), -c(1, ncol(tmp))]
     tmp1[[1]] <- tmp1[[1]][-c(1, length(tmp1[[1]]))]
     tmp2[[1]] <- tmp2[[1]][-c(1, length(tmp2[[1]]))]
