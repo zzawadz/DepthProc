@@ -12,9 +12,9 @@
 #' @param n number of points that will be used to create plot (\eqn{ n ^ 2 })
 #' @param xlab description of x-axis
 #' @param ylab description of y-axis
-#' @param plot_title plot title (default NULL means paste(depth_params$method, "depth"))
+#' @param plot_title plot title (default NULL means the computed depth's method followed by "depth")
 #' @param colors function for colors pallete (e.g. gray.colors).
-#' @param depth_params list of parameters for function depth ("method", "threads", "ndir", "la", "lb", "pdim", "mean", "cov", "exact").
+#' @param depth_params list of parameters for function depth ("method", "threads", "ndir", "la", "lb", "pdim", "mean", "cov", "exact"), or a \code{\link{depthSpec}}, which checks them.
 #' @param graph_params list of graphical parameters for functions rgl::persp3d and lattice::wireframe.
 #'
 #' @details
@@ -54,17 +54,14 @@ depthPersp <- function(x, plot_method = "lattice",
 
     ux_list <- list(u = xy_surface, X = x)
 
-    depth_params <- c(ux_list, depth_params)
+    depth_params <- c(ux_list, .depthParams(depth_params))
 
     z_surface <- do.call(depth, depth_params)
-    method <- depth_params$method
 
     if (is.null(plot_title)) {
-      plot_title <- paste(method, "depth")
-
-      if(is.null(method)) {
-        plot_title <- "Projection depth"
-      }
+      # from the object rather than from the input list: depth() has already
+      # resolved the method, including the default when none was given
+      plot_title <- paste(z_surface@method, "depth")
     }
 
     graph_params <- c(ux_list, graph_params)

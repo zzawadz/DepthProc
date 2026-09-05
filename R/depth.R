@@ -80,8 +80,7 @@ depth <- function(u, X, method = "Projection", threads = -1, ...) {
     stop(gettextf(
       "unknown depth method %s; must be one of %s",
       sQuote(method),
-      paste(sQuote(c("Mahalanobis", "Euclidean", "Projection", "Tukey",
-                     "LP", "Local", "MBD", "FM")), collapse = ", ")
+      paste(sQuote(.depthMethodNames), collapse = ", ")
     ))
   )
 

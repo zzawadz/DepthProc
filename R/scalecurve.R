@@ -11,7 +11,7 @@
 #' @param name Name of matrix X used in legend.
 #' @param name_y Name of matrix Y used in legend.
 #' @param title title of the plot.
-#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
+#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact), or a \code{\link{depthSpec}}, which checks them.
 #'
 #' @details
 #'
@@ -80,6 +80,7 @@ scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
 
   uxname_list <- list(u = x, X = x)
 
+  depth_params <- .depthParams(depth_params)
   depth_est <- do.call(depth, c(uxname_list, depth_params))
 
   k <- length(alpha)

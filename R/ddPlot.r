@@ -11,7 +11,7 @@
 #' @param name name for data set x. It labels the horizontal axis of the plot.
 #' @param name_y as above for y, labelling the vertical axis.
 #' @param title title of the plot.
-#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
+#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact), or a \code{\link{depthSpec}}, which checks them.
 #'
 #' @details
 #'
@@ -46,6 +46,9 @@ ddPlot <- function(x, y, scale = FALSE, location = FALSE, name = "X",
   if (ncol(x) != ncol(y)) {
     stop("Wrong dimensions of the datasets! ncol(x) != ncol(y)")
   }
+
+  depth_params <- .depthParams(depth_params)
+
   if (scale) {
     uxname_list_x <- list(u = x, X = x)
     uxname_list_y <- list(u = y, X = y)

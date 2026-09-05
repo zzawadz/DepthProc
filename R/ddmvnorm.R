@@ -7,7 +7,7 @@
 #' @param robust Logical. Default \code{FALSE}. If \code{TRUE}, robust measures are used to specify the parameters of theoretical distribution.
 #' @param alpha cutoff point for robust measure of covariance.
 #' @param title title of a plot.
-#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
+#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact), or a \code{\link{depthSpec}}, which checks them.
 #' 
 #' @description
 #' Produces a normal DD plot of a multivariate dataset.
@@ -46,6 +46,7 @@
 ddMvnorm <- function(x, size = nrow(x), robust = FALSE, alpha = 0.05,
                      title = "ddMvnorm", depth_params = list()) {
   ux_list <- list(u = x, X = x)
+  depth_params <- .depthParams(depth_params)
   depth_sample <- do.call(depth, c(ux_list, depth_params))
 
   if (robust) {

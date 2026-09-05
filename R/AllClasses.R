@@ -52,6 +52,42 @@ methods::setClass("DepthLocal",
          slots = c(depth_params1 = "list", depth_params2 = "list"),
          contains = c("Depth", "numeric"))
 
+#' @title Renderer suited to a computed depth surface
+#'
+#' @docType methods
+#' @rdname contourMethod-methods
+#'
+#' @param object an object that inherits from \link{Depth-class}.
+#'
+#' @description
+#'
+#' Returns the name of the method \code{\link{depthContour}} should use to
+#' draw the level sets of \code{object}: \code{"contour"} or
+#' \code{"convexhull"}. This is what \code{contour_method = "auto"} consults.
+#'
+#' @details
+#'
+#' Whether a depth surface can be contoured is a property of the depth, so each
+#' depth class declares it. Tukey depth is piecewise constant --- contouring it
+#' draws staircase artefacts, while its level sets are convex polytopes that a
+#' convex hull traces exactly --- so \code{DepthTukey} answers
+#' \code{"convexhull"} and everything else answers \code{"contour"}. A new
+#' depth with the same discreteness declares it here rather than relying on
+#' \code{depthContour} to recognise its name.
+#'
+#' @export
+methods::setGeneric("contourMethod", function(object) {
+  standardGeneric("contourMethod")
+})
+
+#' @rdname contourMethod-methods
+#' @export
+methods::setMethod("contourMethod", "Depth", function(object) "contour")
+
+#' @rdname contourMethod-methods
+#' @export
+methods::setMethod("contourMethod", "DepthTukey", function(object) "convexhull")
+
 #####################################
 ############## DDPlot ###############
 #####################################

@@ -19,7 +19,7 @@ depthLocal(
 
 \item{beta}{cutoff value for neighbourhood}
 
-\item{depth_params1}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).}
+\item{depth_params1}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact), or a \code{\link{depthSpec}}, which checks them.}
 
 \item{depth_params2}{as above --- default is depth_params1.}
 }

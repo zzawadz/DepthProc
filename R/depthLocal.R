@@ -35,7 +35,7 @@
 #' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #' @param X The data as a matrix, data frame. If it is a matrix or data frame, then each row is viewed as one multivariate observation.
 #' @param beta cutoff value for neighbourhood
-#' @param depth_params1 list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
+#' @param depth_params1 list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact), or a \code{\link{depthSpec}}, which checks them.
 #' @param depth_params2 as above --- default is depth_params1.
 #'
 #' @details
@@ -102,6 +102,9 @@ depthLocal <- function(u, X, beta = 0.5,
   dat <- .coerceDepthInput(u, X)
   u <- dat$u
   X <- dat$X
+
+  depth_params1 <- .depthParams(depth_params1, "depth_params1")
+  depth_params2 <- .depthParams(depth_params2, "depth_params2")
 
   depths <- seq_len(nrow(u))
 

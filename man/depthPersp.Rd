@@ -33,11 +33,11 @@ depthPersp(
 
 \item{ylab}{description of y-axis}
 
-\item{plot_title}{plot title (default NULL means paste(depth_params$method, "depth"))}
+\item{plot_title}{plot title (default NULL means the computed depth's method followed by "depth")}
 
 \item{colors}{function for colors pallete (e.g. gray.colors).}
 
-\item{depth_params}{list of parameters for function depth ("method", "threads", "ndir", "la", "lb", "pdim", "mean", "cov", "exact").}
+\item{depth_params}{list of parameters for function depth ("method", "threads", "ndir", "la", "lb", "pdim", "mean", "cov", "exact"), or a \code{\link{depthSpec}}, which checks them.}
 
 \item{graph_params}{list of graphical parameters for functions rgl::persp3d and lattice::wireframe.}
 }

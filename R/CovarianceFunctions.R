@@ -56,7 +56,7 @@ CovLP <- function(x, pdim = 2, la = 1, lb = 1) {
   }
 
   cov <- CovLPCPP(x, pdim, la, lb)
-  depth_params <- list(method = "LP", pdim = pdim, la = la, lb = lb)
+  depth_params <- depthSpec("LP", pdim = pdim, la = la, lb = lb)
   center <- depthMedian(x, depth_params)
 
   method <- "Depth Weighted Estimator"

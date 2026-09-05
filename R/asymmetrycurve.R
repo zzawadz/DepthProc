@@ -9,7 +9,7 @@
 #' @param movingmedian Logical. For default FALSE only one depth median is used to compute asymmetry norm. If TRUE --- for every central area, a new depth median will be used --- this approach needs much more time.
 #' @param name Name of set X --- used in plot legend
 #' @param name_y Name of set Y --- used in plot legend
-#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
+#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact), or a \code{\link{depthSpec}}, which checks them.
 #'
 #' @details
 #'
@@ -79,6 +79,8 @@ asymmetryCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01),
   if (!is.null(y) && !is.matrix(y)) {
     stop("Y must be a matrix!")
   }
+
+  depth_params <- .depthParams(depth_params)
 
   uxname_list <- list(u = x, X = x)
 
