@@ -4,7 +4,7 @@
 #'
 #' @param u Numerical vector or matrix whose depth is to be calculated. Dimension has to be the same as that of the observations.
 #' @param X The data as a matrix, data frame or list. If it is a matrix or data frame, then each row is viewed as one multivariate observation. If it is a list, all components must be numerical vectors of equal length (coordinates of observations).
-#' @param method Character string which determines the depth function. \code{method} can be "Projection" (the default), "Mahalanobis", "Euclidean" or "Tukey". For details see \code{\link{depth}}.
+#' @param method Character string which determines the depth function. \code{method} can be one of "Projection" (the default), "Mahalanobis", "Euclidean", "Tukey", "LP" or "Local" for multivariate data, or "MBD" or "FM" for functional data, in which case the call is forwarded to \code{\link{fncDepth}}. Any other value is an error. For details see \code{\link{depth}}.
 #' @param threads number of threads used in parallel computations. Default value -1 means that all possible cores will be used.
 #' @param ... parameters specific to method --- see \code{\link{depthEuclid}}
 #'
