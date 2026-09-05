@@ -27,7 +27,28 @@ test_that("depth() rejects an unusable method instead of returning NULL", {
 
   expect_error(depth(x, x, method = "projection"), "unknown depth method")
   expect_error(depth(x, x, method = "NotADepth"), "unknown depth method")
-  expect_error(depth(x, x, method = 3), "single character string")
+  expect_error(depth(x, x, method = 3), "must be a character value")
+  expect_error(depth(x, x, method = c("Projection", "Tukey")), "not a vector of length 2")
+})
+
+test_that("the functional depths accept a single curve given as a vector", {
+  set.seed(123)
+  X <- matrix(rnorm(20 * 10), nrow = 20)
+  u <- rnorm(10)
+
+  expect_equal(fncDepthFM(u, X), fncDepthFM(matrix(u, nrow = 1), X))
+  expect_equal(fncDepthMBD(u, X), fncDepthMBD(matrix(u, nrow = 1), X))
+  expect_equal(length(fncDepthFM(u, X)), 1)
+  expect_equal(length(fncDepthMBD(u, X)), 1)
+})
+
+test_that("the functional depths reject u and X observed at different points", {
+  set.seed(123)
+  X <- matrix(rnorm(20 * 10), nrow = 20)
+  u <- matrix(rnorm(6), nrow = 1)
+
+  expect_error(fncDepthFM(u, X), "they must match")
+  expect_error(fncDepthMBD(u, X), "they must match")
 })
 
 test_that("depthMedian handles ties on one-column input", {

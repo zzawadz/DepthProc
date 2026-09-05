@@ -123,6 +123,18 @@ fncDepthFM <- function(u, X, dep1d_params = list(method = "Projection")) {
   if (missing(X)) {
     X <- u
   }
+  if (is.vector(X)) {
+    X <- matrix(X, nrow = 1)
+  }
+  if (is.vector(u)) {
+    u <- matrix(u, ncol = ncol(X))
+  }
+  if (ncol(u) != ncol(X)) {
+    stop(gettextf(
+      "'u' is observed at %d point(s) but 'X' at %d; they must match",
+      ncol(u), ncol(X)
+    ))
+  }
 
   depths <- rep(0, nrow(u))
 
@@ -155,8 +167,23 @@ fncDepthFM <- function(u, X, dep1d_params = list(method = "Projection")) {
 fncDepthMBD <- function(u, X) {
 
   if (missing(X)) {
+    if (is.vector(u)) {
+      u <- matrix(u, nrow = 1)
+    }
     depth <- fastMBD(t(u))
   } else {
+    if (is.vector(X)) {
+      X <- matrix(X, nrow = 1)
+    }
+    if (is.vector(u)) {
+      u <- matrix(u, ncol = ncol(X))
+    }
+    if (ncol(u) != ncol(X)) {
+      stop(gettextf(
+        "'u' is observed at %d point(s) but 'X' at %d; they must match",
+        ncol(u), ncol(X)
+      ))
+    }
     depth <- fastMBDRef(t(u), t(X))
   }
 
