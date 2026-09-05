@@ -266,7 +266,7 @@ fastBDRef <- function(u, X) {
 
   rmat <- t(rmat)
 
-  down <- apply(rmat,1,min)
+  down <- apply(rmat,1,min) - 1
   up <- n - apply(rmat,1,max)
   ((up * down) + n - 1) / choose(n, 2)
 }

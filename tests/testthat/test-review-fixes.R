@@ -77,3 +77,23 @@ test_that("depthTukey rejects u and X of different dimension", {
   expect_error(depthTukey(u, x, exact = FALSE), "dimensions must match")
   expect_equal(length(depthTukey(x[1:5, ], x, exact = TRUE)), 5)
 })
+
+test_that("fncDepthBD agrees with itself when the reference sample is passed", {
+  set.seed(4)
+  x <- matrix(rnorm(40), ncol = 2)
+
+  expect_equal(fncDepthBD(x), fncDepthBD(x, x))
+
+  set.seed(9)
+  y <- matrix(rnorm(200), ncol = 5)
+
+  expect_equal(fncDepthBD(y), fncDepthBD(y, y))
+})
+
+test_that("band depth stays within the modified band depth", {
+  set.seed(11)
+  x <- matrix(rnorm(150), ncol = 5)
+
+  expect_true(all(fncDepthBD(x) <= fncDepthMBD(x) + 1e-12))
+  expect_true(all(fncDepthBD(x) >= 0))
+})
