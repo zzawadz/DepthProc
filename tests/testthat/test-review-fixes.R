@@ -97,3 +97,20 @@ test_that("band depth stays within the modified band depth", {
   expect_true(all(fncDepthBD(x) <= fncDepthMBD(x) + 1e-12))
   expect_true(all(fncDepthBD(x) >= 0))
 })
+
+test_that("depthDensity works without the np package being attached", {
+  skip_if_not_installed("np")
+
+  # np builds the bandwidth call as quote(npudensbw) and evaluates it in its
+  # caller's frame, so the name has to resolve from DepthProc's namespace
+  expect_false("package:np" %in% search())
+
+  set.seed(31)
+  x <- rnorm(60)
+  y <- x + rnorm(60, sd = 0.5)
+
+  dens <- suppressWarnings(depthDensity(x, y, nx = 4, ny = 8))
+
+  expect_s4_class(dens, "DepthDensity")
+  expect_equal(dim(dens@density), c(8L, 4L))
+})
