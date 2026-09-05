@@ -75,8 +75,13 @@ depth <- function(u, X, method = "Projection", threads = -1, ...) {
   }
 
   # Method logic
-  if (!is.character(method) || length(method) != 1L) {
-    stop("'method' must be a single character string")
+  if (!is.character(method)) {
+    stop(gettextf("'method' must be a character value, not %s",
+                  sQuote(class(method)[1L])))
+  }
+  if (length(method) != 1L) {
+    stop(gettextf("'method' must be a single value, not a vector of length %d",
+                  length(method)))
   }
 
   output <- switch(
