@@ -65,12 +65,20 @@ methods::setClass("DepthLocal",
 #' @slot title title of a plot.
 #' @slot name name of the x data set, used to label the horizontal axis.
 #' @slot name_y name of the y data set, used to label the vertical axis.
+#' @slot sample factor, one level per point, saying which of the two data sets
+#'   it came from. Both axes hold the depths of the pooled sample, so this is
+#'   the only record of a point's origin. An empty factor means the points are
+#'   not distinguished and are all drawn in one colour, which is how a DDPlot
+#'   built without it --- \code{\link{ddMvnorm}}, where every point comes from
+#'   the same data set --- still renders.
 #'
 #' @export
 methods::setClass("DDPlot",
          slots = c(X = "Depth", Y = "Depth", title = "character",
-                   name = "character", name_y = "character"),
-         prototype = methods::prototype(name = "X", name_y = "Y"))
+                   name = "character", name_y = "character",
+                   sample = "factor"),
+         prototype = methods::prototype(name = "X", name_y = "Y",
+                                        sample = factor()))
 
 #####################################
 ############ DepthCurve #############

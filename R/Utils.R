@@ -7,6 +7,20 @@
                title = ggplot2::element_text(face = "bold", vjust = 1, size = 18)))
 }
 
+# Okabe-Ito blue and vermillion: the first stays the blue every DD plot has
+# been drawn in, and the pair is distinguishable under the common forms of
+# colour blindness. More than two samples falls back to ggplot2's own scale.
+.ddPlotColors <- function(n) {
+  base <- c("#0072B2", "#D55E00")
+
+  if (n <= length(base)) {
+    return(base[seq_len(n)])
+  }
+
+  grDevices::hcl(h = seq(15, 375, length.out = n + 1)[seq_len(n)],
+                 c = 100, l = 65)
+}
+
 .testNorm <- function(d = 2) {
   MASS::mvrnorm(100, rep(1, d), diag(d))
 }

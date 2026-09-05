@@ -63,3 +63,81 @@ test_that("indexLiu counts the points away from the diagonal", {
   # the index is non-increasing in gamma
   expect_true(!is.unsorted(rev(indexLiu(pl, seq(0, 1, by = 0.1)))))
 })
+
+test_that("ddPlot records which sample every point came from", {
+  set.seed(127)
+  x <- MASS::mvrnorm(50, c(0, 0), diag(2))
+  y <- MASS::mvrnorm(30, c(2, 2), diag(2))
+  params <- list(method = "Mahalanobis")
+
+  pl <- ddPlot(x, y, name = "Left", name_y = "Right", depth_params = params)
+
+  # both axes hold depths of the pooled sample, so the origin of a point is not
+  # recoverable from its coordinates - the slot is the only record of it
+  expect_s3_class(pl@sample, "factor")
+  expect_equal(levels(pl@sample), c("Left", "Right"))
+  expect_equal(as.character(pl@sample), rep(c("Left", "Right"), c(50, 30)))
+  expect_equal(length(pl@sample), length(pl@X))
+})
+
+test_that("getPlot colours the points by sample and labels the legend", {
+  set.seed(128)
+  x <- MASS::mvrnorm(50, c(0, 0), diag(2))
+  y <- MASS::mvrnorm(50, c(2, 2), diag(2))
+  params <- list(method = "Mahalanobis")
+
+  p <- getPlot(ddPlot(x, y, name = "Left", name_y = "Right",
+                      depth_params = params))
+
+  expect_s3_class(p, "ggplot")
+  expect_equal(as.character(p$layers[[1]]$data$sample),
+               rep(c("Left", "Right"), each = 50))
+
+  built <- ggplot2::ggplot_build(p)
+  colours <- unique(built$data[[1]]$colour)
+  expect_equal(length(colours), 2L)
+  # the first sample keeps the blue every DD plot has been drawn in
+  expect_equal(colours[1], "#0072B2")
+})
+
+test_that("color_by_sample = FALSE reproduces the single-colour plot", {
+  set.seed(129)
+  x <- MASS::mvrnorm(40, c(0, 0), diag(2))
+  y <- MASS::mvrnorm(40, c(2, 2), diag(2))
+  params <- list(method = "Mahalanobis")
+
+  plain <- ddPlot(x, y, depth_params = params, color_by_sample = FALSE)
+
+  expect_equal(length(plain@sample), 0L)
+
+  built <- ggplot2::ggplot_build(getPlot(plain))
+  expect_equal(unique(built$data[[1]]$colour), "blue")
+})
+
+test_that("a DDPlot with one named sample is not split into two colours", {
+  set.seed(130)
+  x <- MASS::mvrnorm(40, c(0, 0), diag(2))
+  y <- MASS::mvrnorm(40, c(2, 2), diag(2))
+
+  # name and name_y both default to their own values, but a caller can repeat
+  # one; a single level is not something to colour by
+  same <- ddPlot(x, y, name = "S", name_y = "S",
+                 depth_params = list(method = "Mahalanobis"))
+
+  expect_equal(levels(same@sample), "S")
+
+  built <- ggplot2::ggplot_build(getPlot(same))
+  expect_equal(unique(built$data[[1]]$colour), "blue")
+})
+
+test_that("ddMvnorm still draws one colour, having only one data set", {
+  set.seed(131)
+  x <- MASS::mvrnorm(60, c(0, 0), diag(2))
+
+  dd <- ddMvnorm(x, depth_params = list(method = "Mahalanobis"))
+
+  expect_equal(length(dd@sample), 0L)
+
+  built <- ggplot2::ggplot_build(getPlot(dd))
+  expect_equal(unique(built$data[[1]]$colour), "blue")
+})
