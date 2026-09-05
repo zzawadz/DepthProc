@@ -14,6 +14,7 @@
 #'
 #' Kosiorowski D. and Zawadzki Z. (2014) Notes on optimality of predictive distribution pseudo-estimators in the CHARME models and automatic trading strategies, FindEcon2014, submitted
 #'
+#' @importFrom np npudens npudensbw
 #' @export
 #' @examples
 #'

@@ -77,3 +77,80 @@ test_that("depthTukey rejects u and X of different dimension", {
   expect_error(depthTukey(u, x, exact = FALSE), "dimensions must match")
   expect_equal(length(depthTukey(x[1:5, ], x, exact = TRUE)), 5)
 })
+
+test_that("fncDepthBD agrees with itself when the reference sample is passed", {
+  set.seed(4)
+  x <- matrix(rnorm(40), ncol = 2)
+
+  expect_equal(fncDepthBD(x), fncDepthBD(x, x))
+
+  set.seed(9)
+  y <- matrix(rnorm(200), ncol = 5)
+
+  expect_equal(fncDepthBD(y), fncDepthBD(y, y))
+})
+
+test_that("band depth stays within the modified band depth", {
+  set.seed(11)
+  x <- matrix(rnorm(150), ncol = 5)
+
+  expect_true(all(fncDepthBD(x) <= fncDepthMBD(x) + 1e-12))
+  expect_true(all(fncDepthBD(x) >= 0))
+})
+
+test_that("depthDensity works without the np package being attached", {
+  skip_if_not_installed("np")
+
+  # np builds the bandwidth call as quote(npudensbw) and evaluates it in its
+  # caller's frame, so the name has to resolve from DepthProc's namespace
+  expect_false("package:np" %in% search())
+
+  set.seed(31)
+  x <- rnorm(60)
+  y <- x + rnorm(60, sd = 0.5)
+
+  dens <- suppressWarnings(depthDensity(x, y, nx = 4, ny = 8))
+
+  expect_s4_class(dens, "DepthDensity")
+  expect_equal(dim(dens@density), c(8L, 4L))
+})
+
+test_that("a curve outside the reference sample never gets a negative depth", {
+  set.seed(51)
+  X <- matrix(rnorm(15 * 4), ncol = 4)
+
+  below <- matrix(rep(-10, 4), nrow = 1)
+  above <- matrix(rep(10, 4), nrow = 1)
+
+  # refRank is 0 at every point for `below`, which drove the lower band count
+  # to -1 and the depth to -1 / choose(n, 2)
+  expect_gte(fncDepthBD(below, X), 0)
+  expect_gte(fncDepthMBD(below, X), 0)
+
+  # and the two out-of-range directions now agree instead of one being negative
+  expect_equal(fncDepthBD(below, X), fncDepthBD(above, X))
+  expect_equal(fncDepthMBD(below, X), fncDepthMBD(above, X))
+})
+
+test_that("band depths stay non-negative across many external curves", {
+  set.seed(52)
+  X <- matrix(rnorm(15 * 5), ncol = 5)
+  u <- matrix(rnorm(500 * 5, sd = 3), ncol = 5)
+
+  expect_true(all(fncDepthBD(u, X) >= 0))
+  expect_true(all(fncDepthMBD(u, X) >= 0))
+})
+
+test_that("clamping the lower count leaves the u-in-X case untouched", {
+  # refRank is >= 1 whenever u is one of the reference curves, so the clamp
+  # never fires there and the self-consistency identities still hold
+  set.seed(53)
+  x <- matrix(rnorm(20 * 6), ncol = 6)
+
+  expect_equal(fncDepthBD(x), fncDepthBD(x, x))
+  expect_equal(fncDepthMBD(x), fncDepthMBD(x, x))
+
+  data("katowice.airpollution")
+  expect_equal(fncDepthMBD(katowice.airpollution),
+               fncDepthMBD(katowice.airpollution, katowice.airpollution))
+})

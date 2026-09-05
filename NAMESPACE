@@ -80,6 +80,10 @@ importFrom(graphics,
   segments
 )
 importFrom(lattice,wireframe)
+importFrom(np,
+  npudens,
+  npudensbw
+)
 importFrom(rlang,.data)
 importFrom(sm,binning)
 importFrom(stats,
