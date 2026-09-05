@@ -75,6 +75,10 @@ depth <- function(u, X, method = "Projection", threads = -1, ...) {
   }
 
   # Method logic
+  if (!is.character(method) || length(method) != 1L) {
+    stop("'method' must be a single character string")
+  }
+
   output <- switch(
     method,
     Mahalanobis = depthMah(u, X, threads = threads, ...),
@@ -84,7 +88,13 @@ depth <- function(u, X, method = "Projection", threads = -1, ...) {
     LP = depthLP(u, X, threads = threads, ...),
     Local = depthLocal(u, X, ...),
     MBD = fncDepth(u, X, method = method, ...),
-    FM = fncDepth(u, X, method = method, ...)
+    FM = fncDepth(u, X, method = method, ...),
+    stop(gettextf(
+      "unknown depth method %s; must be one of %s",
+      sQuote(method),
+      paste(sQuote(c("Mahalanobis", "Euclidean", "Projection", "Tukey",
+                     "LP", "Local", "MBD", "FM")), collapse = ", ")
+    ))
   )
 
   return(output)
