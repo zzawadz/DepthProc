@@ -114,3 +114,43 @@ test_that("depthDensity works without the np package being attached", {
   expect_s4_class(dens, "DepthDensity")
   expect_equal(dim(dens@density), c(8L, 4L))
 })
+
+test_that("a curve outside the reference sample never gets a negative depth", {
+  set.seed(51)
+  X <- matrix(rnorm(15 * 4), ncol = 4)
+
+  below <- matrix(rep(-10, 4), nrow = 1)
+  above <- matrix(rep(10, 4), nrow = 1)
+
+  # refRank is 0 at every point for `below`, which drove the lower band count
+  # to -1 and the depth to -1 / choose(n, 2)
+  expect_gte(fncDepthBD(below, X), 0)
+  expect_gte(fncDepthMBD(below, X), 0)
+
+  # and the two out-of-range directions now agree instead of one being negative
+  expect_equal(fncDepthBD(below, X), fncDepthBD(above, X))
+  expect_equal(fncDepthMBD(below, X), fncDepthMBD(above, X))
+})
+
+test_that("band depths stay non-negative across many external curves", {
+  set.seed(52)
+  X <- matrix(rnorm(15 * 5), ncol = 5)
+  u <- matrix(rnorm(500 * 5, sd = 3), ncol = 5)
+
+  expect_true(all(fncDepthBD(u, X) >= 0))
+  expect_true(all(fncDepthMBD(u, X) >= 0))
+})
+
+test_that("clamping the lower count leaves the u-in-X case untouched", {
+  # refRank is >= 1 whenever u is one of the reference curves, so the clamp
+  # never fires there and the self-consistency identities still hold
+  set.seed(53)
+  x <- matrix(rnorm(20 * 6), ncol = 6)
+
+  expect_equal(fncDepthBD(x), fncDepthBD(x, x))
+  expect_equal(fncDepthMBD(x), fncDepthMBD(x, x))
+
+  data("katowice.airpollution")
+  expect_equal(fncDepthMBD(katowice.airpollution),
+               fncDepthMBD(katowice.airpollution, katowice.airpollution))
+})

@@ -213,7 +213,12 @@ fastMBDRef <- function(u, X) {
 
   rmat <- t(rmat)
 
-  down <- rmat - 1
+  # refRank returns 0 where u lies below every reference curve, so the
+  # self-reference correction has to be clamped: without it down goes to -1 and
+  # the depth comes out negative. Where u is one of the reference curves
+  # refRank is at least 1, so the clamp never fires and the self-consistency
+  # with fastMBD is untouched.
+  down <- pmax(rmat - 1, 0)
   up <- n - rmat
   (rowSums(up * down) / p + n - 1) / choose(n, 2)
 }
@@ -266,7 +271,9 @@ fastBDRef <- function(u, X) {
 
   rmat <- t(rmat)
 
-  down <- apply(rmat,1,min) - 1
+  # clamped for the same reason as in fastMBDRef: a curve below the whole
+  # reference sample has refRank 0 everywhere, which would make down -1
+  down <- pmax(apply(rmat,1,min) - 1, 0)
   up <- n - apply(rmat,1,max)
   ((up * down) + n - 1) / choose(n, 2)
 }
