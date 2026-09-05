@@ -88,9 +88,11 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
 
       if (nbins > 0) {
         s_bound <- 1:(nbins / 2) * sigma
+      } else {
+        # nbins <= 2 leaves only the two unbounded border bins
+        s_bound <- numeric(0)
       }
 
-      0:nbins * sigma
       breaks <- sort(c(-Inf, -s_bound + mean, mean, s_bound + mean, Inf))
     }
 
@@ -100,15 +102,23 @@ binningDepth2D <- function(x, binmethod = "LocDepth", nbins = 8, k = 1,
     })
 
     if (nbins != "auto") {
-      midpoints[1] <- midpoints[2] - 2 * sigma # mean(x[x < breaks[2]])
-      midpoints[length(midpoints)] <- midpoints[(length(midpoints) - 1)] +
-        2 * sigma # mean(x[x > breaks[length(breaks) - 1]])
-      if (is.na(midpoints[1])) {
-        midpoints[1] <- midpoints[2] - 2 * sigma
-      }
-      if (is.na(midpoints[length(midpoints)])) {
-        midpoints[(length(midpoints))] <- midpoints[(length(midpoints) - 1)] +
-          2 * sigma
+
+      if (length(midpoints) == 2L) {
+        # only the two unbounded border bins, so neither has a finite neighbour
+        # to be offset from; anchor both on the split point instead, keeping the
+        # 2 * sigma offset used for border bins below
+        midpoints <- c(mean - 2 * sigma, mean + 2 * sigma)
+      } else {
+        midpoints[1] <- midpoints[2] - 2 * sigma # mean(x[x < breaks[2]])
+        midpoints[length(midpoints)] <- midpoints[(length(midpoints) - 1)] +
+          2 * sigma # mean(x[x > breaks[length(breaks) - 1]])
+        if (is.na(midpoints[1])) {
+          midpoints[1] <- midpoints[2] - 2 * sigma
+        }
+        if (is.na(midpoints[length(midpoints)])) {
+          midpoints[(length(midpoints))] <- midpoints[(length(midpoints) - 1)] +
+            2 * sigma
+        }
       }
     }
 
