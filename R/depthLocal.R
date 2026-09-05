@@ -93,9 +93,11 @@ depthLocal <- function(u, X, beta = 0.5,
                        depth_params1 = list(method = "Projection"),
                        depth_params2 = depth_params1) {
 
-  if (missing(X)) {
-    X <- u
-  }
+  # the same contract as the other entry points: depthLocal indexes u by row,
+  # so a data frame or a bare vector has to become a matrix here too
+  dat <- .coerceDepthInput(u, X)
+  u <- dat$u
+  X <- dat$X
 
   depths <- seq_len(nrow(u))
 
