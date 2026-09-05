@@ -13,7 +13,7 @@ depth(u, X, method = "Projection", threads = -1, ...)
 
 \item{method}{Character string which determines the depth function. \code{method} can be one of "Projection" (the default), "Mahalanobis", "Euclidean", "Tukey", "LP" or "Local" for multivariate data, or "MBD" or "FM" for functional data, in which case the call is forwarded to \code{\link{fncDepth}}. Any other value is an error. For details see \code{\link{depth}}.}
 
-\item{threads}{number of threads used in parallel computations. Default value -1 means that all possible cores will be used.}
+\item{threads}{number of threads used in parallel computations. Default value -1 means that all possible cores will be used. It is forwarded to the "Mahalanobis", "Projection", "LP" and "Tukey" methods; "Euclidean" and "Local" have no parallel implementation and ignore it.}
 
 \item{...}{parameters specific to method --- see \code{\link{depthEuclid}}}
 }
