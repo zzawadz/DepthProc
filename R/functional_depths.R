@@ -58,8 +58,7 @@ fncDepth.matrix <- function(u, X = NULL, method = "MBD", byrow = NULL, ...) {
   if (method == "FM") {
     dept <- (fncDepthFM(u, X, ...))
     depth <- methods::new("FncDepthFM", dept)
-  }
-  if (method == "MBD") {
+  } else if (method == "MBD") {
 
     if (fast_mbd) {
       dept <- fncDepthMBD(u)
@@ -68,6 +67,13 @@ fncDepth.matrix <- function(u, X = NULL, method = "MBD", byrow = NULL, ...) {
     }
 
     depth <- methods::new("FncDepthMBD", dept)
+  } else {
+    stop(gettextf(
+      "unknown functional depth method %s; must be one of %s%s",
+      sQuote(method),
+      paste(sQuote(c("MBD", "FM")), collapse = ", "),
+      if (identical(method, "BD")) " (band depth is available as fncDepthBD)" else ""
+    ))
   }
 
   depth@u <- u
