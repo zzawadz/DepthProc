@@ -17,7 +17,7 @@ Extract bands from functional depth object.
 \examples{
 
 x <- matrix(rnorm(600), nc = 20)
-obj <- DepthProc::fncDepth(x, method = "FM", dep1d = "Mahalanobis")
+obj <- DepthProc::fncDepth(x, method = "FM", dep1d_params = list(method = "Mahalanobis"))
 DepthProc::fncGetBand(obj)
 
 }

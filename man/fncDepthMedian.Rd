@@ -25,6 +25,6 @@ Calculate functional median based on data depth.
 \examples{
 
 x <- matrix(rnorm(600), nc = 20)
-md <- DepthProc::fncDepthMedian(x, method = "FM", dep1d = "Mahalanobis")
+md <- DepthProc::fncDepthMedian(x, method = "FM", dep1d_params = list(method = "Mahalanobis"))
 
 }
