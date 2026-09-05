@@ -58,6 +58,15 @@
 #' @export
 #'
 deepReg2d <- function(x, y) {
+
+  if (length(x) != length(y)) {
+    stop(gettextf("'x' has %d observation(s) but 'y' has %d; they must match",
+                  length(x), length(y)))
+  }
+  if (length(x) < 2) {
+    stop("'x' and 'y' must have at least 2 observations")
+  }
+
   y <- y[order(x)]
   x <- sort(x)
   tmp <- depth2dcpp(x, y)

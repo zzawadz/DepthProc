@@ -75,7 +75,10 @@ NumericVector depth2dcpp(SEXP R_x, SEXP R_y) {
     double *px = REAL(R_x);
     double *py = REAL(R_y);
     int tmp_depth = 0;
-    int depth = 0;
+    // -1 rather than 0 so the first candidate pair always wins: a sample whose
+    // best regression depth is 0 would otherwise leave deep_coef empty and the
+    // result below would read past the end of it
+    int depth = -1;
     std::vector<double> coef;
     std::vector<double> deep_coef;
   
@@ -96,6 +99,11 @@ NumericVector depth2dcpp(SEXP R_x, SEXP R_y) {
     
     
     
+    if(deep_coef.size() < 2) {
+      // no candidate pair at all, i.e. fewer than two observations
+      Rcpp::stop("deepReg2d needs at least 2 observations");
+    }
+
     NumericVector yy   = NumericVector::create(deep_coef[0],deep_coef[1],depth) ;
     
     return yy ;
