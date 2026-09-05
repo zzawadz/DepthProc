@@ -88,3 +88,21 @@ test_that("a bare vector is one column of data and one observation", {
   expect_equal(dim(one@u), c(1L, 2L))
   expect_length(as.numeric(one), 1L)
 })
+
+test_that("a one-observation reference sample is refused by Mahalanobis depth", {
+  X <- matrix(c(1, 2), nrow = 1)
+  u <- matrix(c(0.3, -0.7), nrow = 1)
+
+  # arma::cov() of a single row comes back 1 x 1, and the multiplication that
+  # followed threw inside an OpenMP loop - SIGABRT, not a catchable error
+  expect_error(depthMah(u, X), "not enough to estimate a covariance")
+
+  # an explicit covariance sidesteps the estimate, so it still works
+  expect_equal(as.numeric(depthMah(u, X, cov = diag(2))),
+               as.numeric(depthEuclid(u, X)))
+
+  # the other kernels cope with a single reference point on their own
+  expect_silent(depthProjection(u, X))
+  expect_silent(depthLP(u, X))
+  expect_silent(depthEuclid(u, X))
+})

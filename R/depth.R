@@ -154,6 +154,17 @@ depthMah <- function(u, X, cov = NULL, mean = NULL, threads = -1) {
   u <- dat$u
   X <- dat$X
 
+  if (is.null(cov) && nrow(X) < 2L) {
+    # a single observation has no sample covariance; Armadillo returns a 1x1
+    # from arma::cov() and the multiplication that follows throws inside an
+    # OpenMP loop, which aborts the R session rather than raising an error
+    stop(gettextf(
+      paste("'X' has %d observation, which is not enough to estimate a",
+            "covariance matrix; use at least two rows, or pass 'cov'"),
+      nrow(X)
+    ))
+  }
+
   if (!is.null(mean)) {
     mean <- matrix(mean, ncol = length(mean))
   }
