@@ -61,12 +61,7 @@
 #'   ggplot2::ggtitle("Scale curves")
 #' figure
 #'
-#' @keywords
-#' multivariate
-#' nonparametric
-#' robust
-#' depth function
-#' asymmetry
+#' @keywords multivariate nonparametric robust depth function asymmetry
 #'
 #' @export
 #'

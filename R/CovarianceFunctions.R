@@ -47,11 +47,7 @@ methods::setClass("CovDepthWeighted", contains = "CovRobust")
 #' data1990 <- na.omit(cbind(under5.mort[, 1], inf.mort[, 1], maesles.imm[, 1]))
 #' DepthProc::CovLP(data1990)
 #'
-#' @keywords
-#' multivariate
-#' nonparametric
-#' robust
-#' depth function
+#' @keywords multivariate nonparametric robust depth function
 #'
 CovLP <- function(x, pdim = 2, la = 1, lb = 1) {
 

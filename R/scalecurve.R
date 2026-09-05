@@ -53,12 +53,7 @@
 #' DepthProc::scaleCurve(x, rbind(y, z), name = "N", name_y = "Mixture of N",
 #'            depth_params = list(method = "Projection"))
 #'
-#' @keywords
-#' multivariate
-#' nonparametric
-#' robust
-#' depth function
-#' scale curve
+#' @keywords multivariate nonparametric robust depth function scale curve
 #'
 scaleCurve <- function(x, y = NULL, alpha = seq(0, 1, 0.01), name = "X",
                        name_y = "Y", title = "Scale Curve",
