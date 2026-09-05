@@ -73,3 +73,16 @@ test_that("plot marks the bin centres for a two-bin grid", {
 
   expect_silent(plot(b, add_mid = TRUE))
 })
+
+test_that("binningDepth2D rejects remove_borders when only border bins exist", {
+  set.seed(708)
+  x <- MASS::mvrnorm(100, c(0, 0), diag(2))
+
+  # nbins = 2 leaves only the two unbounded border bins in each dimension, so
+  # dropping the borders would leave an empty 0 x 0 grid
+  expect_error(binningDepth2D(x, nbins = 2, remove_borders = TRUE),
+               "at least three bins")
+
+  expect_s4_class(binningDepth2D(x, nbins = 3, remove_borders = TRUE),
+                  "BinnDepth2d")
+})
