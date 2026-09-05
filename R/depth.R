@@ -309,6 +309,13 @@ depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
     u <- matrix(u, ncol = ncol(X))
   }
 
+  if (ncol(u) != ncol(X)) {
+    stop(gettextf(
+      "'u' has %d column(s) but 'X' has %d; the dimensions must match",
+      ncol(u), ncol(X)
+    ))
+  }
+
   tukey1d <- function(u, X) {
     Xecdf <- ecdf(X)
     uecdf <- Xecdf(u)
