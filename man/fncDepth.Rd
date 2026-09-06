@@ -29,7 +29,7 @@ Calculates depth functions.
 \examples{
 
 x <- matrix(rnorm(60), ncol = 20)
-DepthProc::fncDepth(x, method = "FM", dep1d = "Mahalanobis")
+DepthProc::fncDepth(x, method = "FM", dep1d_params = list(method = "Mahalanobis"))
 DepthProc::fncDepth(x, byrow = FALSE)
 
 # zoo and xts

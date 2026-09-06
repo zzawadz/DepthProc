@@ -14,7 +14,7 @@
 #' @examples
 #'
 #' x <- matrix(rnorm(600), nc = 20)
-#' md <- DepthProc::fncDepthMedian(x, method = "FM", dep1d = "Mahalanobis")
+#' md <- DepthProc::fncDepthMedian(x, method = "FM", dep1d_params = list(method = "Mahalanobis"))
 #'
 fncDepthMedian <- function(u, X = NULL, method = "MBD", byrow = NULL,
                            unique = TRUE, ...) {
@@ -38,7 +38,7 @@ fncDepthMedian <- function(u, X = NULL, method = "MBD", byrow = NULL,
 #' @examples
 #'
 #' x <- matrix(rnorm(600), nc = 20)
-#' obj <- DepthProc::fncDepth(x, method = "FM", dep1d = "Mahalanobis")
+#' obj <- DepthProc::fncDepth(x, method = "FM", dep1d_params = list(method = "Mahalanobis"))
 #' DepthProc::fncGetBand(obj)
 #'
 fncGetBand <- function(obj, band = 0.5) {

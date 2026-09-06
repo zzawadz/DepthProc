@@ -1,12 +1,14 @@
 context("Tukey depth dispatch")
 
-test_that("depth() forwards threads to depthTukey", {
+test_that("the dispatch table forwards threads to every parallel method", {
   # threads is a named formal of depth(), so it is captured there and never
-  # reaches `...`; the Tukey arm was the one arm not passing it on, leaving
-  # depthTukey() permanently at its own threads = -1 default
-  tukey_arm <- grep("depthTukey", deparse(body(depth)), value = TRUE)
-  expect_length(tukey_arm, 1L)
-  expect_match(tukey_arm, "threads = threads", fixed = TRUE)
+  # reaches `...`; the Tukey arm was once the one arm not passing it on,
+  # leaving depthTukey() permanently at its own threads = -1 default. The arms
+  # now live in .depthMethods, which fncDepthFM() resolves against too.
+  for (method in c("Mahalanobis", "Projection", "Tukey", "LP")) {
+    arm <- paste(deparse(body(.depthMethods[[method]])), collapse = " ")
+    expect_match(arm, "threads = threads", fixed = TRUE, info = method)
+  }
 })
 
 test_that("depth(method = 'Tukey', threads = ) runs and agrees with depthTukey", {

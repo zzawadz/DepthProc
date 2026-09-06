@@ -118,7 +118,7 @@ There are two functional depths implemented - modified band depth (MBD), and Fra
 ```{r}
 x <- matrix(rnorm(60), nc = 20)
 fncDepth(x, method = "MBD")
-fncDepth(x, method = "FM", dep1d = "Mahalanobis")
+fncDepth(x, method = "FM", dep1d_params = list(method = "Mahalanobis"))
 ```
 
 ### Functional BoxPlot
