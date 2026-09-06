@@ -12,11 +12,6 @@
 # work -- they are the documented interface and are all over user code -- they
 # are just validated now.
 
-# The methods depth() dispatches on. depth()'s own error message is built from
-# this, so the two cannot disagree about what is valid.
-.depthMethodNames <- c("Mahalanobis", "Euclidean", "Projection", "Tukey",
-                       "LP", "Local", "MBD", "FM")
-
 # The arguments a method accepts, read off the implementing function rather
 # than listed by hand, so this cannot drift from the functions it describes.
 # MBD and FM return NULL: they go through fncDepth(), which forwards `...` on
@@ -47,11 +42,15 @@
       arg, sQuote(class(method)[1L])
     ))
   }
-  if (!(method %in% .depthMethodNames)) {
+  # names(.depthMethods) is the table depth() itself dispatches on, so this
+  # check and depth()'s own cannot disagree about what is valid. Read at call
+  # time: there is no Collate field, so a top-level binding here could not rely
+  # on depth.R having been sourced first.
+  if (!(method %in% names(.depthMethods))) {
     stop(gettextf(
       "unknown depth method %s in %s; must be one of %s",
       sQuote(method), arg,
-      paste(sQuote(.depthMethodNames), collapse = ", ")
+      paste(sQuote(names(.depthMethods)), collapse = ", ")
     ))
   }
 

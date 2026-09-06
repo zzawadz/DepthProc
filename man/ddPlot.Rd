@@ -12,7 +12,8 @@ ddPlot(
   name = "X",
   name_y = "Y",
   title = "Depth vs. depth plot",
-  depth_params = list()
+  depth_params = list(),
+  color_by_sample = TRUE
 )
 }
 \arguments{
@@ -31,6 +32,10 @@ ddPlot(
 \item{title}{title of the plot.}
 
 \item{depth_params}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact), or a \code{\link{depthSpec}}, which checks them.}
+
+\item{color_by_sample}{logical. If TRUE (the default) points are coloured by
+the data set they came from, and labelled with \code{name} and
+\code{name_y}. FALSE draws them all in one colour, as before.}
 }
 \description{
 Produces a DD plot which allows to compare two multivariate datasets or to compare a subject dataset with theoretical distribution.
@@ -52,6 +57,10 @@ standard <- MASS::mvrnorm(1000, c(0, 0), diag(2))
 scale <- MASS::mvrnorm(1000, c(0, 0), 4 * diag(2))
 DepthProc::ddPlot(x = standard, y = scale)
 DepthProc::ddPlot(x = standard, y = scale, scale = TRUE)
+
+# EXAMPLE 3: naming the samples labels the legend as well as the axes
+DepthProc::ddPlot(x = standard, y = scale, name = "Standard", name_y = "Scaled")
+DepthProc::ddPlot(x = standard, y = scale, color_by_sample = FALSE)
 
 }
 \references{

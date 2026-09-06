@@ -173,3 +173,37 @@ test_that("plot on a curve and on a curve list runs", {
   expect_silent(plot(sc))
   expect_silent(plot(combineDepthCurves(sc, scaleCurve(x, name = "B"))))
 })
+
+test_that("depthCurveListClass names the container for each DepthCurve subclass", {
+  set.seed(320)
+  x <- MASS::mvrnorm(300, c(0, 0), diag(2))
+  params <- list(method = "Mahalanobis")
+
+  sc <- scaleCurve(x, depth_params = params, name = "A")
+  ac <- asymmetryCurve(x, depth_params = params, name = "A")
+  sc2 <- scaleCurve(x, depth_params = params, name = "B")
+  ac2 <- asymmetryCurve(x, depth_params = params, name = "B")
+
+  expect_equal(depthCurveListClass(sc), "ScaleCurveList")
+  expect_equal(depthCurveListClass(ac), "AsymmetryCurveList")
+
+  # the two callers that used to build the name with paste0()
+  expect_s4_class(combineDepthCurves(sc, sc2), "ScaleCurveList")
+  expect_s4_class(combineDepthCurves(ac, ac2), "AsymmetryCurveList")
+})
+
+test_that("a DepthCurve subclass with no container reports which class is missing", {
+  methods::setClass("OrphanCurve", contains = c("DepthCurve", "numeric"),
+                    where = globalenv())
+  on.exit(methods::removeClass("OrphanCurve", where = globalenv()))
+
+  set.seed(321)
+  x <- MASS::mvrnorm(50, c(0, 0), diag(2))
+  orphan <- methods::new("OrphanCurve", 1, depth = depthMah(x, x),
+                         name = "A", title = "t", alpha = 1)
+
+  # the paste0() convention gave "undefined class \"OrphanCurveList\"" from
+  # deep inside methods::new(); the message now names the class and the fix
+  expect_error(depthCurveListClass(orphan), "OrphanCurveList")
+  expect_error(depthCurveListClass(orphan), "depthCurveListClass")
+})

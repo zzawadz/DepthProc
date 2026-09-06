@@ -14,7 +14,7 @@
 #' @examples
 #'
 #' x <- matrix(rnorm(60), ncol = 20)
-#' DepthProc::fncDepth(x, method = "FM", dep1d = "Mahalanobis")
+#' DepthProc::fncDepth(x, method = "FM", dep1d_params = list(method = "Mahalanobis"))
 #' DepthProc::fncDepth(x, byrow = FALSE)
 #'
 #' # zoo and xts
@@ -142,14 +142,63 @@ fncDepthFM <- function(u, X, dep1d_params = list(method = "Projection")) {
     ))
   }
 
+  # The loop below runs once per observation point. Calling the public depth()
+  # in it re-ran the whole dispatcher every iteration -- including the MBD/FM
+  # arms, which call straight back into fncDepth(), so the two dispatch routes
+  # were mutually recursive. Resolve and validate the univariate method once,
+  # here, and call its implementation directly.
+  # Not as.list(): fncDepth() forwards `...` here, and R partial-matches a bare
+  # dep1d = "Mahalanobis" onto dep1d_params. That used to land the string in
+  # depth()'s `method` by position and so appeared to work; say what is wrong
+  # instead of depending on an argument order.
+  if (!is.list(dep1d_params)) {
+    stop(gettextf(
+      paste("'dep1d_params' must be a list of arguments for the univariate",
+            "depth, not %s; did you mean dep1d_params = list(method = %s)?"),
+      sQuote(class(dep1d_params)[1L]),
+      if (is.character(dep1d_params) && length(dep1d_params) == 1L) {
+        dQuote(dep1d_params)
+      } else {
+        "..."
+      }
+    ))
+  }
+
+  method <- dep1d_params$method
+  if (is.null(method)) {
+    method <- "Projection"
+  }
+  threads <- dep1d_params$threads
+  if (is.null(threads)) {
+    threads <- -1
+  }
+  dep1d_params[c("u", "X", "method", "threads")] <- NULL
+
+  # The seam the two taxonomies used to leave open: going back through depth()
+  # made the functional methods reachable from here, and they are defined over a
+  # whole sample of curves rather than over one point of one, so asking for one
+  # recursed until the stack ran out.
+  if (method %in% c("MBD", "FM")) {
+    stop(gettextf(
+      paste("%s is a depth for a sample of curves, not for a single point of",
+            "one, so it cannot be the univariate depth in 'dep1d_params'"),
+      sQuote(method)
+    ))
+  }
+
+  # a local named `depth` here would resolve to the package's own depth()
+  # function rather than erroring, so this one is deliberately not called that
+  dep1d <- .depthMethod(method)
+  dep1d_args <- c(list(u = NULL, X = NULL, threads = threads), dep1d_params)
+
   depths <- rep(0, nrow(u))
 
   for (i in seq_len(ncol(X))) {
 
-    dep1d_params$u <- u[, i]
-    dep1d_params$X <- X[, i]
+    dep1d_args$u <- u[, i]
+    dep1d_args$X <- X[, i]
 
-    depths <- depths + do.call(depth, dep1d_params)
+    depths <- depths + do.call(dep1d, dep1d_args)
   }
 
   depths <- as.numeric(depths / ncol(X))

@@ -5,51 +5,35 @@ using namespace Rcpp;
 // [[Rcpp::export]]
 SEXP depthMahCPP(SEXP ru, SEXP rX, SEXP rcov, SEXP rmean, int threads) 
 {
-  Rboolean (Rf_isNull)(SEXP s);
-  
   Rcpp::NumericMatrix cu(ru);
   arma::mat u(cu.begin(), cu.nrow(), cu.ncol(), false);
   
   Rcpp::NumericMatrix cX(rX);
   arma::mat X(cX.begin(), cX.nrow(), cX.ncol(), false);
   
-  arma::vec depth;
-  
-  
-  // Cov and mean need to be computed
-  if(Rf_isNull(rcov) && Rf_isNull(rmean))
+  arma::mat cov;
+  if(Rf_isNull(rcov))
   {
-    depth = Depth::MahalanobisDepth(u, X, threads);
+    cov = arma::cov(X);
   }
-  
-  // Cov passed, mean need to be computed
-  if(!Rf_isNull(rcov) && Rf_isNull(rmean))
+  else
   {
     Rcpp::NumericMatrix ccov(rcov);
-    arma::mat cov(ccov.begin(), ccov.nrow(), ccov.ncol(), false);
-    
-    depth = Depth::MahalanobisDepth(u, X, cov, threads);
+    cov = arma::mat(ccov.begin(), ccov.nrow(), ccov.ncol(), true);
   }
   
-  // Cov need to be computed, mean passed
-  if(Rf_isNull(rcov) && !Rf_isNull(rmean))
+  arma::rowvec mean;
+  if(Rf_isNull(rmean))
+  {
+    mean = arma::mean(X);
+  }
+  else
   {
     Rcpp::NumericMatrix cmean(rmean);
-    arma::rowvec mean(cmean.begin(), cmean.ncol(), false);
-    
-    depth = Depth::MahalanobisDepth(u, X, mean, threads);
+    mean = arma::rowvec(cmean.begin(), cmean.ncol(), true);
   }
   
-  // Cov need to be computed, mean passed
-  if(!Rf_isNull(rcov) && !Rf_isNull(rmean))
-  {
-    Rcpp::NumericMatrix ccov(rcov);
-    arma::mat cov(ccov.begin(), ccov.nrow(), ccov.ncol(), false);
-    Rcpp::NumericMatrix cmean(rmean);
-    arma::rowvec mean(cmean.begin(), cmean.ncol(), false);
-    
-    depth = Depth::MahalanobisDepth(u, X, cov, mean, threads);
-  }
+  arma::vec depth = Depth::MahalanobisDepth(u, X, cov, mean, threads);
   
   return wrap(depth);
 }

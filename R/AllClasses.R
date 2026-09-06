@@ -101,12 +101,20 @@ methods::setMethod("contourMethod", "DepthTukey", function(object) "convexhull")
 #' @slot title title of a plot.
 #' @slot name name of the x data set, used to label the horizontal axis.
 #' @slot name_y name of the y data set, used to label the vertical axis.
+#' @slot sample factor, one level per point, saying which of the two data sets
+#'   it came from. Both axes hold the depths of the pooled sample, so this is
+#'   the only record of a point's origin. An empty factor means the points are
+#'   not distinguished and are all drawn in one colour, which is how a DDPlot
+#'   built without it --- \code{\link{ddMvnorm}}, where every point comes from
+#'   the same data set --- still renders.
 #'
 #' @export
 methods::setClass("DDPlot",
          slots = c(X = "Depth", Y = "Depth", title = "character",
-                   name = "character", name_y = "character"),
-         prototype = methods::prototype(name = "X", name_y = "Y"))
+                   name = "character", name_y = "character",
+                   sample = "factor"),
+         prototype = methods::prototype(name = "X", name_y = "Y",
+                                        sample = factor()))
 
 #####################################
 ############ DepthCurve #############
@@ -151,6 +159,49 @@ methods::setClass("DepthCurve",
 #'
 methods::setClass("DepthCurveList", contains = "VIRTUAL")
 
+#' @title Container class for a DepthCurve
+#'
+#' @docType methods
+#' @rdname depthCurveListClass-methods
+#'
+#' @param object an object that inherits from \link{DepthCurve-class}.
+#'
+#' @description
+#'
+#' Returns the name of the \link{DepthCurveList-class} class that holds curves of
+#' \code{object}'s class. \code{plot()} on a single curve and
+#' \code{\link{combineDepthCurves}} on two of them both need that name, and
+#' every \code{DepthCurve} subclass declares it with its own method rather than
+#' having it inferred from the subclass name.
+#'
+#' @export
+methods::setGeneric("depthCurveListClass", function(object) {
+  standardGeneric("depthCurveListClass")
+})
+
+#' @rdname depthCurveListClass-methods
+#' @export
+methods::setMethod("depthCurveListClass", "DepthCurve", function(object) {
+  # Fallback for subclasses defined outside the package, which historically
+  # relied on the <Name>/<Name>List naming convention. Checking the class here
+  # turns methods::new()'s generic "undefined class" into a message that names
+  # both the subclass at fault and the fix.
+  cls <- paste0(class(object), "List")
+
+  if (!methods::isClass(cls) || !methods::extends(cls, "DepthCurveList")) {
+    stop(gettextf(
+      paste("no depthCurveListClass() method for class %s, and the %s",
+            "convention gives %s, which is not a DepthCurveList; define a",
+            "depthCurveListClass() method for %s returning the name of its",
+            "container class"),
+      sQuote(class(object)), sQuote("<Name>List"), sQuote(cls),
+      sQuote(class(object))
+    ))
+  }
+
+  cls
+})
+
 #' ScaleCurve and ScaleCurveList
 #'
 #' ScaleCurve is a class that stores results of \link{scaleCurve} function.
@@ -177,6 +228,11 @@ methods::setClass("DepthCurveList", contains = "VIRTUAL")
 methods::setClass("ScaleCurve", contains = c("DepthCurve", "numeric"))
 methods::setClass("ScaleCurveList", contains = c("DepthCurveList", "list"))
 
+#' @rdname depthCurveListClass-methods
+#' @export
+methods::setMethod("depthCurveListClass", "ScaleCurve",
+                   function(object) "ScaleCurveList")
+
 #' AsymmetryCurve and AsymmetryCurveList
 #'
 #' AsymmetryCurve is a class that stores results of \link{asymmetryCurve} function.
@@ -186,6 +242,11 @@ methods::setClass("ScaleCurveList", contains = c("DepthCurveList", "list"))
 #' @export
 methods::setClass("AsymmetryCurve", contains = c("DepthCurve", "numeric"))
 methods::setClass("AsymmetryCurveList", contains = c("DepthCurveList", "list"))
+
+#' @rdname depthCurveListClass-methods
+#' @export
+methods::setMethod("depthCurveListClass", "AsymmetryCurve",
+                   function(object) "AsymmetryCurveList")
 
 #' BinnDepth2d
 #'

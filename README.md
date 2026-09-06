@@ -119,7 +119,7 @@ and Frainman-Muniz depth (FM):
 ``` r
 x <- matrix(rnorm(60), nc = 20)
 fncDepth(x, method = "MBD")
-fncDepth(x, method = "FM", dep1d = "Mahalanobis")
+fncDepth(x, method = "FM", dep1d_params = list(method = "Mahalanobis"))
 #> Warning in dep1d_params$u <- u[, i]: Coercing LHS to a list
 ```
 

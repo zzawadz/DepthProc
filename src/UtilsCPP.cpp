@@ -16,26 +16,6 @@ SEXP runifsphereCPP(double n, double p)
 }
 
 // [[Rcpp::export]]
-SEXP covCPP(SEXP rX, int threads)
-{
-  Rcpp::NumericMatrix cX(rX);
-  arma::mat X(cX.begin(), cX.nrow(), cX.ncol(), false);
-
-  arma::mat cov = Utils::cov(X, threads);
-  return wrap(cov);
-}
-
-// [[Rcpp::export]]
-SEXP meanCPP(SEXP rX, int threads)
-{
-  Rcpp::NumericMatrix cX(rX);
-  arma::mat X(cX.begin(), cX.nrow(), cX.ncol(), false);
-
-  arma::rowvec meanr = Utils::mean(X, threads);
-  return wrap(meanr);
-}
-
-// [[Rcpp::export]]
 std::vector<double> refRank(std::vector<double> u, std::vector<double> x) {
 
   std::vector<double> rank_result(u.size());

@@ -52,49 +52,18 @@ namespace Depth
 	}
 	arma::vec MahalanobisDepth(const arma::mat& X, const arma::mat& Y, int threads)
 	{
-		arma::mat cov;
-		arma::rowvec mean;
-
-    // if threads == -2 uses paraller function to compute
-    // covariance matrix and mean vector
-    if(threads == -2)
-    {
-      mean = Utils::mean(Y, threads);
-      cov = Utils::cov(Y, threads);
-    } else
-    {
-       cov = arma::cov(Y);
-       mean = arma::mean(Y);
-    }
-
-		return(MahalanobisDepth(X,Y,cov,mean,threads));
+		return(MahalanobisDepth(X, Y, arma::cov(Y), arma::mean(Y), threads));
 	}
 
 
  arma::vec MahalanobisDepth(const arma::mat& X, const arma::mat& Y, const arma::mat& cov, int threads)
  {
-    arma::rowvec mean;
-    if(threads == -2)
-    {
-      mean = Utils::mean(Y, threads);
-    }
-    else {
-      mean = arma::mean(Y);
-    }
-    return(MahalanobisDepth(X,Y,cov,mean,threads));
+    return(MahalanobisDepth(X, Y, cov, arma::mean(Y), threads));
  }
 
  arma::vec MahalanobisDepth(const arma::mat& X, const arma::mat& Y, const arma::rowvec& mean, int threads)
  {
-    arma::mat cov;
-    if(threads == -2)
-    {
-      cov = Utils::cov(Y, threads);
-    } else
-    {
-       cov = arma::cov(Y);
-    }
-    return(MahalanobisDepth(X,Y,cov,mean,threads));
+    return(MahalanobisDepth(X, Y, arma::cov(Y), mean, threads));
  }
 
  arma::vec MahalanobisDepth(const arma::mat& X, const arma::mat& Y, const arma::mat& cov, const arma::rowvec& mean, int threads)

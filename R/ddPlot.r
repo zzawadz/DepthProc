@@ -12,6 +12,9 @@
 #' @param name_y as above for y, labelling the vertical axis.
 #' @param title title of the plot.
 #' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact), or a \code{\link{depthSpec}}, which checks them.
+#' @param color_by_sample logical. If TRUE (the default) points are coloured by
+#'   the data set they came from, and labelled with \code{name} and
+#'   \code{name_y}. FALSE draws them all in one colour, as before.
 #'
 #' @details
 #'
@@ -39,9 +42,13 @@
 #' DepthProc::ddPlot(x = standard, y = scale)
 #' DepthProc::ddPlot(x = standard, y = scale, scale = TRUE)
 #'
+#' # EXAMPLE 3: naming the samples labels the legend as well as the axes
+#' DepthProc::ddPlot(x = standard, y = scale, name = "Standard", name_y = "Scaled")
+#' DepthProc::ddPlot(x = standard, y = scale, color_by_sample = FALSE)
+#'
 ddPlot <- function(x, y, scale = FALSE, location = FALSE, name = "X",
                    name_y = "Y", title = "Depth vs. depth plot",
-                   depth_params = list()) {
+                   depth_params = list(), color_by_sample = TRUE) {
 
   if (ncol(x) != ncol(y)) {
     stop("Wrong dimensions of the datasets! ncol(x) != ncol(y)")
@@ -75,8 +82,17 @@ ddPlot <- function(x, y, scale = FALSE, location = FALSE, name = "X",
   depth_x <- do.call(depth, c(uxname_list_x_new, depth_params))
   depth_y <- do.call(depth, c(uxname_list_y_new, depth_params))
 
+  # Both axes carry the depths of the pooled sample, so which set a point came
+  # from is not recoverable from the plotted coordinates; record it here.
+  sample <- factor()
+  if (color_by_sample) {
+    levels <- unique(c(name, name_y))
+    sample <- factor(rep(c(name, name_y), c(nrow(x_new), nrow(y_new))),
+                     levels = levels)
+  }
+
   ddplot <- methods::new("DDPlot", X = depth_x, Y = depth_y, title = title,
-                         name = name, name_y = name_y)
+                         name = name, name_y = name_y, sample = sample)
 
   return(ddplot)
 }

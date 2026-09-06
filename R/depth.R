@@ -1,3 +1,66 @@
+# The one table mapping a depth method name to the function that implements it.
+#
+# It used to be a switch() inside depth() -- and fncDepthFM() reached it by
+# calling back into depth() once per observation point, with a different method
+# than the one its own caller had asked for. depth(method = "FM") therefore ran
+# fncDepth() -> fncDepthFM() -> depth(), so the whole dispatcher, and anything
+# ever added to it, sat inside a hot loop, and the two routes into it were free
+# to disagree about which methods exist. fncDepthFM() now resolves an entry here
+# once, before its loop, and calls it directly.
+#
+# Every entry takes (u, X, threads, ...) so a caller does not have to know which
+# methods use threads and which ignore them; .depthMethod() is the only place
+# that has to.
+.depthMethods <- list(
+  Mahalanobis = function(u, X, threads, ...) {
+    depthMah(u, X, threads = threads, ...)
+  },
+  Euclidean = function(u, X, threads, ...) {
+    depthEuclid(u, X)
+  },
+  Projection = function(u, X, threads, ...) {
+    depthProjection(u, X, threads = threads, ...)
+  },
+  Tukey = function(u, X, threads, ...) {
+    depthTukey(u, X, threads = threads, ...)
+  },
+  LP = function(u, X, threads, ...) {
+    depthLP(u, X, threads = threads, ...)
+  },
+  Local = function(u, X, threads, ...) {
+    depthLocal(u, X, ...)
+  },
+  MBD = function(u, X, threads, ...) {
+    fncDepth(u, X, method = "MBD", ...)
+  },
+  FM = function(u, X, threads, ...) {
+    fncDepth(u, X, method = "FM", ...)
+  }
+)
+
+# Validates a method name and returns its implementation. Splitting this out of
+# depth() is what lets a caller resolve the method once and then call it many
+# times without paying for -- or bypassing -- the validation.
+.depthMethod <- function(method) {
+  if (!is.character(method)) {
+    stop(gettextf("'method' must be a character value, not %s",
+                  sQuote(class(method)[1L])))
+  }
+  if (length(method) != 1L) {
+    stop(gettextf("'method' must be a single value, not a vector of length %d",
+                  length(method)))
+  }
+  if (is.na(method) || !(method %in% names(.depthMethods))) {
+    stop(gettextf(
+      "unknown depth method %s; must be one of %s",
+      sQuote(method),
+      paste(sQuote(names(.depthMethods)), collapse = ", ")
+    ))
+  }
+
+  .depthMethods[[method]]
+}
+
 #' @title Depth calculation
 #'
 #' @description Calculate depth functions.
@@ -54,35 +117,10 @@
 depth <- function(u, X, method = "Projection", threads = -1, ...) {
 
   dat <- .coerceDepthInput(u, X)
-  u <- dat$u
-  X <- dat$X
 
-  # Method logic
-  if (!is.character(method)) {
-    stop(gettextf("'method' must be a character value, not %s",
-                  sQuote(class(method)[1L])))
-  }
-  if (length(method) != 1L) {
-    stop(gettextf("'method' must be a single value, not a vector of length %d",
-                  length(method)))
-  }
+  depthFun <- .depthMethod(method)
 
-  output <- switch(
-    method,
-    Mahalanobis = depthMah(u, X, threads = threads, ...),
-    Euclidean = depthEuclid(u, X),
-    Projection = depthProjection(u, X, threads = threads, ...),
-    Tukey = depthTukey(u, X, threads = threads, ...),
-    LP = depthLP(u, X, threads = threads, ...),
-    Local = depthLocal(u, X, ...),
-    MBD = fncDepth(u, X, method = method, ...),
-    FM = fncDepth(u, X, method = method, ...),
-    stop(gettextf(
-      "unknown depth method %s; must be one of %s",
-      sQuote(method),
-      paste(sQuote(.depthMethodNames), collapse = ", ")
-    ))
-  )
+  output <- depthFun(dat$u, dat$X, threads = threads, ...)
 
   return(output)
 }

@@ -1,17 +1,13 @@
 .depthLocal <- function(u, X, beta, depth_params1, depth_params2) {
-  ncol <- ncol(X)
-  nrow <- nrow(X)
+  # The neighbourhood is built from X symmetrised about u, so the second half
+  # of symDATA is the reflection 2u - X. apply() built that one row at a time,
+  # then needed a transpose and a shape check to undo apply()'s own
+  # transposition -- and the check was the "fix for dim 1", because a
+  # one-column X makes apply() return a bare vector. The reflection is one
+  # vectorised expression, which is both faster and the same shape at every d.
+  reflection <- matrix(2 * u, nrow = nrow(X), ncol = ncol(X), byrow = TRUE) - X
 
-  # Fix for dim 1
-  tmp <- t(apply(X, 1, function(k) {
-    2 * u - k
-  }))
-
-  if (ncol(tmp) != ncol(X)) {
-    tmp <- t(tmp)
-  }
-
-  symDATA <- rbind(X, tmp)
+  symDATA <- rbind(X, reflection)
 
   uxDepthList1 <- list(u = X, X = symDATA)
 
@@ -106,7 +102,7 @@ depthLocal <- function(u, X, beta = 0.5,
   depth_params1 <- .depthParams(depth_params1, "depth_params1")
   depth_params2 <- .depthParams(depth_params2, "depth_params2")
 
-  depths <- seq_len(nrow(u))
+  depths <- numeric(nrow(u))
 
   for (i in seq_len(nrow(u))) {
     depths[i] <- .depthLocal(

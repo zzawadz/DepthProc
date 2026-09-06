@@ -17,14 +17,6 @@ runifsphereCPP <- function(n, p) {
     .Call(`_DepthProc_runifsphereCPP`, n, p)
 }
 
-covCPP <- function(rX, threads) {
-    .Call(`_DepthProc_covCPP`, rX, threads)
-}
-
-meanCPP <- function(rX, threads) {
-    .Call(`_DepthProc_meanCPP`, rX, threads)
-}
-
 refRank <- function(u, x) {
     .Call(`_DepthProc_refRank`, u, x)
 }

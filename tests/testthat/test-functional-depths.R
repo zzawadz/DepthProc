@@ -175,3 +175,74 @@ test_that("fncBoxPlot builds a ggplot with one ribbon per band", {
   expect_equal(nlevels(p$data$level), 3L)
   expect_equal(nrow(p$data), 3L * ncol(x))
 })
+
+test_that("fncDepthFM agrees with the univariate depths it dispatches to", {
+  set.seed(216)
+  x <- matrix(rnorm(15 * 8), ncol = 8)
+
+  # the sum the loop builds, spelled out through the public entry points
+  by_hand <- rowMeans(vapply(seq_len(ncol(x)), FUN.VALUE = numeric(nrow(x)),
+                             function(i) {
+                               as.numeric(depthMah(x[, i], x[, i]))
+                             }))
+
+  expect_equal(fncDepthFM(x, x, dep1d_params = list(method = "Mahalanobis")),
+               by_hand)
+})
+
+test_that("fncDepthFM honours a univariate method other than the default", {
+  set.seed(217)
+  x <- matrix(rnorm(15 * 8), ncol = 8)
+
+  mah <- fncDepthFM(x, x, dep1d_params = list(method = "Mahalanobis"))
+  euc <- fncDepthFM(x, x, dep1d_params = list(method = "Euclidean"))
+
+  expect_equal(length(mah), nrow(x))
+  expect_false(isTRUE(all.equal(mah, euc)))
+})
+
+test_that("fncDepthFM validates its univariate method before the loop", {
+  set.seed(218)
+  x <- matrix(rnorm(15 * 8), ncol = 8)
+
+  expect_error(fncDepthFM(x, x, dep1d_params = list(method = "NotADepth")),
+               "unknown depth method")
+  expect_error(fncDepthFM(x, x, dep1d_params = list(method = 3)),
+               "must be a character value")
+})
+
+test_that("a functional depth is refused as fncDepthFM's univariate depth", {
+  set.seed(219)
+  x <- matrix(rnorm(15 * 8), ncol = 8)
+
+  # depth() -> fncDepth() -> fncDepthFM() -> depth() used to make this recurse
+  expect_error(fncDepthFM(x, x, dep1d_params = list(method = "FM")),
+               "sample of curves")
+  expect_error(fncDepth(x, method = "FM", dep1d_params = list(method = "MBD")),
+               "sample of curves")
+})
+
+test_that("depth() and fncDepth() agree on which methods exist", {
+  set.seed(220)
+  x <- matrix(rnorm(15 * 8), ncol = 8)
+  params <- list(method = "Mahalanobis")
+
+  expect_equal(as.numeric(depth(x, x, method = "FM", dep1d_params = params)),
+               as.numeric(fncDepth(x, x, method = "FM", dep1d_params = params)))
+  expect_equal(as.numeric(depth(x, x, method = "MBD")),
+               as.numeric(fncDepth(x, x, method = "MBD")))
+})
+
+test_that("fncDepthFM rejects a dep1d_params that is not a list", {
+  set.seed(221)
+  x <- matrix(rnorm(15 * 8), ncol = 8)
+
+  # fncDepth() forwards ... to fncDepthFM(), and R partial-matches dep1d onto
+  # dep1d_params; the string used to reach depth()'s `method` by position
+  expect_error(fncDepth(x, method = "FM", dep1d = "Mahalanobis"),
+               "must be a list")
+  expect_error(fncDepth(x, method = "FM", dep1d = "Mahalanobis"),
+               "Mahalanobis")
+  expect_error(fncDepthFM(x, x, dep1d_params = "Mahalanobis"),
+               "must be a list")
+})
