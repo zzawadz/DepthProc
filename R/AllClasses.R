@@ -118,7 +118,7 @@ methods::setClass("DepthCurveList", contains = "VIRTUAL")
 #' @title Container class for a DepthCurve
 #'
 #' @docType methods
-#' @rdname listClass-methods
+#' @rdname depthCurveListClass-methods
 #'
 #' @param object an object that inherits from \link{DepthCurve-class}.
 #'
@@ -131,13 +131,13 @@ methods::setClass("DepthCurveList", contains = "VIRTUAL")
 #' having it inferred from the subclass name.
 #'
 #' @export
-methods::setGeneric("listClass", function(object) {
-  standardGeneric("listClass")
+methods::setGeneric("depthCurveListClass", function(object) {
+  standardGeneric("depthCurveListClass")
 })
 
-#' @rdname listClass-methods
+#' @rdname depthCurveListClass-methods
 #' @export
-methods::setMethod("listClass", "DepthCurve", function(object) {
+methods::setMethod("depthCurveListClass", "DepthCurve", function(object) {
   # Fallback for subclasses defined outside the package, which historically
   # relied on the <Name>/<Name>List naming convention. Checking the class here
   # turns methods::new()'s generic "undefined class" into a message that names
@@ -146,9 +146,10 @@ methods::setMethod("listClass", "DepthCurve", function(object) {
 
   if (!methods::isClass(cls) || !methods::extends(cls, "DepthCurveList")) {
     stop(gettextf(
-      paste("no listClass() method for class %s, and the %s convention gives",
-            "%s, which is not a DepthCurveList; define a listClass() method",
-            "for %s returning the name of its container class"),
+      paste("no depthCurveListClass() method for class %s, and the %s",
+            "convention gives %s, which is not a DepthCurveList; define a",
+            "depthCurveListClass() method for %s returning the name of its",
+            "container class"),
       sQuote(class(object)), sQuote("<Name>List"), sQuote(cls),
       sQuote(class(object))
     ))
@@ -183,9 +184,10 @@ methods::setMethod("listClass", "DepthCurve", function(object) {
 methods::setClass("ScaleCurve", contains = c("DepthCurve", "numeric"))
 methods::setClass("ScaleCurveList", contains = c("DepthCurveList", "list"))
 
-#' @rdname listClass-methods
+#' @rdname depthCurveListClass-methods
 #' @export
-methods::setMethod("listClass", "ScaleCurve", function(object) "ScaleCurveList")
+methods::setMethod("depthCurveListClass", "ScaleCurve",
+                   function(object) "ScaleCurveList")
 
 #' AsymmetryCurve and AsymmetryCurveList
 #'
@@ -197,9 +199,9 @@ methods::setMethod("listClass", "ScaleCurve", function(object) "ScaleCurveList")
 methods::setClass("AsymmetryCurve", contains = c("DepthCurve", "numeric"))
 methods::setClass("AsymmetryCurveList", contains = c("DepthCurveList", "list"))
 
-#' @rdname listClass-methods
+#' @rdname depthCurveListClass-methods
 #' @export
-methods::setMethod("listClass", "AsymmetryCurve",
+methods::setMethod("depthCurveListClass", "AsymmetryCurve",
                    function(object) "AsymmetryCurveList")
 
 #' BinnDepth2d

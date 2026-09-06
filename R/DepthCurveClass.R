@@ -1,7 +1,7 @@
 #' @rdname plot-methods
 #' @export
 methods::setMethod("plot", signature = c(x = "DepthCurve"), function(x) {
-  plot(methods::new(listClass(x), x))
+  plot(methods::new(depthCurveListClass(x), x))
 })
 
 #' @rdname plot-methods
@@ -75,7 +75,7 @@ methods::setMethod("combineDepthCurves",
 #' @export
 methods::setMethod("combineDepthCurves", signature(x = "DepthCurve", y = "DepthCurve"),
           function(x, y, .list) {
-            return(methods::new(listClass(x), x, y))
+            return(methods::new(depthCurveListClass(x), x, y))
           }
 )
 methods::setMethod(".getPlot", "DepthCurveList", function(object) {
