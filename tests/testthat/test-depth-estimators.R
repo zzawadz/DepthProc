@@ -161,3 +161,19 @@ test_that("depthMah honours a cov or mean that differs from the sample estimate"
   shifted <- as.numeric(depthMah(u, X, cov = diag(2), mean = c(0, 0)))
   expect_equal(shifted, as.numeric(1 / (1 + rowSums(u ^ 2))))
 })
+
+test_that("a negative threads value means all cores, whatever the value", {
+  set.seed(332)
+  X <- MASS::mvrnorm(200, c(1, -2), matrix(c(3, 1, 1, 2), 2, 2))
+  u <- X[1:20, , drop = FALSE]
+
+  default <- as.numeric(depthMah(u, X, threads = -1))
+
+  # -2 used to select the package's own OpenMP cov/mean instead of
+  # Armadillo's. Those were removed for being slower at every size and BLAS
+  # configuration measured, so -2 is no longer special: like any value below
+  # 1 it just means "use every core", and the result is unchanged.
+  expect_equal(as.numeric(depthMah(u, X, threads = -2)), default)
+  expect_equal(as.numeric(depthMah(u, X, threads = 1)), default)
+  expect_equal(as.numeric(depthMah(u, X, threads = 2)), default)
+})

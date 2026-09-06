@@ -2,22 +2,6 @@
 using namespace Rcpp;
 #include "Depth.h"
 
-namespace
-{
-  // Defaulting an absent estimate is all the four branches this replaces ever
-  // expressed, and Depth::MahalanobisDepth's own overloads already default them
-  // exactly this way. threads == -2 is the package's own parallel estimator.
-  arma::mat defaultCov(const arma::mat& X, int threads)
-  {
-    return threads == -2 ? Utils::cov(X, threads) : arma::cov(X);
-  }
-
-  arma::rowvec defaultMean(const arma::mat& X, int threads)
-  {
-    return threads == -2 ? Utils::mean(X, threads) : arma::mean(X);
-  }
-}
-
 // [[Rcpp::export]]
 SEXP depthMahCPP(SEXP ru, SEXP rX, SEXP rcov, SEXP rmean, int threads) 
 {
@@ -30,7 +14,7 @@ SEXP depthMahCPP(SEXP ru, SEXP rX, SEXP rcov, SEXP rmean, int threads)
   arma::mat cov;
   if(Rf_isNull(rcov))
   {
-    cov = defaultCov(X, threads);
+    cov = arma::cov(X);
   }
   else
   {
@@ -41,7 +25,7 @@ SEXP depthMahCPP(SEXP ru, SEXP rX, SEXP rcov, SEXP rmean, int threads)
   arma::rowvec mean;
   if(Rf_isNull(rmean))
   {
-    mean = defaultMean(X, threads);
+    mean = arma::mean(X);
   }
   else
   {

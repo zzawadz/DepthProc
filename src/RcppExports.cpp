@@ -65,30 +65,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// covCPP
-SEXP covCPP(SEXP rX, int threads);
-RcppExport SEXP _DepthProc_covCPP(SEXP rXSEXP, SEXP threadsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP);
-    Rcpp::traits::input_parameter< int >::type threads(threadsSEXP);
-    rcpp_result_gen = Rcpp::wrap(covCPP(rX, threads));
-    return rcpp_result_gen;
-END_RCPP
-}
-// meanCPP
-SEXP meanCPP(SEXP rX, int threads);
-RcppExport SEXP _DepthProc_meanCPP(SEXP rXSEXP, SEXP threadsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP);
-    Rcpp::traits::input_parameter< int >::type threads(threadsSEXP);
-    rcpp_result_gen = Rcpp::wrap(meanCPP(rX, threads));
-    return rcpp_result_gen;
-END_RCPP
-}
 // refRank
 std::vector<double> refRank(std::vector<double> u, std::vector<double> x);
 RcppExport SEXP _DepthProc_refRank(SEXP uSEXP, SEXP xSEXP) {
@@ -215,8 +191,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_DepthProc_sampleMaxDepthForMuCPP", (DL_FUNC) &_DepthProc_sampleMaxDepthForMuCPP, 5},
     {"_DepthProc_sampleMaxLocScaleDepthCPP", (DL_FUNC) &_DepthProc_sampleMaxLocScaleDepthCPP, 4},
     {"_DepthProc_runifsphereCPP", (DL_FUNC) &_DepthProc_runifsphereCPP, 2},
-    {"_DepthProc_covCPP", (DL_FUNC) &_DepthProc_covCPP, 2},
-    {"_DepthProc_meanCPP", (DL_FUNC) &_DepthProc_meanCPP, 2},
     {"_DepthProc_refRank", (DL_FUNC) &_DepthProc_refRank, 2},
     {"_DepthProc_CovLPCPP", (DL_FUNC) &_DepthProc_CovLPCPP, 4},
     {"_DepthProc_depthMahCPP", (DL_FUNC) &_DepthProc_depthMahCPP, 5},
