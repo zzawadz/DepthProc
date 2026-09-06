@@ -14,7 +14,7 @@
 #' @param points Logical. If TRUE points from matrix x will be drawn.
 #' @param colors function for colors pallete (e.g. gray.colors).
 #' @param levels number of levels for color scale.
-#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
+#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact), or a \code{\link{depthSpec}}, which checks them.
 #' @param graph_params list of graphical parameters for functions filled.contour and contour (e.g. lwd, lty, main).
 #' @param contour_method determines the method used to draw the contour lines. The default value ("auto") tries
 #' to determine the best method for given depth function.
@@ -77,6 +77,8 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
   xy_surface <- expand.grid(x_axis, y_axis)
   xy_surface <- cbind(xy_surface[, 1], xy_surface[, 2])
 
+  depth_params <- .depthParams(depth_params)
+
   ux_list <- list(u = xy_surface, X = x)
 
   depth_params_list <- c(ux_list, depth_params)
@@ -93,14 +95,16 @@ depthContour <- function(x, xlim = extendrange(x[, 1], f = 0.1),
   }
 
   # set contour method
-  contour_method <- contour_method[1]
-  if(contour_method == "auto") {
-    dp_method <- depth_params[["method"]]
-    if(!is.null(dp_method) && dp_method == "Tukey") {
-      contour_method <- "convexhull"
-    } else {
-      contour_method <- "contour"
-    }
+  contour_method <- match.arg(contour_method,
+                              c("auto", "convexhull", "contour"))
+  if (contour_method == "auto") {
+    # Which renderer suits a depth surface is a property of the depth, not of
+    # this function: Tukey depth is piecewise constant, so contouring it draws
+    # staircase artefacts and its level sets are traced exactly by a convex
+    # hull. Asking the object depth() just returned puts that knowledge on the
+    # depth class, where a new discrete depth can declare it, instead of
+    # string-matching an unvalidated list entry here.
+    contour_method <- contourMethod(depth_surface_raw)
   }
 
   addConvexHull <- function(data, depth, cutoff, col = "black") {

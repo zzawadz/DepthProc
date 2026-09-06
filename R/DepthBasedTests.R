@@ -12,7 +12,7 @@
 #' @param x data matrix
 #' @param y data matrix
 #' @param alternative a character string specifying the alternative hypothesis, must be one of "two.sided" (default), "greater" or "less".
-#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).
+#' @param depth_params list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact), or a \code{\link{depthSpec}}, which checks them.
 #'
 #' @details
 #'
@@ -63,6 +63,7 @@ mWilcoxonTest <- function(x, y, alternative = "two.sided",
   total <- rbind(x, y)
   uxname_list_x <- list(u = x, X = total)
   uxname_list_y <- list(u = y, X = total)
+  depth_params <- .depthParams(depth_params)
   dep_x <- do.call(depth, c(uxname_list_x, depth_params))
   dep_y <- do.call(depth, c(uxname_list_y, depth_params))
   test_res <- wilcox.test(dep_x, dep_y, alternative = alternative)

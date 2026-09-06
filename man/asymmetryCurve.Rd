@@ -27,7 +27,7 @@ asymmetryCurve(
 
 \item{name_y}{Name of set Y --- used in plot legend}
 
-\item{depth_params}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact).}
+\item{depth_params}{list of parameters for function depth (method, threads, ndir, la, lb, pdim, mean, cov, exact), or a \code{\link{depthSpec}}, which checks them.}
 
 \item{method}{Character string which determines the depth function used. The method can be "Projection" (the default), "Mahalanobis", "Euclidean", "Tukey" or "LP". For details see \code{\link{depth}}.}
 }
