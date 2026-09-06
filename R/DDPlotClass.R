@@ -9,13 +9,30 @@ methods::setMethod("plot", signature = c(x = "DDPlot"), function(x) {
 #' @export
 methods::setMethod("getPlot", "DDPlot", function(object) {
   a_est <- data.frame(x = object@X, y = object@Y)
+
+  # An object built without the sample slot - ddMvnorm, or one from before the
+  # slot existed - keeps the single-colour plot it has always had.
+  by_sample <- length(object@sample) == nrow(a_est) &&
+    nlevels(object@sample) > 1L
+
   p <- ggplot2::ggplot()
   # eval(as.name("x")) - small hack to fix:
   # getPlot, DDPlot: no visible binding for global variable "x"
   # getPlot, DDPlot: no visible binding for global variable "y"
   # I cannot use aes(x, y)
-  p <- p + ggplot2::geom_point(data = a_est, ggplot2::aes(eval(as.name("x")), eval(as.name("y"))),
-                      color = "blue", shape = 1, size = 3)
+  if (by_sample) {
+    a_est$sample <- object@sample
+    p <- p + ggplot2::geom_point(data = a_est,
+                        ggplot2::aes(eval(as.name("x")), eval(as.name("y")),
+                                     color = eval(as.name("sample"))),
+                        shape = 1, size = 3)
+    p <- p + ggplot2::scale_color_manual(
+      name = NULL,
+      values = .ddPlotColors(nlevels(object@sample)))
+  } else {
+    p <- p + ggplot2::geom_point(data = a_est, ggplot2::aes(eval(as.name("x")), eval(as.name("y"))),
+                        color = "blue", shape = 1, size = 3)
+  }
   p <- p + ggplot2::theme_bw() + .depTheme()
   p <- p + ggplot2::ggtitle(object@title)
   p <- p + ggplot2::xlab(paste(object@name, "depth"))
