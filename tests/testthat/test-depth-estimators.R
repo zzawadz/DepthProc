@@ -127,3 +127,37 @@ test_that("depthMedian rejects depth_params for a Depth object", {
   expect_equal(depthMedian(dp, convex = TRUE),
                depthMedian(x, list(method = "Mahalanobis"), convex = TRUE))
 })
+
+test_that("depthMah defaults cov and mean independently of each other", {
+  set.seed(330)
+  X <- MASS::mvrnorm(200, c(1, -2), matrix(c(3, 1, 1, 2), 2, 2))
+  u <- X[1:20, , drop = FALSE]
+
+  cov_hat <- stats::cov(X)
+  mean_hat <- colMeans(X)
+
+  # the four argument combinations must agree once the omitted estimate is the
+  # one the function would have computed anyway
+  both <- as.numeric(depthMah(u, X, cov = cov_hat, mean = mean_hat))
+
+  expect_equal(as.numeric(depthMah(u, X)), both)
+  expect_equal(as.numeric(depthMah(u, X, cov = cov_hat)), both)
+  expect_equal(as.numeric(depthMah(u, X, mean = mean_hat)), both)
+})
+
+test_that("depthMah honours a cov or mean that differs from the sample estimate", {
+  set.seed(331)
+  X <- MASS::mvrnorm(200, c(1, -2), matrix(c(3, 1, 1, 2), 2, 2))
+  u <- X[1:20, , drop = FALSE]
+
+  default <- as.numeric(depthMah(u, X))
+
+  expect_false(isTRUE(all.equal(
+    as.numeric(depthMah(u, X, cov = diag(2))), default)))
+  expect_false(isTRUE(all.equal(
+    as.numeric(depthMah(u, X, mean = c(0, 0))), default)))
+
+  # a custom mean is a plain relocation of the Mahalanobis distance
+  shifted <- as.numeric(depthMah(u, X, cov = diag(2), mean = c(0, 0)))
+  expect_equal(shifted, as.numeric(1 / (1 + rowSums(u ^ 2))))
+})

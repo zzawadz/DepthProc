@@ -2,54 +2,54 @@
 using namespace Rcpp;
 #include "Depth.h"
 
+namespace
+{
+  // Defaulting an absent estimate is all the four branches this replaces ever
+  // expressed, and Depth::MahalanobisDepth's own overloads already default them
+  // exactly this way. threads == -2 is the package's own parallel estimator.
+  arma::mat defaultCov(const arma::mat& X, int threads)
+  {
+    return threads == -2 ? Utils::cov(X, threads) : arma::cov(X);
+  }
+
+  arma::rowvec defaultMean(const arma::mat& X, int threads)
+  {
+    return threads == -2 ? Utils::mean(X, threads) : arma::mean(X);
+  }
+}
+
 // [[Rcpp::export]]
 SEXP depthMahCPP(SEXP ru, SEXP rX, SEXP rcov, SEXP rmean, int threads) 
 {
-  Rboolean (Rf_isNull)(SEXP s);
-  
   Rcpp::NumericMatrix cu(ru);
   arma::mat u(cu.begin(), cu.nrow(), cu.ncol(), false);
   
   Rcpp::NumericMatrix cX(rX);
   arma::mat X(cX.begin(), cX.nrow(), cX.ncol(), false);
   
-  arma::vec depth;
-  
-  
-  // Cov and mean need to be computed
-  if(Rf_isNull(rcov) && Rf_isNull(rmean))
+  arma::mat cov;
+  if(Rf_isNull(rcov))
   {
-    depth = Depth::MahalanobisDepth(u, X, threads);
+    cov = defaultCov(X, threads);
   }
-  
-  // Cov passed, mean need to be computed
-  if(!Rf_isNull(rcov) && Rf_isNull(rmean))
+  else
   {
     Rcpp::NumericMatrix ccov(rcov);
-    arma::mat cov(ccov.begin(), ccov.nrow(), ccov.ncol(), false);
-    
-    depth = Depth::MahalanobisDepth(u, X, cov, threads);
+    cov = arma::mat(ccov.begin(), ccov.nrow(), ccov.ncol(), true);
   }
   
-  // Cov need to be computed, mean passed
-  if(Rf_isNull(rcov) && !Rf_isNull(rmean))
+  arma::rowvec mean;
+  if(Rf_isNull(rmean))
+  {
+    mean = defaultMean(X, threads);
+  }
+  else
   {
     Rcpp::NumericMatrix cmean(rmean);
-    arma::rowvec mean(cmean.begin(), cmean.ncol(), false);
-    
-    depth = Depth::MahalanobisDepth(u, X, mean, threads);
+    mean = arma::rowvec(cmean.begin(), cmean.ncol(), true);
   }
   
-  // Cov need to be computed, mean passed
-  if(!Rf_isNull(rcov) && !Rf_isNull(rmean))
-  {
-    Rcpp::NumericMatrix ccov(rcov);
-    arma::mat cov(ccov.begin(), ccov.nrow(), ccov.ncol(), false);
-    Rcpp::NumericMatrix cmean(rmean);
-    arma::rowvec mean(cmean.begin(), cmean.ncol(), false);
-    
-    depth = Depth::MahalanobisDepth(u, X, cov, mean, threads);
-  }
+  arma::vec depth = Depth::MahalanobisDepth(u, X, cov, mean, threads);
   
   return wrap(depth);
 }
