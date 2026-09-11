@@ -11,7 +11,11 @@
 
   uxDepthList1 <- list(u = X, X = symDATA)
 
-  depths <- as.numeric(do.call(depth, c(uxDepthList1, depth_params1)))
+  # .depthValues() rather than depth(): both calls in this function threw away
+  # the S4 Depth object immediately, and this one is the expensive one to
+  # build -- its X slot is symDATA, 2 * nrow(X) rows, copied once per row of u
+  # by the caller's loop.
+  depths <- do.call(.depthValues, c(uxDepthList1, depth_params1))
   quan <- quantile(depths, probs = 1 - beta)
   # a small beta can leave a single point in the neighbourhood; without
   # drop = FALSE that row collapses to a vector and as.matrix() stood it back
@@ -21,7 +25,7 @@
 
   uxDepthList2 <- list(u = u, X = Rset)
 
-  as.numeric(do.call(depth, c(uxDepthList2, depth_params2)))
+  do.call(.depthValues, c(uxDepthList2, depth_params2))
 }
 
 #' @title Local depth

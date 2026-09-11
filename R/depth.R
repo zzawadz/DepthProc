@@ -38,10 +38,10 @@
   }
 )
 
-# Validates a method name and returns its implementation. Splitting this out of
-# depth() is what lets a caller resolve the method once and then call it many
-# times without paying for -- or bypassing -- the validation.
-.depthMethod <- function(method) {
+# Validates a method name and returns it. Split out of .depthMethod() so the
+# raw-value table below can reuse the one set of checks rather than growing a
+# second, drifting copy of them.
+.depthMethodName <- function(method) {
   if (!is.character(method)) {
     stop(gettextf("'method' must be a character value, not %s",
                   sQuote(class(method)[1L])))
@@ -58,7 +58,83 @@
     ))
   }
 
-  .depthMethods[[method]]
+  method
+}
+
+# Validates a method name and returns its implementation. Splitting this out of
+# depth() is what lets a caller resolve the method once and then call it many
+# times without paying for -- or bypassing -- the validation.
+.depthMethod <- function(method) {
+  .depthMethods[[.depthMethodName(method)]]
+}
+
+# The raw-value twin of .depthMethods: the same methods behind the same
+# (u, X, threads, ...) calling convention, but returning the plain numeric
+# vector instead of the S4 Depth object built around it.
+#
+# Every depthXxx() ends by handing its numeric result to methods::new() along
+# with u, X and the method name. That object is the right return value for a
+# user calling depth() once. It is pure waste for the package's own loops,
+# which call a depth function per iteration and immediately as.numeric() the
+# result away: each iteration allocates the object, copies u and X into its
+# slots and runs the class's validity check, then drops all of it. In
+# .depthLocal() the X being copied is the 2 * nrow(X)-row symmetrised sample,
+# once per row of u.
+.depthValueMethods <- list(
+  Mahalanobis = function(u, X, threads, ...) {
+    .depthMahValues(u, X, threads = threads, ...)
+  },
+  Euclidean = function(u, X, threads, ...) {
+    .depthEuclidValues(u, X)
+  },
+  Projection = function(u, X, threads, ...) {
+    .depthProjectionValues(u, X, threads = threads, ...)
+  },
+  Tukey = function(u, X, threads, ...) {
+    .depthTukeyValues(u, X, threads = threads, ...)
+  },
+  LP = function(u, X, threads, ...) {
+    .depthLPValues(u, X, threads = threads, ...)
+  }
+)
+
+# Resolves a method to a function returning depths as a bare numeric vector,
+# with the same input contract as the public depth functions: the returned
+# function coerces u and X itself, because its callers are loops that hand it a
+# different slice each iteration -- fncDepthFM() passes bare columns and relies
+# on the callee to stand them up as one-column matrices.
+#
+# Local, MBD and FM have no kernel of their own to expose -- Local is
+# depthLocal()'s own loop over this very table, and the two functional depths
+# are defined over a sample of curves and forward to fncDepth(). They keep the
+# S4 route, unwrapped here, so that every name .depthMethod() accepts is also
+# accepted by this one and the two tables cannot drift apart.
+.depthValueMethod <- function(method) {
+  name <- .depthMethodName(method)
+
+  valueFun <- .depthValueMethods[[name]]
+  if (is.null(valueFun)) {
+    objectFun <- .depthMethods[[name]]
+    return(function(u, X, threads, ...) {
+      as.numeric(objectFun(u, X, threads = threads, ...))
+    })
+  }
+
+  function(u, X, threads, ...) {
+    dat <- .coerceDepthInput(u, X)
+    # as.numeric() because the C++ kernels hand back an n x 1 matrix, which the
+    # S4 route flattened on the way out of the Depth object. Without it the two
+    # routes would return different shapes for the same call, and a caller that
+    # indexed the result would quietly get a matrix.
+    as.numeric(valueFun(dat$u, dat$X, threads = threads, ...))
+  }
+}
+
+# The internal counterpart of depth(): same arguments, same dispatch, same
+# validation, same coercion, but a bare numeric vector back. For callers that
+# would have written as.numeric(do.call(depth, ...)).
+.depthValues <- function(u, X, method = "Projection", threads = -1, ...) {
+  .depthValueMethod(method)(u, X, threads = threads, ...)
 }
 
 #' @title Depth calculation
@@ -153,12 +229,17 @@ depthEuclid <- function(u, X) {
   u <- dat$u
   X <- dat$X
 
+  depth <- .depthEuclidValues(u, X)
+
+  methods::new("DepthEuclid", depth, u = u, X = X, method = "Euclidean")
+}
+
+# Expects u and X already coerced by .coerceDepthInput().
+.depthEuclidValues <- function(u, X) {
   n <- dim(u)[1]
   center <- colMeans(X)
   center <- matrix(rep(center, n), nrow = n, byrow = TRUE)
-  depth <- 1 / (1 + (rowSums((u - center) ^ 2)))
-
-  methods::new("DepthEuclid", depth, u = u, X = X, method = "Euclidean")
+  1 / (1 + (rowSums((u - center) ^ 2)))
 }
 
 #' @title Mahalanobis Depth
@@ -191,14 +272,27 @@ depthMah <- function(u, X, cov = NULL, mean = NULL, threads = -1) {
   u <- dat$u
   X <- dat$X
 
+  depth <- .depthMahValues(u, X, cov = cov, mean = mean, threads = threads)
+
+  methods::new("DepthMahalanobis", depth, u = u, X = X, method = "Mahalanobis")
+}
+
+# Expects u and X already coerced by .coerceDepthInput().
+.depthMahValues <- function(u, X, cov = NULL, mean = NULL, threads = -1) {
+
   if (is.null(cov) && nrow(X) < 2L) {
     # a single observation has no sample covariance; Armadillo returns a 1x1
     # from arma::cov() and the multiplication that follows throws inside an
     # OpenMP loop, which aborts the R session rather than raising an error
-    stop(gettextf(
-      paste("'X' has %d observation, which is not enough to estimate a",
-            "covariance matrix; use at least two rows, or pass 'cov'"),
-      nrow(X)
+    # call = sys.call(-1) so the condition still names the public function the
+    # user called, now that the guard lives one frame below it
+    stop(simpleError(
+      gettextf(
+        paste("'X' has %d observation, which is not enough to estimate a",
+              "covariance matrix; use at least two rows, or pass 'cov'"),
+        nrow(X)
+      ),
+      call = sys.call(-1)
     ))
   }
 
@@ -206,9 +300,7 @@ depthMah <- function(u, X, cov = NULL, mean = NULL, threads = -1) {
     mean <- matrix(mean, ncol = length(mean))
   }
 
-  depth <- depthMahCPP(u, X, cov, mean, threads)
-
-  methods::new("DepthMahalanobis", depth, u = u, X = X, method = "Mahalanobis")
+  depthMahCPP(u, X, cov, mean, threads)
 }
 
 #' @title Projection Depth
@@ -240,9 +332,14 @@ depthProjection <- function(u, X, ndir = 1000, threads = -1) {
   u <- dat$u
   X <- dat$X
 
-  depth <- depthProjCPP(u, X, ndir, threads)
+  depth <- .depthProjectionValues(u, X, ndir = ndir, threads = threads)
 
   methods::new("DepthProjection", depth, u = u, X = X, method = "Projection")
+}
+
+# Expects u and X already coerced by .coerceDepthInput().
+.depthProjectionValues <- function(u, X, ndir = 1000, threads = -1) {
+  depthProjCPP(u, X, ndir, threads)
 }
 
 #' @title Tukey Depth
@@ -281,6 +378,15 @@ depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
   u <- dat$u
   X <- dat$X
 
+  depth <- .depthTukeyValues(u, X, ndir = ndir, threads = threads,
+                             exact = exact)
+
+  methods::new("DepthTukey", depth, u = u, X = X, method = "Tukey")
+}
+
+# Expects u and X already coerced by .coerceDepthInput().
+.depthTukeyValues <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
+
   tukey1d <- function(u, X) {
     Xecdf <- ecdf(X)
     uecdf <- Xecdf(u)
@@ -294,11 +400,14 @@ depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
   if (exact && ncol(X) > 2) {
     # the exact algorithm exists for 2d only; say so rather than quietly
     # handing back an approximation the caller explicitly asked not to get
-    warning(gettextf(
-      paste("exact Tukey depth is available for two-dimensional data only;",
-            "X has %d columns, so the approximate algorithm with ndir = %d",
-            "random directions was used instead"),
-      ncol(X), ndir
+    warning(simpleWarning(
+      gettextf(
+        paste("exact Tukey depth is available for two-dimensional data only;",
+              "X has %d columns, so the approximate algorithm with ndir = %d",
+              "random directions was used instead"),
+        ncol(X), ndir
+      ),
+      call = sys.call(-1)
     ))
   }
 
@@ -321,7 +430,7 @@ depthTukey <- function(u, X, ndir = 1000, threads = -1, exact = FALSE) {
     depth <- apply(OD, 1, min)
   }
 
-  methods::new("DepthTukey", depth, u = u, X = X, method = "Tukey")
+  depth
 }
 
 #' @title LP Depth
@@ -357,11 +466,20 @@ depthLP <- function(u, X, pdim = 2, la = 1, lb = 1, threads = -1,
   u <- dat$u
   X <- dat$X
 
-  if (!is.null(func)) {
-    stop("'func' is not supported yet; leave it as NULL")
-  }
-
-  depth <- depthLPCPP(u, X, pdim, la, lb, threads = threads)
+  depth <- .depthLPValues(u, X, pdim = pdim, la = la, lb = lb,
+                          threads = threads, func = func)
 
   methods::new("DepthLP", depth, u = u, X = X, method = "LP")
+}
+
+# Expects u and X already coerced by .coerceDepthInput().
+.depthLPValues <- function(u, X, pdim = 2, la = 1, lb = 1, threads = -1,
+                           func = NULL) {
+
+  if (!is.null(func)) {
+    stop(simpleError("'func' is not supported yet; leave it as NULL",
+                     call = sys.call(-1)))
+  }
+
+  depthLPCPP(u, X, pdim, la, lb, threads = threads)
 }

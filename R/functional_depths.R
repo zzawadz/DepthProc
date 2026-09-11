@@ -187,8 +187,10 @@ fncDepthFM <- function(u, X, dep1d_params = list(method = "Projection")) {
   }
 
   # a local named `depth` here would resolve to the package's own depth()
-  # function rather than erroring, so this one is deliberately not called that
-  dep1d <- .depthMethod(method)
+  # function rather than erroring, so this one is deliberately not called that.
+  # The raw-value table, because the loop below sums the depths and would
+  # otherwise build and discard one S4 Depth object per observation point.
+  dep1d <- .depthValueMethod(method)
   dep1d_args <- c(list(u = NULL, X = NULL, threads = threads), dep1d_params)
 
   depths <- rep(0, nrow(u))
