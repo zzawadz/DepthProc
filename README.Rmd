@@ -53,7 +53,7 @@ install_github("zzawadz/DepthProc")
 
 ### Speed and multithreading
 
-Most of the code is written in C++ for additional efficiency. We also use OpenMP to speedup computations with multithreading:
+Most of the code is written in C++ for additional efficiency. We also use OpenMP to speedup computations with multithreading. The speedup is close to linear in the number of cores --- the timings below were knitted on a 4-core machine, so restricting `depth()` to one thread costs roughly 4x the elapsed time, and to two threads roughly 2x:
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, results='markup'}
@@ -61,14 +61,14 @@ library(DepthProc)
 set.seed(123)
 
 d <- 10
-x <- MASS::mvrnorm(1000, rep(0, d), diag(d))
+x <- MASS::mvrnorm(2000, rep(0, d), diag(d))
 # Default - utilize as many threads as possible
 system.time(depth(x, x, method = "LP"))
 
-# Only single thread - 4 times slower:
+# Only single thread - compare the elapsed column:
 system.time(depth(x, x, method = "LP", threads = 1))
 
-# Two threads - 2 times slower:
+# Two threads:
 system.time(depth(x, x, method = "LP", threads = 2))
 ```
 

@@ -44,28 +44,31 @@ install_github("zzawadz/DepthProc")
 ### Speed and multithreading
 
 Most of the code is written in C++ for additional efficiency. We also
-use OpenMP to speedup computations with multithreading:
+use OpenMP to speedup computations with multithreading. The speedup is
+close to linear in the number of cores — the timings below were knitted
+on a 4-core machine, so restricting `depth()` to one thread costs
+roughly 4x the elapsed time, and to two threads roughly 2x:
 
 ``` r
 library(DepthProc)
 set.seed(123)
 
 d <- 10
-x <- MASS::mvrnorm(1000, rep(0, d), diag(d))
+x <- MASS::mvrnorm(2000, rep(0, d), diag(d))
 # Default - utilize as many threads as possible
 system.time(depth(x, x, method = "LP"))
 #>    user  system elapsed 
-#>   0.408   0.054   0.033
+#>   1.864   0.001   0.473
 
-# Only single thread - 4 times slower:
+# Only single thread - compare the elapsed column:
 system.time(depth(x, x, method = "LP", threads = 1))
 #>    user  system elapsed 
-#>   0.039   0.000   0.039
+#>   1.769   0.000   1.772
 
-# Two threads - 2 times slower:
+# Two threads:
 system.time(depth(x, x, method = "LP", threads = 2))
 #>    user  system elapsed 
-#>   0.036   0.000   0.020
+#>   1.803   0.000   0.904
 ```
 
 ## Available depth functions
@@ -120,7 +123,6 @@ and Frainman-Muniz depth (FM):
 x <- matrix(rnorm(60), nc = 20)
 fncDepth(x, method = "MBD")
 fncDepth(x, method = "FM", dep1d_params = list(method = "Mahalanobis"))
-#> Warning in dep1d_params$u <- u[, i]: Coercing LHS to a list
 ```
 
 ### Functional BoxPlot
