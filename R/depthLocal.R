@@ -1,21 +1,60 @@
+# depth_params1 asks for the symmetrised-sample stage of local depth. When that
+# is Projection depth -- the default -- depthLocalProjCPP() computes it without
+# ever forming the symmetrised sample; see Depth.cpp for why it can. Returns the
+# arguments for that route, or NULL when depth_params1 asks for anything else
+# and the general route has to build symDATA after all.
+#
+# The name check is deliberately strict: the shortcut only knows Projection's
+# own two arguments, so a depth_params1 carrying anything further falls back
+# rather than silently ignoring it.
+.localProjectionArgs <- function(depth_params1) {
+  method <- depth_params1$method
+  if (is.null(method)) {
+    # .depthValues() defaults to Projection, so an absent method means it too
+    method <- "Projection"
+  }
+  if (!identical(method, "Projection")) {
+    return(NULL)
+  }
+  if (!all(names(depth_params1) %in% c("method", "ndir", "threads"))) {
+    return(NULL)
+  }
+
+  # the defaults depthProjection() would have applied
+  list(
+    ndir = if (is.null(depth_params1$ndir)) 1000 else depth_params1$ndir,
+    threads = if (is.null(depth_params1$threads)) -1 else depth_params1$threads
+  )
+}
+
 .depthLocal <- function(u, X, beta, depth_params1, depth_params2) {
-  # The neighbourhood is built from X symmetrised about u, so the second half
-  # of symDATA is the reflection 2u - X. apply() built that one row at a time,
-  # then needed a transpose and a shape check to undo apply()'s own
-  # transposition -- and the check was the "fix for dim 1", because a
-  # one-column X makes apply() return a bare vector. The reflection is one
-  # vectorised expression, which is both faster and the same shape at every d.
-  reflection <- matrix(2 * u, nrow = nrow(X), ncol = ncol(X), byrow = TRUE) - X
 
-  symDATA <- rbind(X, reflection)
+  projArgs <- .localProjectionArgs(depth_params1)
 
-  uxDepthList1 <- list(u = X, X = symDATA)
+  if (is.null(projArgs)) {
+    # The neighbourhood is built from X symmetrised about u, so the second half
+    # of symDATA is the reflection 2u - X. apply() built that one row at a time,
+    # then needed a transpose and a shape check to undo apply()'s own
+    # transposition -- and the check was the "fix for dim 1", because a
+    # one-column X makes apply() return a bare vector. The reflection is one
+    # vectorised expression, which is both faster and the same shape at every d.
+    reflection <- matrix(2 * u, nrow = nrow(X), ncol = ncol(X),
+                         byrow = TRUE) - X
 
-  # .depthValues() rather than depth(): both calls in this function threw away
-  # the S4 Depth object immediately, and this one is the expensive one to
-  # build -- its X slot is symDATA, 2 * nrow(X) rows, copied once per row of u
-  # by the caller's loop.
-  depths <- do.call(.depthValues, c(uxDepthList1, depth_params1))
+    symDATA <- rbind(X, reflection)
+
+    uxDepthList1 <- list(u = X, X = symDATA)
+
+    # .depthValues() rather than depth(): both calls in this function threw away
+    # the S4 Depth object immediately, and this one is the expensive one to
+    # build -- its X slot is symDATA, 2 * nrow(X) rows, copied once per row of u
+    # by the caller's loop.
+    depths <- do.call(.depthValues, c(uxDepthList1, depth_params1))
+  } else {
+    depths <- as.numeric(
+      depthLocalProjCPP(X, u, projArgs$ndir, projArgs$threads))
+  }
+
   quan <- quantile(depths, probs = 1 - beta)
   # a small beta can leave a single point in the neighbourhood; without
   # drop = FALSE that row collapses to a vector and as.matrix() stood it back

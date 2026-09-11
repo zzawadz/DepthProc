@@ -33,6 +33,10 @@ depthProjCPP <- function(ru, rX, nproj, threads) {
     .Call(`_DepthProc_depthProjCPP`, ru, rX, nproj, threads)
 }
 
+depthLocalProjCPP <- function(rX, ru, nproj, threads) {
+    .Call(`_DepthProc_depthLocalProjCPP`, rX, ru, nproj, threads)
+}
+
 depthLPCPP <- function(ru, rX, p, a, b, threads) {
     .Call(`_DepthProc_depthLPCPP`, ru, rX, p, a, b, threads)
 }
