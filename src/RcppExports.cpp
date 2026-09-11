@@ -120,6 +120,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// depthLocalProjCPP
+SEXP depthLocalProjCPP(SEXP rX, SEXP ru, double nproj, int threads);
+RcppExport SEXP _DepthProc_depthLocalProjCPP(SEXP rXSEXP, SEXP ruSEXP, SEXP nprojSEXP, SEXP threadsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type rX(rXSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type ru(ruSEXP);
+    Rcpp::traits::input_parameter< double >::type nproj(nprojSEXP);
+    Rcpp::traits::input_parameter< int >::type threads(threadsSEXP);
+    rcpp_result_gen = Rcpp::wrap(depthLocalProjCPP(rX, ru, nproj, threads));
+    return rcpp_result_gen;
+END_RCPP
+}
 // depthLPCPP
 SEXP depthLPCPP(SEXP ru, SEXP rX, double p, double a, double b, int threads);
 RcppExport SEXP _DepthProc_depthLPCPP(SEXP ruSEXP, SEXP rXSEXP, SEXP pSEXP, SEXP aSEXP, SEXP bSEXP, SEXP threadsSEXP) {
@@ -195,6 +209,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_DepthProc_CovLPCPP", (DL_FUNC) &_DepthProc_CovLPCPP, 4},
     {"_DepthProc_depthMahCPP", (DL_FUNC) &_DepthProc_depthMahCPP, 5},
     {"_DepthProc_depthProjCPP", (DL_FUNC) &_DepthProc_depthProjCPP, 4},
+    {"_DepthProc_depthLocalProjCPP", (DL_FUNC) &_DepthProc_depthLocalProjCPP, 4},
     {"_DepthProc_depthLPCPP", (DL_FUNC) &_DepthProc_depthLPCPP, 6},
     {"_DepthProc_depthTukeyCPP", (DL_FUNC) &_DepthProc_depthTukeyCPP, 4},
     {"_DepthProc_modBandDepthRef", (DL_FUNC) &_DepthProc_modBandDepthRef, 2},

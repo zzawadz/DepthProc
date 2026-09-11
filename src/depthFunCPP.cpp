@@ -53,6 +53,22 @@ SEXP depthProjCPP(SEXP ru, SEXP rX, double nproj, int threads)
 }
 
 // [[Rcpp::export]]
+SEXP depthLocalProjCPP(SEXP rX, SEXP ru, double nproj, int threads)
+{
+  Rcpp::NumericMatrix cX(rX);
+  arma::mat X(cX.begin(), cX.nrow(), cX.ncol(), false);
+
+  // u is the single query point the sample is symmetrised about, passed as a
+  // 1 x d matrix by the caller
+  Rcpp::NumericMatrix cu(ru);
+  arma::mat um(cu.begin(), cu.nrow(), cu.ncol(), false);
+  arma::rowvec u = um.row(0);
+
+  arma::vec depth = Depth::LocalProjectionDepth(X, u, nproj, threads);
+  return wrap(depth);
+}
+
+// [[Rcpp::export]]
 SEXP depthLPCPP(SEXP ru, SEXP rX, double p, double a, double b, int threads) 
 {
   Rcpp::NumericMatrix cu(ru);

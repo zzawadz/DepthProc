@@ -92,37 +92,24 @@ namespace Depth
 
 
 	// Projection Depth
-	arma::vec ProjectionDepth(const arma::mat& X, size_t nproj, int threads)
+	//
+	// Both entry points below reduce to the same thing once each direction has a
+	// median and a MAD for the reference sample: divide the query's deviation
+	// from the median by the MAD, take the worst direction. Only the way the
+	// medians and MADs are obtained differs, so that tail -- including the
+	// zero-MAD handling, which is easy to get subtly wrong -- lives here once.
+	static arma::vec projectionOutlyingness(
+		const arma::mat& X,
+		const arma::mat& directions,
+		const arma::rowvec& medians,
+		const arma::rowvec& mads,
+		int threads)
 	{
-		return ProjectionDepth(X, X, nproj, threads);
-	}
-
-	arma::vec ProjectionDepth(const arma::mat& X, const arma::mat& Y, size_t nproj, int threads)
-	{
-    if(threads < 1) threads = omp_get_max_threads();
-
 		size_t nx = X.n_rows;
-		size_t ny = Y.n_rows;
-		size_t d  = Y.n_cols;
-
-		arma::mat directions = Utils::runifsphere(nproj, d);
-		directions = directions.t();
+		size_t nproj = directions.n_cols;
 
 		arma::vec depth(nx);
-
-		arma::vec tmpProj(ny);
-		arma::rowvec medians(nproj);
-		arma::rowvec mads(nproj);
-
-    size_t i;
-
-    #pragma omp parallel for shared(nproj,Y,medians,mads,directions) private(tmpProj,i) num_threads(threads)
-		for(i = 0; i < nproj; i++)
-		{
-			tmpProj = Y * directions.col(i);
-			medians(i) = arma::median(tmpProj);
-			mads(i) = arma::median(arma::abs(tmpProj - medians(i)));
-		}
+		size_t i;
 
 		// A direction on which the projected reference sample has zero MAD gives
 		// an outlyingness ratio of |x - median| / 0, which the plain division
@@ -185,6 +172,83 @@ namespace Depth
 		depth = 1/(1+depth);
 
 		return depth;
+	}
+
+	arma::vec ProjectionDepth(const arma::mat& X, size_t nproj, int threads)
+	{
+		return ProjectionDepth(X, X, nproj, threads);
+	}
+
+	arma::vec ProjectionDepth(const arma::mat& X, const arma::mat& Y, size_t nproj, int threads)
+	{
+    if(threads < 1) threads = omp_get_max_threads();
+
+		size_t ny = Y.n_rows;
+		size_t d  = Y.n_cols;
+
+		arma::mat directions = Utils::runifsphere(nproj, d);
+		directions = directions.t();
+
+		arma::vec tmpProj(ny);
+		arma::rowvec medians(nproj);
+		arma::rowvec mads(nproj);
+
+    size_t i;
+
+    #pragma omp parallel for shared(nproj,Y,medians,mads,directions) private(tmpProj,i) num_threads(threads)
+		for(i = 0; i < nproj; i++)
+		{
+			tmpProj = Y * directions.col(i);
+			medians(i) = arma::median(tmpProj);
+			mads(i) = arma::median(arma::abs(tmpProj - medians(i)));
+		}
+
+		return projectionOutlyingness(X, directions, medians, mads, threads);
+	}
+
+	// Projection depth of every row of X with respect to X symmetrised about u,
+	// i.e. with respect to rbind(X, 2u - X) -- the reference sample the local
+	// depth of Paindaveine and Van Bever builds at each query point.
+	//
+	// That sample is symmetric about u by construction, and the two facts this
+	// routine exists for follow from that. For any direction v:
+	//
+	//   median(rbind(X, 2u - X) * v)  ==  u * v                exactly
+	//   MAD(rbind(X, 2u - X) * v)     ==  median(|X * v - u * v|)
+	//
+	// The first holds because a sample symmetric about a point has that point as
+	// its median: sorted, its k-th smallest and k-th largest sum to 2 * (u * v),
+	// so the two middle values average to u * v. The second because the absolute
+	// deviations of the symmetrised sample are those of X, each appearing twice,
+	// and doubling every value of a sample leaves its median unchanged.
+	//
+	// So the median costs nothing, the MAD is a median over n values rather than
+	// 2n, and the symmetrised sample never has to be formed at all -- which is
+	// what the caller would otherwise rebuild, and reproject, once per row of u.
+	arma::vec LocalProjectionDepth(const arma::mat& X, const arma::rowvec& u, size_t nproj, int threads)
+	{
+    if(threads < 1) threads = omp_get_max_threads();
+
+		size_t nx = X.n_rows;
+		size_t d  = X.n_cols;
+
+		arma::mat directions = Utils::runifsphere(nproj, d);
+		directions = directions.t();
+
+		arma::rowvec medians = u * directions;
+		arma::rowvec mads(nproj);
+
+		arma::vec tmpProj(nx);
+		size_t i;
+
+    #pragma omp parallel for shared(nproj,X,medians,mads,directions) private(tmpProj,i) num_threads(threads)
+		for(i = 0; i < nproj; i++)
+		{
+			tmpProj = X * directions.col(i);
+			mads(i) = arma::median(arma::abs(tmpProj - medians(i)));
+		}
+
+		return projectionOutlyingness(X, directions, medians, mads, threads);
 	}
 
 

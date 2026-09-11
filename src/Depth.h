@@ -24,6 +24,9 @@ namespace Depth
 	// Projection Depth
 	arma::vec ProjectionDepth(const arma::mat& X, size_t nproj, int threads);
 	arma::vec ProjectionDepth(const arma::mat& X, const arma::mat& Y, size_t nproj, int threads);
+
+	// Projection depth with respect to X symmetrised about u -- see Depth.cpp
+	arma::vec LocalProjectionDepth(const arma::mat& X, const arma::rowvec& u, size_t nproj, int threads);
   
   
   // Tukey depth
